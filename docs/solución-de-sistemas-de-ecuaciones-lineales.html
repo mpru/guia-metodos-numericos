@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Solución de Sistemas de Ecuaciones Lineales | Taller de Métodos Numéricos</title>
+  <meta name="description" content="Esta guía resume algunos conceptos desarrollados en el Taller de Métodos Numéricos de la Licenciatura en Estadística (Facultad de Ciencias Económicas y Estadstica, Universidad Nacional de Rosario)." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Solución de Sistemas de Ecuaciones Lineales | Taller de Métodos Numéricos" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://mpru.github.io/guia-metodos-numericos/" />
+  
+  <meta property="og:description" content="Esta guía resume algunos conceptos desarrollados en el Taller de Métodos Numéricos de la Licenciatura en Estadística (Facultad de Ciencias Económicas y Estadstica, Universidad Nacional de Rosario)." />
+  <meta name="github-repo" content="mpru/guia-metodos-numericos" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Solución de Sistemas de Ecuaciones Lineales | Taller de Métodos Numéricos" />
+  
+  <meta name="twitter:description" content="Esta guía resume algunos conceptos desarrollados en el Taller de Métodos Numéricos de la Licenciatura en Estadística (Facultad de Ciencias Económicas y Estadstica, Universidad Nacional de Rosario)." />
+  
+
+<meta name="author" content="Marcos Prunello" />
+<meta name="author" content="Cecilia Rapelli" />
+
+
+<meta name="date" content="2020-03-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="solución-numérica-de-ecuaciones-no-lineales.html">
+<link rel="next" href="aproximación-polinomial-interpolación-y-extrapolación.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Guía de estudio para el Taller de Métodos Numéricos</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Acerca del Taller</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#horario-y-lugar-de-cursado"><i class="fa fa-check"></i>Horario y lugar de cursado</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#consultas"><i class="fa fa-check"></i>Consultas</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#material-de-estudio"><i class="fa fa-check"></i>Material de estudio</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#evaluación"><i class="fa fa-check"></i>Evaluación</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#campus-virtual"><i class="fa fa-check"></i>Campus virtual</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html"><i class="fa fa-check"></i><b>1</b> Introducción a los Métodos Numéricos</a><ul>
+<li class="chapter" data-level="1.1" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#cifras-significativas"><i class="fa fa-check"></i><b>1.1</b> Cifras significativas</a></li>
+<li class="chapter" data-level="1.2" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#notación-científica-o-exponencial"><i class="fa fa-check"></i><b>1.2</b> Notación Científica o Exponencial</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#ejemplo-2"><i class="fa fa-check"></i><b>1.2.1</b> Ejemplo 2:</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#sistemas-numéricos"><i class="fa fa-check"></i><b>1.3</b> Sistemas numéricos</a></li>
+<li class="chapter" data-level="1.4" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#por-qué-nos-interesa-el-sistema-binario"><i class="fa fa-check"></i><b>1.4</b> ¿Por qué nos interesa el sistema binario?</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#ejemplo-3"><i class="fa fa-check"></i><b>1.4.1</b> Ejemplo 3</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#formato-de-coma-flotante"><i class="fa fa-check"></i><b>1.5</b> Formato de coma flotante</a></li>
+<li class="chapter" data-level="1.6" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#propiedades-importantes-del-formato-ieee-754"><i class="fa fa-check"></i><b>1.6</b> Propiedades importantes del formato IEEE-754</a></li>
+<li class="chapter" data-level="1.7" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#análisis-de-los-errores"><i class="fa fa-check"></i><b>1.7</b> Análisis de los errores</a><ul>
+<li class="chapter" data-level="1.7.1" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#error-de-truncamiento"><i class="fa fa-check"></i><b>1.7.1</b> Error de truncamiento</a></li>
+<li class="chapter" data-level="1.7.2" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#error-de-redondeo"><i class="fa fa-check"></i><b>1.7.2</b> Error de redondeo</a></li>
+<li class="chapter" data-level="1.7.3" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#ejemplos-de-operaciones-delicadas"><i class="fa fa-check"></i><b>1.7.3</b> Ejemplos de operaciones “delicadas”</a></li>
+<li class="chapter" data-level="1.7.4" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#medida-del-error"><i class="fa fa-check"></i><b>1.7.4</b> Medida del error</a></li>
+<li class="chapter" data-level="1.7.5" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#error-propagado"><i class="fa fa-check"></i><b>1.7.5</b> Error propagado</a></li>
+<li class="chapter" data-level="1.7.6" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#error-propagado-1"><i class="fa fa-check"></i><b>1.7.6</b> Error propagado</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html"><i class="fa fa-check"></i><b>2</b> Solución Numérica de Ecuaciones No Lineales</a><ul>
+<li class="chapter" data-level="2.1" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#generalidades"><i class="fa fa-check"></i><b>2.1</b> Generalidades</a></li>
+<li class="chapter" data-level="2.2" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#método-de-las-aproximaciones-sucesivas-o-del-punto-fijo"><i class="fa fa-check"></i><b>2.2</b> Método de las Aproximaciones Sucesivas o del Punto Fijo</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#punto-fijo"><i class="fa fa-check"></i><b>2.2.1</b> Punto fijo</a></li>
+<li class="chapter" data-level="2.2.2" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#empleo-para-la-resolución-de-ecuaciones"><i class="fa fa-check"></i><b>2.2.2</b> Empleo para la resolución de ecuaciones</a></li>
+<li class="chapter" data-level="2.2.3" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#ejemplo"><i class="fa fa-check"></i><b>2.2.3</b> Ejemplo</a></li>
+<li class="chapter" data-level="2.2.4" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#criterios-para-detener-el-proceso-iterativo"><i class="fa fa-check"></i><b>2.2.4</b> Criterios para detener el proceso iterativo</a></li>
+<li class="chapter" data-level="2.2.5" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#ejemplo-1"><i class="fa fa-check"></i><b>2.2.5</b> Ejemplo</a></li>
+<li class="chapter" data-level="2.2.6" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#teorema-del-punto-fijo"><i class="fa fa-check"></i><b>2.2.6</b> Teorema del Punto Fijo</a></li>
+<li class="chapter" data-level="2.2.7" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#ejemplo-4"><i class="fa fa-check"></i><b>2.2.7</b> Ejemplo</a></li>
+<li class="chapter" data-level="2.2.8" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#interpretación-gráfica"><i class="fa fa-check"></i><b>2.2.8</b> Interpretación gráfica</a></li>
+<li class="chapter" data-level="2.2.9" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#ejemplo-5"><i class="fa fa-check"></i><b>2.2.9</b> Ejemplo</a></li>
+<li class="chapter" data-level="2.2.10" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#algunos-diagramas"><i class="fa fa-check"></i><b>2.2.10</b> Algunos diagramas</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#método-de-newton-raphson"><i class="fa fa-check"></i><b>2.3</b> Método de Newton-Raphson</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#teorema-de-newton-raphson"><i class="fa fa-check"></i><b>2.3.1</b> Teorema de Newton-Raphson</a></li>
+<li class="chapter" data-level="2.3.2" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#convergencia"><i class="fa fa-check"></i><b>2.3.2</b> Convergencia</a></li>
+<li class="chapter" data-level="2.3.3" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#ejemplo-6"><i class="fa fa-check"></i><b>2.3.3</b> Ejemplo:</a></li>
+<li class="chapter" data-level="2.3.4" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#ventajas-y-desventajas"><i class="fa fa-check"></i><b>2.3.4</b> Ventajas y desventajas</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#método-de-von-mises"><i class="fa fa-check"></i><b>2.4</b> Método de von Mises</a></li>
+<li class="chapter" data-level="2.5" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#método-de-newton-raphson-de-2º-orden"><i class="fa fa-check"></i><b>2.5</b> Método de Newton-Raphson de 2º Orden</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html"><i class="fa fa-check"></i><b>3</b> Solución de Sistemas de Ecuaciones Lineales</a><ul>
+<li class="chapter" data-level="3.1" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#generalidades-1"><i class="fa fa-check"></i><b>3.1</b> Generalidades</a></li>
+<li class="chapter" data-level="3.2" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#repaso"><i class="fa fa-check"></i><b>3.2</b> Repaso</a></li>
+<li class="chapter" data-level="3.3" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#notación"><i class="fa fa-check"></i><b>3.3</b> Notación</a></li>
+<li class="chapter" data-level="3.4" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#métodos-de-resolución-de-sistemas-de-ecuaciones"><i class="fa fa-check"></i><b>3.4</b> Métodos de Resolución de Sistemas de Ecuaciones</a></li>
+<li class="chapter" data-level="3.5" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#sistemas-fáciles-de-resolver"><i class="fa fa-check"></i><b>3.5</b> Sistemas fáciles de resolver</a></li>
+<li class="chapter" data-level="3.6" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#eliminación-gaussiana"><i class="fa fa-check"></i><b>3.6</b> Eliminación gaussiana</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#eliminación-gaussiana-con-pivoteo-trivial"><i class="fa fa-check"></i><b>3.6.1</b> Eliminación gaussiana con pivoteo trivial</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#estrategias-de-pivoteo-para-reducir-los-errores"><i class="fa fa-check"></i><b>3.7</b> Estrategias de pivoteo para reducir los errores</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#pivoteo-parcial"><i class="fa fa-check"></i><b>3.7.1</b> Pivoteo parcial</a></li>
+<li class="chapter" data-level="3.7.2" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#pivoteo-parcial-escalado"><i class="fa fa-check"></i><b>3.7.2</b> Pivoteo parcial escalado</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#método-de-eliminación-de-gauss-jordan"><i class="fa fa-check"></i><b>3.8</b> Método de eliminación de Gauss-Jordan</a></li>
+<li class="chapter" data-level="3.9" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#métodos-aproximados-o-iterativos"><i class="fa fa-check"></i><b>3.9</b> Métodos Aproximados o Iterativos</a><ul>
+<li class="chapter" data-level="3.9.1" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#método-de-jacobi"><i class="fa fa-check"></i><b>3.9.1</b> Método de Jacobi</a></li>
+<li class="chapter" data-level="3.9.2" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#método-de-gauss-seidel"><i class="fa fa-check"></i><b>3.9.2</b> Método de Gauss-Seidel</a></li>
+<li class="chapter" data-level="3.9.3" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#generalización"><i class="fa fa-check"></i><b>3.9.3</b> Generalización</a></li>
+<li class="chapter" data-level="3.9.4" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#convergencia-1"><i class="fa fa-check"></i><b>3.9.4</b> Convergencia</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="aproximación-polinomial-interpolación-y-extrapolación.html"><a href="aproximación-polinomial-interpolación-y-extrapolación.html"><i class="fa fa-check"></i><b>4</b> Aproximación Polinomial: interpolación y extrapolación</a><ul>
+<li class="chapter" data-level="4.1" data-path="aproximación-polinomial-interpolación-y-extrapolación.html"><a href="aproximación-polinomial-interpolación-y-extrapolación.html#generalidades-2"><i class="fa fa-check"></i><b>4.1</b> Generalidades</a></li>
+<li class="chapter" data-level="4.2" data-path="aproximación-polinomial-interpolación-y-extrapolación.html"><a href="aproximación-polinomial-interpolación-y-extrapolación.html#diferencias-finitas"><i class="fa fa-check"></i><b>4.2</b> Diferencias finitas</a></li>
+<li class="chapter" data-level="4.3" data-path="aproximación-polinomial-interpolación-y-extrapolación.html"><a href="aproximación-polinomial-interpolación-y-extrapolación.html#interpolación-de-newton-para-incrementos-constantes"><i class="fa fa-check"></i><b>4.3</b> Interpolación de Newton para incrementos constantes</a></li>
+<li class="chapter" data-level="4.4" data-path="aproximación-polinomial-interpolación-y-extrapolación.html"><a href="aproximación-polinomial-interpolación-y-extrapolación.html#interpolación-de-lagrange"><i class="fa fa-check"></i><b>4.4</b> Interpolación de Lagrange</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="aproximación-polinomial-interpolación-y-extrapolación.html"><a href="aproximación-polinomial-interpolación-y-extrapolación.html#observaciones-finales"><i class="fa fa-check"></i><b>4.4.1</b> Observaciones finales</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Taller de Métodos Numéricos</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="solución-de-sistemas-de-ecuaciones-lineales" class="section level1">
+<h1><span class="header-section-number">3</span> Solución de Sistemas de Ecuaciones Lineales</h1>
+<div id="generalidades-1" class="section level2">
+<h2><span class="header-section-number">3.1</span> Generalidades</h2>
+<ul>
+<li><strong>Objetivo</strong>: examinar los aspectos numéricos que se presentan al resolver sistemas de ecuaciones lineales de la forma:</li>
+</ul>
+<p><span class="math display">\[
+\begin{cases} 
+a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n = b_1 \\
+a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n = b_2 \\
+\vdots \\
+a_{n1}x_1 + a_{n2}x_2 + \cdots + a_{nn}x_n = b_n
+\end{cases}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(n\)</span> ecuaciones, <span class="math inline">\(n\)</span> incógnitas: sistema de orden <span class="math inline">\(n \times n\)</span>.</li>
+<li>Los coeficientes <span class="math inline">\(a_{ij}\)</span> y los términos independientes <span class="math inline">\(b_i\)</span> son reales fijos.</li>
+</ul>
+</div>
+<div id="repaso" class="section level2">
+<h2><span class="header-section-number">3.2</span> Repaso</h2>
+<ul>
+<li>Representación matricial: <span class="math inline">\(\mathbf{Ax=b}\)</span>, de dimensión <span class="math inline">\(n\times n\)</span>, <span class="math inline">\(n\times 1\)</span> y <span class="math inline">\(n\times 1\)</span>, respectivamente.</li>
+</ul>
+<p><span class="math display">\[
+\begin{bmatrix}
+a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\
+a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+a_{n1} &amp; a_{n2} &amp; \cdots &amp; a_{nn} 
+\end{bmatrix}
+\times 
+\begin{bmatrix}
+x_1 \\ x_2 \\ \vdots \\ x_n
+\end{bmatrix}
+=
+\begin{bmatrix}
+b_1 \\ b_2 \\ \vdots \\ b_n
+\end{bmatrix}
+\]</span></p>
+<ul>
+<li>Llamamos <strong>matriz ampliada</strong> o <strong>aumentada</strong> a:</li>
+</ul>
+<p><span class="math display">\[
+\begin{bmatrix}
+    \mathbf{A} &amp; \mathbf{b}
+\end{bmatrix}
+=
+\begin{bmatrix}
+a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} &amp; b_1\\
+a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} &amp; b_2\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots\\
+a_{n1} &amp; a_{n2} &amp; \cdots &amp; a_{nn} &amp; b_n 
+\end{bmatrix}
+\]</span></p>
+<ul>
+<li><p>Un sistema de ecuaciones lineales se clasifica en:</p>
+<ul>
+<li><strong>Compatible determinado</strong>: tiene una única solución</li>
+<li><strong>Compatible indeterminado</strong>: tiene infinitas soluciones</li>
+<li><strong>Incompatible</strong>: no existe solución</li>
+</ul></li>
+</ul>
+<!--  
+# Repaso
+
+- El **rango** ($r$) de una matriz es el orden de la mayor submatriz cuadrada cuyo determinante es distinto de 0.
+- **Teorema de rangos**:
+
+    - $r(\mathbf{A}) < r([\mathbf{A} \quad \mathbf{b}]) \implies$ sistema incompatible
+    - $r(\mathbf{A}) = r([\mathbf{A} \quad \mathbf{b}]) \implies$ sistema compatible
+    
+        - $r(\mathbf{A}) = n \implies$ determinado
+        - $r(\mathbf{A}) < n \implies$ indeterminado
+-->
+<p><strong>Teorema</strong>. Las siguientes condiciones son equivalentes:</p>
+<ul>
+<li>El sistema <span class="math inline">\(\mathbf{Ax=b}\)</span> tiene solución única (es compatible determinado).</li>
+<li>La matriz <span class="math inline">\(\mathbf{A}\)</span> es invertible (existe <span class="math inline">\(\mathbf{A^{-1}}\)</span>).</li>
+<li>La matriz <span class="math inline">\(\mathbf{A}\)</span> es no singular (<span class="math inline">\(\det \mathbf{A} \neq 0\)</span>).</li>
+<li><p>El sistema <span class="math inline">\(\mathbf{Ax=0}\)</span> tiene como única solución <span class="math inline">\(\mathbf{x=0}\)</span>.</p></li>
+<li>Dos sistemas de orden <span class="math inline">\(n \times n\)</span> son <strong>equivalentes</strong> si tienen el mismo conjunto de soluciones.</li>
+<li><p>Existen ciertas transformaciones sobre las ecuaciones de un sistema que no cambian el conjunto de soluciones (producen un sistema equivalente):</p>
+<ul>
+<li><strong>Intercambio</strong>: el orden de las ecuaciones puede cambiarse.</li>
+<li><strong>Escalado</strong>: multiplicar una ecuación por una constante no nula.</li>
+<li><strong>Sustitución</strong>: una ecuación puede ser reemplazada por una combinación lineal de las ecuaciones del sistema (<em>teorema fundamental de la equivalencia</em>)</li>
+</ul></li>
+<li><p>Realizar estas transformaciones sobre las ecuaciones es equivalente a realizar las mismas operaciones sobre las filas de la matriz aumentada.</p></li>
+</ul>
+</div>
+<div id="notación" class="section level2">
+<h2><span class="header-section-number">3.3</span> Notación</h2>
+<ul>
+<li><p>Notación que ayuda a expresar algoritmos con operaciones matriciales y facilita la escritura de los programas en IML o R.</p></li>
+<li><p>Dada una matriz <span class="math inline">\(\mathbf{Z}\)</span> de dimensión <span class="math inline">\(n \times m\)</span>, anotamos:</p>
+<ul>
+<li><span class="math inline">\(z_{ij} = \mathbf{Z}[i, j]\)</span>: elemento en la fila <span class="math inline">\(i\)</span> y columna <span class="math inline">\(j\)</span> de la matriz <span class="math inline">\(\mathbf{Z}\)</span></li>
+<li><span class="math inline">\(\mathbf{Z}[i,]\)</span>: vector fila de dimensión <span class="math inline">\(1\times m\)</span> constituido por la <span class="math inline">\(i\)</span>-ésima fila de la matriz <span class="math inline">\(\mathbf{Z}\)</span></li>
+<li><span class="math inline">\(\mathbf{Z}[,j]\)</span>: vector columna <span class="math inline">\(n\times 1\)</span> constituido por la <span class="math inline">\(j\)</span>-ésima columna de la matriz <span class="math inline">\(\mathbf{Z}\)</span></li>
+<li><span class="math inline">\(\mathbf{Z}[i,k:l]\)</span>: matriz de dimensión <span class="math inline">\(1\times (l-k+1)\)</span> constituida con los elementos <span class="math inline">\(z_{i,k}, z_{i,k+1}, \cdots, z_{i,l}\)</span> de la matriz <span class="math inline">\(\mathbf{Z}\)</span>, <span class="math inline">\(l \geq k\)</span>.</li>
+<li><span class="math inline">\(\mathbf{Z}[c:d,k:l]\)</span>: matriz de dimensión <span class="math inline">\((d-c+1)\times (l-k+1)\)</span> constituida por la submatriz que contiene las filas de <span class="math inline">\(\mathbf{Z}\)</span> desde la <span class="math inline">\(c\)</span> hasta <span class="math inline">\(d\)</span> y las columnas de <span class="math inline">\(\mathbf{Z}\)</span> desde la <span class="math inline">\(k\)</span> hasta la <span class="math inline">\(l\)</span>, <span class="math inline">\(d \geq c\)</span>, <span class="math inline">\(l \geq k\)</span>.</li>
+</ul></li>
+<li><p>Dado un vector <span class="math inline">\(\mathbf{Z}\)</span> de largo <span class="math inline">\(n\)</span>, anotamos:</p>
+<ul>
+<li><span class="math inline">\(\mathbf{Z}[i]\)</span>: elemento <span class="math inline">\(i\)</span>-ésimo del vector <span class="math inline">\(\mathbf{Z}\)</span></li>
+<li><span class="math inline">\(\mathbf{Z}[k:l]\)</span>: vector de largo <span class="math inline">\((l-k+1)\)</span> constituido con los elementos <span class="math inline">\(z_{k}, z_{k+1}, \cdots, z_{l}\)</span> del vector <span class="math inline">\(\mathbf{Z}\)</span>, <span class="math inline">\(l \geq k\)</span>.</li>
+</ul></li>
+</ul>
+</div>
+<div id="métodos-de-resolución-de-sistemas-de-ecuaciones" class="section level2">
+<h2><span class="header-section-number">3.4</span> Métodos de Resolución de Sistemas de Ecuaciones</h2>
+<ul>
+<li><p><strong>Métodos exactos</strong>: permiten obtener la solución del sistema de manera directa.</p>
+<ul>
+<li>Método de Eliminación de Gauss</li>
+<li>Método de Gauss-Jordan</li>
+</ul></li>
+<li><p><strong>Métodos aproximados</strong>: utilizan algoritmos iterativos que calculan las solución del sistema por aproximaciones sucesivas.</p>
+<ul>
+<li>Método de Jacobi</li>
+<li>Método de Gauss-Seidel</li>
+</ul></li>
+<li><p>En muchas ocasiones los métodos aproximados permiten obtener un grado de exactitud superior al que se puede obtener empleando los denominados métodos exactos, debido fundamentalmente a los errores de truncamiento que se producen en el proceso.</p></li>
+</ul>
+</div>
+<div id="sistemas-fáciles-de-resolver" class="section level2">
+<h2><span class="header-section-number">3.5</span> Sistemas fáciles de resolver</h2>
+<p><strong>Caso 1: La matriz</strong> <span class="math inline">\(\mathbf{A}\)</span> es <strong>diagonal</strong></p>
+<p><span class="math display">\[
+\begin{bmatrix}
+a_{11} &amp; 0 &amp; \cdots &amp; 0 \\
+0 &amp; a_{22} &amp; \cdots &amp; 0 \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+0 &amp; 0 &amp; \cdots &amp; a_{nn} 
+\end{bmatrix}
+\times 
+\begin{bmatrix}
+x_1 \\ x_2 \\ \vdots \\ x_n
+\end{bmatrix}
+=
+\begin{bmatrix}
+b_1 \\ b_2 \\ \vdots \\ b_n
+\end{bmatrix}
+\]</span></p>
+<ul>
+<li>El sistema se reduce a <span class="math inline">\(n\)</span> ecuaciones simples y la solución es:</li>
+</ul>
+<p><span class="math display">\[
+\mathbf{x} =
+\begin{bmatrix}
+    b_1/a_{11} \\ b_2/a_{22} \\ \vdots \\ b_n/a_{nn}
+\end{bmatrix}
+\]</span></p>
+<p><strong>Caso 2: La matrix</strong> <span class="math inline">\(\mathbf{A}\)</span> <strong>es triangular superior</strong>:</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+a_{11} &amp; a_{12} &amp; a_{13} &amp; \cdots &amp; a_{1n} \\
+0 &amp; a_{22} &amp; a_{23} &amp; \cdots &amp; a_{2n} \\
+0 &amp; 0 &amp; a_{33} &amp; \cdots &amp; a_{3n} \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+0 &amp; 0 &amp; 0 &amp; \cdots &amp; a_{nn}
+\end{bmatrix}
+\times 
+\begin{bmatrix}
+x_1 \\ x_2 \\ \vdots \\ x_n
+\end{bmatrix}
+=
+\begin{bmatrix}
+b_1 \\ b_2 \\ \vdots \\ b_n
+\end{bmatrix}
+\]</span></p>
+<ul>
+<li>La solución de <span class="math inline">\(x_n\)</span> es inmediata y a partir de ella se encuentran las restantes siguiendo el orden inverso <span class="math inline">\(x_{n-1}, \cdots, x_1\)</span>, aplicando el algoritmo de <strong>sustitución regresiva</strong>:</li>
+</ul>
+<p><span class="math display">\[
+x_n = \frac{b_n}{a_{nn}} \text{ y } x_k = \frac{b_k - \sum_{j = k+1}^{n}a_{kj}x_j}{a_{kk}} \quad k = n-1, n-2, \cdots, 1
+\]</span></p>
+<ul>
+<li>Empleando la notación matricial vista, la suma en el algoritmo puede reescribirse con productos matriciales:</li>
+</ul>
+<p><span class="math display">\[
+\mathbf{x}[n] = \frac{\mathbf{b}[n]}{\mathbf{A}[n,n]} \qquad \mathbf{x}[k] = \frac{\mathbf{b}[k] - \mathbf{A}[k, k+1 : n] \times \mathbf{x}[k+1 : n]}{\mathbf{A}[k,k]}
+\]</span>
+<span class="math display">\[
+\quad k = n-1, n-2, \cdots, 1
+\]</span></p>
+<ul>
+<li>Iniciando el vector solución con ceros (<span class="math inline">\(\mathbf{x} = [0 ~ 0 \cdots 0]\)</span>), la expresión anterior se simplifica en:</li>
+</ul>
+<p><span class="math display">\[
+\mathbf{x}[n] = \frac{\mathbf{b}[n]}{\mathbf{A}[n,n]} \qquad \mathbf{x}[k] = \frac{\mathbf{b}[k] - \mathbf{A}[k, ] \times \mathbf{x}}{\mathbf{A}[k,k]}
+\qquad k = n-1, n-2, \cdots, 1
+\]</span></p>
+<ul>
+<li>Ver el algoritmo y programarlo.</li>
+</ul>
+<p><strong>Caso 3: La matrix</strong> <span class="math inline">\(\mathbf{A}\)</span> <strong>es triangular inferior</strong>:</p>
+<ul>
+<li>Obtención de la solución análoga al caso anterior.</li>
+</ul>
+<p><strong>Observación</strong></p>
+<ul>
+<li>En los casos anteriores asumimos <span class="math inline">\(a_{kk} \neq 0 \forall k\)</span>. De lo contrario el sistema no tiene solución o tiene infinitas.</li>
+<li>Recordar que un sistema lineal <span class="math inline">\(\mathbf{Ax=b}\)</span> tiene solución única si y sólo si <span class="math inline">\(\det \mathbf{A} \neq 0\)</span> y que si un elemento de la diagonal principal de una matriz triangular es cero, entonces <span class="math inline">\(\det \mathbf{A} = 0\)</span>.</li>
+</ul>
+</div>
+<div id="eliminación-gaussiana" class="section level2">
+<h2><span class="header-section-number">3.6</span> Eliminación gaussiana</h2>
+<ul>
+<li>Es un método para resolver un sistema lineal general <span class="math inline">\(\mathbf{Ax=b}\)</span> de <span class="math inline">\(n\)</span> ecuaciones con <span class="math inline">\(n\)</span> incógnitas.</li>
+<li>El objetivo es construir un sistema equivalente donde la matriz de coeficientes sea triangular superior para obtener las soluciones con el algoritmo de sustitución regresiva.</li>
+<li>El método consiste en ir eliminando incógnitas en las ecuaciones de manera sucesiva.</li>
+<li>Ejemplo: resolver el siguiente sistema</li>
+</ul>
+<p><span class="math display">\[
+\begin{cases} 
+x+2y-z+3t=-8 \\
+2x+2z-t=13 \\
+-x+y+z-t=8\\
+3x+3y-z+2t = -1
+\end{cases}
+\mathbf{A}=
+\begin{bmatrix}
+1 &amp; 2 &amp; -1 &amp; 3 \\
+2 &amp; 0 &amp; 2 &amp; -1 \\
+-1 &amp; 1 &amp; 1 &amp; -1 \\
+3 &amp; 3 &amp; -1 &amp; 2 &amp;  
+\end{bmatrix}
+\mathbf{x} = 
+\begin{bmatrix}
+x \\ y \\ z \\ t
+\end{bmatrix}
+\mathbf{b} =
+\begin{bmatrix}
+-8 \\ 13 \\ 8 \\ -1
+\end{bmatrix}
+\]</span></p>
+<ul>
+<li>Matriz aumentada:</li>
+</ul>
+<p><span class="math display">\[
+\begin{bmatrix}
+    \mathbf{A} &amp; \mathbf{b}
+\end{bmatrix}
+=
+\begin{bmatrix}
+    1 &amp; 2 &amp; -1 &amp; 3 &amp;|&amp; -8\\
+    2 &amp; 0 &amp; 2 &amp; -1 &amp;|&amp; 13\\
+    -1 &amp; 1 &amp; 1 &amp; -1 &amp;|&amp; 8\\
+    3 &amp; 3 &amp; -1 &amp; 2 &amp;|&amp; -1  
+\end{bmatrix}
+\]</span></p>
+<ul>
+<li>En el primer paso eliminamos la incógnita <span class="math inline">\(x\)</span> en las ecuaciones 2, 3 y 4, buscando que queden ceros en toda la primera columna excepto en el elemento diagonal.</li>
+<li>La eliminación se hace empleando las transformaciones que producen un sistema equivalente.</li>
+<li>Observando con detenimiento, esto se puede lograr realizando los siguientes reemplazos:</li>
+</ul>
+<p><span class="math display">\[
+\begin{array}{cl}
+\text{Fila 2} &amp;= \text{ Fila 2} - 2 \times \text{Fila 1} \\ 
+\text{Fila 3} &amp;= \text{ Fila 3} - (-1) \times \text{Fila 1} \\
+\text{Fila 4} &amp;= \text{ Fila 4} - 3 \times \text{Fila 1} 
+\end{array}
+\]</span></p>
+<ul>
+<li>A la Fila 1 se le dice <strong>fila pivote</strong> y al elemento <span class="math inline">\(a_{11}=1\)</span>, <strong>pivote</strong>.</li>
+<li>A los valores <span class="math inline">\(2\)</span>, <span class="math inline">\(-1\)</span> y <span class="math inline">\(3\)</span> que multiplican a la fila pivote en los reemplazos se les dice <strong>multiplicadores</strong>.</li>
+<li>Los multiplicadores se simbolizan y obtienen con: <span class="math inline">\(m_{r1} = a_{r1} / a_{11}, \quad r = 2, 3, 4\)</span>.</li>
+<li>De esta forma, los reemplazos realizados se generalizan como: Fila <span class="math inline">\(r\)</span> = Fila <span class="math inline">\(r\)</span> - <span class="math inline">\(m_{r1}\times\)</span> Fila 1.</li>
+<li>El resultado de los reemplazos anteriores es:</li>
+</ul>
+<p><span class="math display">\[
+\begin{matrix}
+\text{pivote} \rightarrow \\ m_{21} = 2 \\ m_{31} = -1 \\ m_{41} = 3
+\end{matrix}
+\begin{bmatrix}
+1 &amp; 2 &amp; -1 &amp; 3 &amp;|&amp; -8\\
+2 &amp; 0 &amp; 2 &amp; -1 &amp;|&amp; 13\\
+-1 &amp; 1 &amp; 1 &amp; -1 &amp;|&amp; 8\\
+3 &amp; 3 &amp; -1 &amp; 2 &amp;|&amp; -1  
+\end{bmatrix}
+\implies
+\begin{bmatrix}
+1 &amp; 2 &amp; -1 &amp; 3 &amp;|&amp; -8\\
+0 &amp; -4 &amp; 4 &amp; -7 &amp;|&amp; 29\\
+0 &amp; 3 &amp; 0 &amp; 2 &amp;|&amp; 0\\
+0 &amp; -3 &amp; 2 &amp; -7 &amp;|&amp; 23  
+\end{bmatrix}
+\]</span></p>
+<ul>
+<li>En el segundo paso, eliminamos la incógnita <span class="math inline">\(y\)</span> en las ecuaciones 3 y 4.</li>
+<li>La fila pivote pasa a ser la segunda y el pivote es <span class="math inline">\(a_{22}=-4\)</span>.</li>
+<li>Los multiplicadores son <span class="math inline">\(m_{r2}=a_{r2}/a_{22}\)</span>, <span class="math inline">\(r=3,4\)</span>, dando lugar a los reemplazos:</li>
+</ul>
+<p><span class="math display">\[
+\begin{array}{cl}
+\text{Fila 3} &amp;= \text{ Fila 3} - (-3/4) \times \text{Fila 2} \\
+\text{Fila 4} &amp;= \text{ Fila 4} - 3/4 \times \text{Fila 2} 
+\end{array}
+\]</span></p>
+<ul>
+<li>El resultado es:</li>
+</ul>
+<p><span class="math display">\[
+\begin{matrix}
+ \\ \text{pivote} \rightarrow \\ m_{32} = -3/4 \\ m_{42} = 3/4
+\end{matrix}
+\begin{bmatrix}
+1 &amp; 2 &amp; -1 &amp; 3 &amp;|&amp; -8\\
+0 &amp; -4 &amp; 4 &amp; -7 &amp;|&amp; 29\\
+0 &amp; 3 &amp; 0 &amp; 2 &amp;|&amp; 0\\
+0 &amp; -3 &amp; 2 &amp; -7 &amp;|&amp; 23  
+\end{bmatrix}
+\implies
+\]</span></p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1 &amp; 2 &amp; -1 &amp; 3 &amp;|&amp; -8\\
+0 &amp; -4 &amp; 4 &amp; -7 &amp;|&amp; 29\\
+0 &amp; 0 &amp; -12 &amp; 13 &amp;|&amp; -87\\
+0 &amp; 0 &amp; 4 &amp; 7 &amp;|&amp; -5  
+\end{bmatrix}
+\]</span></p>
+<ul>
+<li>Finalmente, eliminamos la incógnita <span class="math inline">\(z\)</span> en la última ecuación.</li>
+<li>La fila pivote es la 3º y el pivote es <span class="math inline">\(a_{33}=-12\)</span>.</li>
+<li>El multiplicador es <span class="math inline">\(m_{43}=a_{43}/a_{33}=-4/12\)</span>.</li>
+<li>El reemplazo a realizar es Fila 4 = Fila 4 - <span class="math inline">\((-4/12)\times\)</span> Fila 3.</li>
+<li>El resultado es:</li>
+</ul>
+<p><span class="math display">\[
+\begin{matrix}
+\\ \\ \text{pivote} \rightarrow \\ m_{43} = -4/12
+\end{matrix}
+\begin{bmatrix}
+1 &amp; 2 &amp; -1 &amp; 3 &amp;|&amp; -8\\
+0 &amp; -4 &amp; 4 &amp; -7 &amp;|&amp; 29\\
+0 &amp; 0 &amp; -12 &amp; 13 &amp;|&amp; -87\\
+0 &amp; 0 &amp; 4 &amp; 7 &amp;|&amp; -5  
+\end{bmatrix}
+\implies
+\]</span></p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1 &amp; 2 &amp; -1 &amp; 3 &amp;|&amp; -8\\
+0 &amp; -4 &amp; 4 &amp; -7 &amp;|&amp; 29\\
+0 &amp; 0 &amp; -12 &amp; 13 &amp;|&amp; -87\\
+0 &amp; 0 &amp; 0 &amp; -136 &amp;|&amp; 408  
+\end{bmatrix}
+\]</span></p>
+<ul>
+<li>Hemos llegado a un sistema equivalente cuya matriz de coeficientes es triangular superior, en el que aplicamos el algoritmo de sustitución regresiva:</li>
+</ul>
+<p><span class="math display">\[
+\left\{
+\begin{aligned}
+x+2y-z-3t &amp;=-8 \cr
+-4y+4z-7t &amp;=29\cr
+-12z+13t &amp;=-87\cr
+-136t &amp;=408
+\end{aligned}
+\right.
+\implies
+\left\{
+\begin{aligned}
+x &amp;= 1\\ y &amp;= 2\\ z &amp;= 4\\ t &amp;= -3
+\end{aligned}
+\right.
+\]</span></p>
+<div id="eliminación-gaussiana-con-pivoteo-trivial" class="section level3">
+<h3><span class="header-section-number">3.6.1</span> Eliminación gaussiana con pivoteo trivial</h3>
+<ul>
+<li><strong>Observación</strong>: en el algoritmo visto es necesario que los pivotes <span class="math inline">\(a_{qq} \neq 0 ~\forall q\)</span>.</li>
+<li>Si en uno de los pasos encontramos un <span class="math inline">\(a_{qq} = 0\)</span>, debemos intercambiar la <span class="math inline">\(q\)</span>-ésima fila por una cualquiera de las siguientes, por ejemplo la fila <span class="math inline">\(k\)</span>, en la que <span class="math inline">\(a_{kq} \neq 0, k&gt;q\)</span>.</li>
+<li>Esta estrategia para hallar un pivote no nulo se llama <strong>pivoteo trivial</strong>.</li>
+<li>Ejemplo propuesto:</li>
+</ul>
+<p><span class="math display">\[
+\begin{cases} 
+x-2y+z=-4 \\
+-2x+4y-3z=3 \\
+x-3y-4z=-1
+\end{cases}
+\]</span></p>
+</div>
+</div>
+<div id="estrategias-de-pivoteo-para-reducir-los-errores" class="section level2">
+<h2><span class="header-section-number">3.7</span> Estrategias de pivoteo para reducir los errores</h2>
+<ul>
+<li>Como ya sabemos, dado que las computadoras usan una aritmética cuya precisión está fijada de antemano, es posible que cada vez que se realice una operación aritmética se introduzca un pequeño error.</li>
+<li>En la resolución de ecuaciones por eliminación gaussiana, un adecuado reordenamiento de las filas en el momento indicado puede reducir notablemente los errores cometidos.</li>
+<li>Por ejemplo, se puede mostrar cómo buscar un multiplicador de menor magnitud (es decir, un pivote de mayor magnitud) mejora la precisión de los resultados.</li>
+<li>Por eso, existen estrategias de pivoteo que no solamente hacen intercambio de filas cuando se tiene un pivote nulo, si no también cuando alguna de las filas posteriores tiene un pivote de mayor valor absoluto.</li>
+</ul>
+<div id="pivoteo-parcial" class="section level3">
+<h3><span class="header-section-number">3.7.1</span> Pivoteo parcial</h3>
+<ul>
+<li>Para reducir la propagación de los errores de redondeo, antes de comenzar una nueva ronda de reemplazos con el pivote <span class="math inline">\(a_{qq}\)</span> se evalúa si debajo en la misma columna hay algún elemento con mayor valor absoluto y en ese caso se intercambian las respectivas filas.</li>
+<li>Es decir, se busca si existe <span class="math inline">\(r\)</span> tal que <span class="math inline">\(|a_{rq}| &gt; |a_{qq}|,\quad r&gt;q\)</span> para luego intercambiar las filas <span class="math inline">\(q\)</span> y <span class="math inline">\(r\)</span>.</li>
+<li>Este proceso suele conservar las magnitudes relativas de los elementos de la matriz triangular superior en el mismo orden que las de los coeficientes de la matriz original.</li>
+</ul>
+</div>
+<div id="pivoteo-parcial-escalado" class="section level3">
+<h3><span class="header-section-number">3.7.2</span> Pivoteo parcial escalado</h3>
+<ul>
+<li>Reduce aún más los efectos de la propagación de los errores.</li>
+<li>Se elige el elemento de la columna <span class="math inline">\(q\)</span>-ésima, en o por debajo de la diagonal principal, que tiene mayor tamaño relativo con respecto al resto de los elementos de su fila.</li>
+<li><strong>Paso 1</strong>: buscar el máximo valor absoluto en cada fila:</li>
+</ul>
+<p><span class="math display">\[
+s_r = max\{|a_{rq}|, |a_{r,q+1}|, \cdots, |a_{rn}| \} \quad r = q, q+1, \cdots, n
+\]</span></p>
+<ul>
+<li><strong>Paso 2</strong>: elegir como fila pivote a la que tenga el mayor valor de <span class="math inline">\(\frac{|a_{rq}|}{s_r}\)</span>, <span class="math inline">\(r = q, q+1, \cdots, n\)</span>.</li>
+<li><strong>Paso 3</strong>: intercambiar la fila <span class="math inline">\(q\)</span> con la fila hallada en el paso 2.</li>
+</ul>
+</div>
+</div>
+<div id="método-de-eliminación-de-gauss-jordan" class="section level2">
+<h2><span class="header-section-number">3.8</span> Método de eliminación de Gauss-Jordan</h2>
+<ul>
+<li>Ya vimos que el método de Gauss transforma la matriz de coeficientes en una matriz triangular superior.</li>
+<li>El método de Gauss-Jordan continúa el proceso de transformación hasta obtener la matriz identidad.</li>
+<li><strong>Retomar Ejemplo Diapo 15</strong>: cuando aplicamos eliminación de Gauss llegamos a la siguiente matriz triangular.</li>
+</ul>
+<p><span class="math display">\[
+\begin{bmatrix}
+1 &amp; 2 &amp; -1 &amp; 3 &amp;|&amp; -8\\
+0 &amp; -4 &amp; 4 &amp; -7 &amp;|&amp; 29\\
+0 &amp; 0 &amp; -12 &amp; 13 &amp;|&amp; -87\\
+0 &amp; 0 &amp; 0 &amp; -136 &amp;|&amp; 408  
+\end{bmatrix}
+\]</span></p>
+<ul>
+<li>Con el método de sustitución regresiva, llegamos a encontrar <span class="math inline">\(x=1\)</span>, <span class="math inline">\(y=2\)</span>, <span class="math inline">\(z=4\)</span> y <span class="math inline">\(t=-3\)</span>.</li>
+<li>En lugar de aplicar sustitución regresiva, seguimos operando por fila hasta lograr una matriz diagonal:</li>
+</ul>
+<p><span class="math display">\[
+\begin{array}{cl}
+\text{Fila 2} &amp;= \text{ Fila 2} / (-4) \\ 
+\text{Fila 3} &amp;= \text{ Fila 3} /(-12) \\
+\text{Fila 4} &amp;= \text{ Fila 4} / (-136) 
+\end{array}
+\implies
+\begin{bmatrix}
+1 &amp; 2 &amp; -1 &amp; 3 &amp;|&amp; -8\\
+0 &amp; 1 &amp; -1 &amp; 7/4 &amp;|&amp; -29/4\\
+0 &amp; 0 &amp; 1 &amp; -13/12 &amp;|&amp; 87/12\\
+0 &amp; 0 &amp; 0 &amp; 1 &amp;|&amp; -3  
+\end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+\begin{array}{cl}
+\text{Fila 1} &amp;= \text{ Fila 1} - 3 \text{ Fila 4} \\ 
+\text{Fila 2} &amp;= \text{ Fila 2} - 7/4 \text{ Fila 4}\\
+\text{Fila 3} &amp;= \text{ Fila 3} + 13/12 \text{ Fila 4} 
+\end{array}
+\implies
+\begin{bmatrix}
+1 &amp; 2 &amp; -1 &amp; 0 &amp;|&amp; 1\\
+0 &amp; 1 &amp; -1 &amp; 0 &amp;|&amp; -2\\
+0 &amp; 0 &amp; 1 &amp; 0 &amp;|&amp; 4\\
+0 &amp; 0 &amp; 0 &amp; 1 &amp;|&amp; -3  
+\end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+\begin{array}{cl}
+\text{Fila 1} &amp;= \text{ Fila 1} + \text{ Fila 3} \\ 
+\text{Fila 2} &amp;= \text{ Fila 2} + \text{ Fila 3}
+\end{array}
+\implies
+\begin{bmatrix}
+1 &amp; 2 &amp; 0 &amp; 0 &amp;|&amp; 5\\
+0 &amp; 1 &amp; 0 &amp; 0 &amp;|&amp; 2\\
+0 &amp; 0 &amp; 1 &amp; 0 &amp;|&amp; 4\\
+0 &amp; 0 &amp; 0 &amp; 1 &amp;|&amp; -3  
+\end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+\begin{array}{cl}
+\text{Fila 1} &amp;= \text{ Fila 1} -2 \text{ Fila 2} 
+\end{array}
+\implies
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 &amp; 0 &amp;|&amp; 1\\
+0 &amp; 1 &amp; 0 &amp; 0 &amp;|&amp; 2\\
+0 &amp; 0 &amp; 1 &amp; 0 &amp;|&amp; 4\\
+0 &amp; 0 &amp; 0 &amp; 1 &amp;|&amp; -3  
+\end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+\implies
+\left\{
+\begin{aligned}
+x &amp;= 1\\ y &amp;= 2\\ z &amp;= 4\\ t &amp;= -3
+\end{aligned}
+\right.
+\]</span></p>
+<ul>
+<li>La ventaja de este método es que permite también hallar fácilmente la matriz inversa de <span class="math inline">\(\mathbf{A}\)</span>.</li>
+<li>Para esto hay que concatenar a la derecha de la matriz aumentada una matriz identidad de orden <span class="math inline">\(n\)</span>. Cuando en la submatriz izquierda se llega a la matriz identidad, en el centro habrá quedado el vector solución y a su derecha la matriz inversa.</li>
+<li>Ejemplo. Resolver el siguiente sistema y hallar la inversa de la matriz de coeficientes:</li>
+</ul>
+<p><span class="math display">\[
+\begin{cases} 
+x-y+z=-4 \\
+5x-4y+3z=-12 \\
+2x+y+z=11
+\end{cases}
+\]</span></p>
+<p><span class="math display">\[
+\begin{bmatrix}
+    1 &amp; -1 &amp; 1 &amp;|&amp; -4 &amp;|&amp; 1 &amp; 0 &amp; 0\\
+    5 &amp; -4 &amp; 3 &amp;|&amp; -12 &amp;|&amp; 0 &amp; 1 &amp; 0\\
+    2 &amp; 1 &amp; 1 &amp;|&amp; 11 &amp;|&amp; 0 &amp; 0 &amp; 1
+\end{bmatrix}
+\]</span>
+<span class="math display">\[
+\begin{array}{cl}
+    F2 &amp;= F2 - 5 F1 \\
+    F3 &amp;= F3 - 2 F1 \\
+    F1 &amp;= F1 + F2 \\
+    F3 &amp;= F3 - 3 F2 \\
+    F1 &amp;= F1 + 1/5 F3 \\
+    F2 &amp;= F2 + 2/5 F3  \\
+    F3 &amp;= F3 / 5
+\end{array}
+\]</span>
+<span class="math display">\[
+\begin{bmatrix}
+    1 &amp; 0 &amp; 0 &amp;|&amp; 3 &amp;|&amp; -7/5 &amp; 2/5 &amp; 1/5\\
+    0 &amp; 1 &amp; 0 &amp;|&amp; 6 &amp;|&amp; 1/5 &amp; -1/5 &amp; 2/5\\
+    0 &amp; 0 &amp; 1 &amp;|&amp; -1 &amp;|&amp; 13/5 &amp; -3/2 &amp; 1/5
+\end{bmatrix}
+\]</span></p>
+<ul>
+<li>¿Por qué este procedimiento nos devuelva la inversa de la matriz de coeficientes?</li>
+<li>Recordar que la inversa de <span class="math inline">\(\mathbf{A}\)</span> es aquella matriz <span class="math inline">\(\mathbf{A}^{-1}\)</span> que verifica <span class="math inline">\(\mathbf{AA}^{-1} =\mathbf{A}^{-1}\mathbf{A}=\mathbf{I}\)</span></li>
+<li>Entonces queremos hallar la matriz <span class="math inline">\(\mathbf{A}^{-1}\)</span>:</li>
+</ul>
+<p><span class="math display">\[
+\mathbf{A}^{-1} =
+\begin{bmatrix}
+x_{11} &amp; x_{12} &amp; x_{13} \\
+x_{21} &amp; x_{22} &amp; x_{23} \\
+x_{31} &amp; x_{32} &amp; x_{33} 
+\end{bmatrix}
+\]</span></p>
+<p>tal que:</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1 &amp; -1 &amp; 1 \\
+5 &amp; -4 &amp; 3 \\
+2 &amp; 1 &amp; 1 
+\end{bmatrix}
+\times
+\begin{bmatrix}
+x_{11} &amp; x_{12} &amp; x_{13} \\
+x_{21} &amp; x_{22} &amp; x_{23} \\
+x_{31} &amp; x_{32} &amp; x_{33} 
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 1 
+\end{bmatrix}
+\]</span></p>
+<ul>
+<li>Esto da lugar a tres sistemas de ecuaciones con la misma matriz de coeficientes:</li>
+</ul>
+<p><span class="math display">\[
+\implies
+\begin{bmatrix}
+x_{11}-x_{21}+x_{31} &amp; x_{12}-x_{22}+x_{32} &amp; x_{13}-x_{23}+x_{33} \\
+5x_{11}-4x_{21}+3x_{31} &amp; 5x_{12}-4x_{22}+3x_{32} &amp; 5x_{13}-4x_{23}+3x_{33} \\
+2x_{11}+x_{21}+x_{31} &amp; 2x_{12}-x_{22}+x_{32} &amp; 2x_{13}-x_{23}+x_{33} 
+\end{bmatrix}
+=
+\]</span></p>
+<p><span class="math display">\[
+=
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 1 
+\end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+\begin{cases} 
+x_{11}-x_{21}+x_{31}=1 \\
+5x_{11}-4x_{21}+3x_{31}=0 \\
+2x_{11}+x_{21}+x_{31}=0
+\end{cases}
+\]</span></p>
+<p><span class="math display">\[
+\begin{cases} 
+x_{12}-x_{22}+x_{32}=0 \\
+5x_{12}-4x_{22}+3x_{32}=1 \\
+2x_{12}+x_{22}+x_{32}=0
+\end{cases}
+\]</span></p>
+<p><span class="math display">\[
+\begin{cases} 
+x_{13}-x_{23}+x_{33}=0 \\
+5x_{13}-4x_{23}+3x_{33}=0 \\
+2x_{13}+x_{23}+x_{33}=1
+\end{cases}
+\]</span></p>
+<ul>
+<li>Los resolvemos simultáneamente al agregar la matriz identidad de orden <span class="math inline">\(n\)</span> a la derecha de la matriz aumentada del sistema original.</li>
+</ul>
+</div>
+<div id="métodos-aproximados-o-iterativos" class="section level2">
+<h2><span class="header-section-number">3.9</span> Métodos Aproximados o Iterativos</h2>
+<ul>
+<li><strong>Objetivo</strong>: extender a espacios de dimensión mayor que uno las ideas de los métodos iterativos vistos en la unidad 2 para resolver sistemas de ecuaciones lineales.</li>
+<li><p>Veremos:</p>
+<ul>
+<li>Método de Jacobi</li>
+<li>Método de Gauss-Seidel</li>
+</ul></li>
+</ul>
+<div id="método-de-jacobi" class="section level3">
+<h3><span class="header-section-number">3.9.1</span> Método de Jacobi</h3>
+<ul>
+<li>Consideremos el sistema:</li>
+</ul>
+<p><span class="math display">\[
+\begin{cases} 
+4x-y+z=7 \\
+4x-8y+z=-21 \\
+-2x+y+5z=15
+\end{cases}
+\implies
+\begin{cases} 
+x=(7+y-z)/4 \\
+y=(21+4x+z)/8 \\
+z=(15+2x-y)/5
+\end{cases}
+\]</span></p>
+<ul>
+<li>Despejar una incógnita en cada ecuación provee expresiones que sugieren la idea de un proceso iterativo.</li>
+<li>Dado un vector de valores iniciales <span class="math inline">\(\mathbf{x_0}=(x_0, y_0, z_0)\)</span>, operar con la siguiente fórmula de recurrencia hasta la convergencia:</li>
+</ul>
+<p><span class="math display">\[
+\begin{cases} 
+x_{k+1}=(7+y_k-z_k)/4 \\
+y_{k+1}=(21+4x_k+z_k)/8 \\
+z_{k+1}=(15+2x_k-y_k)/5
+\end{cases}
+\]</span></p>
+<ul>
+<li>Por ejemplo, tomando el valor inicial <span class="math inline">\((1, 2, 2)\)</span>, el proceso converge hacia la solución exacta del sistema <span class="math inline">\((2, 4, 3)\)</span>.</li>
+<li>Usando 4 posiciones decimales con redondeo luego de la coma:</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(k\)</span></th>
+<th><span class="math inline">\(x_k\)</span></th>
+<th><span class="math inline">\(y_k\)</span></th>
+<th><span class="math inline">\(z_k\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>1.7500</td>
+<td>3.3750</td>
+<td>3.0000</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>1.8438</td>
+<td>3.8750</td>
+<td>3.0250</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>1.9625</td>
+<td>3.9250</td>
+<td>2.9625</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>1.9906</td>
+<td>3.9766</td>
+<td>3.0000</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>1.9942</td>
+<td>3.9953</td>
+<td>3.0009</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>1.9986</td>
+<td>3.9972</td>
+<td>2.9986</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td>1.9997</td>
+<td>3.9991</td>
+<td>3.0000</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>1.9998</td>
+<td>3.9999</td>
+<td>3.0001</td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td>2.0000</td>
+<td>3.9999</td>
+<td>2.9999</td>
+</tr>
+<tr class="odd">
+<td>10</td>
+<td>2.0000</td>
+<td>4.0000</td>
+<td>3.0000</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><em>Observación</em>: no siempre este método converge. Es sensible al ordenamiento de las ecuaciones dentro del sistema.</li>
+<li>Ejemplo: tomamos el mismo sistema de antes pero intercambiamos las filas 1 y 3:</li>
+</ul>
+<p><span class="math display">\[
+\begin{cases} 
+4x-y+z=7 \\
+4x-8y+z=-21 \\
+-2x+y+5z=15
+\end{cases}
+\implies
+\begin{cases} 
+-2x+y+5z=15 \\
+4x-8y+z=-21 \\
+4x-y+z=7
+\end{cases}
+\]</span></p>
+<p><span class="math display">\[
+\implies
+\begin{cases} 
+x=(-15+y+5z)/2 \\
+y=(21+4x+z)/8 \\
+z=7-4x+y
+\end{cases}
+\implies
+\begin{cases} 
+x_{k+1}=(-15+y_k+5z_k)/2 \\
+y_{k+1}=(21+4x_k+z_k)/8 \\
+z_{k+1}=7-4x_k+y_k
+\end{cases}
+\]</span></p>
+<ul>
+<li>Tomando el mismo valor inicial <span class="math inline">\((1, 2, 2)\)</span>, esta vez el proceso diverge:</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(k\)</span></th>
+<th><span class="math inline">\(x_k\)</span></th>
+<th><span class="math inline">\(y_k\)</span></th>
+<th><span class="math inline">\(z_k\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>-1.5000</td>
+<td>3.3750</td>
+<td>5.0000</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>6.6875</td>
+<td>2.5000</td>
+<td>16.3750</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>34.6875</td>
+<td>8.0156</td>
+<td>-17.2500</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>-46.6172</td>
+<td>17.8125</td>
+<td>-123.7344</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>-307.9298</td>
+<td>-36.1504</td>
+<td>211.2813</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>502.6281</td>
+<td>-124.9297</td>
+<td>1202.5688</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td>2936.4572</td>
+<td>404.2602</td>
+<td>-2128.4421</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>-5126.4752</td>
+<td>1204.7983</td>
+<td>-11334.5686</td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td>-27741.5224</td>
+<td>-3977.4337</td>
+<td>21717.6991</td>
+</tr>
+<tr class="odd">
+<td>10</td>
+<td>52298.0309</td>
+<td>-11153.4238</td>
+<td>106995.6559</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="método-de-gauss-seidel" class="section level3">
+<h3><span class="header-section-number">3.9.2</span> Método de Gauss-Seidel</h3>
+<ul>
+<li>Toma la misma idea que Jacobi, pero con una pequeña modificación para acelerar la convergencia. Retomando el ejemplo inicial:</li>
+</ul>
+<p><span class="math display">\[
+\begin{cases} 
+4x-y+z=7 \\
+4x-8y+z=-21 \\
+-2x+y+5z=15
+\end{cases}
+\implies
+\begin{cases} 
+x=(7+y-z)/4 \\
+y=(21+4x+z)/8 \\
+z=(15+2x-y)/5
+\end{cases}
+\]</span></p>
+<p>Jacobi:</p>
+<p><span class="math display">\[
+\begin{cases} 
+x_{k+1}=(7+y_k-z_k)/4 \\
+y_{k+1}=(21+4x_k+z_k)/8 \\
+z_{k+1}=(15+2x_k-y_k)/5
+\end{cases}
+\]</span></p>
+<p>Gauss-Seidel:</p>
+<p><span class="math display">\[
+\begin{cases} 
+x_{k+1}=(7+y_k-z_k)/4 \\
+y_{k+1}=(21+4x_{k+1}+z_k)/8 \\
+z_{k+1}=(15+2x_{k+1}-y_{k+1})/5
+\end{cases}
+\]</span></p>
+<ul>
+<li><p>La diferencia está en que apenas calcula un nuevo valor de las incógnitas, Gauss-Seidel lo usa inmediatamente en el cálculo de las restantes, en lugar esperar a la próxima ronda.</p></li>
+<li><p>Tomando otra vez el valor inicial <span class="math inline">\((1, 2, 2)\)</span> y operando con 4 posiciones decimales con redondeo luego de la coma:</p></li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th><strong>Jacobi</strong></th>
+<th></th>
+<th></th>
+<th></th>
+<th><strong>Gauss-Seidel</strong></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(k\)</span></td>
+<td><span class="math inline">\(x_k\)</span></td>
+<td><span class="math inline">\(y_k\)</span></td>
+<td><span class="math inline">\(z_k\)</span></td>
+<td><span class="math inline">\(k\)</span></td>
+<td><span class="math inline">\(x_k\)</span></td>
+<td><span class="math inline">\(y_k\)</span></td>
+<td><span class="math inline">\(z_k\)</span></td>
+</tr>
+<tr class="even">
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td>1.7500</td>
+<td>3.3750</td>
+<td>3.0000</td>
+<td>1</td>
+<td>1.7500</td>
+<td>3.7500</td>
+<td>2.9500</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>1.8438</td>
+<td>3.8750</td>
+<td>3.0250</td>
+<td>2</td>
+<td>1.9500</td>
+<td>3.9688</td>
+<td>2.9862</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>1.9625</td>
+<td>3.9250</td>
+<td>2.9625</td>
+<td>3</td>
+<td>1.9957</td>
+<td>3.9961</td>
+<td>2.9991</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>1.9906</td>
+<td>3.9766</td>
+<td>3.0000</td>
+<td>4</td>
+<td>1.9993</td>
+<td>3.9995</td>
+<td>2.9998</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>1.9942</td>
+<td>3.9953</td>
+<td>3.0009</td>
+<td>5</td>
+<td>1.9999</td>
+<td>3.9999</td>
+<td>3.0000</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>1.9986</td>
+<td>3.9972</td>
+<td>2.9986</td>
+<td>6</td>
+<td>2.0000</td>
+<td>4.0000</td>
+<td>3.0000</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>1.9997</td>
+<td>3.9991</td>
+<td>3.0000</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>1.9998</td>
+<td>3.9999</td>
+<td>3.0001</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>2.0000</td>
+<td>3.9999</td>
+<td>2.9999</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>2.0000</td>
+<td>4.0000</td>
+<td>3.0000</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="generalización" class="section level3">
+<h3><span class="header-section-number">3.9.3</span> Generalización</h3>
+<ul>
+<li><p>Ahora que sabemos qué hace cada método y en qué se diferencian vamos a:</p>
+<ul>
+<li>Generalizar las fórmulas recursivas</li>
+<li>Escribirlas matricialmente</li>
+<li>Evaluar la convergencia</li>
+<li>Ver los programas</li>
+</ul></li>
+<li><p>Tenemos un sistema de <span class="math inline">\(n\)</span> ecuaciones lineales con <span class="math inline">\(n\)</span> incógnitas y despejamos una variable en cada ecuación:</p></li>
+</ul>
+<p><span class="math display">\[
+\begin{cases} 
+a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n = b_1 \\
+a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n = b_2 \\
+\vdots \\
+a_{j1}x_1 + a_{j2}x_2 + \cdots + a_{jn}x_n = b_j \\
+\vdots \\
+a_{n1}x_1 + a_{n2}x_2 + \cdots + a_{nn}x_n = b_n
+\end{cases}
+\]</span>
+<span class="math display">\[
+\implies\hspace{-0.2cm}
+\begin{cases} 
+x_1 = \frac{b_1 - a_{12}x_2 - \cdots - a_{1n}x_n}{ a_{11}}\\
+x_2 = \frac{b_2 - a_{21}x_1 - a_{23}x_3 - \cdots - a_{2n}x_n}{ a_{22}}\\
+\vdots \\
+x_j = \frac{b_j - a_{j1}x_1 \cdots - a_{j(j-1)}x_{j-1} - a_{j(j+1)}x_{j+1} - \cdots - a_{jn}x_n}{ a_{jj}}\\
+\vdots \\
+x_n = \frac{b_n - a_{n1}x_1 - \cdots - a_{n(n-1)}x_{n-1}}{a_{nn}}\\
+\end{cases}
+\]</span></p>
+<div id="generalización-del-método-de-jacobi" class="section level4">
+<h4><span class="header-section-number">3.9.3.1</span> Generalización del Método de Jacobi</h4>
+<ul>
+<li>Con los supra índices indicando el número de iteración, la fórmula de recurrencia es:</li>
+</ul>
+<p><span class="math display">\[
+\begin{cases} 
+x_1^{(k+1)} = \frac{b_1 - a_{12}x_2^{(k)} - \cdots - a_{1n}x_n^{(k)}}{ a_{11}}\\
+x_2^{(k+1)} = \frac{b_2 - a_{21}x_1^{(k)} - a_{23}x_3^{(k)} - \cdots - a_{2n}x_n^{(k)}}{ a_{22}}\\
+\vdots \\
+x_j^{(k+1)} = \frac{b_j - a_{j1}x_1^{(k)} \cdots - a_{j(j-1)}x_{j-1}^{(k)} - a_{j(j+1)}x_{j+1}^{(k)} - \cdots - a_{jn}x_n^{(k)}}{ a_{jj}}\\
+\vdots \\
+x_n^{(k+1)} = \frac{b_n - a_{n1}x_1^{(k)} - \cdots - a_{n(n-1)}x_{n-1}^{(k)}}{a_{nn}}\\
+\end{cases}
+\]</span></p>
+<p><span class="math display">\[
+\implies
+x_j^{(k+1)} = \frac{b_j - a_{j1}x_1^{(k)} \cdots - a_{j(j-1)}x_{j-1}^{(k)} - a_{j(j+1)}x_{j+1}^{(k)} - \cdots - a_{jn}x_n^{(k)}}{ a_{jj}}
+\]</span>
+<span class="math display">\[
+k=1, 2, \cdots n
+\]</span></p>
+</div>
+<div id="generalización-del-método-de-gauss-seidel" class="section level4">
+<h4><span class="header-section-number">3.9.3.2</span> Generalización del Método de Gauss-Seidel</h4>
+<ul>
+<li>Con los supra índices indicando el número de iteración, la fórmula de recurrencia es:</li>
+</ul>
+<p><span class="math display">\[
+\begin{cases} 
+x_1^{(k+1)} = \frac{b_1 - a_{12}x_2^{(k)} - \cdots - a_{1n}x_n^{(k)}}{ a_{11}}\\
+x_2^{(k+1)} = \frac{b_2 - a_{21}x_1^{(k+1)} - a_{23}x_3^{(k)} - \cdots - a_{2n}x_n^{(k)}}{ a_{22}}\\
+\vdots \\
+x_j^{(k+1)} = \frac{b_j - a_{j1}x_1^{(k+1)} \cdots - a_{j(j-1)}x_{j-1}^{(k+1)} - a_{j(j+1)}x_{j+1}^{(k)} - \cdots - a_{jn}x_n^{(k)}}{ a_{jj}}\\
+\vdots \\
+x_n^{(k+1)} = \frac{b_n - a_{n1}x_1^{(k+1)} - \cdots - a_{n(n-1)}x_{n-1}^{(k+1)}}{a_{nn}}\\
+\end{cases}
+\]</span></p>
+<p><span class="math display">\[
+\implies
+x_j^{(k+1)} = \frac{b_j - a_{j1}x_1^{(k+1)} \cdots - a_{j(j-1)}x_{j-1}^{(k+1)} - a_{j(j+1)}x_{j+1}^{(k)} - \cdots - a_{jn}x_n^{(k)}}{ a_{jj}}
+\]</span>
+<span class="math display">\[
+k=1, 2, \cdots n
+\]</span></p>
+</div>
+<div id="expresión-matricial-para-el-método-de-jacobi" class="section level4">
+<h4><span class="header-section-number">3.9.3.3</span> Expresión matricial para el Método de Jacobi</h4>
+<ul>
+<li>Si descomponemos a la matriz <span class="math inline">\(\mathbf{A}\)</span> como <span class="math inline">\(\mathbf{A=D+R}\)</span>, donde <span class="math inline">\(\mathbf{D}\)</span> es la matriz diagonal formada con la diagonal de <span class="math inline">\(\mathbf{A}\)</span> y <span class="math inline">\(\mathbf{R}\)</span> es igual a <span class="math inline">\(\mathbf{A}\)</span> excepto en la diagonal donde posee todos ceros, tenemos:</li>
+</ul>
+<p><span class="math display">\[\begin{align*} 
+\mathbf{Ax} &amp;= \mathbf{b} \\
+\mathbf{(D+R)x} &amp;= \mathbf{b} \\
+\mathbf{Dx} &amp;= \mathbf{b} - \mathbf{Rx}  \\
+\mathbf{x} &amp;= \mathbf{D}^{-1} (\mathbf{b} - \mathbf{Rx})  \\
+\end{align*}\]</span></p>
+<ul>
+<li>Esto da lugar a la siguiente fórmula de recurrencia, que es equivalente a las vistas anteriormente, y facilita la programación del método:</li>
+</ul>
+<p><span class="math display">\[
+\mathbf{x}^{(k+1)} = \mathbf{D}^{-1} (\mathbf{b} - \mathbf{Rx}^{(k)}) 
+\]</span></p>
+<ul>
+<li>Requisito: ningún elemento en la diagonal de <span class="math inline">\(\mathbf{A}\)</span> es cero.</li>
+</ul>
+</div>
+<div id="expresión-matricial-para-el-método-de-gauss-seidel" class="section level4">
+<h4><span class="header-section-number">3.9.3.4</span> Expresión matricial para el Método de Gauss-Seidel</h4>
+<ul>
+<li>Si descomponemos a la matriz <span class="math inline">\(\mathbf{A}\)</span> como <span class="math inline">\(\mathbf{A=L+U}\)</span>, donde <span class="math inline">\(\mathbf{L}\)</span> es una matriz triangular inferior (incluyendo la diagonal de <span class="math inline">\(\mathbf{A}\)</span>) y <span class="math inline">\(\mathbf{U}\)</span> es una matriz triangular superior (con ceros en la diagonal), tenemos:</li>
+</ul>
+<p><span class="math display">\[\begin{align*} 
+\mathbf{Ax} &amp;= \mathbf{b} \\
+\mathbf{(L+U)x} &amp;= \mathbf{b} \\
+\mathbf{Lx} &amp;= \mathbf{b} - \mathbf{Ux}  \\
+\mathbf{x} &amp;= \mathbf{L}^{-1} (\mathbf{b} - \mathbf{Ux})  \\
+\end{align*}\]</span></p>
+<ul>
+<li>Esto da lugar a la siguiente fórmula de recurrencia, que es equivalente a las vistas anteriormente, y facilita la programación del método:</li>
+</ul>
+<p><span class="math display">\[
+\mathbf{x}^{(k+1)} = \mathbf{L}^{-1} (\mathbf{b} - \mathbf{Ux}^{(k)}) 
+\]</span></p>
+<ul>
+<li>Requisito: ningún elemento en la diagonal de <span class="math inline">\(\mathbf{A}\)</span> es cero.</li>
+</ul>
+</div>
+</div>
+<div id="convergencia-1" class="section level3">
+<h3><span class="header-section-number">3.9.4</span> Convergencia</h3>
+<p><strong>Definición</strong>:</p>
+<p>Se dice que una matriz <span class="math inline">\(\mathbf{A}\)</span> de orden <span class="math inline">\(n \times n\)</span> es <strong>diagonal estrictamente dominante</strong> cuando el elemento diagonal es mayor a la suma del resto de los elementos de su fila en valor absoluto:</p>
+<p><span class="math display">\[
+|a_{kk}| &gt; \sum\limits_{\substack{j=0 \\ j\neq k}}^n |a_{kj}| \quad k=1, 2, \cdots, n
+\]</span></p>
+<p><strong>Teorema</strong></p>
+<p>Si la matriz <span class="math inline">\(\mathbf{A}\)</span> es diagonal estrictamente dominante, entonces el sistema lineal <span class="math inline">\(\mathbf{Ax=b}\)</span> tiene solución única y los procesos iterativos de Jacobi y de Gauss-Seidel convergen hacia la misma cualquiera sea el vector de partida <span class="math inline">\(\mathbf{x_0}\)</span>.</p>
+<ul>
+<li>Es una condición suficiente pero no necesaria.</li>
+</ul>
+<p><strong>Criterios para la convergencia</strong></p>
+<ul>
+<li><strong>Norma L1 (distancia Manhattan)</strong>:</li>
+</ul>
+<p><span class="math display">\[
+||\mathbf{x}_{k+1}-\mathbf{x}_{k}||_1 =\sum_{j=1}^n |x_j^{(k+1)} - x_j^{(k)}| &lt; \epsilon
+\]</span></p>
+<ul>
+<li><strong>Norma L2 (norma euclídea)</strong>:</li>
+</ul>
+<p><span class="math display">\[||\mathbf{x}_{k+1}-\mathbf{x}_{k}||_2 = \sqrt{(\mathbf{x}_{k+1}-\mathbf{x}_{k})&#39;(\mathbf{x}_{k+1}-\mathbf{x}_{k})} = \sqrt{\sum_{j=1}^n (x_j^{(k+1)} - x_j^{(k)})^2} &lt; \epsilon\]</span></p>
+<ul>
+<li><strong>Norma L<span class="math inline">\(_\infty\)</span> (máxima diferencia)</strong>:</li>
+</ul>
+<p><span class="math display">\[
+||\mathbf{x}_{k+1}-\mathbf{x}_{k}||_\infty = \max_{j} |x_j^{(k+1)} - x_j^{(k)}| &lt; \epsilon
+\]</span></p>
+<ul>
+<li><strong>Establecer un número máximo de iteraciones</strong></li>
+</ul>
+<div id="ventajas-de-gauss-seidel" class="section level4">
+<h4><span class="header-section-number">3.9.4.1</span> Ventajas de Gauss-Seidel</h4>
+<ul>
+<li>Converge más rápidamente.</li>
+<li>Puede converger cuando Jacobi no lo hace (aunque <span class="math inline">\(\mathbf{A}\)</span> no sea diagonal estrictamente dominante, por ejemplo si <span class="math inline">\(\mathbf{A}\)</span> es semidefinida positiva).</li>
+<li>Pero puede haber casos en los que Jacobi converge y Gauss-Seidel no.</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="solución-numérica-de-ecuaciones-no-lineales.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="aproximación-polinomial-interpolación-y-extrapolación.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/mpru/guia-metodos-numericos/issues/03_Unidad3.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["guia-met-num.pdf", "guia-met-num.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

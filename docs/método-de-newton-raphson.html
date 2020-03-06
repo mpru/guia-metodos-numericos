@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 Método de Newton-Raphson | Taller de Métodos Numéricos</title>
+  <meta name="description" content="Esta guía resume algunos conceptos desarrollados en el Taller de Métodos Numéricos de la Licenciatura en Estadística (Facultad de Ciencias Económicas y Estadstica, Universidad Nacional de Rosario)." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 Método de Newton-Raphson | Taller de Métodos Numéricos" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://mpru.github.io/guia-metodos-numericos/" />
+  
+  <meta property="og:description" content="Esta guía resume algunos conceptos desarrollados en el Taller de Métodos Numéricos de la Licenciatura en Estadística (Facultad de Ciencias Económicas y Estadstica, Universidad Nacional de Rosario)." />
+  <meta name="github-repo" content="mpru/guia-metodos-numericos" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 Método de Newton-Raphson | Taller de Métodos Numéricos" />
+  
+  <meta name="twitter:description" content="Esta guía resume algunos conceptos desarrollados en el Taller de Métodos Numéricos de la Licenciatura en Estadística (Facultad de Ciencias Económicas y Estadstica, Universidad Nacional de Rosario)." />
+  
+
+<meta name="author" content="Marcos Prunello" />
+<meta name="author" content="Cecilia Rapelli" />
+
+
+<meta name="date" content="2020-03-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="método-de-las-aproximaciones-sucesivas-o-del-punto-fijo.html">
+<link rel="next" href="método-de-von-mises.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Guía de estudio para el Taller de Métodos Numéricos</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Acerca del Taller</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#horario-y-lugar-de-cursado"><i class="fa fa-check"></i>Horario y lugar de cursado</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#consultas"><i class="fa fa-check"></i>Consultas</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#material-de-estudio"><i class="fa fa-check"></i>Material de estudio</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#evaluación"><i class="fa fa-check"></i>Evaluación</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#campus-virtual"><i class="fa fa-check"></i>Campus virtual</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html"><i class="fa fa-check"></i><b>1</b> Introducción a los Métodos Numéricos</a><ul>
+<li class="chapter" data-level="1.1" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#cifras-significativas"><i class="fa fa-check"></i><b>1.1</b> Cifras significativas</a></li>
+<li class="chapter" data-level="1.2" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#notación-científica-o-exponencial"><i class="fa fa-check"></i><b>1.2</b> Notación Científica o Exponencial</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#ejemplo-2"><i class="fa fa-check"></i><b>1.2.1</b> Ejemplo 2:</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#sistemas-numéricos"><i class="fa fa-check"></i><b>1.3</b> Sistemas numéricos</a></li>
+<li class="chapter" data-level="1.4" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#por-qué-nos-interesa-el-sistema-binario"><i class="fa fa-check"></i><b>1.4</b> ¿Por qué nos interesa el sistema binario?</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#ejemplo-3"><i class="fa fa-check"></i><b>1.4.1</b> Ejemplo 3</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#formato-de-coma-flotante"><i class="fa fa-check"></i><b>1.5</b> Formato de coma flotante</a></li>
+<li class="chapter" data-level="1.6" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#propiedades-importantes-del-formato-ieee-754"><i class="fa fa-check"></i><b>1.6</b> Propiedades importantes del formato IEEE-754</a></li>
+<li class="chapter" data-level="1.7" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#análisis-de-los-errores"><i class="fa fa-check"></i><b>1.7</b> Análisis de los errores</a><ul>
+<li class="chapter" data-level="1.7.1" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#error-de-truncamiento"><i class="fa fa-check"></i><b>1.7.1</b> Error de truncamiento</a></li>
+<li class="chapter" data-level="1.7.2" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#error-de-redondeo"><i class="fa fa-check"></i><b>1.7.2</b> Error de redondeo</a></li>
+<li class="chapter" data-level="1.7.3" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#ejemplos-de-operaciones-delicadas"><i class="fa fa-check"></i><b>1.7.3</b> Ejemplos de operaciones “delicadas”</a></li>
+<li class="chapter" data-level="1.7.4" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#medida-del-error"><i class="fa fa-check"></i><b>1.7.4</b> Medida del error</a></li>
+<li class="chapter" data-level="1.7.5" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#error-propagado"><i class="fa fa-check"></i><b>1.7.5</b> Error propagado</a></li>
+<li class="chapter" data-level="1.7.6" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#error-propagado-1"><i class="fa fa-check"></i><b>1.7.6</b> Error propagado</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html"><i class="fa fa-check"></i><b>2</b> Solución Numérica de Ecuaciones No Lineales</a><ul>
+<li class="chapter" data-level="2.1" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#generalidades"><i class="fa fa-check"></i><b>2.1</b> Generalidades</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="método-de-las-aproximaciones-sucesivas-o-del-punto-fijo.html"><a href="método-de-las-aproximaciones-sucesivas-o-del-punto-fijo.html"><i class="fa fa-check"></i><b>3</b> Método de las Aproximaciones Sucesivas o del Punto Fijo</a><ul>
+<li class="chapter" data-level="3.1" data-path="método-de-las-aproximaciones-sucesivas-o-del-punto-fijo.html"><a href="método-de-las-aproximaciones-sucesivas-o-del-punto-fijo.html#punto-fijo"><i class="fa fa-check"></i><b>3.1</b> Punto fijo</a></li>
+<li class="chapter" data-level="3.2" data-path="método-de-las-aproximaciones-sucesivas-o-del-punto-fijo.html"><a href="método-de-las-aproximaciones-sucesivas-o-del-punto-fijo.html#empleo-para-la-resolución-de-ecuaciones"><i class="fa fa-check"></i><b>3.2</b> Empleo para la resolución de ecuaciones</a></li>
+<li class="chapter" data-level="3.3" data-path="método-de-las-aproximaciones-sucesivas-o-del-punto-fijo.html"><a href="método-de-las-aproximaciones-sucesivas-o-del-punto-fijo.html#ejemplo"><i class="fa fa-check"></i><b>3.3</b> Ejemplo</a></li>
+<li class="chapter" data-level="3.4" data-path="método-de-las-aproximaciones-sucesivas-o-del-punto-fijo.html"><a href="método-de-las-aproximaciones-sucesivas-o-del-punto-fijo.html#criterios-para-detener-el-proceso-iterativo"><i class="fa fa-check"></i><b>3.4</b> Criterios para detener el proceso iterativo</a></li>
+<li class="chapter" data-level="3.5" data-path="método-de-las-aproximaciones-sucesivas-o-del-punto-fijo.html"><a href="método-de-las-aproximaciones-sucesivas-o-del-punto-fijo.html#ejemplo-1"><i class="fa fa-check"></i><b>3.5</b> Ejemplo</a></li>
+<li class="chapter" data-level="3.6" data-path="método-de-las-aproximaciones-sucesivas-o-del-punto-fijo.html"><a href="método-de-las-aproximaciones-sucesivas-o-del-punto-fijo.html#teorema-del-punto-fijo"><i class="fa fa-check"></i><b>3.6</b> Teorema del Punto Fijo</a></li>
+<li class="chapter" data-level="3.7" data-path="método-de-las-aproximaciones-sucesivas-o-del-punto-fijo.html"><a href="método-de-las-aproximaciones-sucesivas-o-del-punto-fijo.html#ejemplo-4"><i class="fa fa-check"></i><b>3.7</b> Ejemplo</a></li>
+<li class="chapter" data-level="3.8" data-path="método-de-las-aproximaciones-sucesivas-o-del-punto-fijo.html"><a href="método-de-las-aproximaciones-sucesivas-o-del-punto-fijo.html#interpretación-gráfica"><i class="fa fa-check"></i><b>3.8</b> Interpretación gráfica</a></li>
+<li class="chapter" data-level="3.9" data-path="método-de-las-aproximaciones-sucesivas-o-del-punto-fijo.html"><a href="método-de-las-aproximaciones-sucesivas-o-del-punto-fijo.html#ejemplo-5"><i class="fa fa-check"></i><b>3.9</b> Ejemplo</a></li>
+<li class="chapter" data-level="3.10" data-path="método-de-las-aproximaciones-sucesivas-o-del-punto-fijo.html"><a href="método-de-las-aproximaciones-sucesivas-o-del-punto-fijo.html#algunos-diagramas"><i class="fa fa-check"></i><b>3.10</b> Algunos diagramas</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="método-de-newton-raphson.html"><a href="método-de-newton-raphson.html"><i class="fa fa-check"></i><b>4</b> Método de Newton-Raphson</a><ul>
+<li class="chapter" data-level="4.1" data-path="método-de-newton-raphson.html"><a href="método-de-newton-raphson.html#teorema-de-newton-raphson"><i class="fa fa-check"></i><b>4.1</b> Teorema de Newton-Raphson</a></li>
+<li class="chapter" data-level="4.2" data-path="método-de-newton-raphson.html"><a href="método-de-newton-raphson.html#convergencia"><i class="fa fa-check"></i><b>4.2</b> Convergencia</a></li>
+<li class="chapter" data-level="4.3" data-path="método-de-newton-raphson.html"><a href="método-de-newton-raphson.html#ejemplo-6"><i class="fa fa-check"></i><b>4.3</b> Ejemplo:</a></li>
+<li class="chapter" data-level="4.4" data-path="método-de-newton-raphson.html"><a href="método-de-newton-raphson.html#ventajas-y-desventajas"><i class="fa fa-check"></i><b>4.4</b> Ventajas y desventajas</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="método-de-von-mises.html"><a href="método-de-von-mises.html"><i class="fa fa-check"></i><b>5</b> Método de von Mises</a></li>
+<li class="chapter" data-level="6" data-path="método-de-newton-raphson-de-2º-orden.html"><a href="método-de-newton-raphson-de-2º-orden.html"><i class="fa fa-check"></i><b>6</b> Método de Newton-Raphson de 2º Orden</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Taller de Métodos Numéricos</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="método-de-newton-raphson" class="section level1">
+<h1><span class="header-section-number">4</span> Método de Newton-Raphson</h1>
+<ul>
+<li>Si la función <span class="math inline">\(F\)</span> y sus derivadas <span class="math inline">\(F&#39;\)</span> y <span class="math inline">\(F&#39;&#39;\)</span> son continuas cerca de una raíz <span class="math inline">\(p\)</span>, se pueden usar estas características de <span class="math inline">\(F\)</span> para desarrollar algoritmos que produzcan sucesiones <span class="math inline">\(\{x_k\}\)</span> que converjan a <span class="math inline">\(p\)</span> más rápidamente.</li>
+<li>El método de <strong>Newton-Raphson</strong> es uno de los más útiles y conocidos.</li>
+<li>Vamos a introducir este método a partir de su interpretación geométrica y su representación gráfica.</li>
+<li><strong>Recordar</strong>: La <em>tangente</em> a una curva en un punto es una recta que toca a la curva sólo en dicho punto.</li>
+<li>Veamos el siguiente ejemplo donde el objetivo es hallar la raiz de la función <span class="math inline">\(F\)</span>, es decir, el valor <span class="math inline">\(p\)</span> tal que <span class="math inline">\(F(p) = 0\)</span>.</li>
+</ul>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1">knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="st">&quot;Plots/U2/nr1.png&quot;</span>)</a></code></pre></div>
+<p><img src="Plots/U2/nr1.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1">knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="st">&quot;Plots/U2/nr2.png&quot;</span>)</a></code></pre></div>
+<p><img src="Plots/U2/nr2.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1">knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="st">&quot;Plots/U2/nr3.png&quot;</span>)</a></code></pre></div>
+<p><img src="Plots/U2/nr3.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1">knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="st">&quot;Plots/U2/nr4.png&quot;</span>)</a></code></pre></div>
+<p><img src="Plots/U2/nr4.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1">knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="st">&quot;Plots/U2/nr.png&quot;</span>)</a></code></pre></div>
+<p><img src="Plots/U2/nr.png" width="90%" style="display: block; margin: auto;" /></p>
+<ul>
+<li>Supongamos que contamos con una aproximación inicial <span class="math inline">\(x_0\)</span> cercana a la raiz <span class="math inline">\(p\)</span>.</li>
+<li>Definimos a <span class="math inline">\(x_1\)</span> como el punto de intersección del eje de las abscisas con la recta tangente a la curva <span class="math inline">\(F\)</span> en <span class="math inline">\(x_0\)</span>.</li>
+<li>En el caso de la figura, se puede observar que <span class="math inline">\(x_1\)</span> está más cerca de <span class="math inline">\(p\)</span> que <span class="math inline">\(x_0\)</span>.</li>
+<li>Ahora definimos a <span class="math inline">\(x_2\)</span> como el punto de intersección del eje de las abscisas con la recta tangente a la curva <span class="math inline">\(F\)</span> en <span class="math inline">\(x_1\)</span>.</li>
+<li>Nuevamente, para el caso del ejemplo, podemos ver cómo <span class="math inline">\(x_2\)</span> está aún más cerca de <span class="math inline">\(p\)</span>.</li>
+<li><p>Si continuamos repitiendo este proceso, esperamos encontrar un <span class="math inline">\(x_n\)</span> que sea una buena aproximación para <span class="math inline">\(p\)</span>.</p></li>
+<li>¿Podemos expresar esto que observamos gráficamente a través de una fórmula?</li>
+<li>Es decir, a partir de <span class="math inline">\(x_0\)</span>, ¿podemos encontrar una fórmula para <span class="math inline">\(x_1\)</span>?</li>
+<li>Sí, para eso hay prestarle atención a la pendiente <span class="math inline">\(m\)</span> de la recta tangente en <span class="math inline">\(x_0\)</span>.</li>
+<li><p>Por un lado, sabemos que la pendiente de la recta tangente a la curva en un punto es igual a la derivada de la función en dicho punto:</p></li>
+</ul>
+
+<p><span class="math display">\[\begin{equation}
+\label{eq:deriv1}
+m = F&#39;(x_0)
+\end{equation}\]</span></p>
+<ul>
+<li>Pero además sabemos que para cualquier recta, la pendiente es igual a:</li>
+</ul>
+
+<p><span class="math display">\[\begin{equation}
+\label{eq:deriv2}
+m = \frac{y_1 - y_0}{x_1 - x_0}
+\end{equation}\]</span></p>
+<p>siendo <span class="math inline">\((x_0, y_0)\)</span> y <span class="math inline">\((x_1, y_1)\)</span> dos puntos distintos que pertenecen a la misma.</p>
+<ul>
+<li>Para expresar la pendiente de la recta tangente en <span class="math inline">\(x_0\)</span>, podemos tomar los puntos <span class="math inline">\((x_0, F(x_0))\)</span> y <span class="math inline">\((x_1, 0)\)</span> (el punto donde la tangente intersecta al eje x), de manera que a partir de la fórmula anterior:</li>
+</ul>
+
+<p><span class="math display">\[\begin{equation}
+\label{eq:deriv3}
+m = \frac{0 - F(x_0)}{x_1 - x_0} = - \frac{F(x_0)}{x_1 - x_0}
+\end{equation}\]</span></p>
+<ul>
+<li>Igualando () y () y despejando <span class="math inline">\(x_1\)</span> nos queda:</li>
+</ul>
+
+<p><span class="math display">\[\begin{equation}
+\label{eq:deriv4}
+x_1 = x_0 - \frac{F(x_0)}{F&#39;(x_0)}
+\end{equation}\]</span></p>
+<ul>
+<li>Si repetimos este pensamiento empezando desde <span class="math inline">\(x_1\)</span> con la recta tangente a <span class="math inline">\(F\)</span> en el punto <span class="math inline">\(x_1\)</span>, vamos a encontrar que:</li>
+</ul>
+
+<p><span class="math display">\[\begin{equation}
+\label{eq:deriv5}
+x_2 = x_1 - \frac{F(x_1)}{F&#39;(x_1)}
+\end{equation}\]</span></p>
+<ul>
+<li><p>De esta manera hemos deducido una fórmula recursiva que nos permitirá hallar una aproximación para el verdadero valor de la raiz de <span class="math inline">\(F\)</span>.</p></li>
+<li>Las ideas anteriores se formalizan analíticamente a través del siguiente teorema.</li>
+<li><p>En el mismo se deduce la fórmula recursiva a partir del desarrollo en serie de Taylor de la función <span class="math inline">\(F\)</span>.</p></li>
+</ul>
+<div id="teorema-de-newton-raphson" class="section level2">
+<h2><span class="header-section-number">4.1</span> Teorema de Newton-Raphson</h2>
+<p>Supongamos que la función <span class="math inline">\(F\)</span> es continua, con derivada segunda continua en el intervalo <span class="math inline">\([a; b]\)</span>, y que existe un número <span class="math inline">\(p \in [a; b]\)</span> tal que <span class="math inline">\(F(p) = 0\)</span>. Si <span class="math inline">\(F&#39;(p) \neq 0\)</span>, entonces existe <span class="math inline">\(\delta &gt; 0\)</span> tal que la sucesión <span class="math inline">\(\{x_k\}_{k=0}^{\infty}\)</span> definida por el proceso iterativo</p>
+<p><span class="math display">\[
+x_k = x_{k-1} - \frac{F(x_{k-1})}{F&#39;(x_{k-1})} \quad k = 1, 2, \dots
+\]</span></p>
+<p>converge a <span class="math inline">\(p\)</span> cualquiera sea la aproximación inicial <span class="math inline">\(x_0 \in [p - \delta; p + \delta]\)</span></p>
+</div>
+<div id="convergencia" class="section level2">
+<h2><span class="header-section-number">4.2</span> Convergencia</h2>
+<p><strong>Observación</strong>: para garantizar la convergencia, <span class="math inline">\(\delta\)</span> debe ser elegido tal que:
+<span class="math display">\[\frac{|F(x)F&#39;&#39;(x)|}{[F&#39;(x)]^2} &lt; 1  \quad \forall x \in [p - \delta, p + \delta]\]</span></p>
+<p>Esto significa que:</p>
+<ul>
+<li><span class="math inline">\(x_0\)</span> debe estar suficientemente cerca a la raíz de <span class="math inline">\(F(x) = 0\)</span>.</li>
+<li><span class="math inline">\(F&#39;&#39;(x)\)</span> no debe ser excesivamente grande.</li>
+<li><span class="math inline">\(F&#39;(x)\)</span> no debe estar muy próxima a cero.</li>
+</ul>
+</div>
+<div id="ejemplo-6" class="section level2">
+<h2><span class="header-section-number">4.3</span> Ejemplo:</h2>
+<ul>
+<li>Evaluar si Newton-Raphson permite hallar la raíz positiva de <span class="math inline">\(F(x) = x^2-3x+e^x-2\)</span>, que no pudo ser hallada con Aproximaciones Sucesivas.</li>
+</ul>
+</div>
+<div id="ventajas-y-desventajas" class="section level2">
+<h2><span class="header-section-number">4.4</span> Ventajas y desventajas</h2>
+<p><strong>Ventajas</strong></p>
+<ul>
+<li>Aparece <span class="math inline">\(F\)</span> en lugar de <span class="math inline">\(f\)</span>.</li>
+<li>Converge más rápido que el método de las aproximaciones sucesivas.</li>
+<li>En algunos casos en que aproximaciones sucesivas diverge, N-R converge.</li>
+<li>Se puede adaptar para hallar raíces complejas.</li>
+</ul>
+<p><strong>Limitaciones</strong></p>
+<ul>
+<li>Si <span class="math inline">\(x_0\)</span> está demasiado lejos de la raíz deseada, la sucesión <span class="math inline">\(\{x_k\}\)</span> puede converger a otra raíz (la pendiente <span class="math inline">\(F&#39;(x_0)\)</span> es muy pequeña).</li>
+<li>Obtener la derivada primera de la función <span class="math inline">\(F\)</span> puede ser difícil o imposible. En ese caso se podría aproximar <span class="math inline">\(F&#39;(x_{k-1})\)</span> con:
+<span class="math display">\[F&#39;(x_{k-1}) \approx \frac{F(x_{k-1} + h) - F(x_{k-1})}{h}\]</span>
+donde <span class="math inline">\(h\)</span> es un valor pequeño, por ejemplo, <span class="math inline">\(h = 0,001\)</span>.</li>
+</ul>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="método-de-las-aproximaciones-sucesivas-o-del-punto-fijo.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="método-de-von-mises.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/mpru/guia-metodos-numericos/issues/02_Unidad2.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["guia-met-num.pdf", "guia-met-num.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

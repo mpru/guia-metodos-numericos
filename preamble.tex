@@ -1,0 +1,126 @@
+\usepackage{booktabs}
+\usepackage{amsthm}
+\usepackage{amssymb}
+
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\spanishdecimal{.}
+%\renewcommand{\contentsname}{Contenido}
+
+
+% Encabezado
+\usepackage[margin=2cm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+\fancyhead[L]{TDMN - Guía de Estudio}
+\fancyhead[R] {\leftmark}
+
+% Formato para el capítulo
+% Para que diga Unidad en lugar de Capítulo
+\makeatletter
+\renewcommand{\@chapapp}{Unidad}
+\makeatother
+% Para que diga "Unidad" antes del nro y nombre de la unidad
+%\usepackage{titlesec}
+%\titleformat{\chapter}{
+%	\normalfont\LARGE\bfseries
+%}{Unidad \thechapter.  }{0em}{}
+
+% Para que haya encabezado en la primera hoja de cada cap tmb
+\usepackage{etoolbox}
+\patchcmd{\chapter}{\thispagestyle{plain}}{\thispagestyle{fancy}}{}{}
+
+% Pero lo anterior agrega encabezad en la tabla de contenidos, esto lo evita
+\AtBeginDocument{%
+	\addtocontents{toc}{\protect\thispagestyle{empty}}
+}
+
+% Agregar puntos en el TOC en el nivel de capitulo
+\usepackage{tocloft}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}} % for chapters
+
+% Info para la portada
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}}
+\title{
+	%\vspace{-1in} 	
+	\usefont{OT1}{bch}{b}{n}
+	\normalfont \normalsize
+	\textsc{
+		Universidad Nacional de Rosario \\
+		Facultad de Ciencias Económicas y Estadística \\
+		Licenciatura en Estadística
+	} \\ [25pt]
+	\horrule{2pt} \\[0.4cm]
+	\huge \textbf{Taller de Métodos Numéricos} \\
+	\bigbreak
+	Guía de Estudio\\
+	\horrule{2pt} \\[0.5cm]}
+
+\author{
+	\normalfont Prunello, Marcos \\
+	\normalfont Rapelli, Cecilia
+}
+
+% Esto es para que el cuadro sombreado donde sale el codigo sea mas chico y para que el espacio entre el codigo y el output sea menor
+\usepackage{etoolbox,framed} 
+\setlength{\parskip}{2pt}
+\setlength{\OuterFrameSep}{2pt}
+\makeatletter
+\preto{\@verbatim}{\topsep=2pt \partopsep=2pt }
+\makeatother
+
+% Otros paquetes
+\usepackage{xcolor}
+
+% cosas para modificar espacios entre ecuaciones y otros
+% Que haya menos espacio antes y dps de ecuaciones
+% \usepackage{setspace}\onehalfspacing
+% \AtBeginDocument{%
+%   % estas dos 
+%   %\addtolength\abovedisplayskip{-0.5\baselineskip}%
+%   %\addtolength\belowdisplayskip{-0.5\baselineskip}
+%   % o estas dos, probar cual me gusta mas
+%   \setlength{\belowdisplayskip}{0pt} \setlength{\belowdisplayshortskip}{0pt}
+%   \setlength{\abovedisplayskip}{0pt} \setlength{\abovedisplayshortskip}{0pt}
+% }
+% 
+% \setlength{\intextsep}{0pt}
+% 
+% \makeatletter
+% \def\thm@space@setup{%
+%   \thm@preskip=8pt plus 2pt minus 4pt
+%   \thm@postskip=\thm@preskip
+% }
+% \makeatother
+
+% de lo que tenia en las diapos
+
+% Esto es para poder escribir en columnas:
+\usepackage{multicol}
+\newcommand{\twocolbegin}{\begin{multicols}{2}}
+\newcommand{\twocolend}{\end{multicols}}
+
+% Para usar el environment gather* que centra ecuaciones sin numerarlas
+\usepackage{amsmath}
+
+% Para enumerar teoremas
+\usepackage{amsthm}
+\newtheorem{teorema}{Teorema}
+
+% Para enumeraciones
+\usepackage{enumerate}
+
+
+% Para los algoritmos
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\input{spanishAlgorithmic} % mi archivo de traducción
+\usepackage{float}
+
+\newcommand{\approxtext}[1]{\ensuremath{\quad \stackrel{\text{#1}}{\approx} \quad}}
+\newcommand{\equaltext}[1]{\ensuremath{\quad \stackrel{\text{#1}}{=} \quad }}
+\newcommand{\leqtext}[1]{\ensuremath{\quad \stackrel{\text{#1}}{\leq} \quad }}
+% Para matriz aumentada
+\newcommand\aug{\fboxsep=-\fboxrule\!\!\!\fbox{\strut}\!\!\!}

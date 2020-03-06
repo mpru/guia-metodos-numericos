@@ -1,0 +1,48 @@
+--- 
+title: "Taller de Métodos Numéricos"
+subtitle: "Guía de estudio"
+author:
+    - "Marcos Prunello"
+    - "Cecilia Rapelli"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+biblio-style: apalike
+link-citations: yes
+github-repo: mpru/guia-metodos-numericos
+url: https://mpru.github.io/guia-metodos-numericos/
+description: "Esta guía resume algunos conceptos desarrollados en el Taller de Métodos Numéricos de la Licenciatura en Estadística (Facultad de Ciencias Económicas y Estadstica, Universidad Nacional de Rosario)."
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = F, comment = NA, warning = FALSE, message = FALSE, 
+                      fig.align = "center")
+```
+
+# Acerca del Taller {-}
+
+La presente guía resume algunos conceptos desarrollados en el Taller de Métodos Numéricos de la Licenciatura en Estadística en la Facultad de Ciencias Económicas y Estadística, Universidad Nacional de Rosario. La misma irá siendo revisada a lo largo del cuatrimestre y no está exenta de presentar errores o expresar ideas que puedan ser mejoradas. ¡Esperamos que juntos podamos enriquecerla al dar nuestros primeros pasos en la programación!
+
+## Horario y lugar de cursado {-}
+
+Martes de 8:00 a 10:00 en el Laboratorio de Estadística (2do piso).
+
+## Consultas {-}
+
+A través del Foro de Consultas en el Campus Virtual o al finalizar las clases.
+
+## Material de estudio {-}
+
+El material de estudio está compuesto por esta guía y prácticas que, junto con cualquier otro material que necesitemos, estarán disponibles en nuestro espacio en el Campus Virtual de la UNR.
+
+Todo el material fue creado utilizando el lenguaje de programación estadística `R` y las herramientas del entorno de desarrollo integrado `RStudio`.
+
+## Evaluación {-}
+
+En construcción.
+
+## Campus virtual {-}
+
+Además de alojar todo el material del curso, utilizaremos este espacio para la entrega de trabajos y para realizar consultas, que esperamos puedan ser debatidas y respondidas entre el estudiantado.

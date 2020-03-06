@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5 Interpolación de Lagrange | Taller de Métodos Numéricos</title>
+  <meta name="description" content="Esta guía resume algunos conceptos desarrollados en el Taller de Métodos Numéricos de la Licenciatura en Estadística (Facultad de Ciencias Económicas y Estadstica, Universidad Nacional de Rosario)." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5 Interpolación de Lagrange | Taller de Métodos Numéricos" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://mpru.github.io/guia-metodos-numericos/" />
+  
+  <meta property="og:description" content="Esta guía resume algunos conceptos desarrollados en el Taller de Métodos Numéricos de la Licenciatura en Estadística (Facultad de Ciencias Económicas y Estadstica, Universidad Nacional de Rosario)." />
+  <meta name="github-repo" content="mpru/guia-metodos-numericos" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 Interpolación de Lagrange | Taller de Métodos Numéricos" />
+  
+  <meta name="twitter:description" content="Esta guía resume algunos conceptos desarrollados en el Taller de Métodos Numéricos de la Licenciatura en Estadística (Facultad de Ciencias Económicas y Estadstica, Universidad Nacional de Rosario)." />
+  
+
+<meta name="author" content="Marcos Prunello" />
+<meta name="author" content="Cecilia Rapelli" />
+
+
+<meta name="date" content="2020-03-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="aproximación-polinomial-interpolación-y-extrapolación.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Guía de estudio para el Taller de Métodos Numéricos</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Acerca del Taller</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#horario-y-lugar-de-cursado"><i class="fa fa-check"></i>Horario y lugar de cursado</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#consultas"><i class="fa fa-check"></i>Consultas</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#material-de-estudio"><i class="fa fa-check"></i>Material de estudio</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#evaluación"><i class="fa fa-check"></i>Evaluación</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#campus-virtual"><i class="fa fa-check"></i>Campus virtual</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html"><i class="fa fa-check"></i><b>1</b> Introducción a los Métodos Numéricos</a><ul>
+<li class="chapter" data-level="1.1" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#cifras-significativas"><i class="fa fa-check"></i><b>1.1</b> Cifras significativas</a></li>
+<li class="chapter" data-level="1.2" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#notación-científica-o-exponencial"><i class="fa fa-check"></i><b>1.2</b> Notación Científica o Exponencial</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#ejemplo-2"><i class="fa fa-check"></i><b>1.2.1</b> Ejemplo 2:</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#sistemas-numéricos"><i class="fa fa-check"></i><b>1.3</b> Sistemas numéricos</a></li>
+<li class="chapter" data-level="1.4" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#por-qué-nos-interesa-el-sistema-binario"><i class="fa fa-check"></i><b>1.4</b> ¿Por qué nos interesa el sistema binario?</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#ejemplo-3"><i class="fa fa-check"></i><b>1.4.1</b> Ejemplo 3</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#formato-de-coma-flotante"><i class="fa fa-check"></i><b>1.5</b> Formato de coma flotante</a></li>
+<li class="chapter" data-level="1.6" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#propiedades-importantes-del-formato-ieee-754"><i class="fa fa-check"></i><b>1.6</b> Propiedades importantes del formato IEEE-754</a></li>
+<li class="chapter" data-level="1.7" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#análisis-de-los-errores"><i class="fa fa-check"></i><b>1.7</b> Análisis de los errores</a><ul>
+<li class="chapter" data-level="1.7.1" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#error-de-truncamiento"><i class="fa fa-check"></i><b>1.7.1</b> Error de truncamiento</a></li>
+<li class="chapter" data-level="1.7.2" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#error-de-redondeo"><i class="fa fa-check"></i><b>1.7.2</b> Error de redondeo</a></li>
+<li class="chapter" data-level="1.7.3" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#ejemplos-de-operaciones-delicadas"><i class="fa fa-check"></i><b>1.7.3</b> Ejemplos de operaciones “delicadas”</a></li>
+<li class="chapter" data-level="1.7.4" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#medida-del-error"><i class="fa fa-check"></i><b>1.7.4</b> Medida del error</a></li>
+<li class="chapter" data-level="1.7.5" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#error-propagado"><i class="fa fa-check"></i><b>1.7.5</b> Error propagado</a></li>
+<li class="chapter" data-level="1.7.6" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#error-propagado-1"><i class="fa fa-check"></i><b>1.7.6</b> Error propagado</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html"><i class="fa fa-check"></i><b>2</b> Solución Numérica de Ecuaciones No Lineales</a><ul>
+<li class="chapter" data-level="2.1" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#generalidades"><i class="fa fa-check"></i><b>2.1</b> Generalidades</a></li>
+<li class="chapter" data-level="2.2" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#método-de-las-aproximaciones-sucesivas-o-del-punto-fijo"><i class="fa fa-check"></i><b>2.2</b> Método de las Aproximaciones Sucesivas o del Punto Fijo</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#punto-fijo"><i class="fa fa-check"></i><b>2.2.1</b> Punto fijo</a></li>
+<li class="chapter" data-level="2.2.2" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#empleo-para-la-resolución-de-ecuaciones"><i class="fa fa-check"></i><b>2.2.2</b> Empleo para la resolución de ecuaciones</a></li>
+<li class="chapter" data-level="2.2.3" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#ejemplo"><i class="fa fa-check"></i><b>2.2.3</b> Ejemplo</a></li>
+<li class="chapter" data-level="2.2.4" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#criterios-para-detener-el-proceso-iterativo"><i class="fa fa-check"></i><b>2.2.4</b> Criterios para detener el proceso iterativo</a></li>
+<li class="chapter" data-level="2.2.5" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#ejemplo-1"><i class="fa fa-check"></i><b>2.2.5</b> Ejemplo</a></li>
+<li class="chapter" data-level="2.2.6" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#teorema-del-punto-fijo"><i class="fa fa-check"></i><b>2.2.6</b> Teorema del Punto Fijo</a></li>
+<li class="chapter" data-level="2.2.7" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#ejemplo-4"><i class="fa fa-check"></i><b>2.2.7</b> Ejemplo</a></li>
+<li class="chapter" data-level="2.2.8" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#interpretación-gráfica"><i class="fa fa-check"></i><b>2.2.8</b> Interpretación gráfica</a></li>
+<li class="chapter" data-level="2.2.9" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#ejemplo-5"><i class="fa fa-check"></i><b>2.2.9</b> Ejemplo</a></li>
+<li class="chapter" data-level="2.2.10" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#algunos-diagramas"><i class="fa fa-check"></i><b>2.2.10</b> Algunos diagramas</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#método-de-newton-raphson"><i class="fa fa-check"></i><b>2.3</b> Método de Newton-Raphson</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#teorema-de-newton-raphson"><i class="fa fa-check"></i><b>2.3.1</b> Teorema de Newton-Raphson</a></li>
+<li class="chapter" data-level="2.3.2" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#convergencia"><i class="fa fa-check"></i><b>2.3.2</b> Convergencia</a></li>
+<li class="chapter" data-level="2.3.3" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#ejemplo-6"><i class="fa fa-check"></i><b>2.3.3</b> Ejemplo:</a></li>
+<li class="chapter" data-level="2.3.4" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#ventajas-y-desventajas"><i class="fa fa-check"></i><b>2.3.4</b> Ventajas y desventajas</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#método-de-von-mises"><i class="fa fa-check"></i><b>2.4</b> Método de von Mises</a></li>
+<li class="chapter" data-level="2.5" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#método-de-newton-raphson-de-2º-orden"><i class="fa fa-check"></i><b>2.5</b> Método de Newton-Raphson de 2º Orden</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html"><i class="fa fa-check"></i><b>3</b> Solución de Sistemas de Ecuaciones Lineales</a><ul>
+<li class="chapter" data-level="3.1" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#generalidades-1"><i class="fa fa-check"></i><b>3.1</b> Generalidades</a></li>
+<li class="chapter" data-level="3.2" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#repaso"><i class="fa fa-check"></i><b>3.2</b> Repaso</a></li>
+<li class="chapter" data-level="3.3" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#notación"><i class="fa fa-check"></i><b>3.3</b> Notación</a></li>
+<li class="chapter" data-level="3.4" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#métodos-de-resolución-de-sistemas-de-ecuaciones"><i class="fa fa-check"></i><b>3.4</b> Métodos de Resolución de Sistemas de Ecuaciones</a></li>
+<li class="chapter" data-level="3.5" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#sistemas-fáciles-de-resolver"><i class="fa fa-check"></i><b>3.5</b> Sistemas fáciles de resolver</a></li>
+<li class="chapter" data-level="3.6" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#eliminación-gaussiana"><i class="fa fa-check"></i><b>3.6</b> Eliminación gaussiana</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#eliminación-gaussiana-con-pivoteo-trivial"><i class="fa fa-check"></i><b>3.6.1</b> Eliminación gaussiana con pivoteo trivial</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#estrategias-de-pivoteo-para-reducir-los-errores"><i class="fa fa-check"></i><b>3.7</b> Estrategias de pivoteo para reducir los errores</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#pivoteo-parcial"><i class="fa fa-check"></i><b>3.7.1</b> Pivoteo parcial</a></li>
+<li class="chapter" data-level="3.7.2" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#pivoteo-parcial-escalado"><i class="fa fa-check"></i><b>3.7.2</b> Pivoteo parcial escalado</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#método-de-eliminación-de-gauss-jordan"><i class="fa fa-check"></i><b>3.8</b> Método de eliminación de Gauss-Jordan</a></li>
+<li class="chapter" data-level="3.9" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#métodos-aproximados-o-iterativos"><i class="fa fa-check"></i><b>3.9</b> Métodos Aproximados o Iterativos</a><ul>
+<li class="chapter" data-level="3.9.1" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#método-de-jacobi"><i class="fa fa-check"></i><b>3.9.1</b> Método de Jacobi</a></li>
+<li class="chapter" data-level="3.9.2" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#método-de-gauss-seidel"><i class="fa fa-check"></i><b>3.9.2</b> Método de Gauss-Seidel</a></li>
+<li class="chapter" data-level="3.9.3" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#generalización"><i class="fa fa-check"></i><b>3.9.3</b> Generalización</a></li>
+<li class="chapter" data-level="3.9.4" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#convergencia-1"><i class="fa fa-check"></i><b>3.9.4</b> Convergencia</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="aproximación-polinomial-interpolación-y-extrapolación.html"><a href="aproximación-polinomial-interpolación-y-extrapolación.html"><i class="fa fa-check"></i><b>4</b> Aproximación Polinomial: interpolación y extrapolación</a><ul>
+<li class="chapter" data-level="4.1" data-path="aproximación-polinomial-interpolación-y-extrapolación.html"><a href="aproximación-polinomial-interpolación-y-extrapolación.html#generalidades-2"><i class="fa fa-check"></i><b>4.1</b> Generalidades</a></li>
+<li class="chapter" data-level="4.2" data-path="aproximación-polinomial-interpolación-y-extrapolación.html"><a href="aproximación-polinomial-interpolación-y-extrapolación.html#diferencias-finitas"><i class="fa fa-check"></i><b>4.2</b> Diferencias finitas</a></li>
+<li class="chapter" data-level="4.3" data-path="aproximación-polinomial-interpolación-y-extrapolación.html"><a href="aproximación-polinomial-interpolación-y-extrapolación.html#interpolación-de-newton-para-incrementos-constantes"><i class="fa fa-check"></i><b>4.3</b> Interpolación de Newton para incrementos constantes</a></li>
+<li class="chapter" data-level="4.4" data-path="aproximación-polinomial-interpolación-y-extrapolación.html"><a href="aproximación-polinomial-interpolación-y-extrapolación.html#interpolación-de-lagrange"><i class="fa fa-check"></i><b>4.4</b> Interpolación de Lagrange</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="interpolación-de-lagrange-1.html"><a href="interpolación-de-lagrange-1.html"><i class="fa fa-check"></i><b>5</b> Interpolación de Lagrange</a><ul>
+<li class="chapter" data-level="5.1" data-path="interpolación-de-lagrange-1.html"><a href="interpolación-de-lagrange-1.html#observaciones-finales"><i class="fa fa-check"></i><b>5.1</b> Observaciones finales</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Taller de Métodos Numéricos</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="interpolación-de-lagrange-1" class="section level1">
+<h1><span class="header-section-number">5</span> Interpolación de Lagrange</h1>
+<ul>
+<li>Lagrange propuso reescribir la recta anterior como:</li>
+</ul>
+<p><span class="math display">\[
+f(x) = \frac{x - x_1}{x_0 - x_1} y_0 + \frac{x - x_0}{x_1 - x_0} y_1
+\]</span></p>
+<ul>
+<li>Esta es expresión que se puede extender para obtener polinomios de grados superiores que pasen por más puntos.</li>
+<li>Por ejemplo, para hallar el polinomio que pasa por los puntos <span class="math inline">\((x_0, y_0)\)</span>, <span class="math inline">\((x_1, y_1)\)</span> y <span class="math inline">\((x_2, y_2)\)</span>:</li>
+</ul>
+<p><span class="math display">\[
+f(x) = \frac{(x - x_1)(x - x_2)}{(x_0 - x_1)(x_0 - x_2)} y_0 + \frac{(x - x_0)(x - x_2)}{(x_1 - x_0)(x_1 - x_2)} y_1 + \frac{(x - x_0)(x - x_1)}{(x_2 - x_0)(x_2 - x_1)} y_2
+\]</span></p>
+<ul>
+<li><p>Se puede ver fácilmente que este polinomio pasa exactamente por los tres puntos dados.</p></li>
+<li><p>De la misma forma, el polinomio de grado 3 que pasa por cuatro puntos <span class="math inline">\((x_0, y_0)\)</span>, <span class="math inline">\((x_1, y_1)\)</span>, <span class="math inline">\((x_2, y_2)\)</span> y <span class="math inline">\((x_3, y_3)\)</span> es:</p></li>
+</ul>
+<p><span class="math display">\[
+\hspace{-0.5cm}
+\begin{split}
+f(x) = &amp;~ \frac{(x - x_1)(x - x_2)(x - x_3)}{(x_0 - x_1)(x_0 - x_2)(x_0 - x_3)} y_0 + \frac{(x - x_0)(x - x_2)(x - x_3)}{(x_1 - x_0)(x_1 - x_2)(x_1 - x_3)} y_1 \\
+&amp; + \frac{(x - x_0)(x - x_1)(x - x_3)}{(x_2 - x_0)(x_2 - x_1)(x_2 - x_3)} y_2 + \frac{(x - x_0)(x - x_1)(x - x_2)}{(x_3 - x_0)(x_3 - x_1)(x_3 - x_2)} y_3
+\end{split}
+\]</span></p>
+<ul>
+<li><p>Se puede ver fácilmente que este polinomio pasa exactamente por los cuatro puntos dados.</p></li>
+<li><p>Generalizando, la fórmula de interpolación de Lagrange para construir un polinomio de grado <span class="math inline">\(n\)</span> que pase por <span class="math inline">\(n+1\)</span> puntos <span class="math inline">\((x_0, y_0), (x_1, y_1), \cdots, (x_n, y_n)\)</span> es:</p></li>
+</ul>
+<p><span class="math display">\[
+y = f(x) = \sum_{i = 0}^n \frac{\prod\limits_{\substack{j = 0\\ j \neq i}}^n (x - x_j)}{\prod\limits_{\substack{j = 0\\ j \neq i}}^n (x_i - x_j)} y_i
+\]</span></p>
+<p><strong>Comparación con el método de Newton</strong></p>
+<ul>
+<li><p><strong>Ventaja</strong>: no requiere que los valores tabulados de <span class="math inline">\(x\)</span> estén equiespaciados. Si lo están, ambos métodos coinciden.</p></li>
+<li><p><strong>Desventaja</strong>:</p>
+<ul>
+<li>En ocasiones es útil considerar varios polinomios interpoladores de distinto grado para luego elegir el más adecuado.</li>
+<li>Con el método de Newton esto es muy sencillo, ya que como vimos se pueden construir recursivamente (por ejemplo, el de grado 3 es igual al de grado 2 más un término extra).</li>
+<li>En cambio, con el método de Lagrange no hay relación entre la construcción de <span class="math inline">\(P_{n-1}(x)\)</span> y la de <span class="math inline">\(P_n(x)\)</span>; cada polinomio debe construirse individualmente realizando todos los cálculos otra vez.</li>
+<li>Esto implica que este método sea menos eficiente al tener que recalcular todo el polinomio si varía el número de puntos.</li>
+</ul></li>
+</ul>
+<p><strong>Ejemplo 5</strong>. Emplear el método de Lagrange para interpolar el valor de la función <span class="math inline">\(f\)</span> en <span class="math inline">\(x=2.25\)</span>, con el polinomio interpolador de grado 3 que pasa por los cuatro puntos tabulados:</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x_k\)</span></th>
+<th><span class="math inline">\(y_k\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>-1</td>
+<td>0,5403</td>
+</tr>
+<tr class="even">
+<td>0</td>
+<td>1,0000</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>-0,4162</td>
+</tr>
+<tr class="even">
+<td>2.5</td>
+<td>-0,8011</td>
+</tr>
+</tbody>
+</table>
+<p><img src="Plots/U4/lagrej1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><strong>Ejemplo 5</strong></p>
+<p><span class="math display">\[
+\begin{split}
+f(x) &amp;= \sum_{i = 0}^3 \frac{\prod\limits_{\substack{j = 0\\ j \neq i}}^3 (x - x_j)}{\prod\limits_{\substack{j = 0\\ j \neq i}}^3 (x_i - x_j)} y_i \\ \\
+&amp;= \frac{(x - x_1)(x - x_2)(x - x_3)}{(x_0 - x_1)(x_0 - x_2)(x_0 - x_3)} y_0 + \frac{(x - x_0)(x - x_2)(x - x_3)}{(x_1 - x_0)(x_1 - x_2)(x_1 - x_3)} y_1 \\
+&amp;~ + \frac{(x - x_0)(x - x_1)(x - x_3)}{(x_2 - x_0)(x_2 - x_1)(x_2 - x_3)} y_2 + \frac{(x - x_0)(x - x_1)(x - x_2)}{(x_3 - x_0)(x_3 - x_1)(x_3 - x_2)} y_3 \\ \\
+\implies y = f(2.25) &amp;\approx \frac{(2.25 - 0)(2.25 - 2)(2.25 - 2.5)}{(-1-0)(-1-2)(-1-2.5)} 0.5403 + \frac{(2.25 +1)(2.25 - 2)(2.25 - 2.5)}{(0+1)(0-2)(0-2.5)} 1.0000 \\
+&amp;~ + \frac{(2.25 +1)(2.25 - 0)(2.25 - 2.5)}{(2+1)(2-0)(2-2.5)} (-0.4162) + \frac{(2.25 +1)(2.25 - 0)(2.25 - 2)}{(2.5+1)(2.5-0)(2.5-2)} (-0.8011) \\
+&amp;= -0.6218 \\ \\
+&amp;\therefore f(2.25) \approx -0.6218
+\end{split}
+\]</span></p>
+<p><strong>Ejemplo 5</strong>. Si en la fórmula anterior en lugar de reemplazar <span class="math inline">\(x\)</span> por un valor particular (en este caso, <span class="math inline">\(2.5\)</span>) operamos y reacomodamos los términos, podemos hallar la expresión del polinomio interpolador:</p>
+<p><span class="math display">\[
+f(x) = 0.1042 x^3 -0.4934 x^2 -0.1379 x+1
+\]</span></p>
+<p><img src="Plots/U4/lagrej2.png" width="60%" style="display: block; margin: auto;" /></p>
+<p><strong>Ejemplo 5</strong>. La función que generó los valores tabulados es <span class="math inline">\(cos(x)\)</span>:</p>
+<p>En el rango tabulado:</p>
+<p><img src="Plots/U4/lagrange2.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>Un poco más lejos:</p>
+<p><img src="Plots/U4/lagrange.png" width="100%" style="display: block; margin: auto;" /></p>
+<ul>
+<li>Siendo <span class="math inline">\(cos(2.25) = -0.6282\)</span>, el error relativo de la aproximación fue <span class="math inline">\(|-0.6282-0.6218| / |-0.6285| = 1.02\%\)</span></li>
+</ul>
+<p><strong>Interpolación inversa</strong></p>
+<ul>
+<li>El problema de interpolación consiste en determinar el valor de la función desconocida <span class="math inline">\(f(x)\)</span> a partir de un valor conocido de <span class="math inline">\(x\)</span>.</li>
+<li>En la <em>interpolación inversa</em> se resuelve el problema contrario: determinar el valor de <span class="math inline">\(x\)</span> conociendo el de <span class="math inline">\(f(x)\)</span>.</li>
+<li>Podemos implementar interpolación inversa con el método de Lagrange intercambiando el rol de las columnas tabuladas <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span>, <strong>pero sólo para rangos tabulados donde la función <span class="math inline">\(f\)</span> es monótona</strong>.</li>
+</ul>
+<!-- 
+Para entender por que solo para intervalos monotonos, ver el graf con el pol interpolador.
+Intercambiar x e y significa rotar esa figura 90 grados a la derecha.
+Emplear Lagrange allí no aproxima la misma curva, puesto q no es una fc, hay mas de un valor de 
+"y" para un mismo "x". El metodo considerara que la fc sube duratne los 3 primeros ptos y luego baja,
+. Ver grafico "explicacion" en la carpeta de los Plots.
+-->
+<p><strong>Ejemplo 6</strong>. Con los datos del Ejemplo 1, ¿cuál es el valor de <span class="math inline">\(x\)</span> tal que <span class="math inline">\(f(x)=-0.75\)</span>?</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x_k\)</span></th>
+<th><span class="math inline">\(y_k\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>-1</td>
+<td>0,5403</td>
+</tr>
+<tr class="even">
+<td>0</td>
+<td>1,0000</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>-0,4162</td>
+</tr>
+<tr class="even">
+<td>2.5</td>
+<td>-0,8011</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(\downarrow\)</span></p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x_k\)</span></th>
+<th><span class="math inline">\(y_k\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1,0000</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>-0,4162</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>-0,8011</td>
+<td>2.5</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math display">\[
+\begin{split}
+f(x) &amp;= \sum_{i = 0}^2 \frac{\prod\limits_{\substack{j = 0\\ j \neq i}}^2 (x - x_j)}{\prod\limits_{\substack{j = 0\\ j \neq i}}^2 (x_i - x_j)} y_i \\ \\
+&amp;= \frac{(x - x_1)(x - x_2)}{(x_0 - x_1)(x_0 - x_2)} y_0 + \frac{(x - x_0)(x - x_2)}{(x_1 - x_0)(x_1 - x_2)} y_1 + \frac{(x - x_0)(x - x_1)}{(x_2 - x_0)(x_2 - x_1)} y_2 \\ \\
+\implies f(-0.75) &amp;\approx \frac{(-0.75+0.4162)(-0.75+0.8011)}{(1+0.4162)(1+0.8011)} 0 \\
+&amp;~ + \frac{(-0.75-1)(-0.75+0.8011)}{(-0.4162-1)(-0.4162+0.8011)} 2 \\
+&amp;~ + \frac{(-0.75-1)(-0.75+0.4162)}{(-0.8011-1)(-0.8011+0.4162)} 2.5  \\
+&amp;= 2.4347
+\end{split}
+\]</span>
+<span class="math inline">\(\therefore\)</span> el valor de <span class="math inline">\(x\)</span> tal que <span class="math inline">\(f(x)=-0.75\)</span> es <span class="math inline">\(x \approx 2.4347\)</span>.</p>
+<p><strong>Interpolación inversa</strong>. Podemos usar la interpolación inversa para resolver ecuaciones.</p>
+<p><strong>Ejemplo 7</strong>: hallar una raiz positiva para la ecuación <span class="math inline">\(f(x)=x-4\sin(x+2) = 0\)</span>.</p>
+<ul>
+<li>Tabulamos algunos valores y graficamos:</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x_k\)</span></th>
+<th><span class="math inline">\(y_k\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>-3.6372</td>
+</tr>
+<tr class="even">
+<td>0.5</td>
+<td>-1.8939</td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td>0.4355</td>
+</tr>
+</tbody>
+</table>
+<p><img src="Plots/U4/lagr_ecuacion1.png" width="75%" style="display: block; margin: auto;" /></p>
+<p><strong>Ejemplo 7</strong></p>
+<ul>
+<li>Podemos usar los dos últimos puntos donde vemos que la función cortó a las abscisas y hacer una interpolación lineal, los tres puntos y tener una interpolación cuadrática, o incluso agregar más puntos.</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x_k\)</span></th>
+<th><span class="math inline">\(y_k\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>-3.6372</td>
+</tr>
+<tr class="even">
+<td>0.5</td>
+<td>-1.8939</td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td>0.4355</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(\downarrow\)</span></p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x_k\)</span></th>
+<th><span class="math inline">\(y_k\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>-3.6372</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><span class="math display">\[
+\begin{split}
+y = f(x) &amp;= \frac{x - x_1}{x_0 - x_1} y_0 + \frac{x - x_0}{x_1 - x_0} y_1 \\ \\
+\implies f(0) &amp;\approx \frac{0-0.4355}{-1.8939-0.4355} 0.5 + \frac{0+1.8939}{0.4355+1.8939} 1 \\ \\
+&amp;= 0.9065 \\
+\end{split}
+\]</span>
+<span class="math inline">\(\therefore\)</span> La solución positiva de la ecuación es <span class="math inline">\(x \approx 0.9065\)</span> ya que <span class="math inline">\(f(0.9065) \approx 0\)</span>.</p>
+<div id="observaciones-finales" class="section level2">
+<h2><span class="header-section-number">5.1</span> Observaciones finales</h2>
+<ul>
+<li>Un polinomio de grado <span class="math inline">\(n\)</span> ajustado a <span class="math inline">\(n+1\)</span> puntos es único.</li>
+<li>El polinomio de interpolación se puede expresar en varias formas distintas, pero todas son equivalentes por el punto anterior.</li>
+<li>Si una función se aproxima mediante un polinomio de interpolación, no hay garantía de que dicho polinomio converja a la función exacta al aumentar el número de datos. En general, la interpolación mediante un polinomio de orden grande debe evitarse o utilizarse con precauciones extremas.</li>
+<li>Aunque no existe un criterio para determinar el orden óptimo del polinomio de interpolación, generalmente se recomienda utilizar uno con orden relativamente bajo en un pequeño rango de <span class="math inline">\(x\)</span>.</li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="aproximación-polinomial-interpolación-y-extrapolación.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/mpru/guia-metodos-numericos/issues/04_Unidad4_Parte1.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["guia-met-num.pdf", "guia-met-num.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

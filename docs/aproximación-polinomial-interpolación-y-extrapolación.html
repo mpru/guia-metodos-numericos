@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 Aproximación Polinomial: interpolación y extrapolación | Taller de Métodos Numéricos</title>
+  <meta name="description" content="Esta guía resume algunos conceptos desarrollados en el Taller de Métodos Numéricos de la Licenciatura en Estadística (Facultad de Ciencias Económicas y Estadstica, Universidad Nacional de Rosario)." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 Aproximación Polinomial: interpolación y extrapolación | Taller de Métodos Numéricos" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://mpru.github.io/guia-metodos-numericos/" />
+  
+  <meta property="og:description" content="Esta guía resume algunos conceptos desarrollados en el Taller de Métodos Numéricos de la Licenciatura en Estadística (Facultad de Ciencias Económicas y Estadstica, Universidad Nacional de Rosario)." />
+  <meta name="github-repo" content="mpru/guia-metodos-numericos" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 Aproximación Polinomial: interpolación y extrapolación | Taller de Métodos Numéricos" />
+  
+  <meta name="twitter:description" content="Esta guía resume algunos conceptos desarrollados en el Taller de Métodos Numéricos de la Licenciatura en Estadística (Facultad de Ciencias Económicas y Estadstica, Universidad Nacional de Rosario)." />
+  
+
+<meta name="author" content="Marcos Prunello" />
+<meta name="author" content="Cecilia Rapelli" />
+
+
+<meta name="date" content="2020-03-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="solución-de-sistemas-de-ecuaciones-lineales.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Guía de estudio para el Taller de Métodos Numéricos</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Acerca del Taller</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#horario-y-lugar-de-cursado"><i class="fa fa-check"></i>Horario y lugar de cursado</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#consultas"><i class="fa fa-check"></i>Consultas</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#material-de-estudio"><i class="fa fa-check"></i>Material de estudio</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#evaluación"><i class="fa fa-check"></i>Evaluación</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#campus-virtual"><i class="fa fa-check"></i>Campus virtual</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html"><i class="fa fa-check"></i><b>1</b> Introducción a los Métodos Numéricos</a><ul>
+<li class="chapter" data-level="1.1" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#cifras-significativas"><i class="fa fa-check"></i><b>1.1</b> Cifras significativas</a></li>
+<li class="chapter" data-level="1.2" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#notación-científica-o-exponencial"><i class="fa fa-check"></i><b>1.2</b> Notación Científica o Exponencial</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#ejemplo-2"><i class="fa fa-check"></i><b>1.2.1</b> Ejemplo 2:</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#sistemas-numéricos"><i class="fa fa-check"></i><b>1.3</b> Sistemas numéricos</a></li>
+<li class="chapter" data-level="1.4" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#por-qué-nos-interesa-el-sistema-binario"><i class="fa fa-check"></i><b>1.4</b> ¿Por qué nos interesa el sistema binario?</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#ejemplo-3"><i class="fa fa-check"></i><b>1.4.1</b> Ejemplo 3</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#formato-de-coma-flotante"><i class="fa fa-check"></i><b>1.5</b> Formato de coma flotante</a></li>
+<li class="chapter" data-level="1.6" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#propiedades-importantes-del-formato-ieee-754"><i class="fa fa-check"></i><b>1.6</b> Propiedades importantes del formato IEEE-754</a></li>
+<li class="chapter" data-level="1.7" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#análisis-de-los-errores"><i class="fa fa-check"></i><b>1.7</b> Análisis de los errores</a><ul>
+<li class="chapter" data-level="1.7.1" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#error-de-truncamiento"><i class="fa fa-check"></i><b>1.7.1</b> Error de truncamiento</a></li>
+<li class="chapter" data-level="1.7.2" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#error-de-redondeo"><i class="fa fa-check"></i><b>1.7.2</b> Error de redondeo</a></li>
+<li class="chapter" data-level="1.7.3" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#ejemplos-de-operaciones-delicadas"><i class="fa fa-check"></i><b>1.7.3</b> Ejemplos de operaciones “delicadas”</a></li>
+<li class="chapter" data-level="1.7.4" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#medida-del-error"><i class="fa fa-check"></i><b>1.7.4</b> Medida del error</a></li>
+<li class="chapter" data-level="1.7.5" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#error-propagado"><i class="fa fa-check"></i><b>1.7.5</b> Error propagado</a></li>
+<li class="chapter" data-level="1.7.6" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#error-propagado-1"><i class="fa fa-check"></i><b>1.7.6</b> Error propagado</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html"><i class="fa fa-check"></i><b>2</b> Solución Numérica de Ecuaciones No Lineales</a><ul>
+<li class="chapter" data-level="2.1" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#generalidades"><i class="fa fa-check"></i><b>2.1</b> Generalidades</a></li>
+<li class="chapter" data-level="2.2" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#método-de-las-aproximaciones-sucesivas-o-del-punto-fijo"><i class="fa fa-check"></i><b>2.2</b> Método de las Aproximaciones Sucesivas o del Punto Fijo</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#punto-fijo"><i class="fa fa-check"></i><b>2.2.1</b> Punto fijo</a></li>
+<li class="chapter" data-level="2.2.2" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#empleo-para-la-resolución-de-ecuaciones"><i class="fa fa-check"></i><b>2.2.2</b> Empleo para la resolución de ecuaciones</a></li>
+<li class="chapter" data-level="2.2.3" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#ejemplo"><i class="fa fa-check"></i><b>2.2.3</b> Ejemplo</a></li>
+<li class="chapter" data-level="2.2.4" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#criterios-para-detener-el-proceso-iterativo"><i class="fa fa-check"></i><b>2.2.4</b> Criterios para detener el proceso iterativo</a></li>
+<li class="chapter" data-level="2.2.5" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#ejemplo-1"><i class="fa fa-check"></i><b>2.2.5</b> Ejemplo</a></li>
+<li class="chapter" data-level="2.2.6" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#teorema-del-punto-fijo"><i class="fa fa-check"></i><b>2.2.6</b> Teorema del Punto Fijo</a></li>
+<li class="chapter" data-level="2.2.7" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#ejemplo-4"><i class="fa fa-check"></i><b>2.2.7</b> Ejemplo</a></li>
+<li class="chapter" data-level="2.2.8" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#interpretación-gráfica"><i class="fa fa-check"></i><b>2.2.8</b> Interpretación gráfica</a></li>
+<li class="chapter" data-level="2.2.9" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#ejemplo-5"><i class="fa fa-check"></i><b>2.2.9</b> Ejemplo</a></li>
+<li class="chapter" data-level="2.2.10" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#algunos-diagramas"><i class="fa fa-check"></i><b>2.2.10</b> Algunos diagramas</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#método-de-newton-raphson"><i class="fa fa-check"></i><b>2.3</b> Método de Newton-Raphson</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#teorema-de-newton-raphson"><i class="fa fa-check"></i><b>2.3.1</b> Teorema de Newton-Raphson</a></li>
+<li class="chapter" data-level="2.3.2" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#convergencia"><i class="fa fa-check"></i><b>2.3.2</b> Convergencia</a></li>
+<li class="chapter" data-level="2.3.3" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#ejemplo-6"><i class="fa fa-check"></i><b>2.3.3</b> Ejemplo:</a></li>
+<li class="chapter" data-level="2.3.4" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#ventajas-y-desventajas"><i class="fa fa-check"></i><b>2.3.4</b> Ventajas y desventajas</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#método-de-von-mises"><i class="fa fa-check"></i><b>2.4</b> Método de von Mises</a></li>
+<li class="chapter" data-level="2.5" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#método-de-newton-raphson-de-2º-orden"><i class="fa fa-check"></i><b>2.5</b> Método de Newton-Raphson de 2º Orden</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html"><i class="fa fa-check"></i><b>3</b> Solución de Sistemas de Ecuaciones Lineales</a><ul>
+<li class="chapter" data-level="3.1" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#generalidades-1"><i class="fa fa-check"></i><b>3.1</b> Generalidades</a></li>
+<li class="chapter" data-level="3.2" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#repaso"><i class="fa fa-check"></i><b>3.2</b> Repaso</a></li>
+<li class="chapter" data-level="3.3" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#notación"><i class="fa fa-check"></i><b>3.3</b> Notación</a></li>
+<li class="chapter" data-level="3.4" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#métodos-de-resolución-de-sistemas-de-ecuaciones"><i class="fa fa-check"></i><b>3.4</b> Métodos de Resolución de Sistemas de Ecuaciones</a></li>
+<li class="chapter" data-level="3.5" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#sistemas-fáciles-de-resolver"><i class="fa fa-check"></i><b>3.5</b> Sistemas fáciles de resolver</a></li>
+<li class="chapter" data-level="3.6" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#eliminación-gaussiana"><i class="fa fa-check"></i><b>3.6</b> Eliminación gaussiana</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#eliminación-gaussiana-con-pivoteo-trivial"><i class="fa fa-check"></i><b>3.6.1</b> Eliminación gaussiana con pivoteo trivial</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#estrategias-de-pivoteo-para-reducir-los-errores"><i class="fa fa-check"></i><b>3.7</b> Estrategias de pivoteo para reducir los errores</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#pivoteo-parcial"><i class="fa fa-check"></i><b>3.7.1</b> Pivoteo parcial</a></li>
+<li class="chapter" data-level="3.7.2" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#pivoteo-parcial-escalado"><i class="fa fa-check"></i><b>3.7.2</b> Pivoteo parcial escalado</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#método-de-eliminación-de-gauss-jordan"><i class="fa fa-check"></i><b>3.8</b> Método de eliminación de Gauss-Jordan</a></li>
+<li class="chapter" data-level="3.9" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#métodos-aproximados-o-iterativos"><i class="fa fa-check"></i><b>3.9</b> Métodos Aproximados o Iterativos</a><ul>
+<li class="chapter" data-level="3.9.1" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#método-de-jacobi"><i class="fa fa-check"></i><b>3.9.1</b> Método de Jacobi</a></li>
+<li class="chapter" data-level="3.9.2" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#método-de-gauss-seidel"><i class="fa fa-check"></i><b>3.9.2</b> Método de Gauss-Seidel</a></li>
+<li class="chapter" data-level="3.9.3" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#generalización"><i class="fa fa-check"></i><b>3.9.3</b> Generalización</a></li>
+<li class="chapter" data-level="3.9.4" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#convergencia-1"><i class="fa fa-check"></i><b>3.9.4</b> Convergencia</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="aproximación-polinomial-interpolación-y-extrapolación.html"><a href="aproximación-polinomial-interpolación-y-extrapolación.html"><i class="fa fa-check"></i><b>4</b> Aproximación Polinomial: interpolación y extrapolación</a><ul>
+<li class="chapter" data-level="4.1" data-path="aproximación-polinomial-interpolación-y-extrapolación.html"><a href="aproximación-polinomial-interpolación-y-extrapolación.html#generalidades-2"><i class="fa fa-check"></i><b>4.1</b> Generalidades</a></li>
+<li class="chapter" data-level="4.2" data-path="aproximación-polinomial-interpolación-y-extrapolación.html"><a href="aproximación-polinomial-interpolación-y-extrapolación.html#diferencias-finitas"><i class="fa fa-check"></i><b>4.2</b> Diferencias finitas</a></li>
+<li class="chapter" data-level="4.3" data-path="aproximación-polinomial-interpolación-y-extrapolación.html"><a href="aproximación-polinomial-interpolación-y-extrapolación.html#interpolación-de-newton-para-incrementos-constantes"><i class="fa fa-check"></i><b>4.3</b> Interpolación de Newton para incrementos constantes</a></li>
+<li class="chapter" data-level="4.4" data-path="aproximación-polinomial-interpolación-y-extrapolación.html"><a href="aproximación-polinomial-interpolación-y-extrapolación.html#interpolación-de-lagrange"><i class="fa fa-check"></i><b>4.4</b> Interpolación de Lagrange</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="aproximación-polinomial-interpolación-y-extrapolación.html"><a href="aproximación-polinomial-interpolación-y-extrapolación.html#observaciones-finales"><i class="fa fa-check"></i><b>4.4.1</b> Observaciones finales</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Taller de Métodos Numéricos</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="aproximación-polinomial-interpolación-y-extrapolación" class="section level1">
+<h1><span class="header-section-number">4</span> Aproximación Polinomial: interpolación y extrapolación</h1>
+<div id="generalidades-2" class="section level2">
+<h2><span class="header-section-number">4.1</span> Generalidades</h2>
+<ul>
+<li>En matemática estudiamos funciones de la forma <span class="math inline">\(y = f(x)\)</span>, donde se conoce la expresión matemática que define a <span class="math inline">\(f(x)\)</span>, para determinar sus derivadas y calcular integrales definidas.</li>
+<li><p>Sin embargo, muchas veces en aplicaciones prácticas se requiere trabajar con funciones cuya derivación e integración presenta dificultades porque:</p>
+<ul>
+<li>no son funciones elementales (polinomios, expresiones racionales, funciones trigonométricas, exponenciales o comibnaciones sencillas de estas);</li>
+<li>directamente se desconoce su expresión analítica (ejemplo: datos obtenidos experimentalmente).</li>
+</ul></li>
+<li><p>En estos casos, se suele contar con una tabla de valores compuestas por puntos <span class="math inline">\((x_i, y_i)\)</span> a partir de la cual se desea:</p>
+<ul>
+<li>aproximar <span class="math inline">\(f(x)\)</span> en abscisas que no están tabuladas (valores de <span class="math inline">\(x\)</span> no dados), es decir, interpolar</li>
+<li>integrar <span class="math inline">\(f(x)\)</span> en un intervalo determinado</li>
+<li>derivar <span class="math inline">\(f(x)\)</span></li>
+</ul></li>
+<li><p>En esta unidad estudiaremos métodos numéricos que cumplen con estos objetivos que consisten en sustituir la función complicada o que está determinada tabularmente, por una función polinomial que se aproxime a los puntos disponibles.</p></li>
+</ul>
+</div>
+<div id="diferencias-finitas" class="section level2">
+<h2><span class="header-section-number">4.2</span> Diferencias finitas</h2>
+<ul>
+<li>Antes de ver el primer método veremos cómo crear una tabla de diferencia que utilizaremos más adelante.</li>
+<li>Se tiene una función <span class="math inline">\(y = f(x)\)</span> definida en forma tabular con saltos equiespaciados en <span class="math inline">\(x\)</span>:</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x_k\)</span></th>
+<th><span class="math inline">\(y_k = f(x_k)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(x_0\)</span></td>
+<td><span class="math inline">\(y_0\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(x_1 = x_0 + h\)</span></td>
+<td><span class="math inline">\(y_1\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(x_2 = x_0 + 2 h\)</span></td>
+<td><span class="math inline">\(y_2\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(x_{n-1} = x_0 + (n-1) h\)</span></td>
+<td><span class="math inline">\(y_{n-1}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(x_{n} = x_0 + n h\)</span></td>
+<td><span class="math inline">\(y_n\)</span></td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="32%" />
+<col width="35%" />
+<col width="7%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(\Delta y_k = y_{k+1} - y_k\)</span></th>
+<th><span class="math inline">\(\Delta^2 y_k = \Delta y_{k+1} - \Delta y_k\)</span></th>
+<th><span class="math inline">\(\Delta^3 y_k = \Delta^2 y_{k+1} - \Delta^2 y_k\)</span></th>
+<th><span class="math inline">\(\cdots\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\Delta y_0 = y_1 - y_0\)</span></td>
+<td><span class="math inline">\(\Delta^2 y_0 = \Delta y_{1} - \Delta y_0\)</span></td>
+<td><span class="math inline">\(\Delta^3 y_0 = \Delta^2 y_{1} - \Delta^2 y_0\)</span></td>
+<td><span class="math inline">\(\cdots\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\Delta y_1 = y_2 - y_1\)</span></td>
+<td><span class="math inline">\(\Delta^2 y_1 = \Delta y_{2} - \Delta y_1\)</span></td>
+<td><span class="math inline">\(\Delta^3 y_1 = \Delta^2 y_{2} - \Delta^2 y_1\)</span></td>
+<td><span class="math inline">\(\cdots\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\Delta y_2 = y_3 - y_2\)</span></td>
+<td><span class="math inline">\(\Delta^2 y_2 = \Delta y_{3} - \Delta y_2\)</span></td>
+<td><span class="math inline">\(\Delta^3 y_2 = \Delta^2 y_{3} - \Delta^2 y_2\)</span></td>
+<td><span class="math inline">\(\cdots\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\ddots\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\Delta y_{n-1} = y_{n} - y_{n-1}\)</span></td>
+<td>-</td>
+<td>-</td>
+<td><span class="math inline">\(\cdots\)</span></td>
+</tr>
+<tr class="even">
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td><span class="math inline">\(\cdots\)</span></td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col width="7%" />
+<col width="46%" />
+<col width="45%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(\cdots\)</span></th>
+<th><span class="math inline">\(\Delta^{n-1} y_k = \Delta^{n-2} y_{k+1} - \Delta^{n-2} y_k\)</span></th>
+<th><span class="math inline">\(\Delta^{n} y_k = \Delta^{n-1} y_{k+1} - \Delta^{n-1} y_k\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\cdots\)</span></td>
+<td><span class="math inline">\(\Delta^{n-1} y_0 = \Delta^{n-2} y_{1} - \Delta^{n-2} y_0\)</span></td>
+<td><span class="math inline">\(\Delta^{n} y_0 = \Delta^{n-1} y_{1} - \Delta^{n-1} y_0\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\cdots\)</span></td>
+<td><span class="math inline">\(\Delta^{n-1} y_1 = \Delta^{n-2} y_{0} - \Delta^{n-2} y_1\)</span></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\cdots\)</span></td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\ddots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\cdots\)</span></td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\cdots\)</span></td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejemplo 1</strong>. Siendo <span class="math inline">\(y=f(x)\)</span> una función desconocida de la cual se tienen los valores tabulados <span class="math inline">\((x_k, y_k)\)</span> que se presentan a continuación, junto con una representación gráfica de los mismos:</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(k\)</span></th>
+<th><span class="math inline">\(x_k\)</span></th>
+<th><span class="math inline">\(y_k\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>2</td>
+<td>0,3010</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>3</td>
+<td>0,4771</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>4</td>
+<td>0,6021</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>5</td>
+<td>0,6990</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>6</td>
+<td>0,7781</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>7</td>
+<td>0,8451</td>
+</tr>
+</tbody>
+</table>
+<p><img src="Plots/U4/Unidad4_g1.png" width="100%" style="display: block; margin: auto;" /></p>
+<ul>
+<li>La correspondiente tabla de diferencias finitas es:</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(k\)</span></th>
+<th><span class="math inline">\(x_k\)</span></th>
+<th><span class="math inline">\(y_k\)</span></th>
+<th><span class="math inline">\(\Delta y_k\)</span></th>
+<th><span class="math inline">\(\Delta^2 y_k\)</span></th>
+<th><span class="math inline">\(\Delta^3 y_k\)</span></th>
+<th><span class="math inline">\(\Delta^4 y_k\)</span></th>
+<th><span class="math inline">\(\Delta^5 y_k\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>2</td>
+<td>0,3010</td>
+<td>0,1761</td>
+<td>-0,0511</td>
+<td>0,0230</td>
+<td>-0,0127</td>
+<td>0,0081</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>3</td>
+<td>0,4771</td>
+<td>0,1250</td>
+<td>-0,0281</td>
+<td>0,0103</td>
+<td>-0,0046</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>4</td>
+<td>0,6021</td>
+<td>0,0969</td>
+<td>-0,0178</td>
+<td>0,0057</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>5</td>
+<td>0,6990</td>
+<td>0,0791</td>
+<td>-0,0121</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>6</td>
+<td>0,7781</td>
+<td>0,0670</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>7</td>
+<td>0,8451</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Observaciones:</strong></p>
+<ul>
+<li>Si tenemos <span class="math inline">\(n+1\)</span> puntos podemos calcular <span class="math inline">\(n\)</span> columnas de diferencias hacia adelante.</li>
+<li>Si la función <span class="math inline">\(f(x)\)</span> que dio lugar a la tabla es un polinomio de orden <span class="math inline">\(q\)</span>, entonces la columna para la diferencia de orden <span class="math inline">\(q\)</span> es constante y las siguientes columnas son todas nulas.</li>
+<li>Por lo tanto, si en el proceso de obtención de las diferencias sucesivas de una función, las diferencias de orden <span class="math inline">\(q\)</span> se vuelven constantes (o aproximadamente constantes), sabemos que los datos provienen exactamente (o muy aproximadamente) de un polinomio de orden <span class="math inline">\(q\)</span>.</li>
+<li>Errores de redondeo podrían hacer que a pesar de que los datos provengan de un polinomio, no encontremos diferencias constantes.</li>
+</ul>
+</div>
+<div id="interpolación-de-newton-para-incrementos-constantes" class="section level2">
+<h2><span class="header-section-number">4.3</span> Interpolación de Newton para incrementos constantes</h2>
+<ul>
+<li>Ahora intentaremos resolver el problema de aproximar la función <span class="math inline">\(f(x)\)</span> para valores de <span class="math inline">\(x\)</span> que no forman parte de la tabla.</li>
+<li>Operando con los valores de la tabla de diferencia, se comprueba que los valores tabulados <span class="math inline">\(y_k\)</span> se pueden escribir como:</li>
+</ul>
+<p><span class="math display">\[
+\begin{aligned}
+y_k &amp; = \sum_{j=0}^k \binom{k}{j} \Delta^{j} y_0 \\
+    &amp; = y_0 + k \Delta y_0 + \frac{k(k-1)}{2!}\Delta^2 y_0 + \frac{k(k-1)(k-2)}{3!}\Delta^3 y_0 + \cdots 
+\end{aligned}
+\]</span></p>
+<p>donde <span class="math inline">\(\Delta^{0} y_0 = y_0\)</span>.</p>
+<ul>
+<li>Por ejemplo:</li>
+</ul>
+<p><span class="math display">\[
+y_2 = 0.3010 + 2 \cdot 0.1761 + \frac{2\cdot 1}{2!} (-0.0511) = 0.6021
+\]</span></p>
+<ul>
+<li>Esta fórmula se generaliza para proporcionar valores aproximados de <span class="math inline">\(y = f(x)\)</span> para cualquier <span class="math inline">\(x\)</span>:</li>
+</ul>
+<p><span class="math display">\[
+y = f(x) \cong \sum_{j = 0}^{g} \binom{k}{j} \Delta^{j} y_0 = 
+\]</span>
+<span class="math display">\[
+y_0 + k \Delta y_0 + \frac{k(k-1)}{2!}\Delta^2 y_0 + \frac{k(k-1)(k-2)}{3!}\Delta^3 y_0 + \cdots
+\]</span></p>
+<p>donde <span class="math inline">\(g\)</span> es el orden de la aproximación, <span class="math inline">\(\Delta^{0} y_0 = y_0\)</span> y <span class="math inline">\(k = \frac{x-x_0}{h}\)</span>.</p>
+<ul>
+<li><p>Si <span class="math inline">\(x_0 &lt; x &lt; x_n\)</span>, este proceso se llama <strong>interpolación</strong> y la fórmula anterior, <strong>Fórmula de interpolación de Newton para incrementos constantes</strong>.</p></li>
+<li><p>Si para hallar una aproximación sólo empleamos la diferencia de 1º orden, tenemos una <strong>interpolación lineal</strong>: <span class="math inline">\(f(x) \approx y_0 + k \Delta y_0\)</span>. El polinomio interpolador es de grado 1: una recta que pasa por los puntos <span class="math inline">\((x_0, y_0)\)</span> y <span class="math inline">\((x_1, y_1)\)</span>.</p></li>
+<li><p>Si empleamos hasta la diferencia de 2º orden, tenemos una <strong>interpolación cuadrática</strong>: <span class="math inline">\(f(x) \approx y_0 + k \Delta y_0 + \frac{k(k-1)}{2!}\Delta^2 y_0\)</span>. El polinomio interpolador es de grado 2: una parábola que pasa por los puntos <span class="math inline">\((x_0, y_0)\)</span>, <span class="math inline">\((x_1, y_1)\)</span> y <span class="math inline">\((x_2, y_2)\)</span>.</p></li>
+<li><p>Cuantas más diferencias empleemos, el polinomio interpolador es de mayor orden y puede brindar mejores aproximaciones.</p></li>
+<li><p>Si empleamos las <span class="math inline">\(n\)</span> diferencias, el polinomio interpolador es el único polinomio de grado <span class="math inline">\(n\)</span> que pasa exactamente por los <span class="math inline">\(n + 1\)</span> puntos tabulados.</p></li>
+</ul>
+<p><strong>Retomando el Ejemplo 1</strong>: vamos a aproximar el valor de <span class="math inline">\(f(2,3)\)</span>. Recordamos la tabla de diferencias y el gráfico:</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x_k\)</span></th>
+<th><span class="math inline">\(y_k\)</span></th>
+<th><span class="math inline">\(\Delta y_k\)</span></th>
+<th><span class="math inline">\(\Delta^2 y_k\)</span></th>
+<th><span class="math inline">\(\Delta^3 y_k\)</span></th>
+<th><span class="math inline">\(\Delta^4 y_k\)</span></th>
+<th><span class="math inline">\(\Delta^5 y_k\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2</td>
+<td>0,3010</td>
+<td>0,1761</td>
+<td>-0,0511</td>
+<td>0,0230</td>
+<td>-0,0127</td>
+<td>0,0081</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>0,4771</td>
+<td>0,1250</td>
+<td>-0,0281</td>
+<td>0,0103</td>
+<td>-0,0046</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>0,6021</td>
+<td>0,0969</td>
+<td>-0,0178</td>
+<td>0,0057</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>0,6990</td>
+<td>0,0791</td>
+<td>-0,0121</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>0,7781</td>
+<td>0,0670</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td>0,8451</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p><img src="Plots/U4/Unidad4_g1.png" width="100%" style="display: block; margin: auto;" /></p>
+<ul>
+<li>¿Hasta qué orden de diferencias deberíamos incluir? Es decir, ¿qué grado elegimos para el polinomio interpolador?</li>
+<li><p>Viendo el gráfico podemos pensar que una función cuadrática puede proveer un buen ajuste.</p></li>
+<li><p>Por eso, proponemos un polinomio interpolador de grado 2, usando hasta la diferencia de segundo orden:</p>
+<ul>
+<li><span class="math inline">\(x = 2,3\)</span></li>
+<li><span class="math inline">\(x_0 = 2\)</span></li>
+<li><span class="math inline">\(h = 1\)</span></li>
+<li><span class="math inline">\(k = \frac{x-x_0}{h} = \frac{2,3-2}{1} = 0,3\)</span></li>
+<li><span class="math inline">\(y_0 = 0,3010\)</span>; <span class="math inline">\(\Delta y_0 = 0,1761\)</span>; <span class="math inline">\(\Delta^2 y_0 = -0,0511\)</span></li>
+</ul></li>
+</ul>
+<p><span class="math display">\[
+\begin{aligned}
+y = f(2,3) &amp;\approx y_0 + k \Delta y_0 + \frac{k(k-1)}{2!}\Delta^2 y_0 \\
+    &amp; = 0,3010 + k \cdot 0,1761 + \frac{k(k-1)}{2!} \cdot (-0,0511) \\
+  &amp; = 0,3010 + 0,3 \cdot 0,1761 + \frac{0,3 (0,3-1)}{2} (-0,0511) \\
+  &amp; = 0,3592
+\end{aligned}
+\]</span></p>
+<ul>
+<li>¿Podemos encontrar la expresión del polinomio interpolador que acabamos de usar?</li>
+<li>Sí, sólo debemos reemplazar <span class="math inline">\(k\)</span> en la fórmula anterior por <span class="math inline">\(k = \frac{x-x_0}{h} = \frac{x-2}{1} = x-2\)</span>:</li>
+</ul>
+<p><span class="math display">\[
+\begin{aligned}
+y = f(x) &amp;\approx 0,3010 + k \cdot 0,1761 + \frac{k(k-1)}{2!} \cdot (-0,0511) \\
+    &amp; = 0,3010 + (x-2) \cdot 0,1761 + \frac{(x-2)(x-2-1)}{2!} \cdot (-0,0511) \\
+  &amp; = -0,02555 x^2 + 0,30385 x - 0,2045
+\end{aligned}
+\]</span></p>
+<ul>
+<li>Al representar gráficamente el polinomio interpolador, observamos que ajusta exactamente a los 3 primeros puntos tabulados y parece dar una aproximación razonable para <span class="math inline">\(x = 2,3\)</span>.</li>
+</ul>
+<p><img src="Plots/U4/Unidad4_g2.png" width="70%" style="display: block; margin: auto;" /></p>
+<ul>
+<li><p>Sin embargo, si queremos interpolar para <span class="math inline">\(x = 5,2\)</span>, este polinomio no parece ser muy útil, porque <span class="math inline">\(5,2\)</span> se aleja demasiado de los puntos ajustados.</p></li>
+<li>Por eso, siempre “corremos” el valor inicial <span class="math inline">\(x_0\)</span> hasta el inmediato inferior del que queremos aproximar.</li>
+<li><p>Entonces, para <span class="math inline">\(x=5,2\)</span> tomamos:</p>
+<ul>
+<li><span class="math inline">\(x_0 = 5\)</span></li>
+<li><span class="math inline">\(h = 1\)</span></li>
+<li><span class="math inline">\(k = \frac{x-x_0}{h} = \frac{5,2-5}{1} = 0,2\)</span></li>
+<li><span class="math inline">\(y_0 = 0,6990\)</span>; <span class="math inline">\(\Delta y_0 = 0,0791\)</span>; <span class="math inline">\(\Delta^2 y_0 = -0,0121\)</span></li>
+</ul></li>
+</ul>
+<p><span class="math display">\[
+\begin{aligned}
+y = f(5,2) &amp;\approx y_0 + k \Delta y_0 + \frac{k(k-1)}{2!}\Delta^2 y_0 \\
+  &amp; = 0,6990 + 0,2 \cdot 0,0791 + \frac{0,2 (0,2-1)}{2} (-0,0121) \\
+  &amp; = 0,7158
+\end{aligned}
+\]</span></p>
+<ul>
+<li>Así, con <span class="math inline">\(x_0 = 5\)</span>, la expresión del polinomio interpolador queda <span class="math inline">\(f(x) \approx -0,00605 x^2 + 0,14565 x - 0,122\)</span> y ajusta exactamente a los tres últimos puntos tabulados:</li>
+</ul>
+<!-- si empezamos con x0 = 4, en este caso tenemos el mismo error relativo
+no, si lo haces con la compu, x0 = 5 tiene menos error...
+log10(5.2) = 0.716
+0.6021+1.2*0.0969+0.6*0.2*(-0.0178) = 0.7162
+ER = abs(0.716 - 0.7162) / 0.716 = 0.0002793296
+
+Con x0 = 5, ER = abs(0.7158 - 0.716) / 0.7158 = 0.0002794077
+-->
+<p><img src="Plots/U4/Unidad4_g3.png" width="95%" style="display: block; margin: auto;" /></p>
+<ul>
+<li>Retomemos la interpolación cuadrática para <span class="math inline">\(x=2,3\)</span> que nos dio <span class="math inline">\(f(x) \approx 0,3592\)</span>.</li>
+<li>¿Cómo cambiará la aproximación si usamos polinomios de mayor orden, incluyendo diferencias superiores?</li>
+<li>Incrementar un grado en el orden del polinomio interpolador es muy sencillo, porque solamente tenemos que sumarle un término al polinomio de grado inferior.</li>
+<li>En el ejemplo con <span class="math inline">\(x = 2.3\)</span>; <span class="math inline">\(x_0=2\)</span>; <span class="math inline">\(h = 1\)</span>; <span class="math inline">\(k = 0.3\)</span>:</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>Grado</th>
+<th><span class="math inline">\(f(2.3) \approx\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td><span class="math inline">\(y_0 + k \Delta y_0 = 0.3538\)</span></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><span class="math inline">\(0.3538 + \frac{k(k-1)}{2!}\Delta^2 y_0 = 0.3592\)</span></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td><span class="math inline">\(0.3592 + \frac{k(k-1)(k-2)}{3!}\Delta^3 y_0 = 0.3606\)</span></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td><span class="math inline">\(0.3606 + \frac{k(k-1)(k-2)(k-3)}{4!}\Delta^4 y_0 = 0.3611\)</span></td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td><span class="math inline">\(0.3611 + \frac{k(k-1)(k-2)(k-3)(k-4)}{5!}\Delta^5 y_0 = 0.3613\)</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>La función que generó la tabla de este ejemplo es el logaritmo en base 10, es decir, que el valor exacto es <span class="math inline">\(f(2,3) = log(2,3) = 0,3617\)</span>.</li>
+<li>Con esta información, podemos calcular el Error Relativo que resulta de hacer las aproximaciones anteriores:</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>Grado</th>
+<th><span class="math inline">\(f(2.3) \approx\)</span></th>
+<th>ER</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td><span class="math inline">\(0.3538\)</span></td>
+<td>0.0218</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><span class="math inline">\(0.3592\)</span></td>
+<td>0.0070</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td><span class="math inline">\(0.3606\)</span></td>
+<td>0.0032</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td><span class="math inline">\(0.3611\)</span></td>
+<td>0.0018</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td><span class="math inline">\(0.3613\)</span></td>
+<td>0.0012</td>
+</tr>
+</tbody>
+</table>
+<p>Polinomios interpoladores con <span class="math inline">\(x_0=2\)</span>:</p>
+<p><img src="Plots/U4/Unidad4_g4.png" width="90%" style="display: block; margin: auto;" /></p>
+<ul>
+<li>Realizar una interpolación cúbica para <span class="math inline">\(x=6.4\)</span>.</li>
+<li>Si tomamos <span class="math inline">\(x_0 = 6\)</span>, nos faltan las diferencias de 2° y 3° orden y no podemos obtener el polinomio deseado.</li>
+<li><strong>Modificación</strong>: tomar como <span class="math inline">\(x_0\)</span> al inmediato superior y emplear las diferencias que se encuentran en la diagonal ascendente que comienza en dicho punto.</li>
+<li>Se debe redefinir <span class="math inline">\(k\)</span> y alternar signos positivos y negativos en la fórmula:</li>
+</ul>
+<!--
+IMPORTANTE
+Esto lo hice asi porque despues aparecia en la practica, pero no estoy convencido
+Esto lleva a encontrar el polinomio de grado 3 que pasa exactamente por los ultimos tres puntos,
+y por ningun otro de la tabla, no me doy cuenta cual seria el cuarto punto por el que pasa,
+pense que podria ser el de x=9 asumiendo que la ultima dif es cte y la puedo repetir, pero no
+
+2019. ESTO ES LO MISMO QUE DAR VUELTA LA TABLA Y CREO QUE ESTO ES SEMJANTE A LO DE APLICAR LAS DIFERENCIAS HACIA ATRAS....
+
+El polinomio resultante es 0.3215 + 0.044*x + 0.01105*x^2 - 0.00095*x^3 
+esta vez hice mas facil, lo encontre con R con el paquete polyn
+
+library(polynom)
+p1 <- polynomial(0.8451)
+p2 <- polynomial(c(7, -1)) * (-0.067)
+p3 <- polynomial(c(7, -1)) * polynomial(c(6, -1)) * (-0.0121/2)
+p4 <- polynomial(c(7, -1)) * polynomial(c(6, -1)) * polynomial(c(5, -1)) * 0.0057/6
+p <-  p1 + p2 + p3 + p4
+p <- as.function(p)
+p(2:7)
+p(0:9)
+-->
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x_k\)</span></th>
+<th><span class="math inline">\(y_k\)</span></th>
+<th><span class="math inline">\(\Delta y_k\)</span></th>
+<th><span class="math inline">\(\Delta^2 y_k\)</span></th>
+<th><span class="math inline">\(\Delta^3 y_k\)</span></th>
+<th><span class="math inline">\(\Delta^4 y_k\)</span></th>
+<th><span class="math inline">\(\Delta^5 y_k\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2</td>
+<td>0,3010</td>
+<td>0,1761</td>
+<td>-0,0511</td>
+<td>0,0230</td>
+<td>-0,0127</td>
+<td>0,0081</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>0,4771</td>
+<td>0,1250</td>
+<td>-0,0281</td>
+<td>0,0103</td>
+<td>-0,0046</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>0,6021</td>
+<td>0,0969</td>
+<td>-0,0178</td>
+<td>0,0057</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>0,6990</td>
+<td>0,0791</td>
+<td>-0,0121</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>0,7781</td>
+<td>0,0670</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td>0,8451</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(x_0 = 7\)</span></p>
+<p><span class="math inline">\(k = \frac{x_0-x}{h} = \frac{7-6.4}{1} = 0.6\)</span></p>
+<p><span class="math inline">\(y_0 = 0,8451\)</span>; <span class="math inline">\(\Delta y_0 = 0,0670\)</span>;</p>
+<p><span class="math inline">\(\Delta^2 y_0 = -0.0121\)</span>; <span class="math inline">\(\Delta^3 y_0 = 0.0057\)</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+y = f(6.4) &amp;\approx y_0 - k \Delta y_0 + \frac{k(k-1)}{2!}\Delta^2 y_0 - \frac{k(k-1)(k-2)}{3!}\Delta^3 y_0  \\
+  &amp; = 0.8451 - 0,6 \cdot 0.0670 + \frac{0.6 (0.6-1)}{2} (-0.0121) - \frac{0.6(0.6-1)(0.6-2)}{6} 0.0057\\
+  &amp; = 0.8063
+\end{aligned}
+\]</span></p>
+<p><strong>Ejemplo 2</strong>. Dada la siguiente función tabulada, interpolar para <span class="math inline">\(x = 3.2\)</span>.</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x\)</span></th>
+<th><span class="math inline">\(y=f(x)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>62</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>212</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>506</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>992</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejemplo 2</strong>. La tabla de diferencias es:</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x_k\)</span></th>
+<th><span class="math inline">\(y_k=f(x_k)\)</span></th>
+<th><span class="math inline">\(\Delta y_k\)</span></th>
+<th><span class="math inline">\(\Delta^2 y_k\)</span></th>
+<th><span class="math inline">\(\Delta^3 y_k\)</span></th>
+<th><span class="math inline">\(\Delta^4 y_k\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>2</td>
+<td>6</td>
+<td>48</td>
+<td>48</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>8</td>
+<td>54</td>
+<td>96</td>
+<td>48</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>62</td>
+<td>150</td>
+<td>144</td>
+<td>48</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>212</td>
+<td>294</td>
+<td>192</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>506</td>
+<td>486</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>992</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Las diferencias de orden 3 son constantes. Esto significa que la función <span class="math inline">\(f(x)\)</span> es exactamente un polinomio de grado 3.</li>
+<li>Es decir, si usamos hasta la diferencia de orden 3, con la fórmula de Newton podemos hallar exactamente el valor de <span class="math inline">\(f(x)\)</span> para cualquier <span class="math inline">\(x\)</span> (y no importa cuál valor tomamos como <span class="math inline">\(x_0\)</span>).</li>
+</ul>
+<p><strong>Ejemplo 2</strong>. Continuando con el objetivo de hallar <span class="math inline">\(f(3.2)\)</span>:</p>
+<ul>
+<li><span class="math inline">\(x = 3.2\)</span></li>
+<li><span class="math inline">\(x_0 = 2\)</span></li>
+<li><span class="math inline">\(h = 2\)</span></li>
+<li><span class="math inline">\(k = \frac{x-x_0}{h} = \frac{3.2-2}{2} = 0.6\)</span></li>
+<li><span class="math inline">\(y_0 = 8\)</span>; <span class="math inline">\(\Delta y_0 = 54\)</span>; <span class="math inline">\(\Delta^2 y_0 = 96\)</span>; <span class="math inline">\(\Delta^3 y_0 = 48\)</span></li>
+</ul>
+<p><span class="math display">\[
+\begin{aligned}
+y = f(3.2) &amp;= y_0 + k \Delta y_0 + \frac{k(k-1)}{2!}\Delta^2 y_0 + \frac{k(k-1)(k-2)}{3!}\Delta^3 y_0\\
+  &amp; = 8 + 0.6 \cdot 54 + \frac{0.6 (0.6-1)}{2} 96 + \frac{0.6 (0.6-1)(0.6-2)}{6} 48 \\
+  &amp; = 31.568
+\end{aligned}
+\]</span></p>
+<p><strong>Ejemplo 2</strong>. Ahora interpolar para <span class="math inline">\(x = 9\)</span>. Recordemos la tabla:</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x_k\)</span></th>
+<th><span class="math inline">\(y_k=f(x_k)\)</span></th>
+<th><span class="math inline">\(\Delta y_k\)</span></th>
+<th><span class="math inline">\(\Delta^2 y_k\)</span></th>
+<th><span class="math inline">\(\Delta^3 y_k\)</span></th>
+<th><span class="math inline">\(\Delta^4 y_k\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>2</td>
+<td>6</td>
+<td>48</td>
+<td>48</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>8</td>
+<td>54</td>
+<td>96</td>
+<td>48</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>62</td>
+<td>150</td>
+<td>144</td>
+<td>48</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>212</td>
+<td>294</td>
+<td>192</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>506</td>
+<td>486</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>992</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Si tomamos como <span class="math inline">\(x_0\)</span> al inmediato inferior, es decir, <span class="math inline">\(x_0 = 8\)</span>, nos faltan dos diferencias para completar el cálculo.</li>
+<li>Pero como tenemos diferencias constantes y la verdadera función es un polinomio, cualquier punto de partida nos dará el valor exacto de <span class="math inline">\(f(9)\)</span>.</li>
+<li>Así que podemos tomar, por ejemplo, el primer renglón de la tabla: <span class="math inline">\(x_0=0\)</span>.</li>
+</ul>
+<p><strong>Ejemplo 2</strong>. Continuando con el objetivo de hallar <span class="math inline">\(f(9)\)</span>:</p>
+<ul>
+<li><span class="math inline">\(x = 9\)</span></li>
+<li><span class="math inline">\(x_0 = 0\)</span></li>
+<li><span class="math inline">\(h = 2\)</span></li>
+<li><span class="math inline">\(k = \frac{x-x_0}{h} = \frac{9-0}{2} = 4.5\)</span></li>
+<li><span class="math inline">\(y_0 = 2\)</span>; <span class="math inline">\(\Delta y_0 = 6\)</span>; <span class="math inline">\(\Delta^2 y_0 = 48\)</span>; <span class="math inline">\(\Delta^3 y_0 = 48\)</span></li>
+</ul>
+<p><span class="math display">\[
+\begin{aligned}
+y = f(9) &amp;= y_0 + k \Delta y_0 + \frac{k(k-1)}{2!}\Delta^2 y_0 + \frac{k(k-1)(k-2)}{3!}\Delta^3 y_0\\
+  &amp; = 2 + 4.5 \cdot 6 + \frac{4.5 (4.5-1)}{2} 48 + \frac{4.5 (4.5-1)(4.5-2)}{6} 48 \\
+  &amp; = 722
+\end{aligned}
+\]</span></p>
+<ul>
+<li>En los ejemplos anteriores obtuvimos el valor de <span class="math inline">\(y\)</span> para <span class="math inline">\(x\)</span> comprendida entre dos valores <span class="math inline">\(x_k\)</span> de la tabla (<em>interpolación</em>).</li>
+<li>Ahora vamos a calcular el valor de <span class="math inline">\(y\)</span> para una <span class="math inline">\(x\)</span> fuera del rango de los valores de <span class="math inline">\(x_k\)</span> en la tabla.</li>
+<li>Esto se llama <strong>extrapolación</strong>.</li>
+</ul>
+<p><strong>Ejemplo 3</strong>. Extrapolar para <span class="math inline">\(x = -1\)</span>.</p>
+<ul>
+<li><span class="math inline">\(x = -1\)</span></li>
+<li><span class="math inline">\(x_0 = 0\)</span></li>
+<li><span class="math inline">\(h = 2\)</span></li>
+<li><span class="math inline">\(k = \frac{x-x_0}{h} = \frac{-1-0}{2} = -0.5\)</span></li>
+<li><span class="math inline">\(y_0 = 2\)</span>; <span class="math inline">\(\Delta y_0 = 6\)</span>; <span class="math inline">\(\Delta^2 y_0 = 48\)</span>; <span class="math inline">\(\Delta^2 y_0 = 48\)</span></li>
+</ul>
+<p><span class="math display">\[
+\begin{aligned}
+y = f(-1) &amp;= y_0 + k \Delta y_0 + \frac{k(k-1)}{2!}\Delta^2 y_0 + \frac{k(k-1)(k-2)}{3!}\Delta^3 y_0\\
+  &amp; = 2 - 0.5 \cdot 6 + \frac{- 0.5 (- 0.5-1)}{2} 48 + \frac{- 0.5 (- 0.5-1)(- 0.5-2)}{6} 48 \\
+  &amp; = 2
+\end{aligned}
+\]</span></p>
+<p><strong>Ejemplo 4</strong>. Extrapolar para <span class="math inline">\(x = 11\)</span>.</p>
+<ul>
+<li><span class="math inline">\(x = 11\)</span></li>
+<li><span class="math inline">\(x_0 = 0\)</span></li>
+<li><span class="math inline">\(h = 2\)</span></li>
+<li><span class="math inline">\(k = \frac{x-x_0}{h} = \frac{11-0}{2} = 5.5\)</span></li>
+<li><span class="math inline">\(y_0 = 2\)</span>; <span class="math inline">\(\Delta y_0 = 6\)</span>; <span class="math inline">\(\Delta^2 y_0 = 48\)</span>; <span class="math inline">\(\Delta^3 y_0 = 48\)</span></li>
+</ul>
+<p><span class="math display">\[
+y = f(11) = \cdots = 1322
+\]</span></p>
+</div>
+<div id="interpolación-de-lagrange" class="section level2">
+<h2><span class="header-section-number">4.4</span> Interpolación de Lagrange</h2>
+<ul>
+<li>Como ya mencionamos, en la interpolación lineal se utiliza un segmento rectilíneo que pasa por dos puntos que se conocen.</li>
+<li>De nuestros conocimientos de Geometría sabemos que la ecuación de la recta que pasa por dos puntos <span class="math inline">\((x_0, y_0)\)</span> y <span class="math inline">\((x_1, y_1)\)</span> es:</li>
+</ul>
+<p><span class="math display">\[
+y = f(x) = y_0 + \frac{y_1 - y_0}{x_1 - x_0} (x - x_0)
+\]</span></p>
+<ul>
+<li><p>Es fácil ver que la recta anterior pasa por los puntos dados, ya que <span class="math inline">\(f(x_0) = y_0\)</span> y <span class="math inline">\(f(x_1) = y_1\)</span>.</p></li>
+<li><p>Lagrange propuso reescribir la recta anterior como:</p></li>
+</ul>
+<p><span class="math display">\[
+f(x) = \frac{x - x_1}{x_0 - x_1} y_0 + \frac{x - x_0}{x_1 - x_0} y_1
+\]</span></p>
+<ul>
+<li>Esta es expresión que se puede extender para obtener polinomios de grados superiores que pasen por más puntos.</li>
+<li>Por ejemplo, para hallar el polinomio que pasa por los puntos <span class="math inline">\((x_0, y_0)\)</span>, <span class="math inline">\((x_1, y_1)\)</span> y <span class="math inline">\((x_2, y_2)\)</span>:</li>
+</ul>
+<p><span class="math display">\[
+f(x) = \frac{(x - x_1)(x - x_2)}{(x_0 - x_1)(x_0 - x_2)} y_0 + \frac{(x - x_0)(x - x_2)}{(x_1 - x_0)(x_1 - x_2)} y_1 + \frac{(x - x_0)(x - x_1)}{(x_2 - x_0)(x_2 - x_1)} y_2
+\]</span></p>
+<ul>
+<li><p>Se puede ver fácilmente que este polinomio pasa exactamente por los tres puntos dados.</p></li>
+<li><p>De la misma forma, el polinomio de grado 3 que pasa por cuatro puntos <span class="math inline">\((x_0, y_0)\)</span>, <span class="math inline">\((x_1, y_1)\)</span>, <span class="math inline">\((x_2, y_2)\)</span> y <span class="math inline">\((x_3, y_3)\)</span> es:</p></li>
+</ul>
+<p><span class="math display">\[
+\hspace{-0.5cm}
+\begin{split}
+f(x) = &amp;~ \frac{(x - x_1)(x - x_2)(x - x_3)}{(x_0 - x_1)(x_0 - x_2)(x_0 - x_3)} y_0 + \frac{(x - x_0)(x - x_2)(x - x_3)}{(x_1 - x_0)(x_1 - x_2)(x_1 - x_3)} y_1 \\
+&amp; + \frac{(x - x_0)(x - x_1)(x - x_3)}{(x_2 - x_0)(x_2 - x_1)(x_2 - x_3)} y_2 + \frac{(x - x_0)(x - x_1)(x - x_2)}{(x_3 - x_0)(x_3 - x_1)(x_3 - x_2)} y_3
+\end{split}
+\]</span></p>
+<ul>
+<li><p>Se puede ver fácilmente que este polinomio pasa exactamente por los cuatro puntos dados.</p></li>
+<li><p>Generalizando, la fórmula de interpolación de Lagrange para construir un polinomio de grado <span class="math inline">\(n\)</span> que pase por <span class="math inline">\(n+1\)</span> puntos <span class="math inline">\((x_0, y_0), (x_1, y_1), \cdots, (x_n, y_n)\)</span> es:</p></li>
+</ul>
+<p><span class="math display">\[
+y = f(x) = \sum_{i = 0}^n \frac{\prod\limits_{\substack{j = 0\\ j \neq i}}^n (x - x_j)}{\prod\limits_{\substack{j = 0\\ j \neq i}}^n (x_i - x_j)} y_i
+\]</span></p>
+<p><strong>Comparación con el método de Newton</strong></p>
+<ul>
+<li><p><strong>Ventaja</strong>: no requiere que los valores tabulados de <span class="math inline">\(x\)</span> estén equiespaciados. Si lo están, ambos métodos coinciden.</p></li>
+<li><p><strong>Desventaja</strong>:</p>
+<ul>
+<li>En ocasiones es útil considerar varios polinomios interpoladores de distinto grado para luego elegir el más adecuado.</li>
+<li>Con el método de Newton esto es muy sencillo, ya que como vimos se pueden construir recursivamente (por ejemplo, el de grado 3 es igual al de grado 2 más un término extra).</li>
+<li>En cambio, con el método de Lagrange no hay relación entre la construcción de <span class="math inline">\(P_{n-1}(x)\)</span> y la de <span class="math inline">\(P_n(x)\)</span>; cada polinomio debe construirse individualmente realizando todos los cálculos otra vez.</li>
+<li>Esto implica que este método sea menos eficiente al tener que recalcular todo el polinomio si varía el número de puntos.</li>
+</ul></li>
+</ul>
+<p><strong>Ejemplo 5</strong>. Emplear el método de Lagrange para interpolar el valor de la función <span class="math inline">\(f\)</span> en <span class="math inline">\(x=2.25\)</span>, con el polinomio interpolador de grado 3 que pasa por los cuatro puntos tabulados:</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x_k\)</span></th>
+<th><span class="math inline">\(y_k\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>-1</td>
+<td>0,5403</td>
+</tr>
+<tr class="even">
+<td>0</td>
+<td>1,0000</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>-0,4162</td>
+</tr>
+<tr class="even">
+<td>2.5</td>
+<td>-0,8011</td>
+</tr>
+</tbody>
+</table>
+<p><img src="Plots/U4/lagrej1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><strong>Ejemplo 5</strong></p>
+<p><span class="math display">\[
+\begin{split}
+f(x) &amp;= \sum_{i = 0}^3 \frac{\prod\limits_{\substack{j = 0\\ j \neq i}}^3 (x - x_j)}{\prod\limits_{\substack{j = 0\\ j \neq i}}^3 (x_i - x_j)} y_i \\ \\
+&amp;= \frac{(x - x_1)(x - x_2)(x - x_3)}{(x_0 - x_1)(x_0 - x_2)(x_0 - x_3)} y_0 + \frac{(x - x_0)(x - x_2)(x - x_3)}{(x_1 - x_0)(x_1 - x_2)(x_1 - x_3)} y_1 \\
+&amp;~ + \frac{(x - x_0)(x - x_1)(x - x_3)}{(x_2 - x_0)(x_2 - x_1)(x_2 - x_3)} y_2 + \frac{(x - x_0)(x - x_1)(x - x_2)}{(x_3 - x_0)(x_3 - x_1)(x_3 - x_2)} y_3 \\ \\
+\implies y = f(2.25) &amp;\approx \frac{(2.25 - 0)(2.25 - 2)(2.25 - 2.5)}{(-1-0)(-1-2)(-1-2.5)} 0.5403 + \frac{(2.25 +1)(2.25 - 2)(2.25 - 2.5)}{(0+1)(0-2)(0-2.5)} 1.0000 \\
+&amp;~ + \frac{(2.25 +1)(2.25 - 0)(2.25 - 2.5)}{(2+1)(2-0)(2-2.5)} (-0.4162) + \frac{(2.25 +1)(2.25 - 0)(2.25 - 2)}{(2.5+1)(2.5-0)(2.5-2)} (-0.8011) \\
+&amp;= -0.6218 \\ \\
+&amp;\therefore f(2.25) \approx -0.6218
+\end{split}
+\]</span></p>
+<p><strong>Ejemplo 5</strong>. Si en la fórmula anterior en lugar de reemplazar <span class="math inline">\(x\)</span> por un valor particular (en este caso, <span class="math inline">\(2.5\)</span>) operamos y reacomodamos los términos, podemos hallar la expresión del polinomio interpolador:</p>
+<p><span class="math display">\[
+f(x) = 0.1042 x^3 -0.4934 x^2 -0.1379 x+1
+\]</span></p>
+<p><img src="Plots/U4/lagrej2.png" width="60%" style="display: block; margin: auto;" /></p>
+<p><strong>Ejemplo 5</strong>. La función que generó los valores tabulados es <span class="math inline">\(cos(x)\)</span>:</p>
+<p>En el rango tabulado:</p>
+<p><img src="Plots/U4/lagrange2.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>Un poco más lejos:</p>
+<p><img src="Plots/U4/lagrange.png" width="100%" style="display: block; margin: auto;" /></p>
+<ul>
+<li>Siendo <span class="math inline">\(cos(2.25) = -0.6282\)</span>, el error relativo de la aproximación fue <span class="math inline">\(|-0.6282-0.6218| / |-0.6285| = 1.02\%\)</span></li>
+</ul>
+<p><strong>Interpolación inversa</strong></p>
+<ul>
+<li>El problema de interpolación consiste en determinar el valor de la función desconocida <span class="math inline">\(f(x)\)</span> a partir de un valor conocido de <span class="math inline">\(x\)</span>.</li>
+<li>En la <em>interpolación inversa</em> se resuelve el problema contrario: determinar el valor de <span class="math inline">\(x\)</span> conociendo el de <span class="math inline">\(f(x)\)</span>.</li>
+<li>Podemos implementar interpolación inversa con el método de Lagrange intercambiando el rol de las columnas tabuladas <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span>, <strong>pero sólo para rangos tabulados donde la función <span class="math inline">\(f\)</span> es monótona</strong>.</li>
+</ul>
+<!-- 
+Para entender por que solo para intervalos monotonos, ver el graf con el pol interpolador.
+Intercambiar x e y significa rotar esa figura 90 grados a la derecha.
+Emplear Lagrange allí no aproxima la misma curva, puesto q no es una fc, hay mas de un valor de 
+"y" para un mismo "x". El metodo considerara que la fc sube duratne los 3 primeros ptos y luego baja,
+. Ver grafico "explicacion" en la carpeta de los Plots.
+-->
+<p><strong>Ejemplo 6</strong>. Con los datos del Ejemplo 1, ¿cuál es el valor de <span class="math inline">\(x\)</span> tal que <span class="math inline">\(f(x)=-0.75\)</span>?</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x_k\)</span></th>
+<th><span class="math inline">\(y_k\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>-1</td>
+<td>0,5403</td>
+</tr>
+<tr class="even">
+<td>0</td>
+<td>1,0000</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>-0,4162</td>
+</tr>
+<tr class="even">
+<td>2.5</td>
+<td>-0,8011</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(\downarrow\)</span></p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x_k\)</span></th>
+<th><span class="math inline">\(y_k\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1,0000</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>-0,4162</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>-0,8011</td>
+<td>2.5</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math display">\[
+\begin{split}
+f(x) &amp;= \sum_{i = 0}^2 \frac{\prod\limits_{\substack{j = 0\\ j \neq i}}^2 (x - x_j)}{\prod\limits_{\substack{j = 0\\ j \neq i}}^2 (x_i - x_j)} y_i \\ \\
+&amp;= \frac{(x - x_1)(x - x_2)}{(x_0 - x_1)(x_0 - x_2)} y_0 + \frac{(x - x_0)(x - x_2)}{(x_1 - x_0)(x_1 - x_2)} y_1 + \frac{(x - x_0)(x - x_1)}{(x_2 - x_0)(x_2 - x_1)} y_2 \\ \\
+\implies f(-0.75) &amp;\approx \frac{(-0.75+0.4162)(-0.75+0.8011)}{(1+0.4162)(1+0.8011)} 0 \\
+&amp;~ + \frac{(-0.75-1)(-0.75+0.8011)}{(-0.4162-1)(-0.4162+0.8011)} 2 \\
+&amp;~ + \frac{(-0.75-1)(-0.75+0.4162)}{(-0.8011-1)(-0.8011+0.4162)} 2.5  \\
+&amp;= 2.4347
+\end{split}
+\]</span>
+<span class="math inline">\(\therefore\)</span> el valor de <span class="math inline">\(x\)</span> tal que <span class="math inline">\(f(x)=-0.75\)</span> es <span class="math inline">\(x \approx 2.4347\)</span>.</p>
+<p><strong>Interpolación inversa</strong>. Podemos usar la interpolación inversa para resolver ecuaciones.</p>
+<p><strong>Ejemplo 7</strong>: hallar una raiz positiva para la ecuación <span class="math inline">\(f(x)=x-4\sin(x+2) = 0\)</span>.</p>
+<ul>
+<li>Tabulamos algunos valores y graficamos:</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x_k\)</span></th>
+<th><span class="math inline">\(y_k\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>-3.6372</td>
+</tr>
+<tr class="even">
+<td>0.5</td>
+<td>-1.8939</td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td>0.4355</td>
+</tr>
+</tbody>
+</table>
+<p><img src="Plots/U4/lagr_ecuacion1.png" width="75%" style="display: block; margin: auto;" /></p>
+<p><strong>Ejemplo 7</strong></p>
+<ul>
+<li>Podemos usar los dos últimos puntos donde vemos que la función cortó a las abscisas y hacer una interpolación lineal, los tres puntos y tener una interpolación cuadrática, o incluso agregar más puntos.</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x_k\)</span></th>
+<th><span class="math inline">\(y_k\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>-3.6372</td>
+</tr>
+<tr class="even">
+<td>0.5</td>
+<td>-1.8939</td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td>0.4355</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(\downarrow\)</span></p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x_k\)</span></th>
+<th><span class="math inline">\(y_k\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>-3.6372</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><span class="math display">\[
+\begin{split}
+y = f(x) &amp;= \frac{x - x_1}{x_0 - x_1} y_0 + \frac{x - x_0}{x_1 - x_0} y_1 \\ \\
+\implies f(0) &amp;\approx \frac{0-0.4355}{-1.8939-0.4355} 0.5 + \frac{0+1.8939}{0.4355+1.8939} 1 \\ \\
+&amp;= 0.9065 \\
+\end{split}
+\]</span>
+<span class="math inline">\(\therefore\)</span> La solución positiva de la ecuación es <span class="math inline">\(x \approx 0.9065\)</span> ya que <span class="math inline">\(f(0.9065) \approx 0\)</span>.</p>
+<div id="observaciones-finales" class="section level3">
+<h3><span class="header-section-number">4.4.1</span> Observaciones finales</h3>
+<ul>
+<li>Un polinomio de grado <span class="math inline">\(n\)</span> ajustado a <span class="math inline">\(n+1\)</span> puntos es único.</li>
+<li>El polinomio de interpolación se puede expresar en varias formas distintas, pero todas son equivalentes por el punto anterior.</li>
+<li>Si una función se aproxima mediante un polinomio de interpolación, no hay garantía de que dicho polinomio converja a la función exacta al aumentar el número de datos. En general, la interpolación mediante un polinomio de orden grande debe evitarse o utilizarse con precauciones extremas.</li>
+<li>Aunque no existe un criterio para determinar el orden óptimo del polinomio de interpolación, generalmente se recomienda utilizar uno con orden relativamente bajo en un pequeño rango de <span class="math inline">\(x\)</span>.</li>
+</ul>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="solución-de-sistemas-de-ecuaciones-lineales.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/mpru/guia-metodos-numericos/issues/04_Unidad4_Parte1.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["guia-met-num.pdf", "guia-met-num.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
