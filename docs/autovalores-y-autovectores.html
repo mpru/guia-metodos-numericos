@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6 Autovalores y Autovectores | Taller de Métodos Numéricos</title>
+  <meta name="description" content="Esta guía resume algunos conceptos desarrollados en el Taller de Métodos Numéricos de la Licenciatura en Estadística (Facultad de Ciencias Económicas y Estadstica, Universidad Nacional de Rosario)." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6 Autovalores y Autovectores | Taller de Métodos Numéricos" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://mpru.github.io/guia-metodos-numericos/" />
+  
+  <meta property="og:description" content="Esta guía resume algunos conceptos desarrollados en el Taller de Métodos Numéricos de la Licenciatura en Estadística (Facultad de Ciencias Económicas y Estadstica, Universidad Nacional de Rosario)." />
+  <meta name="github-repo" content="mpru/guia-metodos-numericos" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6 Autovalores y Autovectores | Taller de Métodos Numéricos" />
+  
+  <meta name="twitter:description" content="Esta guía resume algunos conceptos desarrollados en el Taller de Métodos Numéricos de la Licenciatura en Estadística (Facultad de Ciencias Económicas y Estadstica, Universidad Nacional de Rosario)." />
+  
+
+<meta name="author" content="Marcos Prunello" />
+<meta name="author" content="Cecilia Rapelli" />
+
+
+<meta name="date" content="2020-03-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="aproximación-polinomial-integración-y-derivación-numérica.html">
+<link rel="next" href="anexo-teoremas-útiles.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Guía de estudio para el Taller de Métodos Numéricos</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Acerca del Taller</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#horario-y-lugar-de-cursado"><i class="fa fa-check"></i>Horario y lugar de cursado</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#consultas"><i class="fa fa-check"></i>Consultas</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#material-de-estudio"><i class="fa fa-check"></i>Material de estudio</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#evaluación"><i class="fa fa-check"></i>Evaluación</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#campus-virtual"><i class="fa fa-check"></i>Campus virtual</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html"><i class="fa fa-check"></i><b>1</b> Introducción a los Métodos Numéricos</a><ul>
+<li class="chapter" data-level="1.1" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#cifras-significativas"><i class="fa fa-check"></i><b>1.1</b> Cifras significativas</a></li>
+<li class="chapter" data-level="1.2" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#notación-científica-o-exponencial"><i class="fa fa-check"></i><b>1.2</b> Notación Científica o Exponencial</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#ejemplo-2"><i class="fa fa-check"></i><b>1.2.1</b> Ejemplo 2:</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#sistemas-numéricos"><i class="fa fa-check"></i><b>1.3</b> Sistemas numéricos</a></li>
+<li class="chapter" data-level="1.4" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#por-qué-nos-interesa-el-sistema-binario"><i class="fa fa-check"></i><b>1.4</b> ¿Por qué nos interesa el sistema binario?</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#ejemplo-3"><i class="fa fa-check"></i><b>1.4.1</b> Ejemplo 3</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#formato-de-coma-flotante"><i class="fa fa-check"></i><b>1.5</b> Formato de coma flotante</a></li>
+<li class="chapter" data-level="1.6" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#propiedades-importantes-del-formato-ieee-754"><i class="fa fa-check"></i><b>1.6</b> Propiedades importantes del formato IEEE-754</a></li>
+<li class="chapter" data-level="1.7" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#análisis-de-los-errores"><i class="fa fa-check"></i><b>1.7</b> Análisis de los errores</a><ul>
+<li class="chapter" data-level="1.7.1" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#error-de-truncamiento"><i class="fa fa-check"></i><b>1.7.1</b> Error de truncamiento</a></li>
+<li class="chapter" data-level="1.7.2" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#error-de-redondeo"><i class="fa fa-check"></i><b>1.7.2</b> Error de redondeo</a></li>
+<li class="chapter" data-level="1.7.3" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#ejemplos-de-operaciones-delicadas"><i class="fa fa-check"></i><b>1.7.3</b> Ejemplos de operaciones “delicadas”</a></li>
+<li class="chapter" data-level="1.7.4" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#medida-del-error"><i class="fa fa-check"></i><b>1.7.4</b> Medida del error</a></li>
+<li class="chapter" data-level="1.7.5" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#error-propagado"><i class="fa fa-check"></i><b>1.7.5</b> Error propagado</a></li>
+<li class="chapter" data-level="1.7.6" data-path="introducción-a-los-métodos-numéricos.html"><a href="introducción-a-los-métodos-numéricos.html#error-propagado-1"><i class="fa fa-check"></i><b>1.7.6</b> Error propagado</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html"><i class="fa fa-check"></i><b>2</b> Solución Numérica de Ecuaciones No Lineales</a><ul>
+<li class="chapter" data-level="2.1" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#generalidades"><i class="fa fa-check"></i><b>2.1</b> Generalidades</a></li>
+<li class="chapter" data-level="2.2" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#método-de-las-aproximaciones-sucesivas-o-del-punto-fijo"><i class="fa fa-check"></i><b>2.2</b> Método de las Aproximaciones Sucesivas o del Punto Fijo</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#punto-fijo"><i class="fa fa-check"></i><b>2.2.1</b> Punto fijo</a></li>
+<li class="chapter" data-level="2.2.2" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#empleo-para-la-resolución-de-ecuaciones"><i class="fa fa-check"></i><b>2.2.2</b> Empleo para la resolución de ecuaciones</a></li>
+<li class="chapter" data-level="2.2.3" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#ejemplo"><i class="fa fa-check"></i><b>2.2.3</b> Ejemplo</a></li>
+<li class="chapter" data-level="2.2.4" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#criterios-para-detener-el-proceso-iterativo"><i class="fa fa-check"></i><b>2.2.4</b> Criterios para detener el proceso iterativo</a></li>
+<li class="chapter" data-level="2.2.5" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#ejemplo-1"><i class="fa fa-check"></i><b>2.2.5</b> Ejemplo</a></li>
+<li class="chapter" data-level="2.2.6" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#teorema-del-punto-fijo"><i class="fa fa-check"></i><b>2.2.6</b> Teorema del Punto Fijo</a></li>
+<li class="chapter" data-level="2.2.7" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#ejemplo-4"><i class="fa fa-check"></i><b>2.2.7</b> Ejemplo</a></li>
+<li class="chapter" data-level="2.2.8" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#interpretación-gráfica"><i class="fa fa-check"></i><b>2.2.8</b> Interpretación gráfica</a></li>
+<li class="chapter" data-level="2.2.9" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#ejemplo-5"><i class="fa fa-check"></i><b>2.2.9</b> Ejemplo</a></li>
+<li class="chapter" data-level="2.2.10" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#algunos-diagramas"><i class="fa fa-check"></i><b>2.2.10</b> Algunos diagramas</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#método-de-newton-raphson"><i class="fa fa-check"></i><b>2.3</b> Método de Newton-Raphson</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#teorema-de-newton-raphson"><i class="fa fa-check"></i><b>2.3.1</b> Teorema de Newton-Raphson</a></li>
+<li class="chapter" data-level="2.3.2" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#convergencia"><i class="fa fa-check"></i><b>2.3.2</b> Convergencia</a></li>
+<li class="chapter" data-level="2.3.3" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#ejemplo-6"><i class="fa fa-check"></i><b>2.3.3</b> Ejemplo:</a></li>
+<li class="chapter" data-level="2.3.4" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#ventajas-y-desventajas"><i class="fa fa-check"></i><b>2.3.4</b> Ventajas y desventajas</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#método-de-von-mises"><i class="fa fa-check"></i><b>2.4</b> Método de von Mises</a></li>
+<li class="chapter" data-level="2.5" data-path="solución-numérica-de-ecuaciones-no-lineales.html"><a href="solución-numérica-de-ecuaciones-no-lineales.html#método-de-newton-raphson-de-2º-orden"><i class="fa fa-check"></i><b>2.5</b> Método de Newton-Raphson de 2º Orden</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html"><i class="fa fa-check"></i><b>3</b> Solución de Sistemas de Ecuaciones Lineales</a><ul>
+<li class="chapter" data-level="3.1" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#generalidades-1"><i class="fa fa-check"></i><b>3.1</b> Generalidades</a></li>
+<li class="chapter" data-level="3.2" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#repaso"><i class="fa fa-check"></i><b>3.2</b> Repaso</a></li>
+<li class="chapter" data-level="3.3" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#notación"><i class="fa fa-check"></i><b>3.3</b> Notación</a></li>
+<li class="chapter" data-level="3.4" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#métodos-de-resolución-de-sistemas-de-ecuaciones"><i class="fa fa-check"></i><b>3.4</b> Métodos de Resolución de Sistemas de Ecuaciones</a></li>
+<li class="chapter" data-level="3.5" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#sistemas-fáciles-de-resolver"><i class="fa fa-check"></i><b>3.5</b> Sistemas fáciles de resolver</a></li>
+<li class="chapter" data-level="3.6" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#eliminación-gaussiana"><i class="fa fa-check"></i><b>3.6</b> Eliminación gaussiana</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#eliminación-gaussiana-con-pivoteo-trivial"><i class="fa fa-check"></i><b>3.6.1</b> Eliminación gaussiana con pivoteo trivial</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#estrategias-de-pivoteo-para-reducir-los-errores"><i class="fa fa-check"></i><b>3.7</b> Estrategias de pivoteo para reducir los errores</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#pivoteo-parcial"><i class="fa fa-check"></i><b>3.7.1</b> Pivoteo parcial</a></li>
+<li class="chapter" data-level="3.7.2" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#pivoteo-parcial-escalado"><i class="fa fa-check"></i><b>3.7.2</b> Pivoteo parcial escalado</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#método-de-eliminación-de-gauss-jordan"><i class="fa fa-check"></i><b>3.8</b> Método de eliminación de Gauss-Jordan</a></li>
+<li class="chapter" data-level="3.9" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#métodos-aproximados-o-iterativos"><i class="fa fa-check"></i><b>3.9</b> Métodos Aproximados o Iterativos</a><ul>
+<li class="chapter" data-level="3.9.1" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#método-de-jacobi"><i class="fa fa-check"></i><b>3.9.1</b> Método de Jacobi</a></li>
+<li class="chapter" data-level="3.9.2" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#método-de-gauss-seidel"><i class="fa fa-check"></i><b>3.9.2</b> Método de Gauss-Seidel</a></li>
+<li class="chapter" data-level="3.9.3" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#generalización"><i class="fa fa-check"></i><b>3.9.3</b> Generalización</a></li>
+<li class="chapter" data-level="3.9.4" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#convergencia-1"><i class="fa fa-check"></i><b>3.9.4</b> Convergencia</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="aproximación-polinomial-interpolación-y-extrapolación.html"><a href="aproximación-polinomial-interpolación-y-extrapolación.html"><i class="fa fa-check"></i><b>4</b> Aproximación Polinomial: interpolación y extrapolación</a><ul>
+<li class="chapter" data-level="4.1" data-path="aproximación-polinomial-interpolación-y-extrapolación.html"><a href="aproximación-polinomial-interpolación-y-extrapolación.html#generalidades-2"><i class="fa fa-check"></i><b>4.1</b> Generalidades</a></li>
+<li class="chapter" data-level="4.2" data-path="aproximación-polinomial-interpolación-y-extrapolación.html"><a href="aproximación-polinomial-interpolación-y-extrapolación.html#diferencias-finitas"><i class="fa fa-check"></i><b>4.2</b> Diferencias finitas</a></li>
+<li class="chapter" data-level="4.3" data-path="aproximación-polinomial-interpolación-y-extrapolación.html"><a href="aproximación-polinomial-interpolación-y-extrapolación.html#interpolación-de-newton-para-incrementos-constantes"><i class="fa fa-check"></i><b>4.3</b> Interpolación de Newton para incrementos constantes</a></li>
+<li class="chapter" data-level="4.4" data-path="aproximación-polinomial-interpolación-y-extrapolación.html"><a href="aproximación-polinomial-interpolación-y-extrapolación.html#interpolación-de-lagrange"><i class="fa fa-check"></i><b>4.4</b> Interpolación de Lagrange</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="aproximación-polinomial-interpolación-y-extrapolación.html"><a href="aproximación-polinomial-interpolación-y-extrapolación.html#observaciones-finales"><i class="fa fa-check"></i><b>4.4.1</b> Observaciones finales</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="aproximación-polinomial-integración-y-derivación-numérica.html"><a href="aproximación-polinomial-integración-y-derivación-numérica.html"><i class="fa fa-check"></i><b>5</b> Aproximación Polinomial: integración y derivación numérica</a><ul>
+<li class="chapter" data-level="5.1" data-path="aproximación-polinomial-integración-y-derivación-numérica.html"><a href="aproximación-polinomial-integración-y-derivación-numérica.html#integración-numérica"><i class="fa fa-check"></i><b>5.1</b> Integración numérica</a></li>
+<li class="chapter" data-level="5.2" data-path="aproximación-polinomial-integración-y-derivación-numérica.html"><a href="aproximación-polinomial-integración-y-derivación-numérica.html#fórmula-trapecial"><i class="fa fa-check"></i><b>5.2</b> Fórmula trapecial</a></li>
+<li class="chapter" data-level="5.3" data-path="aproximación-polinomial-integración-y-derivación-numérica.html"><a href="aproximación-polinomial-integración-y-derivación-numérica.html#fórmula-de-simpson-de-13"><i class="fa fa-check"></i><b>5.3</b> Fórmula de Simpson de 1/3</a></li>
+<li class="chapter" data-level="5.4" data-path="aproximación-polinomial-integración-y-derivación-numérica.html"><a href="aproximación-polinomial-integración-y-derivación-numérica.html#fórmula-de-simpson-de-38"><i class="fa fa-check"></i><b>5.4</b> Fórmula de Simpson de 3/8</a></li>
+<li class="chapter" data-level="5.5" data-path="aproximación-polinomial-integración-y-derivación-numérica.html"><a href="aproximación-polinomial-integración-y-derivación-numérica.html#derivación-numérica"><i class="fa fa-check"></i><b>5.5</b> Derivación numérica</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="autovalores-y-autovectores.html"><a href="autovalores-y-autovectores.html"><i class="fa fa-check"></i><b>6</b> Autovalores y Autovectores</a><ul>
+<li class="chapter" data-level="6.1" data-path="autovalores-y-autovectores.html"><a href="autovalores-y-autovectores.html#generalidades-3"><i class="fa fa-check"></i><b>6.1</b> Generalidades</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="autovalores-y-autovectores.html"><a href="autovalores-y-autovectores.html#definición"><i class="fa fa-check"></i><b>6.1.1</b> Definición</a></li>
+<li class="chapter" data-level="6.1.2" data-path="autovalores-y-autovectores.html"><a href="autovalores-y-autovectores.html#propiedades"><i class="fa fa-check"></i><b>6.1.2</b> Propiedades</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="autovalores-y-autovectores.html"><a href="autovalores-y-autovectores.html#obtención-los-autovalores-y-autovectores"><i class="fa fa-check"></i><b>6.2</b> Obtención los autovalores y autovectores</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="autovalores-y-autovectores.html"><a href="autovalores-y-autovectores.html#resumen-1-obtener-autovalores-y-autovectores"><i class="fa fa-check"></i><b>6.2.1</b> Resumen 1: Obtener autovalores y autovectores</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="autovalores-y-autovectores.html"><a href="autovalores-y-autovectores.html#método-de-krylov"><i class="fa fa-check"></i><b>6.3</b> Método de Krylov</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="autovalores-y-autovectores.html"><a href="autovalores-y-autovectores.html#resumen-2-método-de-krylov"><i class="fa fa-check"></i><b>6.3.1</b> Resumen 2: Método de Krylov</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="autovalores-y-autovectores.html"><a href="autovalores-y-autovectores.html#método-de-faddeev-leverrier"><i class="fa fa-check"></i><b>6.4</b> Método de Faddeev-LeVerrier</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="autovalores-y-autovectores.html"><a href="autovalores-y-autovectores.html#resumen-3-método-de-faddeev-leverrier"><i class="fa fa-check"></i><b>6.4.1</b> Resumen 3: Método de Faddeev-LeVerrier</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="autovalores-y-autovectores.html"><a href="autovalores-y-autovectores.html#método-de-aproximaciones-sucesivas-o-de-las-potencias"><i class="fa fa-check"></i><b>6.5</b> Método de Aproximaciones Sucesivas o de las Potencias</a></li>
+<li class="chapter" data-level="6.6" data-path="autovalores-y-autovectores.html"><a href="autovalores-y-autovectores.html#método-de-las-potencias-inversas"><i class="fa fa-check"></i><b>6.6</b> Método de las potencias inversas</a></li>
+<li class="chapter" data-level="6.7" data-path="autovalores-y-autovectores.html"><a href="autovalores-y-autovectores.html#método-de-las-potencias-con-deflación-o-de-hotelling"><i class="fa fa-check"></i><b>6.7</b> Método de las potencias con deflación (o de Hotelling)</a></li>
+<li class="chapter" data-level="6.8" data-path="autovalores-y-autovectores.html"><a href="autovalores-y-autovectores.html#resumen-4-método-de-las-aproximaciones-sucesivas-o-de-las-potencias"><i class="fa fa-check"></i><b>6.8</b> Resumen 4: Método de las Aproximaciones Sucesivas o de las Potencias</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="anexo-teoremas-útiles.html"><a href="anexo-teoremas-útiles.html"><i class="fa fa-check"></i>Anexo: Teoremas útiles</a><ul>
+<li class="chapter" data-level="" data-path="anexo-teoremas-útiles.html"><a href="anexo-teoremas-útiles.html#teorema-del-valor-intermedio-o-de-bolzano"><i class="fa fa-check"></i>Teorema del Valor Intermedio o de Bolzano</a></li>
+<li class="chapter" data-level="" data-path="anexo-teoremas-útiles.html"><a href="anexo-teoremas-útiles.html#teorema-del-valor-medio"><i class="fa fa-check"></i>Teorema del Valor Medio</a></li>
+<li class="chapter" data-level="" data-path="anexo-teoremas-útiles.html"><a href="anexo-teoremas-útiles.html#teorema-de-taylor"><i class="fa fa-check"></i>Teorema de Taylor</a></li>
+<li class="chapter" data-level="" data-path="anexo-teoremas-útiles.html"><a href="anexo-teoremas-útiles.html#teorema-del-punto-fijo-1"><i class="fa fa-check"></i>Teorema del Punto Fijo</a><ul>
+<li class="chapter" data-level="" data-path="anexo-teoremas-útiles.html"><a href="anexo-teoremas-útiles.html#demostración"><i class="fa fa-check"></i>Demostración</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="anexo-teoremas-útiles.html"><a href="anexo-teoremas-útiles.html#teorema-de-newton-raphson-1"><i class="fa fa-check"></i>Teorema de Newton-Raphson</a><ul>
+<li class="chapter" data-level="" data-path="anexo-teoremas-útiles.html"><a href="anexo-teoremas-útiles.html#demostración-1"><i class="fa fa-check"></i>Demostración</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="anexo-teoremas-útiles.html"><a href="anexo-teoremas-útiles.html#deducción-de-la-fórmula-de-recurrencia-para-el-método-de-newton-raphson-de-2º-orden"><i class="fa fa-check"></i>Deducción de la fórmula de recurrencia para el Método de Newton-Raphson de 2º Orden</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Taller de Métodos Numéricos</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="autovalores-y-autovectores" class="section level1">
+<h1><span class="header-section-number">6</span> Autovalores y Autovectores</h1>
+<div id="generalidades-3" class="section level2">
+<h2><span class="header-section-number">6.1</span> Generalidades</h2>
+<ul>
+<li>Los <strong>autovalores</strong> y <strong>autovectores</strong> son esas cosas raras que aparecen por todos lados pero nunca terminamos por entender.</li>
+<li>El objetivo de esta unidad es ver métodos para su cálculo, pero antes vamos a repasar qué son (<strong>informalmente</strong>, <strong>sin rigurosidad</strong>, el que avisa no traiciona…)</li>
+</ul>
+<!-- Esta explicacion esta basada en https://math.stackexchange.com/questions/36815/a-simple-explanation-of-eigenvectors-and-eigenvalues-with-big-picture-ideas-of 
+-->
+<!-- 
+MUY BUENA EXPLICACION DE LO QUE ES UN AUTOVALOR Y AUTOVECTOR ACA:
+https://math.stackexchange.com/questions/36815/a-simple-explanation-of-eigenvectors-and-eigenvalues-with-big-picture-ideas-of
+
+hacer algo como lo de la mona lisa de wikipedia pero con vectores en un plano y una matriz, todo de orden 2? 
+como aca: http://www.visiondummy.com/2014/03/eigenvalues-eigenvectors/
+
+-->
+<ul>
+<li>En muchas disciplinas los objetos que se estudian se representan con <em>vectores</em> (ej. <span class="math inline">\(\textbf{x}\)</span>, <span class="math inline">\(\textbf{y}\)</span>) y las cosas que se hacen con ellos son <em>transformaciones lineales</em>, que se representan como <em>matrices</em> (ej. <span class="math inline">\(\textbf{A}\)</span>).</li>
+<li>Así, en muchas situaciones las relaciones que importan entre esos objetos/vectores se expresan como:</li>
+</ul>
+<p><span class="math display">\[\textbf{y} = \textbf{A} \textbf{x}\]</span></p>
+<ul>
+<li><p>Esto abarca desde sistemas de ecuaciones lineales (presentes casi en todos lados en ciencia) hasta problemas muy sofisticados en ingeniería.</p></li>
+<li><p>Ahora bien, en general no es muy fácil mirar a la matriz <span class="math inline">\(\textbf{A}\)</span> y directamente darse cuenta qué es lo que va a pasar cuando se la multipliquemos a <span class="math inline">\(\textbf{x}\)</span>.</p></li>
+<li><p>Sin embargo, podríamos encontrar casos donde haya una relación muy simple entre el vector <span class="math inline">\(\textbf{x}\)</span> y el vector resultado <span class="math inline">\(\textbf{y=Ax}\)</span>.</p></li>
+<li><p>Por ejemplo, si miramos la matriz <span class="math inline">\(\mathbf{A} = \begin{bmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{bmatrix}\)</span> y se la multiplicamos al vector <span class="math inline">\(\textbf{x} = \begin{bmatrix} 1 \\ 1 \end{bmatrix}\)</span>, ¡nos da como resultado el mismo vector <span class="math inline">\(\textbf{x}\)</span>!</p></li>
+<li><p>Es decir, que para ese vector, es muy fácil ver qué aspecto tiene <span class="math inline">\(\textbf{Ax}\)</span>.</p></li>
+<li><p>Se puede generalizar esta observación con el concepto de <strong>autovectores</strong>.</p></li>
+<li><p>Un <strong>autovector</strong> de una matriz <span class="math inline">\(\textbf{A}\)</span> es cualquier vector <span class="math inline">\(\textbf{x}\)</span> para el que sólo cambia su escala cuando se lo multiplica con <span class="math inline">\(\textbf{A}\)</span>, es decir: <span class="math inline">\(\textbf{Ax} = \lambda \textbf{x}\)</span>, para algún número <span class="math inline">\(\lambda\)</span> real o complejo, que recibe el nombre de <strong>autovalor</strong>.</p></li>
+<li><p>Entonces si una matriz <span class="math inline">\(\textbf{A}\)</span> describe algún tipo de sistema, los autovectores son aquellos vectores que, cuando pasan por el sistema, se modifican en una forma muy sencilla.</p></li>
+<li><p>Por ejemplo, si <span class="math inline">\(\textbf{A}\)</span> describe operaciones geométricas, en principio <span class="math inline">\(\textbf{A}\)</span> podría estirar y rotar a los vectores, sin embargo, a sus autovectores lo único que puede hacerles es estirarlos, no rotarlos.</p></li>
+<li><p>Sea: <span class="math inline">\(\mathbf{A} = \begin{bmatrix} 3 &amp; 2 \\ 1 &amp; 4 \end{bmatrix}\)</span>, <span class="math inline">\(\textbf{u} = \begin{bmatrix} 1 \\ 1 \end{bmatrix}\)</span>, <span class="math inline">\(\textbf{v} = \begin{bmatrix} 1 \\ -0.5 \end{bmatrix}\)</span> y <span class="math inline">\(\textbf{w} = \begin{bmatrix} 0 \\ 1 \end{bmatrix}\)</span>.</p></li>
+<li><p>En este gráfico podemos ver los vectores antes de transformarlos (multiplicarlos) mediante <span class="math inline">\(\mathbf{A}\)</span>:</p></li>
+</ul>
+<p><img src="Plots/U5/auto1.png" width="100%" style="display: block; margin: auto;" /></p>
+<ul>
+<li>Y en este gráfico podemos ver como quedan luego de la transformación:</li>
+</ul>
+<p><img src="Plots/U5/auto2.png" width="100%" style="display: block; margin: auto;" /></p>
+<ul>
+<li><p><span class="math inline">\(\textbf{u}\)</span> y <span class="math inline">\(\textbf{v}\)</span> no cambiaron su dirección, sólo su norma: son <strong>autovectores</strong> de <span class="math inline">\(\textbf{A}\)</span>, asociados a los autovalores 5 y 2.</p></li>
+<li><p>En cambio, la matriz <span class="math inline">\(\textbf{A}\)</span> modificó la dirección de <span class="math inline">\(\textbf{w}\)</span>, entonces no es un autovector.</p></li>
+</ul>
+<div id="definición" class="section level3">
+<h3><span class="header-section-number">6.1.1</span> Definición</h3>
+<ul>
+<li><p>Dada una matriz <span class="math inline">\(\textbf{A}\)</span> cuadradada de orden <span class="math inline">\(n\)</span>, llamamos <strong>autovector</strong> o <strong>vector propio</strong> de <span class="math inline">\(\textbf{A}\)</span> a todo vector <span class="math inline">\(\textbf{x}\)</span> de orden <span class="math inline">\(n\)</span> cuya dirección no se modifica al transformarlo mediante <span class="math inline">\(\textbf{A}\)</span>.</p>
+<ul>
+<li>Transformarlo mediante <span class="math inline">\(\textbf{A}\)</span> significa realizar el producto <span class="math inline">\(\textbf{Ax}\)</span> dando como resultado un nuevo vector de orden <span class="math inline">\(n\)</span>.</li>
+<li>Que la dirección de <span class="math inline">\(\textbf{x}\)</span> no se modifique significa que el nuevo vector debe ser múltiplo de <span class="math inline">\(\textbf{x}\)</span>, es decir, igual a <span class="math inline">\(\lambda \textbf{x}\)</span>, con <span class="math inline">\(\lambda \in \mathbb{C}\)</span>, que recibe el nombre de <strong>autovalor</strong> o <strong>valor propio</strong> de A.</li>
+</ul></li>
+<li><p>Lo anterior se resume en la siguiente expresión: <span class="math inline">\(\textbf{x}\)</span> es un autovector y <span class="math inline">\(\lambda\)</span> es un autovalor de <span class="math inline">\(\textbf{A}\)</span> si:</p></li>
+</ul>
+<p><span class="math display">\[\textbf{Ax} = \lambda \textbf{x}, \quad \textbf{x} \neq \textbf{0}, \quad \lambda \in \mathbb{C}\]</span></p>
+<p><strong>Observación</strong></p>
+<ul>
+<li>Se debe observar que si <span class="math inline">\(\textbf{x}\)</span> es un autovector con el autovalor <span class="math inline">\(\lambda\)</span> entonces cualquier múltiplo diferente de cero de <span class="math inline">\(\textbf{x}\)</span> es también un autovector con el autovalor <span class="math inline">\(\lambda\)</span>.</li>
+</ul>
+</div>
+<div id="propiedades" class="section level3">
+<h3><span class="header-section-number">6.1.2</span> Propiedades</h3>
+<ul>
+<li><p>Dada una matriz <span class="math inline">\(\textbf{A}\)</span> cuadradada de orden <span class="math inline">\(n\)</span>:</p>
+<ul>
+<li><span class="math inline">\(\textbf{A}\)</span> tiene <span class="math inline">\(n\)</span> autovalores, <span class="math inline">\(\lambda_1, \lambda_2, \cdots, \lambda_n\)</span>, los cuales no necesariamente son todos distintos.</li>
+<li><span class="math inline">\(tr(A) = \sum_{i=1}^n a_{ii} = \sum_{i=1}^n \lambda_{i}\)</span>.</li>
+<li><span class="math inline">\(\det(A) = \prod_{i=1}^n \lambda_{i}\)</span>.</li>
+<li>Los autovalores de <span class="math inline">\(\textbf{A}^k\)</span> son <span class="math inline">\(\lambda_1^k, \lambda_2^k, \cdots, \lambda_n^k\)</span>.</li>
+<li>Si <span class="math inline">\(\textbf{A}\)</span> es real y simétrica todos sus autovalores son reales y los autovectores correspondientes a distintos autovalores son ortogonales.</li>
+<li>Si <span class="math inline">\(\textbf{A}\)</span> es triangular los valores propios son los elementos diagonales.</li>
+<li>Los autovalores de una matriz y su transpuesta son los mismos.</li>
+<li>Si <span class="math inline">\(\textbf{A}\)</span> tiene inversa, los autovalores de <span class="math inline">\(\textbf{A}^{-1}\)</span> son <span class="math inline">\(1/\lambda_1, 1/\lambda_2, \cdots, 1/\lambda_n\)</span>.</li>
+<li>Los valores de <span class="math inline">\(\alpha \textbf{A}\)</span> son <span class="math inline">\(\alpha \lambda_1, \alpha \lambda_2, \cdots, \alpha \lambda_n, \, \alpha \in \mathbb{R}\)</span>.</li>
+<li>Las matrices <span class="math inline">\(\textbf{A}\)</span> y <span class="math inline">\(\textbf{Q}^{-1}\textbf{AQ}\)</span> (forma cuadrática) tienen los mismos valores propios.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="obtención-los-autovalores-y-autovectores" class="section level2">
+<h2><span class="header-section-number">6.2</span> Obtención los autovalores y autovectores</h2>
+<ul>
+<li>A partir de la expresión anterior:</li>
+</ul>
+<p><span class="math display">\[
+\textbf{Ax} = \lambda \textbf{x} \implies \textbf{Ax} - \lambda \textbf{x} = \textbf{0} \implies (\textbf{A} - \lambda \textbf{I}) \textbf{x} = \textbf{0} 
+\]</span></p>
+<ul>
+<li>Esto es un sistema de ecuaciones lineales con matriz de coeficientes <span class="math inline">\(\textbf{A} - \lambda \textbf{I}\)</span> y vector de términos independientes <span class="math inline">\(\textbf{0}\)</span>, es decir, es un <strong>sistema homogéneo</strong> y como tal tiene solución no nula si: <span class="math inline">\(\det (\textbf{A} - \lambda \textbf{I}) = 0\)</span> (repasar por qué).</li>
+</ul>
+<!-- Como ya sabemos, un sistema Cx = b tiene solución única si det(C) != 0. En nuestro caso si el det de la matriz es distinto de cero, la solución única tiene que ser la trivial, x = 0, porque b=0. Por lo tanto, para que el sistema tenga soluciones no nulas (los autovectores) requerimos que el det sea igual a 0, lo cual significa que el sistema va a tener infinitas soluciones (infinitos autovectores) -->
+<ul>
+<li>El desarrollo de esta expresión conduce a un polinomio de grado <span class="math inline">\(n\)</span> en la incógnita <span class="math inline">\(\lambda\)</span> que igualado a cero es llamado <strong>ecuación característica</strong> y su resolución permite hallar los autovalores.</li>
+</ul>
+<p><strong>Ejemplo</strong></p>
+<p><span class="math display">\[\begin{gather*}
+\mathbf{A} = 
+\begin{bmatrix} 
+    5 &amp; -2 &amp; 0 \\ 
+    -2 &amp; 3 &amp; -1 \\
+    0 &amp; -1 &amp; 1    
+\end{bmatrix} 
+\implies \\ \\
+ det(\textbf{A} - \lambda \textbf{I}) = 
+\begin{vmatrix}
+    5 - \lambda &amp; -2 &amp; 0 \\ 
+    -2 &amp; 3 - \lambda &amp; -1 \\
+    0 &amp; -1 &amp; 1-\lambda
+\end{vmatrix}  = 
+\cdots  = -\lambda^3 + 9 \lambda^2 - 18 \lambda + 6 = 0
+\end{gather*}\]</span></p>
+<ul>
+<li>Las soluciones de la ecuación característica son <span class="math inline">\(\lambda_1 = 6.2899, \lambda_2 = 2.2943\)</span> y <span class="math inline">\(\lambda_3 = 0.4158\)</span>, los cuales son los autovalores de <span class="math inline">\(\textbf{A}\)</span>.</li>
+<li><p>Hallar la ecuación característica ya es demasiado trabajoso para <span class="math inline">\(n=3\)</span>, y mucho más será para mayor <span class="math inline">\(n\)</span>… por eso veremos métodos que directamente nos den los coeficientes de esta ecuación.</p></li>
+<li>Pero nos faltan los autovectores!</li>
+<li>Para eso hacemos uso de la definición: <span class="math inline">\(\textbf{A}\)</span> es un autovector de <span class="math inline">\(\textbf{A}\)</span> asociado al autovalor <span class="math inline">\(\lambda\)</span> si <span class="math inline">\((\textbf{A} - \lambda \textbf{I}) \textbf{x} = \textbf{0}\)</span>.</li>
+<li><p>Tomamos uno de los autovalores, por ejemplo, <span class="math inline">\(\lambda_1 = 6.2899\)</span> y resolvemos el sistema de ecuaciones que la expresión anterior plantea:</p></li>
+</ul>
+<p><span class="math display">\[\begin{gather*}
+(\textbf{A} - 6.2899 \, \textbf{I}) \textbf{x} = \textbf{0} \implies 
+\begin{bmatrix}
+    -1.2899 &amp; -2 &amp; 0 \\ 
+    -2 &amp; -3.2899 &amp; -1 \\
+    0 &amp; -1 &amp; -5.2899
+\end{bmatrix}
+\begin{bmatrix}
+    x_1 \\ x_2 \\ x_3
+\end{bmatrix} 
+=
+\begin{bmatrix}
+    0 \\ 0 \\ 0
+\end{bmatrix}
+\\ \\
+\implies
+\begin{cases}
+-1.2899 x_1 -2 x_2 &amp;= 0 \\
+-2 x_1 - 3.2899 x_2 - x_3 &amp;= 0\\
+-x_2 - 5.2899 x_3 &amp;= 0
+\end{cases} \implies
+\begin{cases}
+    x_1 = 8.2018 x_3\\
+    x_2 = -5.2899 x_2\\
+    x_3 \in \mathbb{R} 
+\end{cases}
+\end{gather*}\]</span></p>
+<ul>
+<li>Como se puede ver la solución de este sistema homogéneo no es única, representando los infinitos autovectores asociados a <span class="math inline">\(\lambda_1 = 6.2899\)</span>. Por ejemplo, si elegimos <span class="math inline">\(x_3 = 1\)</span>, obtenemos el autovector:</li>
+</ul>
+<p><span class="math display">\[
+\textbf{x}_1 = 
+\begin{bmatrix}
+    8.2018 \\ -5.2899 \\ 1
+\end{bmatrix} 
+\]</span></p>
+<ul>
+<li>En general, se resuelve informando el autovector de norma 1 que sí es único.</li>
+<li>De la misma forma se procede con los restantes autovalores <span class="math inline">\(\lambda_2\)</span> y <span class="math inline">\(\lambda_3\)</span>.</li>
+</ul>
+<div id="resumen-1-obtener-autovalores-y-autovectores" class="section level3">
+<h3><span class="header-section-number">6.2.1</span> Resumen 1: Obtener autovalores y autovectores</h3>
+<ul>
+<li><strong>Paso 1</strong>: desarrollar la expresión de <span class="math inline">\(\det(\textbf{A} - \lambda \textbf{I})\)</span> para obtener la ecuación característica (muy engorroso para n &gt; 3):</li>
+</ul>
+<p><span class="math display">\[
+f(\lambda) = \det(\textbf{A} - \lambda \textbf{I}) = \lambda^n + b_1 \lambda^{n-1} + \cdots + b_{n-1} \lambda + b_n = 0
+\]</span></p>
+<ul>
+<li><p><strong>Paso 2</strong>: resolver la ecuación característica para hallar los autovalores <span class="math inline">\(\lambda_1, \lambda_2, \cdots, \lambda_n\)</span>. Dependiendo de <span class="math inline">\(n\)</span>, podemos hacerlo a mano, con la calculadora o con los métodos de la Unidad 2.</p></li>
+<li><p><strong>Paso 3</strong>: tomar cada autovalor <span class="math inline">\(\lambda_i\)</span> y resolver el sistema de ecuaciones lineales <span class="math inline">\((\textbf{A} - \lambda_i \textbf{I}) \textbf{x} = \textbf{0}\)</span>. No nos sirven los métodos de la Unidad 3 porque este sistema es compatible indeterminado, realizarlo “a mano” y dar un expresión para los infinitos autovectores o informar el autovector de norma 1.</p></li>
+</ul>
+</div>
+</div>
+<div id="método-de-krylov" class="section level2">
+<h2><span class="header-section-number">6.3</span> Método de Krylov</h2>
+<ul>
+<li><p>Como ya mencionamos, el desarrollo de <span class="math inline">\(\det(\textbf{A} - \lambda \textbf{I})\)</span> para obtener la ecuación característica tal como lo vimos en el ejemplo inicial se vuelve engorroso rápidamente.</p></li>
+<li><p>El método de Krylov permite obtenerla de manera sencilla, basándose en el siguiente teorema:</p></li>
+<li><p><strong>Teorema de Caylay-Hamilton</strong>: toda matriz cuadrada <span class="math inline">\(\textbf{A}\)</span> verifica su propia ecuación característica. Es decir, siendo la ecuación característica:</p></li>
+</ul>
+<p><span class="math display">\[
+f(\lambda) = \det(\textbf{A} - \lambda \textbf{I}) = \lambda^n + b_1 \lambda^{n-1} + \cdots + b_{n-1} \lambda + b_n = 0,
+\]</span></p>
+<p>se verifica que:</p>
+<p><span class="math display">\[
+f(\textbf{A}) = \textbf{A}^n + b_1 \textbf{A}^{n-1} + \cdots + b_{n-1} \textbf{A} + b_n \textbf{I} = \textbf{0}_{n\times n}
+\]</span></p>
+<p><strong>Ejemplo</strong></p>
+<p><span class="math display">\[\begin{gather*}
+\small
+\mathbf{A} = 
+\begin{bmatrix} 
+    5 &amp; -2 &amp; 0 \\ 
+    -2 &amp; 3 &amp; -1 \\
+    0 &amp; -1 &amp; 1    
+\end{bmatrix}
+\\ \\
+\mathbf{A}^2 = 
+\begin{bmatrix} 
+    29 &amp; -16 &amp; 2 \\ 
+    -16 &amp; 14 &amp; -4 \\
+    2 &amp; -1 &amp; 1    
+\end{bmatrix}
+\\ \\
+\mathbf{A}^3 = 
+\begin{bmatrix} 
+    177 &amp; -108 &amp; 18 \\ 
+    -108 &amp; 78 &amp; -18 \\
+    18 &amp; -18 &amp; 6    
+\end{bmatrix} \\ \\
+f(\textbf{A}) = f(\textbf{A}) = 
+   = \textbf{A}^3 + b_1 \textbf{A}^{2} +  b_{2} \textbf{A} + b_3 \textbf{I} 
+   = \textbf{0} \implies \\ \\
+\begin{bmatrix} 
+    177 &amp; -108 &amp; 18 \\ 
+    -108 &amp; 78 &amp; -18 \\
+    18 &amp; -18 &amp; 6    
+\end{bmatrix}
++ b_1
+\begin{bmatrix} 
+    29 &amp; -16 &amp; 2 \\ 
+    -16 &amp; 14 &amp; -4 \\
+    2 &amp; -1 &amp; 1    
+\end{bmatrix}
++ b_2
+\begin{bmatrix} 
+    5 &amp; -2 &amp; 0 \\ 
+    -2 &amp; 3 &amp; -1 \\
+    0 &amp; -1 &amp; 1    
+\end{bmatrix}  \\ \\
++ b_3
+\begin{bmatrix} 
+    1 &amp; 0 &amp; 0 \\ 
+    0 &amp; 1 &amp; 0 \\
+    0 &amp; 0 &amp; 1    
+\end{bmatrix} =
+\begin{bmatrix} 
+    0 &amp; 0 &amp; 0 \\ 
+    0 &amp; 0 &amp; 0 \\
+    0 &amp; 0 &amp; 0    
+\end{bmatrix}
+\implies \\ \\
+\begin{bmatrix}        
+    177 + 29 b_1 + 5 b_2 + b_3 &amp;   -108-16  b_1 -2  b_2       &amp;  18 +2  b_1              \\ 
+    -108 -16  b_1 -2  b_2      &amp;  78  + 14 b_1 + 3 b_2 + b_3  &amp;   -18 -4  b_1 -  b_2     \\
+    18+2  b_1                  &amp;   -18 -4  b_1 -1  b_2        &amp;   6 + 2 b_1   b_2 + b_3
+\end{bmatrix} =
+\begin{bmatrix} 
+    0 &amp; 0 &amp; 0 \\ 
+    0 &amp; 0 &amp; 0 \\
+    0 &amp; 0 &amp; 0    
+\end{bmatrix}
+\end{gather*}\]</span></p>
+<ul>
+<li><p>Cualquiera de las columnas constituyen un sistema de tres ecuaciones lineales en las incógnitas <span class="math inline">\(b_1, b_2\)</span> y <span class="math inline">\(b_3\)</span>, los coeficientes de la ecuación característica.</p></li>
+<li><p>Podemos usar el siguiente artificio para generar un único sistema de ecuaciones:</p></li>
+</ul>
+<p><span class="math display">\[
+f(\textbf{A}_{n\times n}) = \textbf{0}_{n\times n} \implies f(\textbf{A})  \, \textbf{y}= \textbf{0}\, \textbf{y}  = \textbf{0}_{n\times 1}  \quad \forall \, \textbf{y}_{n\times 1} \in \mathbb{R}^n
+\]</span></p>
+<ul>
+<li>Por ejemplo, tomando <span class="math inline">\(\textbf{y} = [1 \quad 0 \quad 0]^t\)</span>, nos queda:</li>
+</ul>
+<p><span class="math display">\[\begin{gather*}
+f(\textbf{A})  \, \textbf{y} = \textbf{0} \, \textbf{y}  \\ \\
+\implies (\textbf{A}^3 + b_1 \textbf{A}^2 + b_{2} \textbf{A} + b_3 \textbf{I})  \textbf{y} = \textbf{0} \\ \\
+\implies \textbf{A}^3 \textbf{y} + b_1 \textbf{A}^{2} \textbf{y} + b_{2} \textbf{A} \textbf{y} + b_3 \textbf{y} = \textbf{0} \\ \\
+\implies
+\begin{bmatrix} 
+    177 &amp; -108 &amp; 18 \\ 
+    -108 &amp; 78 &amp; -18 \\
+    18 &amp; -18 &amp; 6    
+\end{bmatrix}
+\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}
++ b_1
+\begin{bmatrix} 
+    29 &amp; -16 &amp; 2 \\ 
+    -16 &amp; 14 &amp; -4 \\
+    2 &amp; -1 &amp; 1    
+\end{bmatrix}
+\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} + \\ \\
++ b_2
+\begin{bmatrix} 
+    5 &amp; -2 &amp; 0 \\ 
+    -2 &amp; 3 &amp; -1 \\
+    0 &amp; -1 &amp; 1    
+\end{bmatrix} 
+\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} + 
+b_3
+\begin{bmatrix} 
+    1 &amp; 0 &amp; 0 \\ 
+    0 &amp; 1 &amp; 0 \\
+    0 &amp; 0 &amp; 1    
+\end{bmatrix}
+\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} =
+\begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix} \\ \\
+\implies
+\begin{bmatrix} 177 \\ -108 \\ 18 \end{bmatrix}
++ b_1
+\begin{bmatrix} 29 \\ -16 \\ 2 \end{bmatrix}
++ b_2
+\begin{bmatrix} 5 \\ -2 \\ 0 \end{bmatrix} 
++ b_3
+\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} =
+\begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix} \\ \\
+\implies
+\begin{bmatrix} 
+    29 &amp; 5 &amp; 1 \\ 
+    -16 &amp; -2 &amp; 0 \\
+    2 &amp; 0 &amp; 0    
+\end{bmatrix}
+\begin{bmatrix} b_1 \\ b_2 \\ b_3 \end{bmatrix} =
+\begin{bmatrix} -177 \\ 108 \\ -18 \end{bmatrix}
+\end{gather*}\]</span></p>
+<ul>
+<li><p>Lo anterior no es más que un sistema de tres ecuaciones lineales, <span class="math inline">\(\mathbf{Cb=d}\)</span>, donde:</p>
+<ul>
+<li>el vector incógnitas es <span class="math inline">\(\mathbf{b} = \begin{bmatrix} b_1 \\ b_2 \\ b_3 \end{bmatrix}\)</span>, los coeficientes de la ecuación característica.</li>
+<li>el vector de términos independientes es <span class="math inline">\(\mathbf{d} = - \mathbf{A}^3 \, \mathbf{y} = \begin{bmatrix} -177 \\ 108 \\ -18 \end{bmatrix}\)</span>.</li>
+<li>la matriz de coeficientes es <span class="math inline">\(\mathbf{C} = [\mathbf{A}^{2} \, \mathbf{y} \quad \mathbf{A} \, \mathbf{y} \quad \mathbf{y}] = \begin{bmatrix} 29 &amp; 5 &amp; 1 \\ -16 &amp; -2 &amp; 0 \\2 &amp; 0 &amp; 0 \end{bmatrix}\)</span></li>
+</ul></li>
+<li><p>Dependiendo de <span class="math inline">\(n\)</span>, podemos resolver este sistema “a mano”, con la calcu o con algunos de los métodos de la Unidad 3.</p></li>
+<li><p>En el ejemplo, el resultado es: <span class="math inline">\(b_1 = -9, b_2 = 18\)</span> y <span class="math inline">\(b_3 = -6\)</span>.</p></li>
+<li><p>La ecuación característica entonces es:</p></li>
+</ul>
+<p><span class="math display">\[
+\lambda^3 - 9 \lambda^2 + 18 \lambda - 6 = 0
+\]</span></p>
+<ul>
+<li>Esta ecuación coincide con la que obtuvimos en la sección anterior.</li>
+<li>A partir de aquí, se debe continuar desde el Paso 2 del Resumen 1 para hallar los autovalores y sus respectivos autovectores.</li>
+</ul>
+<div id="resumen-2-método-de-krylov" class="section level3">
+<h3><span class="header-section-number">6.3.1</span> Resumen 2: Método de Krylov</h3>
+<ul>
+<li><strong>Qué necesita</strong>: la matriz <span class="math inline">\(\mathbf{A}\)</span> y un vector <span class="math inline">\(\mathbf{y}\)</span>.</li>
+<li><strong>Qué nos da</strong>: un sistema de ecuaciones para obtener los coeficientes de la ecuación característica.</li>
+<li><strong>Paso 1</strong>: elegir un vector <span class="math inline">\(\mathbf{y}\)</span> de dimensión <span class="math inline">\(n \times 1\)</span>.</li>
+<li><strong>Paso 2</strong>: crear la matriz de coeficientes <span class="math inline">\(\mathbf{C} = [\mathbf{A}^{n-1} \, \mathbf{y} \quad \cdots \quad \mathbf{A}^2 \, \mathbf{y} \quad \mathbf{A} \, \mathbf{y} \quad \mathbf{y}]\)</span>.</li>
+<li><strong>Paso 3</strong>: crear el vector de términos independientes <span class="math inline">\(\mathbf{d} = - \mathbf{A}^n \, \mathbf{y}\)</span>, de dimensión <span class="math inline">\(n \times 1\)</span>.</li>
+<li><strong>Paso 4</strong>: resolver el sistema <span class="math inline">\(\mathbf{Cb=d}\)</span>, donde el vector de incógnitas <span class="math inline">\(\mathbf{b}\)</span> son los coeficientes de la ecuación característica.</li>
+<li><strong>Paso 5</strong>: formar la ecuación característica y continuar desde el Paso 2 del Resumen 1 para hallar los autovalores y sus respectivos autovectores.</li>
+</ul>
+</div>
+</div>
+<div id="método-de-faddeev-leverrier" class="section level2">
+<h2><span class="header-section-number">6.4</span> Método de Faddeev-LeVerrier</h2>
+<ul>
+<li>Este método propone hallar los coeficientes <span class="math inline">\(b_k\)</span> de la ecuación característica:</li>
+</ul>
+<p><span class="math display">\[
+f(\lambda) = \det(\textbf{A} - \lambda \textbf{I}) = \lambda^n + b_1 \lambda^{n-1} + \cdots + b_{n-1} \lambda + b_n = 0
+\]</span></p>
+<p>mediante el siguiente cálculo iterativo:</p>
+<p><span class="math display">\[\begin{gather*}
+\textbf{M}_1 = \textbf{A} \qquad b_1 = - tr(\textbf{M}_1) \\
+\textbf{M}_k = \textbf{A} (\textbf{M}_{k-1} + b_{k-1} \textbf{I}) \qquad b_k = - \frac{tr(\textbf{M}_k)}{k} \qquad k = 2, 3, \cdots, n\\
+\end{gather*}\]</span></p>
+<ul>
+<li><p>Este método se deriva a partir de propiedades de matrices conjugadas.</p></li>
+<li><p>En nuestro ejemplo, tenemos:</p></li>
+</ul>
+<p><span class="math display">\[\begin{gather*}
+\textbf{M}_1 = \textbf{A} = 
+\begin{bmatrix} 
+    5 &amp; -2 &amp; 0 \\ 
+    -2 &amp; 3 &amp; -1 \\
+    0 &amp; -1 &amp; 1  
+\end{bmatrix} 
+\qquad b_1 = - tr(\textbf{M}_1) = -9 \\
+\textbf{M}_2 = \textbf{A} (\textbf{M}_{1} + b_{1} \textbf{I}) = 
+\begin{bmatrix} 
+    -16 &amp; 2 &amp; 2 \\ 
+    2 &amp; -13 &amp; 5 \\
+    2 &amp; 5 &amp; -7  
+\end{bmatrix} 
+\qquad b_2 = - \frac{tr(\textbf{M}_2)}{2} = 18\\
+\textbf{M}_3 = \textbf{A} (\textbf{M}_{2} + b_{2} \textbf{I}) = 
+\begin{bmatrix} 
+    6 &amp; 0 &amp; 0 \\ 
+    0 &amp; 6 &amp; 0 \\
+    0 &amp; 0 &amp; 6  
+\end{bmatrix} 
+\qquad b_3 = - \frac{tr(\textbf{M}_3)}{3} = -6\\
+\end{gather*}\]</span></p>
+<ul>
+<li>La ecuación característica entonces es:</li>
+</ul>
+<p><span class="math display">\[
+\lambda^3 - 9 \lambda^2 + 18 \lambda - 6 = 0
+\]</span></p>
+<ul>
+<li><p>A partir de aquí, otra vez se debe continuar desde el Paso 2 del Resumen 1 para hallar los autovalores y sus respectivos autovectores.</p></li>
+<li><p>Este método también sirve para calcular <span class="math inline">\(\textbf{A}^{-1}\)</span>.</p></li>
+<li><p>Por Cayley-Hamilton, ya sabemos que:</p></li>
+</ul>
+<p><span class="math display">\[
+f(\textbf{A}) = \textbf{A}^n + b_1 \textbf{A}^{n-1}  + \cdots + b_{n-2} \textbf{A}^2  + b_{n-1} \textbf{A} + b_n \textbf{I} = \textbf{0}
+\]</span></p>
+<ul>
+<li>Premultiplicando por <span class="math inline">\(\textbf{A}^{-1}\)</span> nos queda:</li>
+</ul>
+<p><span class="math display">\[\begin{gather*}
+\textbf{A}^{-1} (\textbf{A}^n + b_1 \textbf{A}^{n-1} + \cdots + b_{n-2} \textbf{A}^2 + b_{n-1} \textbf{A} + b_n \textbf{I}) = \textbf{A}^{-1} \, \textbf{0} \\
+\textbf{A}^{n-1} + b_1 \textbf{A}^{n-2} + \cdots + b_{n-2} \textbf{A} +b_{n-1} \textbf{I} + b_n \textbf{A}^{-1} = \textbf{0} \\
+\textbf{A}^{-1} = - \frac{1}{b_n} \Big( \textbf{A}^{n-1} + b_1 \textbf{A}^{n-2} + \cdots + b_{n-2} \textbf{A} + b_{n-1} \textbf{I} \Big) \\
+\textbf{A}^{-1} = - \frac{1}{b_n} \Big( \textbf{M}_{n-1} + b_{n-1} \textbf{I}  \Big) \\
+\end{gather*}\]</span></p>
+<p>… donde el último reemplazo se deduce a partir de la fórmula iterativa vista antes:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\textbf{M}_1 &amp;= \textbf{A}\\
+\textbf{M}_2 &amp;= \textbf{A} (\textbf{M}_{1} + b_{1} \textbf{I})  = \textbf{A} (\textbf{A} + b_{1} \textbf{I})= \textbf{A}^2 + b_{1} \textbf{A}\\
+\textbf{M}_3 &amp;= \textbf{A} (\textbf{M}_{2} + b_{2} \textbf{I})  = \textbf{A} (\textbf{A}^2 + b_{1} \textbf{A} + b_{1} \textbf{I})= \textbf{A}^3 + b_1 \textbf{A}^2 + b_{2} \textbf{A}\\
+\textbf{M}_4 &amp;= \textbf{A} (\textbf{M}_{3} + b_{3} \textbf{I}) = \textbf{A}^4 + b_1 \textbf{A}^3 + b_2 \textbf{A}^2 + b_{3} \textbf{A}\\
+&amp;\vdots \\
+\textbf{M}_{n-1} &amp;= \textbf{A} (\textbf{M}_{n-2} + b_{n-2} \textbf{I}) = \textbf{A}^{n-1} + b_1 \textbf{A}^{n-2} + b_2 \textbf{A}^{n-3} + \cdots + b_{n-2} \textbf{A}\\
+\end{aligned}
+\]</span></p>
+<div id="resumen-3-método-de-faddeev-leverrier" class="section level3">
+<h3><span class="header-section-number">6.4.1</span> Resumen 3: Método de Faddeev-LeVerrier</h3>
+<ul>
+<li><strong>Qué necesita</strong>: la matriz <span class="math inline">\(\mathbf{A}\)</span></li>
+<li><strong>Qué nos da</strong>: los coeficientes de la ecuación característica.</li>
+<li><strong>Paso 1</strong>: calcular los coeficientes <span class="math inline">\(b_k\)</span> de la ecuación característica con la fórmula recursiva:</li>
+</ul>
+<p><span class="math display">\[\begin{gather*}
+\textbf{M}_1 = \textbf{A} \qquad b_1 = - tr(\textbf{M}_1) \\
+\textbf{M}_k = \textbf{A} (\textbf{M}_{k-1} + b_{k-1} \textbf{I}) \qquad b_k = - \frac{tr(\textbf{M}_k)}{k} \qquad k = 2, 3, \cdots, n\\
+\end{gather*}\]</span></p>
+<ul>
+<li><strong>Paso 2</strong>: formar la ecuación característica y continuar desde el Paso 2 del Resumen 1 para hallar los autovalores y sus respectivos autovectores.</li>
+</ul>
+</div>
+</div>
+<div id="método-de-aproximaciones-sucesivas-o-de-las-potencias" class="section level2">
+<h2><span class="header-section-number">6.5</span> Método de Aproximaciones Sucesivas o de las Potencias</h2>
+<ul>
+<li><p><strong>Definición</strong>: si <span class="math inline">\(\lambda\)</span> es un autovalor de <span class="math inline">\(\textbf{A}\)</span> tal que en valor absoluto es mayor que cualquier otro autovalor, se dice que es un <strong>autovalor dominante</strong> y sus autovectores se llaman <strong>autovectores dominantes</strong>.</p></li>
+<li><p>El <strong>método de las potencias</strong> dice que si <span class="math inline">\(\textbf{A}\)</span> tiene un autovalor dominante y <span class="math inline">\(\textbf{v}\)</span> es su autovector normalizado, la sucesión <span class="math inline">\(\textbf{x}_k\)</span> a partir de cualquier <span class="math inline">\(\textbf{x}_0\)</span> no nulo converge a <span class="math inline">\(\textbf{v}\)</span>:</p></li>
+</ul>
+<p><span class="math display">\[
+\textbf{x}_k = \textbf{Ax}_{k-1}
+\]</span></p>
+<ul>
+<li>El autovalor correspondiente está dado por el <strong>cociente de Rayleigh</strong>: si <span class="math inline">\(\textbf{x}\)</span> es un autovector de <span class="math inline">\(\textbf{A}\)</span>, entonces su correspondiente autovalor es:</li>
+</ul>
+<p><span class="math display">\[
+\lambda = \frac{(\textbf{Ax})^t\textbf{x}}{\textbf{x}^t\textbf{x}}
+\]</span></p>
+<ul>
+<li>Se llama método de las potencias porque:</li>
+</ul>
+<p><span class="math display">\[
+\begin{aligned}
+\textbf{x}_1 &amp;= \textbf{Ax}_{0} \\
+\textbf{x}_2 &amp;= \textbf{Ax}_{1} = \textbf{A}^2 \textbf{x}_{0}\\
+\textbf{x}_3 &amp;= \textbf{Ax}_{2} = \textbf{A}^3 \textbf{x}_{0}\\
+&amp;\vdots \\
+\textbf{x}_k &amp;= \textbf{Ax}_{k-1} = \textbf{A}^k \textbf{x}_{0}\\
+\end{aligned}
+\]</span></p>
+<ul>
+<li><p>El método de la potencia tiende a producir aproximaciones en donde los elementos de <span class="math inline">\(\textbf{x}\)</span> tienen gran magnitud, lo cual produce problemas (errores de desbordamiento, <em>overflow error</em>).</p></li>
+<li><p>Por eso, en la práctica se añade un escalamiento en cada paso iterativo, dividiendo por el elemento de mayor magnitud del paso anterior.</p></li>
+<li><p><strong>Método de las potencias</strong>: si <span class="math inline">\(\textbf{A}\)</span> tiene un autovalor dominante, la siguiente sucesión <span class="math inline">\(c_k\)</span> converge al mismo mientras que la sucesión <span class="math inline">\(\textbf{x}_k\)</span> converge a uno de sus autovectores dominantes:</p></li>
+</ul>
+<p><span class="math display">\[
+\textbf{x}_k = \frac{1}{c_k} \textbf{Ax}_{k-1}
+\]</span></p>
+<p>donde <span class="math inline">\(c_{k}\)</span> es la coordenada de mayor tamaño de <span class="math inline">\(\textbf{Ax}_{k-1}\)</span> y <span class="math inline">\(\textbf{x}_0\)</span> es cualquier vector no nulo.</p>
+<ul>
+<li>Retomando nuestro ejemplo:</li>
+</ul>
+<table style="width:100%;">
+<colgroup>
+<col width="3%" />
+<col width="23%" />
+<col width="23%" />
+<col width="5%" />
+<col width="32%" />
+<col width="10%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>k</th>
+<th><span class="math inline">\(\mathbf{x}_k\)</span></th>
+<th><span class="math inline">\(\mathbf{Ax}_k\)</span></th>
+<th><span class="math inline">\(c_k\)</span></th>
+<th><span class="math inline">\(\mathbf{x}_{k+1}\)</span> = <span class="math inline">\(\mathbf{Ax}_k / c_{k}\)</span></th>
+<th>Error (L<span class="math inline">\(_2\)</span>)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>[1 1 1]<span class="math inline">\(^t\)</span></td>
+<td>[3 0 0]<span class="math inline">\(^t\)</span></td>
+<td>3</td>
+<td>[1 0 0]<span class="math inline">\(^t\)</span></td>
+<td>1.4142</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>[1 0 0]<span class="math inline">\(^t\)</span></td>
+<td>[5 -2 0]<span class="math inline">\(^t\)</span></td>
+<td>5</td>
+<td>[1 -0.4 0]<span class="math inline">\(^t\)</span></td>
+<td>0.4</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>[1 -0.4 0]<span class="math inline">\(^t\)</span></td>
+<td>[5.8 -3.2 0.4]<span class="math inline">\(^t\)</span></td>
+<td>5.8</td>
+<td>[1 -0.5517 0.0690]<span class="math inline">\(^t\)</span></td>
+<td>0.1667</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>[1 -0.5517 0.0690]<span class="math inline">\(^t\)</span></td>
+<td>[6.1034 -3.7241 0.6207]<span class="math inline">\(^t\)</span></td>
+<td>6.1034</td>
+<td>[1 -0.6102 0.1017]<span class="math inline">\(^t\)</span></td>
+<td>0.0690</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>[1 -0.6102 0.1017]<span class="math inline">\(^t\)</span></td>
+<td>[6.2203 -3.9322 0.7119]<span class="math inline">\(^t\)</span></td>
+<td>6.2203</td>
+<td>[1 -0.6322 0.1144]<span class="math inline">\(^t\)</span></td>
+<td>0.0254</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td>16</td>
+<td>[1 -0.644972 0.1219239]<span class="math inline">\(^t\)</span></td>
+<td>[6.2899 -4.0568 0.7669]<span class="math inline">\(^t\)</span></td>
+<td>6.2899</td>
+<td>[1 -0.644972 0.1219241]<span class="math inline">\(^t\)</span></td>
+<td>3.956E-7</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="método-de-las-potencias-inversas" class="section level2">
+<h2><span class="header-section-number">6.6</span> Método de las potencias inversas</h2>
+<ul>
+<li>Es una variante del método de las aproximaciones sucesivas o de las potencias.</li>
+<li>Permite hallar el menor autovalor de <span class="math inline">\(\textbf{A}\)</span>.</li>
+<li>Se aplica el método a <span class="math inline">\(\textbf{A}^{-1}\)</span> para hallar su mayor autovalor.</li>
+<li>Pero como los autovalores de <span class="math inline">\(\textbf{A}^{-1}\)</span> son los recíprocos de los de <span class="math inline">\(\textbf{A}\)</span>, el autovalor así hallado es el recíproco del menor autovalor de <span class="math inline">\(\textbf{A}\)</span>.</li>
+</ul>
+</div>
+<div id="método-de-las-potencias-con-deflación-o-de-hotelling" class="section level2">
+<h2><span class="header-section-number">6.7</span> Método de las potencias con deflación (o de Hotelling)</h2>
+<ul>
+<li>Es una variante del método de las aproximaciones sucesivas o de las potencias.</li>
+<li><p>Una vez hallado el mayor autovalor <span class="math inline">\(\lambda_1\)</span> es posible encontrar el segundo mayor autovalor aplicando el mismo método sobre la matriz <span class="math inline">\(\textbf{A}_2 = \textbf{A} - \lambda_1 \textbf{u} \textbf{u}^t\)</span>, donde <span class="math inline">\(\textbf{u} = \textbf{x} / ||\textbf{x}||\)</span>, con <span class="math inline">\(\textbf{x}\)</span> el autovector hallado para <span class="math inline">\(\lambda_1\)</span>.</p></li>
+<li><p>Si <span class="math inline">\(\{\lambda_1, \lambda_2, \cdots, \lambda_n\}\)</span> son los autovalores de <span class="math inline">\(\textbf{A}\)</span>, entonces <span class="math inline">\(\{0, \lambda_2, \cdots, \lambda_n\}\)</span> son los de <span class="math inline">\(\textbf{A}_2\)</span>.</p></li>
+<li><p>Repitiendo este proceso se encuentran los restantes autovalores.</p></li>
+</ul>
+</div>
+<div id="resumen-4-método-de-las-aproximaciones-sucesivas-o-de-las-potencias" class="section level2">
+<h2><span class="header-section-number">6.8</span> Resumen 4: Método de las Aproximaciones Sucesivas o de las Potencias</h2>
+<ul>
+<li><strong>Qué necesita</strong>: la matriz <span class="math inline">\(\mathbf{A}\)</span> y un vector inicial <span class="math inline">\(\mathbf{x}_0\)</span>.</li>
+<li><strong>Qué nos da</strong>: el autovalor dominante de <span class="math inline">\(\mathbf{A}\)</span> y su autovector.</li>
+<li><strong>Paso 1</strong>: elegir un vector inicial <span class="math inline">\(\mathbf{x}_0\)</span> de dimensión <span class="math inline">\(n \times 1\)</span>.</li>
+<li><strong>Paso 2</strong>: repetir el siguiente proceso iterativo estableciendo un criterio para la convergencia:</li>
+</ul>
+<p><span class="math display">\[
+\textbf{x}_k = \frac{1}{c_k} \textbf{Ax}_{k-1}
+\]</span></p>
+<ul>
+<li><p><strong>Paso 3</strong>: al finalizar, <span class="math inline">\(c_k\)</span> aproxima al autovalor dominante y <span class="math inline">\(\mathbf{x}_k\)</span> a uno de sus autovectores.</p></li>
+<li><strong>Modificación 1</strong>: hacer los mismo con <span class="math inline">\(\mathbf{A}^{-1}\)</span> nos da el recíproco del menor autovalor de <span class="math inline">\(\mathbf{A}\)</span> y uno de sus autovectores.</li>
+<li><p><strong>Modificación 2</strong>: aplicar sucesivamente este método modificando <span class="math inline">\(\mathbf{A}\)</span> como establece Hotelling para hallar todos los autovalores.</p></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="aproximación-polinomial-integración-y-derivación-numérica.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="anexo-teoremas-útiles.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/mpru/guia-metodos-numericos/issues/06_Autovalores.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["guia-met-num.pdf", "guia-met-num.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

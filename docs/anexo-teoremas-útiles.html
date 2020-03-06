@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5 Interpolación de Lagrange | Taller de Métodos Numéricos</title>
+  <title>Anexo: Teoremas útiles | Taller de Métodos Numéricos</title>
   <meta name="description" content="Esta guía resume algunos conceptos desarrollados en el Taller de Métodos Numéricos de la Licenciatura en Estadística (Facultad de Ciencias Económicas y Estadstica, Universidad Nacional de Rosario)." />
   <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5 Interpolación de Lagrange | Taller de Métodos Numéricos" />
+  <meta property="og:title" content="Anexo: Teoremas útiles | Taller de Métodos Numéricos" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://mpru.github.io/guia-metodos-numericos/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="mpru/guia-metodos-numericos" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5 Interpolación de Lagrange | Taller de Métodos Numéricos" />
+  <meta name="twitter:title" content="Anexo: Teoremas útiles | Taller de Métodos Numéricos" />
   
   <meta name="twitter:description" content="Esta guía resume algunos conceptos desarrollados en el Taller de Métodos Numéricos de la Licenciatura en Estadística (Facultad de Ciencias Económicas y Estadstica, Universidad Nacional de Rosario)." />
   
@@ -32,7 +32,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="aproximación-polinomial-interpolación-y-extrapolación.html">
+<link rel="prev" href="autovalores-y-autovectores.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -204,10 +204,47 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1" data-path="aproximación-polinomial-interpolación-y-extrapolación.html"><a href="aproximación-polinomial-interpolación-y-extrapolación.html#generalidades-2"><i class="fa fa-check"></i><b>4.1</b> Generalidades</a></li>
 <li class="chapter" data-level="4.2" data-path="aproximación-polinomial-interpolación-y-extrapolación.html"><a href="aproximación-polinomial-interpolación-y-extrapolación.html#diferencias-finitas"><i class="fa fa-check"></i><b>4.2</b> Diferencias finitas</a></li>
 <li class="chapter" data-level="4.3" data-path="aproximación-polinomial-interpolación-y-extrapolación.html"><a href="aproximación-polinomial-interpolación-y-extrapolación.html#interpolación-de-newton-para-incrementos-constantes"><i class="fa fa-check"></i><b>4.3</b> Interpolación de Newton para incrementos constantes</a></li>
-<li class="chapter" data-level="4.4" data-path="aproximación-polinomial-interpolación-y-extrapolación.html"><a href="aproximación-polinomial-interpolación-y-extrapolación.html#interpolación-de-lagrange"><i class="fa fa-check"></i><b>4.4</b> Interpolación de Lagrange</a></li>
+<li class="chapter" data-level="4.4" data-path="aproximación-polinomial-interpolación-y-extrapolación.html"><a href="aproximación-polinomial-interpolación-y-extrapolación.html#interpolación-de-lagrange"><i class="fa fa-check"></i><b>4.4</b> Interpolación de Lagrange</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="aproximación-polinomial-interpolación-y-extrapolación.html"><a href="aproximación-polinomial-interpolación-y-extrapolación.html#observaciones-finales"><i class="fa fa-check"></i><b>4.4.1</b> Observaciones finales</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="interpolación-de-lagrange-1.html"><a href="interpolación-de-lagrange-1.html"><i class="fa fa-check"></i><b>5</b> Interpolación de Lagrange</a><ul>
-<li class="chapter" data-level="5.1" data-path="interpolación-de-lagrange-1.html"><a href="interpolación-de-lagrange-1.html#observaciones-finales"><i class="fa fa-check"></i><b>5.1</b> Observaciones finales</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="aproximación-polinomial-integración-y-derivación-numérica.html"><a href="aproximación-polinomial-integración-y-derivación-numérica.html"><i class="fa fa-check"></i><b>5</b> Aproximación Polinomial: integración y derivación numérica</a><ul>
+<li class="chapter" data-level="5.1" data-path="aproximación-polinomial-integración-y-derivación-numérica.html"><a href="aproximación-polinomial-integración-y-derivación-numérica.html#integración-numérica"><i class="fa fa-check"></i><b>5.1</b> Integración numérica</a></li>
+<li class="chapter" data-level="5.2" data-path="aproximación-polinomial-integración-y-derivación-numérica.html"><a href="aproximación-polinomial-integración-y-derivación-numérica.html#fórmula-trapecial"><i class="fa fa-check"></i><b>5.2</b> Fórmula trapecial</a></li>
+<li class="chapter" data-level="5.3" data-path="aproximación-polinomial-integración-y-derivación-numérica.html"><a href="aproximación-polinomial-integración-y-derivación-numérica.html#fórmula-de-simpson-de-13"><i class="fa fa-check"></i><b>5.3</b> Fórmula de Simpson de 1/3</a></li>
+<li class="chapter" data-level="5.4" data-path="aproximación-polinomial-integración-y-derivación-numérica.html"><a href="aproximación-polinomial-integración-y-derivación-numérica.html#fórmula-de-simpson-de-38"><i class="fa fa-check"></i><b>5.4</b> Fórmula de Simpson de 3/8</a></li>
+<li class="chapter" data-level="5.5" data-path="aproximación-polinomial-integración-y-derivación-numérica.html"><a href="aproximación-polinomial-integración-y-derivación-numérica.html#derivación-numérica"><i class="fa fa-check"></i><b>5.5</b> Derivación numérica</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="autovalores-y-autovectores.html"><a href="autovalores-y-autovectores.html"><i class="fa fa-check"></i><b>6</b> Autovalores y Autovectores</a><ul>
+<li class="chapter" data-level="6.1" data-path="autovalores-y-autovectores.html"><a href="autovalores-y-autovectores.html#generalidades-3"><i class="fa fa-check"></i><b>6.1</b> Generalidades</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="autovalores-y-autovectores.html"><a href="autovalores-y-autovectores.html#definición"><i class="fa fa-check"></i><b>6.1.1</b> Definición</a></li>
+<li class="chapter" data-level="6.1.2" data-path="autovalores-y-autovectores.html"><a href="autovalores-y-autovectores.html#propiedades"><i class="fa fa-check"></i><b>6.1.2</b> Propiedades</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="autovalores-y-autovectores.html"><a href="autovalores-y-autovectores.html#obtención-los-autovalores-y-autovectores"><i class="fa fa-check"></i><b>6.2</b> Obtención los autovalores y autovectores</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="autovalores-y-autovectores.html"><a href="autovalores-y-autovectores.html#resumen-1-obtener-autovalores-y-autovectores"><i class="fa fa-check"></i><b>6.2.1</b> Resumen 1: Obtener autovalores y autovectores</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="autovalores-y-autovectores.html"><a href="autovalores-y-autovectores.html#método-de-krylov"><i class="fa fa-check"></i><b>6.3</b> Método de Krylov</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="autovalores-y-autovectores.html"><a href="autovalores-y-autovectores.html#resumen-2-método-de-krylov"><i class="fa fa-check"></i><b>6.3.1</b> Resumen 2: Método de Krylov</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="autovalores-y-autovectores.html"><a href="autovalores-y-autovectores.html#método-de-faddeev-leverrier"><i class="fa fa-check"></i><b>6.4</b> Método de Faddeev-LeVerrier</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="autovalores-y-autovectores.html"><a href="autovalores-y-autovectores.html#resumen-3-método-de-faddeev-leverrier"><i class="fa fa-check"></i><b>6.4.1</b> Resumen 3: Método de Faddeev-LeVerrier</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="autovalores-y-autovectores.html"><a href="autovalores-y-autovectores.html#método-de-aproximaciones-sucesivas-o-de-las-potencias"><i class="fa fa-check"></i><b>6.5</b> Método de Aproximaciones Sucesivas o de las Potencias</a></li>
+<li class="chapter" data-level="6.6" data-path="autovalores-y-autovectores.html"><a href="autovalores-y-autovectores.html#método-de-las-potencias-inversas"><i class="fa fa-check"></i><b>6.6</b> Método de las potencias inversas</a></li>
+<li class="chapter" data-level="6.7" data-path="autovalores-y-autovectores.html"><a href="autovalores-y-autovectores.html#método-de-las-potencias-con-deflación-o-de-hotelling"><i class="fa fa-check"></i><b>6.7</b> Método de las potencias con deflación (o de Hotelling)</a></li>
+<li class="chapter" data-level="6.8" data-path="autovalores-y-autovectores.html"><a href="autovalores-y-autovectores.html#resumen-4-método-de-las-aproximaciones-sucesivas-o-de-las-potencias"><i class="fa fa-check"></i><b>6.8</b> Resumen 4: Método de las Aproximaciones Sucesivas o de las Potencias</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="anexo-teoremas-útiles.html"><a href="anexo-teoremas-útiles.html"><i class="fa fa-check"></i>Anexo: Teoremas útiles</a><ul>
+<li class="chapter" data-level="" data-path="anexo-teoremas-útiles.html"><a href="anexo-teoremas-útiles.html#teorema-del-valor-intermedio-o-de-bolzano"><i class="fa fa-check"></i>Teorema del Valor Intermedio o de Bolzano</a></li>
+<li class="chapter" data-level="" data-path="anexo-teoremas-útiles.html"><a href="anexo-teoremas-útiles.html#teorema-del-valor-medio"><i class="fa fa-check"></i>Teorema del Valor Medio</a></li>
+<li class="chapter" data-level="" data-path="anexo-teoremas-útiles.html"><a href="anexo-teoremas-útiles.html#teorema-de-taylor"><i class="fa fa-check"></i>Teorema de Taylor</a></li>
+<li class="chapter" data-level="" data-path="anexo-teoremas-útiles.html"><a href="anexo-teoremas-útiles.html#teorema-del-punto-fijo-1"><i class="fa fa-check"></i>Teorema del Punto Fijo</a><ul>
+<li class="chapter" data-level="" data-path="anexo-teoremas-útiles.html"><a href="anexo-teoremas-útiles.html#demostración"><i class="fa fa-check"></i>Demostración</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="anexo-teoremas-útiles.html"><a href="anexo-teoremas-útiles.html#teorema-de-newton-raphson-1"><i class="fa fa-check"></i>Teorema de Newton-Raphson</a><ul>
+<li class="chapter" data-level="" data-path="anexo-teoremas-útiles.html"><a href="anexo-teoremas-útiles.html#demostración-1"><i class="fa fa-check"></i>Demostración</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="anexo-teoremas-útiles.html"><a href="anexo-teoremas-útiles.html#deducción-de-la-fórmula-de-recurrencia-para-el-método-de-newton-raphson-de-2º-orden"><i class="fa fa-check"></i>Deducción de la fórmula de recurrencia para el Método de Newton-Raphson de 2º Orden</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -229,270 +266,124 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="interpolación-de-lagrange-1" class="section level1">
-<h1><span class="header-section-number">5</span> Interpolación de Lagrange</h1>
-<ul>
-<li>Lagrange propuso reescribir la recta anterior como:</li>
-</ul>
+<div id="anexo-teoremas-útiles" class="section level1 unnumbered">
+<h1>Anexo: Teoremas útiles</h1>
+<div id="teorema-del-valor-intermedio-o-de-bolzano" class="section level2 unnumbered">
+<h2>Teorema del Valor Intermedio o de Bolzano</h2>
+<p>Sea <span class="math inline">\(f\)</span> una función real continua en un intervalo cerrado <span class="math inline">\([a,b]\)</span> con <span class="math inline">\(f(a)\)</span> y <span class="math inline">\(f(b)\)</span> de signos contrarios, es decir, <span class="math inline">\(f(a)\cdot f(b) &lt; 0\)</span>. Entonces existe al menos un punto <span class="math inline">\(c\)</span> del intervalo abierto <span class="math inline">\((a, b)\)</span> con <span class="math inline">\(f(c) = 0\)</span>.</p>
+</div>
+<div id="teorema-del-valor-medio" class="section level2 unnumbered">
+<h2>Teorema del Valor Medio</h2>
+<p>Dada cualquier función <span class="math inline">\(f\)</span> continua en el intervalo <span class="math inline">\([a, b]\)</span> y derivable en el intervalo abierto <span class="math inline">\((a, b)\)</span>, entonces existe al menos algún punto <span class="math inline">\(c\)</span> en el intervalo <span class="math inline">\((a, b)\)</span> tal que la tangente a la curva en <span class="math inline">\(c\)</span> es paralela a la recta secante que une los puntos <span class="math inline">\((b, f(b))\)</span> y <span class="math inline">\((a, f(a))\)</span>. Es decir:</p>
 <p><span class="math display">\[
-f(x) = \frac{x - x_1}{x_0 - x_1} y_0 + \frac{x - x_0}{x_1 - x_0} y_1
+{\displaystyle {\frac {f(b)-f(a)}{b-a}}=f&#39;(c)} 
 \]</span></p>
+</div>
+<div id="teorema-de-taylor" class="section level2 unnumbered">
+<h2>Teorema de Taylor</h2>
+<p>Sea <span class="math inline">\(k \geq 1\)</span> un entero y la función <span class="math inline">\(f:\mathbb{R} \rightarrow \mathbb{R}\)</span> diferenciable <span class="math inline">\(k\)</span> veces en el punto <span class="math inline">\(x_0 \in \mathbb{R}\)</span>. Entonces existe una función <span class="math inline">\(h_n: \mathbb{R} \rightarrow \mathbb{R}\)</span> tal que:</p>
+<p><span class="math display">\[\begin{gather*}
+f(x) =
+\underbrace{f(x_0) + f&#39;(x_0)(x-x_0) + {\frac{f&#39;&#39;(x_0)}{2!}} (x-x_0)^{2} + \cdots + {\frac{f^{(n)}(x_0)}{n!}}(x-x_0)^{n}}_{\text{Polinomio de Taylor de orden $n$}} + 
+\underbrace{h_{n}(x)(x-x_0)^{n+1}}_{\text{resto}}
+\end{gather*}\]</span></p>
+<p>y <span class="math inline">\(\lim_{x \to x_0} h_n(x)=0\)</span>. Esta es la llamada <strong>forma de Peano del resto</strong>.</p>
+<p>El polinomio que aparece en el teorema de Taylor se denomina <strong>polinomio de Taylor de orden <span class="math inline">\(n\)</span></strong>.</p>
+<p>Existen diversas fórmulas explícitas para el resto. Una de ellas es la <strong>forma de Lagrange</strong>:</p>
+<p><span class="math display">\[ R_{n}(x) = {\frac {f^{(n+1)}(\xi)}{(n+1)!}}(x-x_0)^{n+1} \]</span>
+para algún número real <span class="math inline">\(\xi\)</span> entre <span class="math inline">\(x_0\)</span> y <span class="math inline">\(x\)</span>, siendo <span class="math inline">\(f\)</span> diferenciable <span class="math inline">\(n+1\)</span> veces.</p>
+</div>
+<div id="teorema-del-punto-fijo-1" class="section level2 unnumbered">
+<h2>Teorema del Punto Fijo</h2>
+<p>Dadas las siguientes condiciones:</p>
+
+<p>Si <span class="math inline">\(x_0\)</span> es cualquier número en <span class="math inline">\([a, b]\)</span>, entonces la sucesión definida por
+<span class="math display">\[ x_n = f(x_{n-1}), \quad n \ge 1,\]</span></p>
+<p>converge al único punto fijo que <span class="math inline">\(f\)</span> posee en <span class="math inline">\([a, b]\)</span>.</p>
+<div id="demostración" class="section level3 unnumbered">
+<h3>Demostración</h3>
+<ol style="list-style-type: decimal">
+<li><p><strong>Existencia de un punto fijo</strong></p>
 <ul>
-<li>Esta es expresión que se puede extender para obtener polinomios de grados superiores que pasen por más puntos.</li>
-<li>Por ejemplo, para hallar el polinomio que pasa por los puntos <span class="math inline">\((x_0, y_0)\)</span>, <span class="math inline">\((x_1, y_1)\)</span> y <span class="math inline">\((x_2, y_2)\)</span>:</li>
-</ul>
-<p><span class="math display">\[
-f(x) = \frac{(x - x_1)(x - x_2)}{(x_0 - x_1)(x_0 - x_2)} y_0 + \frac{(x - x_0)(x - x_2)}{(x_1 - x_0)(x_1 - x_2)} y_1 + \frac{(x - x_0)(x - x_1)}{(x_2 - x_0)(x_2 - x_1)} y_2
-\]</span></p>
-<ul>
-<li><p>Se puede ver fácilmente que este polinomio pasa exactamente por los tres puntos dados.</p></li>
-<li><p>De la misma forma, el polinomio de grado 3 que pasa por cuatro puntos <span class="math inline">\((x_0, y_0)\)</span>, <span class="math inline">\((x_1, y_1)\)</span>, <span class="math inline">\((x_2, y_2)\)</span> y <span class="math inline">\((x_3, y_3)\)</span> es:</p></li>
-</ul>
-<p><span class="math display">\[
-\hspace{-0.5cm}
-\begin{split}
-f(x) = &amp;~ \frac{(x - x_1)(x - x_2)(x - x_3)}{(x_0 - x_1)(x_0 - x_2)(x_0 - x_3)} y_0 + \frac{(x - x_0)(x - x_2)(x - x_3)}{(x_1 - x_0)(x_1 - x_2)(x_1 - x_3)} y_1 \\
-&amp; + \frac{(x - x_0)(x - x_1)(x - x_3)}{(x_2 - x_0)(x_2 - x_1)(x_2 - x_3)} y_2 + \frac{(x - x_0)(x - x_1)(x - x_2)}{(x_3 - x_0)(x_3 - x_1)(x_3 - x_2)} y_3
-\end{split}
-\]</span></p>
-<ul>
-<li><p>Se puede ver fácilmente que este polinomio pasa exactamente por los cuatro puntos dados.</p></li>
-<li><p>Generalizando, la fórmula de interpolación de Lagrange para construir un polinomio de grado <span class="math inline">\(n\)</span> que pase por <span class="math inline">\(n+1\)</span> puntos <span class="math inline">\((x_0, y_0), (x_1, y_1), \cdots, (x_n, y_n)\)</span> es:</p></li>
-</ul>
-<p><span class="math display">\[
-y = f(x) = \sum_{i = 0}^n \frac{\prod\limits_{\substack{j = 0\\ j \neq i}}^n (x - x_j)}{\prod\limits_{\substack{j = 0\\ j \neq i}}^n (x_i - x_j)} y_i
-\]</span></p>
-<p><strong>Comparación con el método de Newton</strong></p>
-<ul>
-<li><p><strong>Ventaja</strong>: no requiere que los valores tabulados de <span class="math inline">\(x\)</span> estén equiespaciados. Si lo están, ambos métodos coinciden.</p></li>
-<li><p><strong>Desventaja</strong>:</p>
-<ul>
-<li>En ocasiones es útil considerar varios polinomios interpoladores de distinto grado para luego elegir el más adecuado.</li>
-<li>Con el método de Newton esto es muy sencillo, ya que como vimos se pueden construir recursivamente (por ejemplo, el de grado 3 es igual al de grado 2 más un término extra).</li>
-<li>En cambio, con el método de Lagrange no hay relación entre la construcción de <span class="math inline">\(P_{n-1}(x)\)</span> y la de <span class="math inline">\(P_n(x)\)</span>; cada polinomio debe construirse individualmente realizando todos los cálculos otra vez.</li>
-<li>Esto implica que este método sea menos eficiente al tener que recalcular todo el polinomio si varía el número de puntos.</li>
+<li>Si <span class="math inline">\(f(a) = a\)</span> o <span class="math inline">\(f(b) = b\)</span>, la existencia del punto fijo es obvia.</li>
+<li>Entonces suponemos que <span class="math inline">\(f(a) \neq a\)</span> y <span class="math inline">\(f(b) \neq b \implies f(a) &gt; a\)</span> y <span class="math inline">\(f(b) &lt; b\)</span> por (b).
+Definimos <span class="math inline">\(h(x) = f(x) - x\)</span>, continua en <span class="math inline">\([a; b]\)</span> tal que:
+<span class="math display">\[h(a) = f(a) - a &gt; 0 \text{ y } h(b) = f(b) - b &lt; 0\]</span>
+Por el Teorema del Valor Intermedio:
+<span class="math display">\[ \exists \quad p \in (a; b) \text{ tal que } h(p) = 0 \implies f(p) - p = 0 \implies p = f(p) \implies p \text{ es un punto fijo de } f\]</span></li>
+<li>Por lo tanto, <span class="math inline">\(f\)</span> tiene al menos un punto fijo.</li>
 </ul></li>
-</ul>
-<p><strong>Ejemplo 5</strong>. Emplear el método de Lagrange para interpolar el valor de la función <span class="math inline">\(f\)</span> en <span class="math inline">\(x=2.25\)</span>, con el polinomio interpolador de grado 3 que pasa por los cuatro puntos tabulados:</p>
-<table>
-<thead>
-<tr class="header">
-<th><span class="math inline">\(x_k\)</span></th>
-<th><span class="math inline">\(y_k\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>-1</td>
-<td>0,5403</td>
-</tr>
-<tr class="even">
-<td>0</td>
-<td>1,0000</td>
-</tr>
-<tr class="odd">
-<td>2</td>
-<td>-0,4162</td>
-</tr>
-<tr class="even">
-<td>2.5</td>
-<td>-0,8011</td>
-</tr>
-</tbody>
-</table>
-<p><img src="Plots/U4/lagrej1.png" width="100%" style="display: block; margin: auto;" /></p>
-<p><strong>Ejemplo 5</strong></p>
-<p><span class="math display">\[
+<li><p><strong>Unicidad del punto fijo</strong></p>
+<p>Sean <span class="math inline">\(p\)</span> y <span class="math inline">\(q\)</span> dos puntos fijos de <span class="math inline">\(f\)</span>, <span class="math inline">\(p \neq q\)</span>, <span class="math inline">\(p, q \in [a; b]\)</span>:</p>
+<p><span class="math display">\[ |p-q| \equaltext{puntos fijos} | f(p) - f(q) | \equaltext{T Valor Medio, $\xi$ entre $p$ y $q$} |f&#39;(\xi) (p - q)| \equaltext{Val abs de un prod} \]</span>
+<span class="math display">\[ |f&#39;(\xi)| |p-q| \leqtext{(c)} m |p-q| \leqtext{(c)} |p-q| \implies |p-q| &lt; |p-q| \]</span></p>
+<p>Lo cual es una contradicción que proviene de la única suposición: <span class="math inline">\(p \neq q\)</span>. Por lo tanto <span class="math inline">\(p = q\)</span> y el punto fijo es único.</p></li>
+<li><p><strong>Convergencia del proceso iterativo</strong></p>
+<p>Por (b), dado que <span class="math inline">\(f:[a; b] \rightarrow [a; b]\)</span> , la sucesión <span class="math inline">\(\{x_n\}_{n=0}^{\infty}\)</span> está definida <span class="math inline">\(\forall n \geq 0\)</span> y <span class="math inline">\(x_n \in [a; b] \quad \forall n\)</span>.
+<span class="math display">\[ |x_n - p| \equaltext{p es punto fijo} |x_n - f(p)| \quad \stackrel{x_n=f(x_{n-1})}{=} \quad |f(x_{n-1}) - f(p)| \equaltext{T Valor Medio, $\xi$ entre $p$ y $x_{n-1}$}\]</span>
+<span class="math display">\[ |f&#39;(\xi)| |x_{n-1} - p| \leqtext{(c)} m |x_{n-1} - p| \implies |x_n - p| \leq m |x_{n-1} - p|\]</span>
+Del mismo modo podríamos ver que <span class="math inline">\(|x_{n-1} - p| \leq m |x_{n-2} - p|\)</span>.
+Aplicando dicha desigualdad inductivamente resulta:
+<span class="math display">\[ |x_n - p| \leq m |x_{n-1} - p| \leq m^2 |x_{n-2} - p| \leq \dots \leq m^n |x_0 - p| \implies |x_n - p| \leq m^n |x_0 - p|\]</span>
+Como <span class="math inline">\(0&lt;m&lt;1\)</span>, el segundo miembro decrece a medida que <span class="math inline">\(n\)</span> aumenta, sin importar cuál es <span class="math inline">\(x_0\)</span>:
+<span class="math display">\[\lim_{n \to \infty} |x_n - p| \leq \lim_{n \to \infty} m^n |x_0 - p| = 0\]</span>
+Entonces <span class="math inline">\(|x_n - p| \xrightarrow[n \to \infty]{} 0\)</span>, es decir el método converge hacia el punto fijo <span class="math inline">\(p\)</span>.</p></li>
+</ol>
+</div>
+</div>
+<div id="teorema-de-newton-raphson-1" class="section level2 unnumbered">
+<h2>Teorema de Newton-Raphson</h2>
+<p>Supongamos que la función <span class="math inline">\(F\)</span> es continua, con derivada segunda continua en el intervalo <span class="math inline">\([a; b]\)</span>, y que existe un número <span class="math inline">\(p \in [a; b]\)</span> tal que <span class="math inline">\(F(p) = 0\)</span>. Si <span class="math inline">\(F&#39;(p) \neq 0\)</span>, entonces <span class="math inline">\(\exists \quad \delta &gt; 0\)</span> tal que la sucesión <span class="math inline">\(\{x_n\}_{n=0}^{\infty}\)</span> definida por el proceso iterativo:</p>
+<p><span class="math display">\[\begin{equation}
+\label{reglagral}
+x_n = x_{n-1} - \frac{F(x_{n-1})}{F&#39;(x_{n-1})} \quad n=1,2,\dots
+\end{equation}\]</span></p>
+<p>converge a <span class="math inline">\(p\)</span> cualquiera sea la aproximación inicial <span class="math inline">\(x_0 \in [p-\delta; p+\delta]\)</span>.</p>
+<div id="demostración-1" class="section level3 unnumbered">
+<h3>Demostración</h3>
+<p>Aplicamos el <strong>Teorema de Taylor</strong> para la función <span class="math inline">\(F\)</span> en el punto <span class="math inline">\(x_0\)</span> empleando un polinomio de grado <span class="math inline">\(n=1\)</span> y el resto en la forma de Lagrange:
+<span class="math display">\[F(x) = F(x_0) + F&#39;(x_0)(x-x_0) + \frac{F&#39;&#39;(\xi)}{2!}(x-x_0)^2\]</span>
+donde <span class="math inline">\(\xi\)</span> es un número real entre <span class="math inline">\(x\)</span> y <span class="math inline">\(x_0\)</span>.</p>
+<p>Si tomamos <span class="math inline">\(x = p\)</span>, sabiendo que <span class="math inline">\(F(p) = 0\)</span>, nos queda:
+<span class="math display">\[0 = F(x_0) + F&#39;(x_0)(p-x_0) + \frac{F&#39;&#39;(\xi)}{2!}(p-x_0)^2\]</span>
+Si <span class="math inline">\(x_0\)</span> está suficientemente cerca de <span class="math inline">\(p\)</span>, entonces el último término del segundo miembro en la igualdad anterior será pequeño comparado con los restantes y podemos despreciarlo:</p>
+<p><span class="math display">\[\begin{equation}
+\label{relacion}
+0 \approx F(x_0) + F&#39;(x_0)(p-x_0) \implies p-x_0 \approx - \frac{F(x_0)}{F&#39;(x_0)} \implies p \approx x_0 - \frac{F(x_0)}{F&#39;(x_0)}.
+\end{equation}\]</span></p>
+<p>De esta manera podemos llamar <span class="math display">\[x_1 = x_0 - \frac{F(x_0)}{F&#39;(x_0)}\]</span> y hemos obtenido un nuevo valor <span class="math inline">\(x_1\)</span> más cercano a <span class="math inline">\(p\)</span> que <span class="math inline">\(x_0\)</span>. Pensando del mismo modo, podemos escribir <span class="math display">\[p \approx x_1 - \frac{F(x_1)}{F&#39;(x_1)}\]</span> de manera que <span class="math display">\[x_2 = x_1 - \frac{F(x_1)}{F&#39;(x_1)}\]</span> es aún una mejor aproximación a <span class="math inline">\(p\)</span>. Continuando de esta manera, queda establecida la regla general (): <span class="math display">\[x_n = x_{n-1} - \frac{F(x_{n-1})}{F&#39;(x_{n-1})} \quad n=1,2,\dots\]</span>.</p>
+<p>Para garantizar la convergencia, debemos darnos cuenta que la iteración de Newton-Raphson es una iteración de punto fijo, por lo cual vale el <strong>Teorema del Punto Fijo</strong>:</p>
+<p><span class="math display">\[\begin{gather*}
+x_n = 
+\underbrace{x_{n-1} - \frac{F(x_{n-1})}{F&#39;(x_{n-1})}}_{f(x_{n-1})} 
+\end{gather*}\]</span>
+Por lo tanto, el método será convergente siempre que <span class="math inline">\(|f&#39;(x)| \leq m &lt; 1\)</span>:
+<span class="math display">\[f(x) = x - \frac{F(x)}{F&#39;(x)}\]</span>
+<span class="math display">\[f&#39;(x) = 1 - \frac{[F&#39;(x)]^2 - F(x)F&#39;&#39;(x)}{[F&#39;(x)]^2} = 1 - 1 + \frac{F(x)F&#39;&#39;(x)}{[F&#39;(x)]^2} = \frac{F(x)F&#39;&#39;(x)}{[F&#39;(x)]^2}.\]</span>
+Es decir, el metodo convergerá si:
+<span class="math display">\[|f&#39;(x)| = \frac{|F(x)F&#39;&#39;(x)|}{[F&#39;(x)]^2} \leq m &lt; 1\]</span>
+Por hipótesis, sabemos que <span class="math inline">\(F(p) = 0\)</span>; luego <span class="math inline">\(f&#39;(p) = 0\)</span>. Como <span class="math inline">\(f(x)\)</span> es continua y <span class="math inline">\(f&#39;(p) = 0\)</span>, podemos encontrar <span class="math inline">\(\delta &gt; 0\)</span> tal que <span class="math inline">\(|f&#39;(x)| &lt; 1\)</span> se cumple en el intervalo <span class="math inline">\([p - \delta, p + \delta]\)</span>. Por consiguiente, que <span class="math inline">\(x_0 \in [p - \delta, p + \delta]\)</span> es una condición suficiente para que <span class="math inline">\(x_0\)</span> sea el punto de partida de una sucesión <span class="math inline">\(\{x_n\}_{n=0}^{\infty}\)</span> que converge a la única raíz de <span class="math inline">\(F(x) = 0\)</span> en dicho intervalo, siempre que <span class="math inline">\(\delta\)</span> sea elegido tal que:
+<span class="math display">\[\frac{|F(x)F&#39;&#39;(x)|}{[F&#39;(x)]^2} &lt; 1  \quad \forall x \in [p - \delta, p + \delta]\]</span></p>
+</div>
+</div>
+<div id="deducción-de-la-fórmula-de-recurrencia-para-el-método-de-newton-raphson-de-2º-orden" class="section level2 unnumbered">
+<h2>Deducción de la fórmula de recurrencia para el Método de Newton-Raphson de 2º Orden</h2>
+<p>Una modificación al método de N-R se deriva a partir de la utilización de un término más en el desarrollo por serie de Taylor de la función <span class="math inline">\(F(x)\)</span>. Aplicamos el <strong>Teorema de Taylor</strong> para la función <span class="math inline">\(F\)</span> en el punto <span class="math inline">\(x_0\)</span> empleando un polinomio de grado <span class="math inline">\(n=2\)</span> y el resto en la forma de Lagrange:</p>
+<p><span class="math display">\[F(x) = F(x_0) + F&#39;(x_0)(x-x_0) + \frac{F&#39;&#39;(x_0)}{2!}(x-x_0)^2 + \frac{F&#39;&#39;(\xi)}{3!}(x-x_0)^3\]</span>
+donde <span class="math inline">\(\xi\)</span> es un número real entre <span class="math inline">\(x\)</span> y <span class="math inline">\(x_0\)</span>.</p>
+<p>Si tomamos <span class="math inline">\(x = p\)</span>, sabiendo que <span class="math inline">\(F(p) = 0\)</span>, nos queda:
+<span class="math display">\[0 = F(x_0) + F&#39;(x_0)(p-x_0) + \frac{F&#39;&#39;(x_0)}{2!}(p-x_0)^2 + \frac{F&#39;&#39;(\xi)}{3!}(p-x_0)^3\]</span>
+Si <span class="math inline">\(x_0\)</span> está suficientemente cerca de <span class="math inline">\(p\)</span>, entonces el último término del segundo miembro en la igualdad anterior será pequeño comparado con los restantes y podemos despreciarlo:</p>
+<p><span class="math display">\[\begin{equation*} 
 \begin{split}
-f(x) &amp;= \sum_{i = 0}^3 \frac{\prod\limits_{\substack{j = 0\\ j \neq i}}^3 (x - x_j)}{\prod\limits_{\substack{j = 0\\ j \neq i}}^3 (x_i - x_j)} y_i \\ \\
-&amp;= \frac{(x - x_1)(x - x_2)(x - x_3)}{(x_0 - x_1)(x_0 - x_2)(x_0 - x_3)} y_0 + \frac{(x - x_0)(x - x_2)(x - x_3)}{(x_1 - x_0)(x_1 - x_2)(x_1 - x_3)} y_1 \\
-&amp;~ + \frac{(x - x_0)(x - x_1)(x - x_3)}{(x_2 - x_0)(x_2 - x_1)(x_2 - x_3)} y_2 + \frac{(x - x_0)(x - x_1)(x - x_2)}{(x_3 - x_0)(x_3 - x_1)(x_3 - x_2)} y_3 \\ \\
-\implies y = f(2.25) &amp;\approx \frac{(2.25 - 0)(2.25 - 2)(2.25 - 2.5)}{(-1-0)(-1-2)(-1-2.5)} 0.5403 + \frac{(2.25 +1)(2.25 - 2)(2.25 - 2.5)}{(0+1)(0-2)(0-2.5)} 1.0000 \\
-&amp;~ + \frac{(2.25 +1)(2.25 - 0)(2.25 - 2.5)}{(2+1)(2-0)(2-2.5)} (-0.4162) + \frac{(2.25 +1)(2.25 - 0)(2.25 - 2)}{(2.5+1)(2.5-0)(2.5-2)} (-0.8011) \\
-&amp;= -0.6218 \\ \\
-&amp;\therefore f(2.25) \approx -0.6218
+0 &amp; \approx F(x_0) + F&#39;(x_0)(p-x_0) + \frac{F&#39;&#39;(x_0)}{2!}(p-x_0)^2 \\
+\implies 0 &amp; \approx F(x_0) + (p-x_0) \left[ F&#39;(x_0) + \frac{F&#39;&#39;(x_0)}{2!}(p-x_0) \right]
 \end{split}
+\end{equation*}\]</span></p>
+<p>Si dentro de los corchetes se reemplaza <span class="math inline">\((p - x_0)\)</span> por <span class="math inline">\(- \frac{F(x_0)}{F&#39;(x_0)}\)</span> según la relación vista en () y se despeja <span class="math inline">\(p\)</span>, se obtiene una expresión para la primera aproximación <span class="math inline">\(x_1\)</span>, dando lugar a la fórmula iterativa:</p>
+<p><span class="math display">\[
+x_n = x_{n-1} - \frac{F(x_{n-1})F&#39;(x_{n-1})}{[F&#39;(x_{n-1})]^2 - 0,5 F(x_{n-1}) F&#39;&#39;(x_{n-1})} \quad n = 1, 2, \dots
 \]</span></p>
-<p><strong>Ejemplo 5</strong>. Si en la fórmula anterior en lugar de reemplazar <span class="math inline">\(x\)</span> por un valor particular (en este caso, <span class="math inline">\(2.5\)</span>) operamos y reacomodamos los términos, podemos hallar la expresión del polinomio interpolador:</p>
-<p><span class="math display">\[
-f(x) = 0.1042 x^3 -0.4934 x^2 -0.1379 x+1
-\]</span></p>
-<p><img src="Plots/U4/lagrej2.png" width="60%" style="display: block; margin: auto;" /></p>
-<p><strong>Ejemplo 5</strong>. La función que generó los valores tabulados es <span class="math inline">\(cos(x)\)</span>:</p>
-<p>En el rango tabulado:</p>
-<p><img src="Plots/U4/lagrange2.png" width="100%" style="display: block; margin: auto;" /></p>
-<p>Un poco más lejos:</p>
-<p><img src="Plots/U4/lagrange.png" width="100%" style="display: block; margin: auto;" /></p>
-<ul>
-<li>Siendo <span class="math inline">\(cos(2.25) = -0.6282\)</span>, el error relativo de la aproximación fue <span class="math inline">\(|-0.6282-0.6218| / |-0.6285| = 1.02\%\)</span></li>
-</ul>
-<p><strong>Interpolación inversa</strong></p>
-<ul>
-<li>El problema de interpolación consiste en determinar el valor de la función desconocida <span class="math inline">\(f(x)\)</span> a partir de un valor conocido de <span class="math inline">\(x\)</span>.</li>
-<li>En la <em>interpolación inversa</em> se resuelve el problema contrario: determinar el valor de <span class="math inline">\(x\)</span> conociendo el de <span class="math inline">\(f(x)\)</span>.</li>
-<li>Podemos implementar interpolación inversa con el método de Lagrange intercambiando el rol de las columnas tabuladas <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span>, <strong>pero sólo para rangos tabulados donde la función <span class="math inline">\(f\)</span> es monótona</strong>.</li>
-</ul>
-<!-- 
-Para entender por que solo para intervalos monotonos, ver el graf con el pol interpolador.
-Intercambiar x e y significa rotar esa figura 90 grados a la derecha.
-Emplear Lagrange allí no aproxima la misma curva, puesto q no es una fc, hay mas de un valor de 
-"y" para un mismo "x". El metodo considerara que la fc sube duratne los 3 primeros ptos y luego baja,
-. Ver grafico "explicacion" en la carpeta de los Plots.
--->
-<p><strong>Ejemplo 6</strong>. Con los datos del Ejemplo 1, ¿cuál es el valor de <span class="math inline">\(x\)</span> tal que <span class="math inline">\(f(x)=-0.75\)</span>?</p>
-<table>
-<thead>
-<tr class="header">
-<th><span class="math inline">\(x_k\)</span></th>
-<th><span class="math inline">\(y_k\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>-1</td>
-<td>0,5403</td>
-</tr>
-<tr class="even">
-<td>0</td>
-<td>1,0000</td>
-</tr>
-<tr class="odd">
-<td>2</td>
-<td>-0,4162</td>
-</tr>
-<tr class="even">
-<td>2.5</td>
-<td>-0,8011</td>
-</tr>
-</tbody>
-</table>
-<p><span class="math inline">\(\downarrow\)</span></p>
-<table>
-<thead>
-<tr class="header">
-<th><span class="math inline">\(x_k\)</span></th>
-<th><span class="math inline">\(y_k\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1,0000</td>
-<td>0</td>
-</tr>
-<tr class="even">
-<td>-0,4162</td>
-<td>2</td>
-</tr>
-<tr class="odd">
-<td>-0,8011</td>
-<td>2.5</td>
-</tr>
-</tbody>
-</table>
-<p><span class="math display">\[
-\begin{split}
-f(x) &amp;= \sum_{i = 0}^2 \frac{\prod\limits_{\substack{j = 0\\ j \neq i}}^2 (x - x_j)}{\prod\limits_{\substack{j = 0\\ j \neq i}}^2 (x_i - x_j)} y_i \\ \\
-&amp;= \frac{(x - x_1)(x - x_2)}{(x_0 - x_1)(x_0 - x_2)} y_0 + \frac{(x - x_0)(x - x_2)}{(x_1 - x_0)(x_1 - x_2)} y_1 + \frac{(x - x_0)(x - x_1)}{(x_2 - x_0)(x_2 - x_1)} y_2 \\ \\
-\implies f(-0.75) &amp;\approx \frac{(-0.75+0.4162)(-0.75+0.8011)}{(1+0.4162)(1+0.8011)} 0 \\
-&amp;~ + \frac{(-0.75-1)(-0.75+0.8011)}{(-0.4162-1)(-0.4162+0.8011)} 2 \\
-&amp;~ + \frac{(-0.75-1)(-0.75+0.4162)}{(-0.8011-1)(-0.8011+0.4162)} 2.5  \\
-&amp;= 2.4347
-\end{split}
-\]</span>
-<span class="math inline">\(\therefore\)</span> el valor de <span class="math inline">\(x\)</span> tal que <span class="math inline">\(f(x)=-0.75\)</span> es <span class="math inline">\(x \approx 2.4347\)</span>.</p>
-<p><strong>Interpolación inversa</strong>. Podemos usar la interpolación inversa para resolver ecuaciones.</p>
-<p><strong>Ejemplo 7</strong>: hallar una raiz positiva para la ecuación <span class="math inline">\(f(x)=x-4\sin(x+2) = 0\)</span>.</p>
-<ul>
-<li>Tabulamos algunos valores y graficamos:</li>
-</ul>
-<table>
-<thead>
-<tr class="header">
-<th><span class="math inline">\(x_k\)</span></th>
-<th><span class="math inline">\(y_k\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>0</td>
-<td>-3.6372</td>
-</tr>
-<tr class="even">
-<td>0.5</td>
-<td>-1.8939</td>
-</tr>
-<tr class="odd">
-<td>1</td>
-<td>0.4355</td>
-</tr>
-</tbody>
-</table>
-<p><img src="Plots/U4/lagr_ecuacion1.png" width="75%" style="display: block; margin: auto;" /></p>
-<p><strong>Ejemplo 7</strong></p>
-<ul>
-<li>Podemos usar los dos últimos puntos donde vemos que la función cortó a las abscisas y hacer una interpolación lineal, los tres puntos y tener una interpolación cuadrática, o incluso agregar más puntos.</li>
-</ul>
-<table>
-<thead>
-<tr class="header">
-<th><span class="math inline">\(x_k\)</span></th>
-<th><span class="math inline">\(y_k\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>0</td>
-<td>-3.6372</td>
-</tr>
-<tr class="even">
-<td>0.5</td>
-<td>-1.8939</td>
-</tr>
-<tr class="odd">
-<td>1</td>
-<td>0.4355</td>
-</tr>
-</tbody>
-</table>
-<p><span class="math inline">\(\downarrow\)</span></p>
-<table>
-<thead>
-<tr class="header">
-<th><span class="math inline">\(x_k\)</span></th>
-<th><span class="math inline">\(y_k\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>-3.6372</td>
-<td>0</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p><span class="math display">\[
-\begin{split}
-y = f(x) &amp;= \frac{x - x_1}{x_0 - x_1} y_0 + \frac{x - x_0}{x_1 - x_0} y_1 \\ \\
-\implies f(0) &amp;\approx \frac{0-0.4355}{-1.8939-0.4355} 0.5 + \frac{0+1.8939}{0.4355+1.8939} 1 \\ \\
-&amp;= 0.9065 \\
-\end{split}
-\]</span>
-<span class="math inline">\(\therefore\)</span> La solución positiva de la ecuación es <span class="math inline">\(x \approx 0.9065\)</span> ya que <span class="math inline">\(f(0.9065) \approx 0\)</span>.</p>
-<div id="observaciones-finales" class="section level2">
-<h2><span class="header-section-number">5.1</span> Observaciones finales</h2>
-<ul>
-<li>Un polinomio de grado <span class="math inline">\(n\)</span> ajustado a <span class="math inline">\(n+1\)</span> puntos es único.</li>
-<li>El polinomio de interpolación se puede expresar en varias formas distintas, pero todas son equivalentes por el punto anterior.</li>
-<li>Si una función se aproxima mediante un polinomio de interpolación, no hay garantía de que dicho polinomio converja a la función exacta al aumentar el número de datos. En general, la interpolación mediante un polinomio de orden grande debe evitarse o utilizarse con precauciones extremas.</li>
-<li>Aunque no existe un criterio para determinar el orden óptimo del polinomio de interpolación, generalmente se recomienda utilizar uno con orden relativamente bajo en un pequeño rango de <span class="math inline">\(x\)</span>.</li>
-</ul>
 
 </div>
 </div>
@@ -501,7 +392,7 @@ y = f(x) &amp;= \frac{x - x_1}{x_0 - x_1} y_0 + \frac{x - x_0}{x_1 - x_0} y_1 \\
           </div>
         </div>
       </div>
-<a href="aproximación-polinomial-interpolación-y-extrapolación.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="autovalores-y-autovectores.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>
@@ -522,7 +413,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/mpru/guia-metodos-numericos/issues/04_Unidad4_Parte1.Rmd",
+"link": "https://github.com/mpru/guia-metodos-numericos/issues/07_Anexo.Rmd",
 "text": "Edit"
 },
 "history": {

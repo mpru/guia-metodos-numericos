@@ -7,7 +7,7 @@ author:
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
-biblio-style: apalike
+classoption: openany
 link-citations: yes
 github-repo: mpru/guia-metodos-numericos
 url: https://mpru.github.io/guia-metodos-numericos/

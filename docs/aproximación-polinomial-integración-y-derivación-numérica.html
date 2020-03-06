@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Taller de Métodos Numéricos</title>
+  <title>5 Aproximación Polinomial: integración y derivación numérica | Taller de Métodos Numéricos</title>
   <meta name="description" content="Esta guía resume algunos conceptos desarrollados en el Taller de Métodos Numéricos de la Licenciatura en Estadística (Facultad de Ciencias Económicas y Estadstica, Universidad Nacional de Rosario)." />
   <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Taller de Métodos Numéricos" />
+  <meta property="og:title" content="5 Aproximación Polinomial: integración y derivación numérica | Taller de Métodos Numéricos" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://mpru.github.io/guia-metodos-numericos/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="mpru/guia-metodos-numericos" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Taller de Métodos Numéricos" />
+  <meta name="twitter:title" content="5 Aproximación Polinomial: integración y derivación numérica | Taller de Métodos Numéricos" />
   
   <meta name="twitter:description" content="Esta guía resume algunos conceptos desarrollados en el Taller de Métodos Numéricos de la Licenciatura en Estadística (Facultad de Ciencias Económicas y Estadstica, Universidad Nacional de Rosario)." />
   
@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="introducción-a-los-métodos-numéricos.html">
+<link rel="prev" href="aproximación-polinomial-interpolación-y-extrapolación.html">
+<link rel="next" href="autovalores-y-autovectores.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -266,36 +266,416 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Taller de Métodos Numéricos</h1>
-<h2 class="subtitle"><em>Guía de estudio</em></h2>
-<p class="author"><em>Marcos Prunello</em></p>
-<p class="author"><em>Cecilia Rapelli</em></p>
-<p class="date"><em>2020-03-06</em></p>
+<div id="aproximación-polinomial-integración-y-derivación-numérica" class="section level1">
+<h1><span class="header-section-number">5</span> Aproximación Polinomial: integración y derivación numérica</h1>
+<div id="integración-numérica" class="section level2">
+<h2><span class="header-section-number">5.1</span> Integración numérica</h2>
+<ul>
+<li>Dada la función <span class="math inline">\(y = f(x)\)</span> definida en forma tabular con a través de <span class="math inline">\(n+1\)</span> valores de <span class="math inline">\(x\)</span> equiespaciados <span class="math inline">\(x_0, x_1 = x_0 + h, \cdots, x_n = x_0 + nh\)</span>, se desea hallar una aproximación de la integral definida:</li>
+</ul>
+<p><span class="math display" id="eq:ec1">\[\begin{equation}
+\tag{5.1}
+\int_{x_0}^{x_n} f(x)dx
+\end{equation}\]</span></p>
+<ul>
+<li>Para esto, aproximaremos a <span class="math inline">\(f(x)\)</span> con el polinomio de Newton:</li>
+</ul>
+<p><span class="math display" id="eq:ec2">\[\begin{equation}
+\tag{5.2}
+f(x) \cong y_0 + k \Delta y_0 + \frac{k(k-1)}{2!}\Delta^2 y_0 + \frac{k(k-1)(k-2)}{3!}\Delta^3 y_0 + \cdots
+\end{equation}\]</span></p>
+<p><span class="math display">\[
+k = \frac{x-x_0}{h}
+\]</span></p>
+<ul>
+<li>En <a href="aproximación-polinomial-integración-y-derivación-numérica.html#eq:ec1">(5.1)</a> la variable es <span class="math inline">\(x\)</span>, mientras que en <a href="aproximación-polinomial-integración-y-derivación-numérica.html#eq:ec2">(5.2)</a> la variable está expresada como <span class="math inline">\(k = (x - x_0)/h\)</span>, por lo tanto para poder reemplazar <a href="aproximación-polinomial-integración-y-derivación-numérica.html#eq:ec2">(5.2)</a> en <a href="aproximación-polinomial-integración-y-derivación-numérica.html#eq:ec1">(5.1)</a> se debe realizar un cambio de variables:</li>
+</ul>
+<p><span class="math display">\[
+k = \frac{x-x_0}{h} \implies
+\begin{cases}
+x = x_0 + hk \\
+dx = hdk \\
+x = x_0 \implies k = \frac{x_0-x_0}{h} = 0 \\
+x = x_n \implies k = \frac{x_n-x_0}{h} = \frac{x_0 + nh -x_0}{h} =n \\
+\end{cases}
+\]</span></p>
+<ul>
+<li>Luego:</li>
+</ul>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; \int_{x_0}^{x_n} f(x)dx \\
+&amp; \cong \int_{0}^{n} \Big( y_0 + k \Delta y_0 + \frac{k(k-1)}{2!}\Delta^2 y_0 + \frac{k(k-1)(k-2)}{3!}\Delta^3 y_0 + \cdots \Big) h\,dk \\
+&amp; = h \int_{0}^{n} \Big[ y_0 + k \Delta y_0 + \Big( \frac{k^2}{2} - \frac{k}{2} \Big) \Delta^2 y_0 + \Big( \frac{k^3}{6} - \frac{k^2}{2} + \frac{k}{3} \Big) \Delta^3 y_0  + \cdots \Big] dk \\
+&amp;= h \Big[ 
+\left.
+y_0 k + \frac{k^2}{2} \Delta y_0 + \Big( \frac{k^3}{6} - \frac{k^2}{4} \Big) \Delta^2 y_0 + \Big( \frac{k^4}{24} - \frac{k^3}{6} + \frac{k^2}{6} \Big) \Delta^3 y_0  + \cdots
+\Big] \right\vert_{0}^{n} \\
+&amp;= h \Big[ y_0 n + \frac{n^2}{2} \Delta y_0 + \Big( \frac{n^3}{6} - \frac{n^2}{4} \Big) \Delta^2 y_0 + \Big( \frac{n^4}{24} - \frac{n^3}{6} + \frac{n^2}{6} \Big) \Delta^3 y_0  + \cdots
+\Big]
+\end{aligned}
+\]</span></p>
+<p><strong>Ejemplo</strong>. Se tienen los siguientes valores tabulados de <span class="math inline">\(f(x)\)</span> y se desea hallar su integral entre 0 y 6.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center"><span class="math inline">\(x\)</span></th>
+<th align="center"><span class="math inline">\(y=f(x)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">0.0</td>
+<td align="center">2.00</td>
+</tr>
+<tr class="even">
+<td align="center">0.5</td>
+<td align="center">3.13</td>
+</tr>
+<tr class="odd">
+<td align="center">1.0</td>
+<td align="center">2.14</td>
+</tr>
+<tr class="even">
+<td align="center">1.5</td>
+<td align="center">1.14</td>
+</tr>
+<tr class="odd">
+<td align="center">2.0</td>
+<td align="center">1.78</td>
+</tr>
+<tr class="even">
+<td align="center">2.5</td>
+<td align="center">2.64</td>
+</tr>
+<tr class="odd">
+<td align="center">3.0</td>
+<td align="center">2.25</td>
+</tr>
+<tr class="even">
+<td align="center">3.5</td>
+<td align="center">1.53</td>
+</tr>
+<tr class="odd">
+<td align="center">4.0</td>
+<td align="center">1.75</td>
+</tr>
+<tr class="even">
+<td align="center">4.5</td>
+<td align="center">2.34</td>
+</tr>
+<tr class="odd">
+<td align="center">5.0</td>
+<td align="center">2.24</td>
+</tr>
+<tr class="even">
+<td align="center">5.5</td>
+<td align="center">1.77</td>
+</tr>
+<tr class="odd">
+<td align="center">6.0</td>
+<td align="center">1.78</td>
+</tr>
+</tbody>
+</table>
+<p><img src="Plots/U4/Unidad4_2_g.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>La curva roja es la verdadera función <span class="math inline">\(f(x)\)</span> que originó la tabla, la cual suponemos desconocida o difícil de integrar.</p>
 </div>
-<div id="acerca-del-taller" class="section level1 unnumbered">
-<h1>Acerca del Taller</h1>
-<p>La presente guía resume algunos conceptos desarrollados en el Taller de Métodos Numéricos de la Licenciatura en Estadística en la Facultad de Ciencias Económicas y Estadística, Universidad Nacional de Rosario. La misma irá siendo revisada a lo largo del cuatrimestre y no está exenta de presentar errores o expresar ideas que puedan ser mejoradas. ¡Esperamos que juntos podamos enriquecerla al dar nuestros primeros pasos en la programación!</p>
-<div id="horario-y-lugar-de-cursado" class="section level2 unnumbered">
-<h2>Horario y lugar de cursado</h2>
-<p>Martes de 8:00 a 10:00 en el Laboratorio de Estadística (2do piso).</p>
+<div id="fórmula-trapecial" class="section level2">
+<h2><span class="header-section-number">5.2</span> Fórmula trapecial</h2>
+<ul>
+<li>Si la interpolación se limita al primer orden y la integral sólo se calcula entre los dos primeros valores de <span class="math inline">\(x\)</span>, se obtiene:</li>
+</ul>
+<p><span class="math display">\[\begin{gather*}
+\int_{x_0}^{x_1} f(x)dx \cong  \int_{0}^{1} \Big( y_0 + k \Delta y_0 \Big) hdk = h \left. \Big( y_0 k + \frac{k^2}{2} \Delta y_0 \Big) \right\vert_{0}^{1} \\
+= h \Big( y_0 + \frac{\Delta y_0}{2} \Big) = h \Big( y_0 + \frac{y_1 - y_0}{2} \Big) = \frac{h}{2} (y_0 + y_1)
+\end{gather*}\]</span></p>
+<ul>
+<li>En el ejemplo:</li>
+</ul>
+<p><span class="math display">\[
+\int_{0}^{0.5} f(x)dx \cong  \frac{0.5}{2} (3.13 + 2) = 1.2825
+\]</span></p>
+<ul>
+<li>Geométricamente, esto equivale al área <span class="math inline">\(A_1\)</span> del trapecio formado por la recta de interpolación y el eje de las abscisas, entre <span class="math inline">\(x_0\)</span> y <span class="math inline">\(x_1\)</span>:</li>
+</ul>
+<p><span class="math display">\[A_2=1.2825\]</span></p>
+<p><img src="Plots/U4/Unidad4_2_g2.png" width="100%" style="display: block; margin: auto;" /></p>
+<ul>
+<li>De manera semejante, se puede emplear la interpolación lineal de Newton para obtener una aproximación de la integral entre <span class="math inline">\(x_1\)</span> y <span class="math inline">\(x_2\)</span>:</li>
+</ul>
+<p><span class="math display">\[
+\int_{x_1}^{x_2} f(x)dx \cong A_2 = \frac{h}{2} (y_1 + y_2)
+\]</span></p>
+<p><span class="math display">\[A_2=1.3175\]</span></p>
+<p><img src="Plots/U4/Unidad4_2_g3.png" width="100%" style="display: block; margin: auto;" /></p>
+<ul>
+<li>Y sucesivamente para todos los intervalos:</li>
+</ul>
+<p><span class="math display">\[
+\int_{x_{i-1}}^{x_i} f(x)dx \cong A_i = \frac{h}{2} (y_{i-1} + y_i) \quad i = 1, \cdots, n
+\]</span></p>
+<ul>
+<li>De modo que la suma de las áreas de los trapecios <span class="math inline">\(A_i\)</span> resulta ser la aproximación para la integral entre <span class="math inline">\(x_0\)</span> y <span class="math inline">\(x_n\)</span>:</li>
+</ul>
+<p><span class="math display">\[
+\int_{x_{0}}^{x_n} f(x)dx \cong \sum_{i=1}^n A_i = \sum_{i=1}^n \frac{h}{2} (y_{i-1} + y_i) = \frac{h}{2} \Big( y_0 + y_n + 2 \sum_{i = 1}^{n-1} y_i \Big)
+\]</span></p>
+<ul>
+<li>La fórmula hallada se conoce como <strong>fórmula trapecial</strong> y se la simboliza con:</li>
+</ul>
+<p><span class="math display">\[
+A_{1/2} = \frac{h}{2} \Big( y_0 + y_n + 2 \sum_{i = 1}^{n-1} y_i \Big)
+\]</span></p>
+<ul>
+<li>Cuanto menor sea el ancho de los intervalos <span class="math inline">\(h\)</span> y más se acerque <span class="math inline">\(f(x)\)</span> a una recta, mejor será la aproximación así obtenida.</li>
+<li>Gráficamente:</li>
+</ul>
+<p><img src="Plots/U4/Unidad4_2_g4.png" width="85%" style="display: block; margin: auto;" /></p>
+<ul>
+<li>En el ejemplo: <span class="math inline">\(A_{1/2} = 12.3000\)</span>.</li>
+<li>El valor exacto es: <span class="math inline">\(\int_0^{6}f(x)dx = 12.2935\)</span>, con lo cual el error relativo de la aproximación con la fórmula trapecial fue: <span class="math inline">\(0.05\%\)</span>.</li>
+</ul>
+<!--
+https://www.integral-calculator.com/
+2 + exp((1-x)/4) * sin(4 * x)
+
+http://www.wolframalpha.com/widgets/view.jsp?id=8ab70731b1553f17c11a3bbc87e0b605
+2 + exp((1-x)/4) * sin(4 * x)dx
+
+-->
 </div>
-<div id="consultas" class="section level2 unnumbered">
-<h2>Consultas</h2>
-<p>A través del Foro de Consultas en el Campus Virtual o al finalizar las clases.</p>
+<div id="fórmula-de-simpson-de-13" class="section level2">
+<h2><span class="header-section-number">5.3</span> Fórmula de Simpson de 1/3</h2>
+<ul>
+<li>Si la interpolación es de segundo orden y la integral sólo se calcula entre los tres primeros valores de <span class="math inline">\(x\)</span>, se obtiene:</li>
+</ul>
+<p><span class="math display">\[
+\begin{aligned}
+\int_{x_0}^{x_2} f(x)dx &amp;\cong  \int_{0}^{2} \Big[ y_0 + k \Delta y_0 + \Big( \frac{k^2}{2} - \frac{k}{2} \Big) \Delta^2 y_0 \Big]  hdk \\
+&amp;= h \left. \Big[ y_0 k + \frac{k^2}{2} \Delta y_0  + \Big( \frac{k^3}{6} - \frac{k^2}{4} \Big) \Delta^2 y_0 \Big] \right\vert_{0}^{2} \\
+&amp;= h \Big[ 2y_0 + 2 \Delta y_0  + \frac{1}{3} \Delta^2 y_0 \Big]
+\end{aligned}
+\]</span></p>
+<ul>
+<li>Dado que <span class="math inline">\(\Delta y_0 = y_1 - y_0\)</span> y <span class="math inline">\(\Delta^2 y_0 = \Delta y_1 - \Delta y_0 = y_2 - 2y_1 + y_0\)</span>, nos queda:</li>
+</ul>
+<p><span class="math display">\[
+\begin{aligned}
+\int_{x_0}^{x_2} f(x)dx &amp;\cong h \Big[ 2y_0 + 2 (y_1 - y_0)  + \frac{1}{3} (y_2 - 2y_1 + y_0) \Big] \\
+&amp;= \frac{h}{3} (y_0 + 4y_1 + y_2)
+\end{aligned}
+\]</span></p>
+<ul>
+<li>Geométricamente, esto equivale al área <span class="math inline">\(A_1\)</span> encerrada entre el eje de las abscisas, <span class="math inline">\(x_0\)</span> y <span class="math inline">\(x_2\)</span> y el polinomio integrador que pasa por <span class="math inline">\((x_0, y_0)\)</span>, <span class="math inline">\((x_1, y_1)\)</span> y <span class="math inline">\((x_2, y_2)\)</span>:  <span class="math inline">\(A_1=2.7766\)</span></li>
+</ul>
+<p><img src="Plots/U4/Unidad4_2_g5.png" width="95%" style="display: block; margin: auto;" /></p>
+<ul>
+<li>De manera semejante, se puede emplear la interpolación cuadrática de Newton para obtener una aproximación de la integral entre <span class="math inline">\(x_2\)</span> y <span class="math inline">\(x_4\)</span>:</li>
+</ul>
+<p><span class="math display">\[
+\int_{x_2}^{x_4} f(x)dx \cong A_2 = \frac{h}{3} (y_2 + 4y_3 + y_4)
+\]</span></p>
+<p><span class="math display">\[A_2=1.4133\]</span></p>
+<p><img src="Plots/U4/Unidad4_2_g6.png" width="100%" style="display: block; margin: auto;" /></p>
+<ul>
+<li>Y sucesivamente para todos los intervalos:</li>
+</ul>
+<p><span class="math display">\[
+\int_{x_{i-1}}^{x_{i+1}} f(x)dx \cong  \frac{h}{3} (y_{i-1} + 4y_i + y_{i+1}) \quad i = 1, 3, 5, \cdots, n-1
+\]</span></p>
+<ul>
+<li>De modo que la suma de estas áreas resulta ser la aproximación para la integral entre <span class="math inline">\(x_0\)</span> y <span class="math inline">\(x_n\)</span>:</li>
+</ul>
+<p><span class="math display">\[
+\int_{x_{0}}^{x_n} f(x)dx \cong \sum\limits_{\substack{i = 1\\ i~impar}}^{n-1} \frac{h}{3} (y_{i-1} + 4y_i + y_{i+1}) = \frac{h}{3} \Big( y_0 + y_n + 2 \sum \limits_{\substack{i = 2\\ i~par}}^{n-2} y_i + 4 \sum\limits_{\substack{i = 1\\ i~impar}}^{n-1} y_i  \Big)
+\]</span></p>
+<ul>
+<li>La fórmula hallada se conoce como <strong>fórmula de Simpson de 1/3</strong> y se la simboliza con:</li>
+</ul>
+<p><span class="math display">\[
+A_{1/3} = \frac{h}{3} \Big( y_0 + y_n + 2 \sum \limits_{\substack{i = 2\\ i~par}}^{n-2} y_i + 4 \sum\limits_{\substack{i = 1\\ i~impar}}^{n-1} y_i  \Big)
+\]</span></p>
+<ul>
+<li><p>Para poder aplicarla, es necesario que la cantidad de puntos tabulados sea impar, es decir que la tabla tenga una cantidad par de intervalos.</p></li>
+<li><p>Gráficamente:</p></li>
+</ul>
+<p><img src="Plots/U4/Unidad4_2_g7.png" width="85%" style="display: block; margin: auto;" /></p>
+<ul>
+<li>En el ejemplo: <span class="math inline">\(A_{1/3} = 12.3833\)</span>.</li>
+<li>El valor exacto es: <span class="math inline">\(\int_0^{6}f(x)dx = 12.2935\)</span>, con lo cual el error relativo de la aproximación con la fórmula trapecial fue: <span class="math inline">\(7.3\%\)</span>.</li>
+</ul>
 </div>
-<div id="material-de-estudio" class="section level2 unnumbered">
-<h2>Material de estudio</h2>
-<p>El material de estudio está compuesto por esta guía y prácticas que, junto con cualquier otro material que necesitemos, estarán disponibles en nuestro espacio en el Campus Virtual de la UNR.</p>
-<p>Todo el material fue creado utilizando el lenguaje de programación estadística <code>R</code> y las herramientas del entorno de desarrollo integrado <code>RStudio</code>.</p>
+<div id="fórmula-de-simpson-de-38" class="section level2">
+<h2><span class="header-section-number">5.4</span> Fórmula de Simpson de 3/8</h2>
+<ul>
+<li>Si la interpolación es de tercer orden y la integral sólo se calcula entre los 4 primeros valores de <span class="math inline">\(x\)</span>, se obtiene:</li>
+</ul>
+<p><span class="math display">\[
+\hspace{-.25cm}
+\begin{aligned}
+\int_{x_0}^{x_3} f(x)dx &amp;\cong  \int_{0}^{3} \Big[ y_0 + k \Delta y_0 + \Big( \frac{k^2}{2} - \frac{k}{2} \Big) \Delta^2 y_0  + \Big( \frac{k^3}{6} - \frac{k^2}{2} + \frac{k}{3} \Big) \Delta^3 y_0
+\Big]  hdk \\
+&amp;= h \left. \Big[ y_0 k + \frac{k^2}{2} \Delta y_0  + \Big( \frac{k^3}{6} - \frac{k^2}{4} \Big) \Delta^2 y_0 + \Big( \frac{k^4}{24} - \frac{k^3}{6} + \frac{k^2}{6} \Big) \Delta^3 y_0 \Big] \right\vert_{0}^{3} \\
+&amp;= h \Big[ 3y_0 + \frac{9}{2} \Delta y_0  + \frac{9}{4} \Delta^2 y_0 + \frac{3}{8} \Delta^3 y_0\Big]
+\end{aligned}
+\]</span></p>
+<ul>
+<li>Dado que <span class="math inline">\(\Delta y_0 = y_1 - y_0\)</span>, <span class="math inline">\(\Delta^2 y_0 = \Delta y_1 - \Delta y_0 = y_2 - 2y_1 + y_0\)</span>, y <span class="math inline">\(\Delta^3 y_0 = \Delta^2 y_1 - \Delta^2 y_0 = y_3 - 3y_2 - 3y_1 + y_0\)</span> nos queda:</li>
+</ul>
+<p><span class="math display">\[
+\begin{aligned}
+\int_{x_0}^{x_3} f(x)dx &amp;\cong \frac{3}{8} h (y_0 + 3y_1 + 3y_2+y_3)
+\end{aligned}
+\]</span></p>
+<ul>
+<li>Geométricamente, esto equivale al área <span class="math inline">\(A_1\)</span> encerrada entre el eje de las abscisas, <span class="math inline">\(x_0\)</span> y <span class="math inline">\(x_3\)</span> y el polinomio integrador que pasa por <span class="math inline">\((x_0, y_0)\)</span>, <span class="math inline">\((x_1, y_1)\)</span>, <span class="math inline">\((x_2, y_2)\)</span> y <span class="math inline">\((x_3, y_3)\)</span>:</li>
+</ul>
+<p><span class="math display">\[A_1 = 3.5531\]</span></p>
+<p><img src="Plots/U4/Unidad4_2_g8.png" width="100%" style="display: block; margin: auto;" /></p>
+<ul>
+<li>De manera semejante, se puede emplear la interpolación cúbica de Newton para obtener una aproximación de la integral entre <span class="math inline">\(x_3\)</span> y <span class="math inline">\(x_6\)</span>:</li>
+</ul>
+<p><span class="math display">\[
+\int_{x_3}^{x_6} f(x)dx \cong A_2 = \frac{3}{8} h (y_3 + 3y_4 + 3y_5 + y_6)
+\]</span></p>
+<p><span class="math display">\[A_1 = 3.1219\]</span></p>
+<p><img src="Plots/U4/Unidad4_2_g9.png" width="100%" style="display: block; margin: auto;" /></p>
+<ul>
+<li>Y sucesivamente para todos los intervalos:</li>
+</ul>
+<p><span class="math display">\[
+\int_{x_{i}}^{x_{i+3}} f(x)dx \cong  \frac{3}{8} h (y_{i} + 3y_{i+1} + 3y_{i+2} + y_{i+3}) \quad i = 0, 3, 6, \cdots, n-3
+\]</span></p>
+<ul>
+<li>De modo que la suma de estas áreas resulta ser la aproximación para la integral entre <span class="math inline">\(x_0\)</span> y <span class="math inline">\(x_n\)</span>:</li>
+</ul>
+<p><span class="math display">\[
+\begin{aligned}
+\int_{x_{0}}^{x_n} f(x)dx &amp; \cong \sum\limits_{\substack{i = 0\\ ó~i~múltiplo~de~3}}^{n-3} \frac{3}{8} h (y_{i} + 3y_{i+1} + 3y_{i+2} + y_{i+3}) \\
+ &amp;= \frac{3}{8} h \Big( y_0 + y_n + 2 \sum \limits_{\substack{i = 3\\ i~múltiplo~de~3}}^{n-3} y_i + 3 \sum\limits_{\substack{i = 1\\ i~no~múltiplo~de~3}}^{n-1} y_i  \Big)
+ \end{aligned}
+\]</span></p>
+<ul>
+<li>La fórmula hallada se conoce como <strong>fórmula de Simpson de 3/8</strong> y se la simboliza con:</li>
+</ul>
+<p><span class="math display">\[
+A_{3/8} = \frac{3}{8} h \Big( y_0 + y_n + 2 \sum \limits_{\substack{i = 3\\ i~múltiplo~de~3}}^{n-3} y_i + 3 \sum\limits_{\substack{i = 1\\ i~no~múltiplo~de~3}}^{n-1} y_i  \Big)
+\]</span></p>
+<ul>
+<li><p>Para poder aplicarla, es necesario que la cantidad de intervalos en la tabla sea múltiplo de 3.</p></li>
+<li><p>Gráficamente:</p></li>
+</ul>
+<p><img src="Plots/U4/Unidad4_2_g10.png" width="85%" style="display: block; margin: auto;" /></p>
+<ul>
+<li>En el ejemplo: <span class="math inline">\(A_{3/8} = 12.4088\)</span>.</li>
+<li>El valor exacto es: <span class="math inline">\(\int_0^{6}f(x)dx = 12.2935\)</span>, con lo cual el error relativo de la aproximación con la fórmula trapecial fue: <span class="math inline">\(9.4\%\)</span>.</li>
+</ul>
 </div>
-<div id="evaluación" class="section level2 unnumbered">
-<h2>Evaluación</h2>
-<p>En construcción.</p>
-</div>
-<div id="campus-virtual" class="section level2 unnumbered">
-<h2>Campus virtual</h2>
-<p>Además de alojar todo el material del curso, utilizaremos este espacio para la entrega de trabajos y para realizar consultas, que esperamos puedan ser debatidas y respondidas entre el estudiantado.</p>
+<div id="derivación-numérica" class="section level2">
+<h2><span class="header-section-number">5.5</span> Derivación numérica</h2>
+<ul>
+<li>Para aproximar la derivada de una función en un punto, nuevamente haremos uso del polinomio interpolador de Newton:</li>
+</ul>
+<p><span class="math display">\[
+\begin{aligned}
+f(x) &amp; \cong y_0 + k \Delta y_0 + \frac{k(k-1)}{2!}\Delta^2 y_0 + \frac{k(k-1)(k-2)}{3!}\Delta^3 y_0 + \cdots \\
+&amp;= y_0 + k \Delta y_0 + \Big( \frac{k^2}{2} - \frac{k}{2} \Big) \Delta^2 y_0 + \Big( \frac{k^3}{6} - \frac{k^2}{2} + \frac{k}{3} \Big) \Delta^3 y_0  + \cdots
+\end{aligned}
+\]</span></p>
+<ul>
+<li>Se debe derivar con respecto a <span class="math inline">\(x\)</span> el miembro derecho de la expresión anterior, aplicando la Regla de la Cadena ya que <span class="math inline">\(k = (x - x_0)/h\)</span>.</li>
+<li>Por simplicidad, lo mostraremos sólo con el polinomio interpolador cuadrático.</li>
+<li>Aproximación de la derivada con el polinomio interpolador cuadrático de Newton:</li>
+</ul>
+<p><span class="math display">\[
+f(x)  \cong y_0 + k \Delta y_0 + \frac{k^2}{2} \Delta^2 y_0 - \frac{k}{2} \Delta^2 y_0
+\]</span>
+<span class="math display">\[
+k = \frac{x-x_0}{h} \implies \frac{\partial k}{\partial x} = \frac{1}{h}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+f&#39;(x) &amp; \cong \Delta y_0 \frac{1}{h} + \Delta^2 y_0 ~k~ \frac{1}{h} - \frac{\Delta^2 y_0}{2} \frac{1}{h} \\
+&amp; = \frac{1}{h} \Big[ \Delta y_0 + \Big( k-\frac{1}{2} \Big) \Delta^2 y_0 \Big]
+\end{aligned}
+\]</span></p>
+<p><strong>Retomando el Ejemplo 1 de la unidad sobre Integración</strong>: vamos a aproximar el valor de <span class="math inline">\(f&#39;(3.4)\)</span>.</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x_k\)</span></th>
+<th><span class="math inline">\(y_k\)</span></th>
+<th><span class="math inline">\(\Delta y_k\)</span></th>
+<th><span class="math inline">\(\Delta^2 y_k\)</span></th>
+<th><span class="math inline">\(\Delta^3 y_k\)</span></th>
+<th><span class="math inline">\(\Delta^4 y_k\)</span></th>
+<th><span class="math inline">\(\Delta^5 y_k\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2</td>
+<td>0,3010</td>
+<td>0,1761</td>
+<td>-0,0511</td>
+<td>0,0230</td>
+<td>-0,0127</td>
+<td>0,0081</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>0,4771</td>
+<td>0,1250</td>
+<td>-0,0281</td>
+<td>0,0103</td>
+<td>-0,0046</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>0,6021</td>
+<td>0,0969</td>
+<td>-0,0178</td>
+<td>0,0057</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>0,6990</td>
+<td>0,0791</td>
+<td>-0,0121</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>0,7781</td>
+<td>0,0670</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td>0,8451</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+
+<p><span class="math display">\[
+f&#39;(x) \cong \frac{1}{h} \Big[ \Delta y_0 + \Big( k-\frac{1}{2} \Big) \Delta^2 y_0 \Big] = 
+ 0.1250 + (-0.1) (-0.0281) = 0.12781
+\]</span></p>
+<p>Nota: esta fórmula se conoce como <em>aproximación por diferencias hacia adelante</em>, pero se pueden lograr aproximaciones más precisas de otras formas, por ejemplo, haciendo que el punto de interés <span class="math inline">\(x\)</span> esté en el centro del rango del polinomio interpolador (<em>aproximación por diferencias centrales</em>).</p>
 
 </div>
 </div>
@@ -304,8 +684,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-
-<a href="introducción-a-los-métodos-numéricos.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="aproximación-polinomial-interpolación-y-extrapolación.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="autovalores-y-autovectores.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -325,7 +705,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/mpru/guia-metodos-numericos/issues/index.Rmd",
+"link": "https://github.com/mpru/guia-metodos-numericos/issues/05_Unidad4_Parte2.Rmd",
 "text": "Edit"
 },
 "history": {

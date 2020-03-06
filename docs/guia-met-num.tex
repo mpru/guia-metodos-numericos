@@ -1,7 +1,7 @@
 \PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
 \PassOptionsToPackage{hyphens}{url}
 %
-\documentclass[]{book}
+\documentclass[openany]{book}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
@@ -238,7 +238,7 @@
 }
 \makeatother
 \usepackage[]{natbib}
-\bibliographystyle{apalike}
+\bibliographystyle{plainnat}
 
 \title{Taller de Métodos Numéricos}
 \providecommand{\subtitle}[1]{}
@@ -3813,5 +3813,1465 @@ y = f(x) &= \frac{x - x_1}{x_0 - x_1} y_0 + \frac{x - x_0}{x_1 - x_0} y_1 \\ \\
 \item
   Aunque no existe un criterio para determinar el orden óptimo del polinomio de interpolación, generalmente se recomienda utilizar uno con orden relativamente bajo en un pequeño rango de \(x\).
 \end{itemize}
+
+\hypertarget{aproximaciuxf3n-polinomial-integraciuxf3n-y-derivaciuxf3n-numuxe9rica}{%
+\chapter{Aproximación Polinomial: integración y derivación numérica}\label{aproximaciuxf3n-polinomial-integraciuxf3n-y-derivaciuxf3n-numuxe9rica}}
+
+\hypertarget{integraciuxf3n-numuxe9rica}{%
+\section{Integración numérica}\label{integraciuxf3n-numuxe9rica}}
+
+\begin{itemize}
+\tightlist
+\item
+  Dada la función \(y = f(x)\) definida en forma tabular con a través de \(n+1\) valores de \(x\) equiespaciados \(x_0, x_1 = x_0 + h, \cdots, x_n = x_0 + nh\), se desea hallar una aproximación de la integral definida:
+\end{itemize}
+
+\begin{equation}
+\label{eq:ec1}
+\int_{x_0}^{x_n} f(x)dx
+\end{equation}
+
+\begin{itemize}
+\tightlist
+\item
+  Para esto, aproximaremos a \(f(x)\) con el polinomio de Newton:
+\end{itemize}
+
+\begin{equation}
+\label{eq:ec2}
+f(x) \cong y_0 + k \Delta y_0 + \frac{k(k-1)}{2!}\Delta^2 y_0 + \frac{k(k-1)(k-2)}{3!}\Delta^3 y_0 + \cdots
+\end{equation}
+
+\[
+k = \frac{x-x_0}{h}
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  En \eqref{eq:ec1} la variable es \(x\), mientras que en \eqref{eq:ec2} la variable está expresada como \(k = (x - x_0)/h\), por lo tanto para poder reemplazar \eqref{eq:ec2} en \eqref{eq:ec1} se debe realizar un cambio de variables:
+\end{itemize}
+
+\[
+k = \frac{x-x_0}{h} \implies
+\begin{cases}
+x = x_0 + hk \\
+dx = hdk \\
+x = x_0 \implies k = \frac{x_0-x_0}{h} = 0 \\
+x = x_n \implies k = \frac{x_n-x_0}{h} = \frac{x_0 + nh -x_0}{h} =n \\
+\end{cases}
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  Luego:
+\end{itemize}
+
+\[
+\begin{aligned}
+& \int_{x_0}^{x_n} f(x)dx \\
+& \cong \int_{0}^{n} \Big( y_0 + k \Delta y_0 + \frac{k(k-1)}{2!}\Delta^2 y_0 + \frac{k(k-1)(k-2)}{3!}\Delta^3 y_0 + \cdots \Big) h\,dk \\
+& = h \int_{0}^{n} \Big[ y_0 + k \Delta y_0 + \Big( \frac{k^2}{2} - \frac{k}{2} \Big) \Delta^2 y_0 + \Big( \frac{k^3}{6} - \frac{k^2}{2} + \frac{k}{3} \Big) \Delta^3 y_0  + \cdots \Big] dk \\
+&= h \Big[ 
+\left.
+y_0 k + \frac{k^2}{2} \Delta y_0 + \Big( \frac{k^3}{6} - \frac{k^2}{4} \Big) \Delta^2 y_0 + \Big( \frac{k^4}{24} - \frac{k^3}{6} + \frac{k^2}{6} \Big) \Delta^3 y_0  + \cdots
+\Big] \right\vert_{0}^{n} \\
+&= h \Big[ y_0 n + \frac{n^2}{2} \Delta y_0 + \Big( \frac{n^3}{6} - \frac{n^2}{4} \Big) \Delta^2 y_0 + \Big( \frac{n^4}{24} - \frac{n^3}{6} + \frac{n^2}{6} \Big) \Delta^3 y_0  + \cdots
+\Big]
+\end{aligned}
+\]
+
+\textbf{Ejemplo}. Se tienen los siguientes valores tabulados de \(f(x)\) y se desea hallar su integral entre 0 y 6.
+
+\begin{longtable}[]{@{}cc@{}}
+\toprule
+\(x\) & \(y=f(x)\)\tabularnewline
+\midrule
+\endhead
+0.0 & 2.00\tabularnewline
+0.5 & 3.13\tabularnewline
+1.0 & 2.14\tabularnewline
+1.5 & 1.14\tabularnewline
+2.0 & 1.78\tabularnewline
+2.5 & 2.64\tabularnewline
+3.0 & 2.25\tabularnewline
+3.5 & 1.53\tabularnewline
+4.0 & 1.75\tabularnewline
+4.5 & 2.34\tabularnewline
+5.0 & 2.24\tabularnewline
+5.5 & 1.77\tabularnewline
+6.0 & 1.78\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{center}\includegraphics[width=1\linewidth]{Plots/U4/Unidad4_2_g} \end{center}
+
+La curva roja es la verdadera función \(f(x)\) que originó la tabla, la cual suponemos desconocida o difícil de integrar.
+
+\hypertarget{fuxf3rmula-trapecial}{%
+\section{Fórmula trapecial}\label{fuxf3rmula-trapecial}}
+
+\begin{itemize}
+\tightlist
+\item
+  Si la interpolación se limita al primer orden y la integral sólo se calcula entre los dos primeros valores de \(x\), se obtiene:
+\end{itemize}
+
+\begin{gather*}
+\int_{x_0}^{x_1} f(x)dx \cong  \int_{0}^{1} \Big( y_0 + k \Delta y_0 \Big) hdk = h \left. \Big( y_0 k + \frac{k^2}{2} \Delta y_0 \Big) \right\vert_{0}^{1} \\
+= h \Big( y_0 + \frac{\Delta y_0}{2} \Big) = h \Big( y_0 + \frac{y_1 - y_0}{2} \Big) = \frac{h}{2} (y_0 + y_1)
+\end{gather*}
+
+\begin{itemize}
+\tightlist
+\item
+  En el ejemplo:
+\end{itemize}
+
+\[
+\int_{0}^{0.5} f(x)dx \cong  \frac{0.5}{2} (3.13 + 2) = 1.2825
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  Geométricamente, esto equivale al área \(A_1\) del trapecio formado por la recta de interpolación y el eje de las abscisas, entre \(x_0\) y \(x_1\):
+\end{itemize}
+
+\[A_2=1.2825\]
+
+\begin{center}\includegraphics[width=1\linewidth]{Plots/U4/Unidad4_2_g2} \end{center}
+
+\begin{itemize}
+\tightlist
+\item
+  De manera semejante, se puede emplear la interpolación lineal de Newton para obtener una aproximación de la integral entre \(x_1\) y \(x_2\):
+\end{itemize}
+
+\[
+\int_{x_1}^{x_2} f(x)dx \cong A_2 = \frac{h}{2} (y_1 + y_2)
+\]
+
+\[A_2=1.3175\]
+
+\begin{center}\includegraphics[width=1\linewidth]{Plots/U4/Unidad4_2_g3} \end{center}
+
+\begin{itemize}
+\tightlist
+\item
+  Y sucesivamente para todos los intervalos:
+\end{itemize}
+
+\[
+\int_{x_{i-1}}^{x_i} f(x)dx \cong A_i = \frac{h}{2} (y_{i-1} + y_i) \quad i = 1, \cdots, n
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  De modo que la suma de las áreas de los trapecios \(A_i\) resulta ser la aproximación para la integral entre \(x_0\) y \(x_n\):
+\end{itemize}
+
+\[
+\int_{x_{0}}^{x_n} f(x)dx \cong \sum_{i=1}^n A_i = \sum_{i=1}^n \frac{h}{2} (y_{i-1} + y_i) = \frac{h}{2} \Big( y_0 + y_n + 2 \sum_{i = 1}^{n-1} y_i \Big)
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  La fórmula hallada se conoce como \textbf{fórmula trapecial} y se la simboliza con:
+\end{itemize}
+
+\[
+A_{1/2} = \frac{h}{2} \Big( y_0 + y_n + 2 \sum_{i = 1}^{n-1} y_i \Big)
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  Cuanto menor sea el ancho de los intervalos \(h\) y más se acerque \(f(x)\) a una recta, mejor será la aproximación así obtenida.
+\item
+  Gráficamente:
+\end{itemize}
+
+\begin{center}\includegraphics[width=0.85\linewidth]{Plots/U4/Unidad4_2_g4} \end{center}
+
+\begin{itemize}
+\tightlist
+\item
+  En el ejemplo: \(A_{1/2} = 12.3000\).
+\item
+  El valor exacto es: \(\int_0^{6}f(x)dx = 12.2935\), con lo cual el error relativo de la aproximación con la fórmula trapecial fue: \(0.05\%\).
+\end{itemize}
+
+\hypertarget{fuxf3rmula-de-simpson-de-13}{%
+\section{Fórmula de Simpson de 1/3}\label{fuxf3rmula-de-simpson-de-13}}
+
+\begin{itemize}
+\tightlist
+\item
+  Si la interpolación es de segundo orden y la integral sólo se calcula entre los tres primeros valores de \(x\), se obtiene:
+\end{itemize}
+
+\[
+\begin{aligned}
+\int_{x_0}^{x_2} f(x)dx &\cong  \int_{0}^{2} \Big[ y_0 + k \Delta y_0 + \Big( \frac{k^2}{2} - \frac{k}{2} \Big) \Delta^2 y_0 \Big]  hdk \\
+&= h \left. \Big[ y_0 k + \frac{k^2}{2} \Delta y_0  + \Big( \frac{k^3}{6} - \frac{k^2}{4} \Big) \Delta^2 y_0 \Big] \right\vert_{0}^{2} \\
+&= h \Big[ 2y_0 + 2 \Delta y_0  + \frac{1}{3} \Delta^2 y_0 \Big]
+\end{aligned}
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  Dado que \(\Delta y_0 = y_1 - y_0\) y \(\Delta^2 y_0 = \Delta y_1 - \Delta y_0 = y_2 - 2y_1 + y_0\), nos queda:
+\end{itemize}
+
+\[
+\begin{aligned}
+\int_{x_0}^{x_2} f(x)dx &\cong h \Big[ 2y_0 + 2 (y_1 - y_0)  + \frac{1}{3} (y_2 - 2y_1 + y_0) \Big] \\
+&= \frac{h}{3} (y_0 + 4y_1 + y_2)
+\end{aligned}
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  Geométricamente, esto equivale al área \(A_1\) encerrada entre el eje de las abscisas, \(x_0\) y \(x_2\) y el polinomio integrador que pasa por \((x_0, y_0)\), \((x_1, y_1)\) y \((x_2, y_2)\): \hspace{3cm} \(A_1=2.7766\)
+\end{itemize}
+
+\begin{center}\includegraphics[width=0.95\linewidth]{Plots/U4/Unidad4_2_g5} \end{center}
+
+\begin{itemize}
+\tightlist
+\item
+  De manera semejante, se puede emplear la interpolación cuadrática de Newton para obtener una aproximación de la integral entre \(x_2\) y \(x_4\):
+\end{itemize}
+
+\[
+\int_{x_2}^{x_4} f(x)dx \cong A_2 = \frac{h}{3} (y_2 + 4y_3 + y_4)
+\]
+
+\[A_2=1.4133\]
+
+\begin{center}\includegraphics[width=1\linewidth]{Plots/U4/Unidad4_2_g6} \end{center}
+
+\begin{itemize}
+\tightlist
+\item
+  Y sucesivamente para todos los intervalos:
+\end{itemize}
+
+\[
+\int_{x_{i-1}}^{x_{i+1}} f(x)dx \cong  \frac{h}{3} (y_{i-1} + 4y_i + y_{i+1}) \quad i = 1, 3, 5, \cdots, n-1
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  De modo que la suma de estas áreas resulta ser la aproximación para la integral entre \(x_0\) y \(x_n\):
+\end{itemize}
+
+\[
+\int_{x_{0}}^{x_n} f(x)dx \cong \sum\limits_{\substack{i = 1\\ i~impar}}^{n-1} \frac{h}{3} (y_{i-1} + 4y_i + y_{i+1}) = \frac{h}{3} \Big( y_0 + y_n + 2 \sum \limits_{\substack{i = 2\\ i~par}}^{n-2} y_i + 4 \sum\limits_{\substack{i = 1\\ i~impar}}^{n-1} y_i  \Big)
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  La fórmula hallada se conoce como \textbf{fórmula de Simpson de 1/3} y se la simboliza con:
+\end{itemize}
+
+\[
+A_{1/3} = \frac{h}{3} \Big( y_0 + y_n + 2 \sum \limits_{\substack{i = 2\\ i~par}}^{n-2} y_i + 4 \sum\limits_{\substack{i = 1\\ i~impar}}^{n-1} y_i  \Big)
+\]
+
+\begin{itemize}
+\item
+  Para poder aplicarla, es necesario que la cantidad de puntos tabulados sea impar, es decir que la tabla tenga una cantidad par de intervalos.
+\item
+  Gráficamente:
+\end{itemize}
+
+\begin{center}\includegraphics[width=0.85\linewidth]{Plots/U4/Unidad4_2_g7} \end{center}
+
+\begin{itemize}
+\tightlist
+\item
+  En el ejemplo: \(A_{1/3} = 12.3833\).
+\item
+  El valor exacto es: \(\int_0^{6}f(x)dx = 12.2935\), con lo cual el error relativo de la aproximación con la fórmula trapecial fue: \(7.3\%\).
+\end{itemize}
+
+\hypertarget{fuxf3rmula-de-simpson-de-38}{%
+\section{Fórmula de Simpson de 3/8}\label{fuxf3rmula-de-simpson-de-38}}
+
+\begin{itemize}
+\tightlist
+\item
+  Si la interpolación es de tercer orden y la integral sólo se calcula entre los 4 primeros valores de \(x\), se obtiene:
+\end{itemize}
+
+\[
+\hspace{-.25cm}
+\begin{aligned}
+\int_{x_0}^{x_3} f(x)dx &\cong  \int_{0}^{3} \Big[ y_0 + k \Delta y_0 + \Big( \frac{k^2}{2} - \frac{k}{2} \Big) \Delta^2 y_0  + \Big( \frac{k^3}{6} - \frac{k^2}{2} + \frac{k}{3} \Big) \Delta^3 y_0
+\Big]  hdk \\
+&= h \left. \Big[ y_0 k + \frac{k^2}{2} \Delta y_0  + \Big( \frac{k^3}{6} - \frac{k^2}{4} \Big) \Delta^2 y_0 + \Big( \frac{k^4}{24} - \frac{k^3}{6} + \frac{k^2}{6} \Big) \Delta^3 y_0 \Big] \right\vert_{0}^{3} \\
+&= h \Big[ 3y_0 + \frac{9}{2} \Delta y_0  + \frac{9}{4} \Delta^2 y_0 + \frac{3}{8} \Delta^3 y_0\Big]
+\end{aligned}
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  Dado que \(\Delta y_0 = y_1 - y_0\), \(\Delta^2 y_0 = \Delta y_1 - \Delta y_0 = y_2 - 2y_1 + y_0\), y \(\Delta^3 y_0 = \Delta^2 y_1 - \Delta^2 y_0 = y_3 - 3y_2 - 3y_1 + y_0\) nos queda:
+\end{itemize}
+
+\[
+\begin{aligned}
+\int_{x_0}^{x_3} f(x)dx &\cong \frac{3}{8} h (y_0 + 3y_1 + 3y_2+y_3)
+\end{aligned}
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  Geométricamente, esto equivale al área \(A_1\) encerrada entre el eje de las abscisas, \(x_0\) y \(x_3\) y el polinomio integrador que pasa por \((x_0, y_0)\), \((x_1, y_1)\), \((x_2, y_2)\) y \((x_3, y_3)\):
+\end{itemize}
+
+\[A_1 = 3.5531\]
+
+\begin{center}\includegraphics[width=1\linewidth]{Plots/U4/Unidad4_2_g8} \end{center}
+
+\begin{itemize}
+\tightlist
+\item
+  De manera semejante, se puede emplear la interpolación cúbica de Newton para obtener una aproximación de la integral entre \(x_3\) y \(x_6\):
+\end{itemize}
+
+\[
+\int_{x_3}^{x_6} f(x)dx \cong A_2 = \frac{3}{8} h (y_3 + 3y_4 + 3y_5 + y_6)
+\]
+
+\[A_1 = 3.1219\]
+
+\begin{center}\includegraphics[width=1\linewidth]{Plots/U4/Unidad4_2_g9} \end{center}
+
+\begin{itemize}
+\tightlist
+\item
+  Y sucesivamente para todos los intervalos:
+\end{itemize}
+
+\[
+\int_{x_{i}}^{x_{i+3}} f(x)dx \cong  \frac{3}{8} h (y_{i} + 3y_{i+1} + 3y_{i+2} + y_{i+3}) \quad i = 0, 3, 6, \cdots, n-3
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  De modo que la suma de estas áreas resulta ser la aproximación para la integral entre \(x_0\) y \(x_n\):
+\end{itemize}
+
+\[
+\begin{aligned}
+\int_{x_{0}}^{x_n} f(x)dx & \cong \sum\limits_{\substack{i = 0\\ ó~i~múltiplo~de~3}}^{n-3} \frac{3}{8} h (y_{i} + 3y_{i+1} + 3y_{i+2} + y_{i+3}) \\
+ &= \frac{3}{8} h \Big( y_0 + y_n + 2 \sum \limits_{\substack{i = 3\\ i~múltiplo~de~3}}^{n-3} y_i + 3 \sum\limits_{\substack{i = 1\\ i~no~múltiplo~de~3}}^{n-1} y_i  \Big)
+ \end{aligned}
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  La fórmula hallada se conoce como \textbf{fórmula de Simpson de 3/8} y se la simboliza con:
+\end{itemize}
+
+\[
+A_{3/8} = \frac{3}{8} h \Big( y_0 + y_n + 2 \sum \limits_{\substack{i = 3\\ i~múltiplo~de~3}}^{n-3} y_i + 3 \sum\limits_{\substack{i = 1\\ i~no~múltiplo~de~3}}^{n-1} y_i  \Big)
+\]
+
+\begin{itemize}
+\item
+  Para poder aplicarla, es necesario que la cantidad de intervalos en la tabla sea múltiplo de 3.
+\item
+  Gráficamente:
+\end{itemize}
+
+\begin{center}\includegraphics[width=0.85\linewidth]{Plots/U4/Unidad4_2_g10} \end{center}
+
+\begin{itemize}
+\tightlist
+\item
+  En el ejemplo: \(A_{3/8} = 12.4088\).
+\item
+  El valor exacto es: \(\int_0^{6}f(x)dx = 12.2935\), con lo cual el error relativo de la aproximación con la fórmula trapecial fue: \(9.4\%\).
+\end{itemize}
+
+\hypertarget{derivaciuxf3n-numuxe9rica}{%
+\section{Derivación numérica}\label{derivaciuxf3n-numuxe9rica}}
+
+\begin{itemize}
+\tightlist
+\item
+  Para aproximar la derivada de una función en un punto, nuevamente haremos uso del polinomio interpolador de Newton:
+\end{itemize}
+
+\[
+\begin{aligned}
+f(x) & \cong y_0 + k \Delta y_0 + \frac{k(k-1)}{2!}\Delta^2 y_0 + \frac{k(k-1)(k-2)}{3!}\Delta^3 y_0 + \cdots \\
+&= y_0 + k \Delta y_0 + \Big( \frac{k^2}{2} - \frac{k}{2} \Big) \Delta^2 y_0 + \Big( \frac{k^3}{6} - \frac{k^2}{2} + \frac{k}{3} \Big) \Delta^3 y_0  + \cdots
+\end{aligned}
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  Se debe derivar con respecto a \(x\) el miembro derecho de la expresión anterior, aplicando la Regla de la Cadena ya que \(k = (x - x_0)/h\).
+\item
+  Por simplicidad, lo mostraremos sólo con el polinomio interpolador cuadrático.
+\item
+  Aproximación de la derivada con el polinomio interpolador cuadrático de Newton:
+\end{itemize}
+
+\[
+f(x)  \cong y_0 + k \Delta y_0 + \frac{k^2}{2} \Delta^2 y_0 - \frac{k}{2} \Delta^2 y_0
+\]
+\[
+k = \frac{x-x_0}{h} \implies \frac{\partial k}{\partial x} = \frac{1}{h}
+\]
+
+\[
+\begin{aligned}
+f'(x) & \cong \Delta y_0 \frac{1}{h} + \Delta^2 y_0 ~k~ \frac{1}{h} - \frac{\Delta^2 y_0}{2} \frac{1}{h} \\
+& = \frac{1}{h} \Big[ \Delta y_0 + \Big( k-\frac{1}{2} \Big) \Delta^2 y_0 \Big]
+\end{aligned}
+\]
+
+\textbf{Retomando el Ejemplo 1 de la unidad sobre Integración}: vamos a aproximar el valor de \(f'(3.4)\).
+
+\begin{longtable}[]{@{}lllllll@{}}
+\toprule
+\(x_k\) & \(y_k\) & \(\Delta y_k\) & \(\Delta^2 y_k\) & \(\Delta^3 y_k\) & \(\Delta^4 y_k\) & \(\Delta^5 y_k\)\tabularnewline
+\midrule
+\endhead
+2 & 0,3010 & 0,1761 & -0,0511 & 0,0230 & -0,0127 & 0,0081\tabularnewline
+3 & 0,4771 & 0,1250 & -0,0281 & 0,0103 & -0,0046 & -\tabularnewline
+4 & 0,6021 & 0,0969 & -0,0178 & 0,0057 & - & -\tabularnewline
+5 & 0,6990 & 0,0791 & -0,0121 & - & - & -\tabularnewline
+6 & 0,7781 & 0,0670 & - & - & - & -\tabularnewline
+7 & 0,8451 & - & - & - & - & -\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{itemize}
+    \small
+    \item $x = 3,4$
+    \item $x_0 = 3$
+    \item $h = 1$
+    \item $k = \frac{x-x_0}{h} = \frac{3.4-3}{1} = 0.4$
+    \item $\Delta y_0 = 0.1250$; $\Delta^2 y_0 = -0.0281$
+\end{itemize}
+
+\[
+f'(x) \cong \frac{1}{h} \Big[ \Delta y_0 + \Big( k-\frac{1}{2} \Big) \Delta^2 y_0 \Big] = 
+ 0.1250 + (-0.1) (-0.0281) = 0.12781
+\]
+
+Nota: esta fórmula se conoce como \emph{aproximación por diferencias hacia adelante}, pero se pueden lograr aproximaciones más precisas de otras formas, por ejemplo, haciendo que el punto de interés \(x\) esté en el centro del rango del polinomio interpolador (\emph{aproximación por diferencias centrales}).
+
+\hypertarget{autovalores-y-autovectores}{%
+\chapter{Autovalores y Autovectores}\label{autovalores-y-autovectores}}
+
+\hypertarget{generalidades-3}{%
+\section{Generalidades}\label{generalidades-3}}
+
+\begin{itemize}
+\tightlist
+\item
+  Los \textbf{autovalores} y \textbf{autovectores} son esas cosas raras que aparecen por todos lados pero nunca terminamos por entender.
+\item
+  El objetivo de esta unidad es ver métodos para su cálculo, pero antes vamos a repasar qué son (\textbf{informalmente}, \textbf{sin rigurosidad}, el que avisa no traiciona\ldots{})
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  En muchas disciplinas los objetos que se estudian se representan con \emph{vectores} (ej. \(\textbf{x}\), \(\textbf{y}\)) y las cosas que se hacen con ellos son \emph{transformaciones lineales}, que se representan como \emph{matrices} (ej. \(\textbf{A}\)).
+\item
+  Así, en muchas situaciones las relaciones que importan entre esos objetos/vectores se expresan como:
+\end{itemize}
+
+\[\textbf{y} = \textbf{A} \textbf{x}\]
+
+\begin{itemize}
+\item
+  Esto abarca desde sistemas de ecuaciones lineales (presentes casi en todos lados en ciencia) hasta problemas muy sofisticados en ingeniería.
+\item
+  Ahora bien, en general no es muy fácil mirar a la matriz \(\textbf{A}\) y directamente darse cuenta qué es lo que va a pasar cuando se la multipliquemos a \(\textbf{x}\).
+\item
+  Sin embargo, podríamos encontrar casos donde haya una relación muy simple entre el vector \(\textbf{x}\) y el vector resultado \(\textbf{y=Ax}\).
+\item
+  Por ejemplo, si miramos la matriz \(\mathbf{A} = \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}\) y se la multiplicamos al vector \(\textbf{x} = \begin{bmatrix} 1 \\ 1 \end{bmatrix}\), ¡nos da como resultado el mismo vector \(\textbf{x}\)!
+\item
+  Es decir, que para ese vector, es muy fácil ver qué aspecto tiene \(\textbf{Ax}\).
+\item
+  Se puede generalizar esta observación con el concepto de \textbf{autovectores}.
+\item
+  Un \textbf{autovector} de una matriz \(\textbf{A}\) es cualquier vector \(\textbf{x}\) para el que sólo cambia su escala cuando se lo multiplica con \(\textbf{A}\), es decir: \(\textbf{Ax} = \lambda \textbf{x}\), para algún número \(\lambda\) real o complejo, que recibe el nombre de \textbf{autovalor}.
+\item
+  Entonces si una matriz \(\textbf{A}\) describe algún tipo de sistema, los autovectores son aquellos vectores que, cuando pasan por el sistema, se modifican en una forma muy sencilla.
+\item
+  Por ejemplo, si \(\textbf{A}\) describe operaciones geométricas, en principio \(\textbf{A}\) podría estirar y rotar a los vectores, sin embargo, a sus autovectores lo único que puede hacerles es estirarlos, no rotarlos.
+\item
+  Sea: \(\mathbf{A} = \begin{bmatrix} 3 & 2 \\ 1 & 4 \end{bmatrix}\), \(\textbf{u} = \begin{bmatrix} 1 \\ 1 \end{bmatrix}\), \(\textbf{v} = \begin{bmatrix} 1 \\ -0.5 \end{bmatrix}\) y \(\textbf{w} = \begin{bmatrix} 0 \\ 1 \end{bmatrix}\).
+\item
+  En este gráfico podemos ver los vectores antes de transformarlos (multiplicarlos) mediante \(\mathbf{A}\):
+\end{itemize}
+
+\begin{center}\includegraphics[width=1\linewidth]{Plots/U5/auto1} \end{center}
+
+\begin{itemize}
+\tightlist
+\item
+  Y en este gráfico podemos ver como quedan luego de la transformación:
+\end{itemize}
+
+\begin{center}\includegraphics[width=1\linewidth]{Plots/U5/auto2} \end{center}
+
+\begin{itemize}
+\item
+  \(\textbf{u}\) y \(\textbf{v}\) no cambiaron su dirección, sólo su norma: son \textbf{autovectores} de \(\textbf{A}\), asociados a los autovalores 5 y 2.
+\item
+  En cambio, la matriz \(\textbf{A}\) modificó la dirección de \(\textbf{w}\), entonces no es un autovector.
+\end{itemize}
+
+\hypertarget{definiciuxf3n}{%
+\subsection{Definición}\label{definiciuxf3n}}
+
+\begin{itemize}
+\item
+  Dada una matriz \(\textbf{A}\) cuadradada de orden \(n\), llamamos \textbf{autovector} o \textbf{vector propio} de \(\textbf{A}\) a todo vector \(\textbf{x}\) de orden \(n\) cuya dirección no se modifica al transformarlo mediante \(\textbf{A}\).
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Transformarlo mediante \(\textbf{A}\) significa realizar el producto \(\textbf{Ax}\) dando como resultado un nuevo vector de orden \(n\).
+  \item
+    Que la dirección de \(\textbf{x}\) no se modifique significa que el nuevo vector debe ser múltiplo de \(\textbf{x}\), es decir, igual a \(\lambda \textbf{x}\), con \(\lambda \in \mathbb{C}\), que recibe el nombre de \textbf{autovalor} o \textbf{valor propio} de A.
+  \end{itemize}
+\item
+  Lo anterior se resume en la siguiente expresión: \(\textbf{x}\) es un autovector y \(\lambda\) es un autovalor de \(\textbf{A}\) si:
+\end{itemize}
+
+\[\textbf{Ax} = \lambda \textbf{x}, \quad \textbf{x} \neq \textbf{0}, \quad \lambda \in \mathbb{C}\]
+
+\textbf{Observación}
+
+\begin{itemize}
+\tightlist
+\item
+  Se debe observar que si \(\textbf{x}\) es un autovector con el autovalor \(\lambda\) entonces cualquier múltiplo diferente de cero de \(\textbf{x}\) es también un autovector con el autovalor \(\lambda\).
+\end{itemize}
+
+\hypertarget{propiedades}{%
+\subsection{Propiedades}\label{propiedades}}
+
+\begin{itemize}
+\item
+  Dada una matriz \(\textbf{A}\) cuadradada de orden \(n\):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(\textbf{A}\) tiene \(n\) autovalores, \(\lambda_1, \lambda_2, \cdots, \lambda_n\), los cuales no necesariamente son todos distintos.
+  \item
+    \(tr(A) = \sum_{i=1}^n a_{ii} = \sum_{i=1}^n \lambda_{i}\).
+  \item
+    \(\det(A) = \prod_{i=1}^n \lambda_{i}\).
+  \item
+    Los autovalores de \(\textbf{A}^k\) son \(\lambda_1^k, \lambda_2^k, \cdots, \lambda_n^k\).
+  \item
+    Si \(\textbf{A}\) es real y simétrica todos sus autovalores son reales y los autovectores correspondientes a distintos autovalores son ortogonales.
+  \item
+    Si \(\textbf{A}\) es triangular los valores propios son los elementos diagonales.
+  \item
+    Los autovalores de una matriz y su transpuesta son los mismos.
+  \item
+    Si \(\textbf{A}\) tiene inversa, los autovalores de \(\textbf{A}^{-1}\) son \(1/\lambda_1, 1/\lambda_2, \cdots, 1/\lambda_n\).
+  \item
+    Los valores de \(\alpha \textbf{A}\) son \(\alpha \lambda_1, \alpha \lambda_2, \cdots, \alpha \lambda_n, \, \alpha \in \mathbb{R}\).
+  \item
+    Las matrices \(\textbf{A}\) y \(\textbf{Q}^{-1}\textbf{AQ}\) (forma cuadrática) tienen los mismos valores propios.
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{obtenciuxf3n-los-autovalores-y-autovectores}{%
+\section{Obtención los autovalores y autovectores}\label{obtenciuxf3n-los-autovalores-y-autovectores}}
+
+\begin{itemize}
+\tightlist
+\item
+  A partir de la expresión anterior:
+\end{itemize}
+
+\[
+\textbf{Ax} = \lambda \textbf{x} \implies \textbf{Ax} - \lambda \textbf{x} = \textbf{0} \implies (\textbf{A} - \lambda \textbf{I}) \textbf{x} = \textbf{0} 
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  Esto es un sistema de ecuaciones lineales con matriz de coeficientes \(\textbf{A} - \lambda \textbf{I}\) y vector de términos independientes \(\textbf{0}\), es decir, es un \textbf{sistema homogéneo} y como tal tiene solución no nula si: \(\det (\textbf{A} - \lambda \textbf{I}) = 0\) (repasar por qué).
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  El desarrollo de esta expresión conduce a un polinomio de grado \(n\) en la incógnita \(\lambda\) que igualado a cero es llamado \textbf{ecuación característica} y su resolución permite hallar los autovalores.
+\end{itemize}
+
+\textbf{Ejemplo}
+
+\begin{gather*}
+\mathbf{A} = 
+\begin{bmatrix} 
+    5 & -2 & 0 \\ 
+    -2 & 3 & -1 \\
+    0 & -1 & 1    
+\end{bmatrix} 
+\implies \\ \\
+ det(\textbf{A} - \lambda \textbf{I}) = 
+\begin{vmatrix}
+    5 - \lambda & -2 & 0 \\ 
+    -2 & 3 - \lambda & -1 \\
+    0 & -1 & 1-\lambda
+\end{vmatrix}  = 
+\cdots  = -\lambda^3 + 9 \lambda^2 - 18 \lambda + 6 = 0
+\end{gather*}
+
+\begin{itemize}
+\item
+  Las soluciones de la ecuación característica son \(\lambda_1 = 6.2899, \lambda_2 = 2.2943\) y \(\lambda_3 = 0.4158\), los cuales son los autovalores de \(\textbf{A}\).
+\item
+  Hallar la ecuación característica ya es demasiado trabajoso para \(n=3\), y mucho más será para mayor \(n\)\ldots{} por eso veremos métodos que directamente nos den los coeficientes de esta ecuación.
+\item
+  Pero nos faltan los autovectores!
+\item
+  Para eso hacemos uso de la definición: \(\textbf{A}\) es un autovector de \(\textbf{A}\) asociado al autovalor \(\lambda\) si \((\textbf{A} - \lambda \textbf{I}) \textbf{x} = \textbf{0}\).
+\item
+  Tomamos uno de los autovalores, por ejemplo, \(\lambda_1 = 6.2899\) y resolvemos el sistema de ecuaciones que la expresión anterior plantea:
+\end{itemize}
+
+\begin{gather*}
+(\textbf{A} - 6.2899 \, \textbf{I}) \textbf{x} = \textbf{0} \implies 
+\begin{bmatrix}
+    -1.2899 & -2 & 0 \\ 
+    -2 & -3.2899 & -1 \\
+    0 & -1 & -5.2899
+\end{bmatrix}
+\begin{bmatrix}
+    x_1 \\ x_2 \\ x_3
+\end{bmatrix} 
+=
+\begin{bmatrix}
+    0 \\ 0 \\ 0
+\end{bmatrix}
+\\ \\
+\implies
+\begin{cases}
+-1.2899 x_1 -2 x_2 &= 0 \\
+-2 x_1 - 3.2899 x_2 - x_3 &= 0\\
+-x_2 - 5.2899 x_3 &= 0
+\end{cases} \implies
+\begin{cases}
+    x_1 = 8.2018 x_3\\
+    x_2 = -5.2899 x_2\\
+    x_3 \in \mathbb{R} 
+\end{cases}
+\end{gather*}
+
+\begin{itemize}
+\tightlist
+\item
+  Como se puede ver la solución de este sistema homogéneo no es única, representando los infinitos autovectores asociados a \(\lambda_1 = 6.2899\). Por ejemplo, si elegimos \(x_3 = 1\), obtenemos el autovector:
+\end{itemize}
+
+\[
+\textbf{x}_1 = 
+\begin{bmatrix}
+    8.2018 \\ -5.2899 \\ 1
+\end{bmatrix} 
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  En general, se resuelve informando el autovector de norma 1 que sí es único.
+\item
+  De la misma forma se procede con los restantes autovalores \(\lambda_2\) y \(\lambda_3\).
+\end{itemize}
+
+\hypertarget{resumen-1-obtener-autovalores-y-autovectores}{%
+\subsection{Resumen 1: Obtener autovalores y autovectores}\label{resumen-1-obtener-autovalores-y-autovectores}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Paso 1}: desarrollar la expresión de \(\det(\textbf{A} - \lambda \textbf{I})\) para obtener la ecuación característica (muy engorroso para n \textgreater{} 3):
+\end{itemize}
+
+\[
+f(\lambda) = \det(\textbf{A} - \lambda \textbf{I}) = \lambda^n + b_1 \lambda^{n-1} + \cdots + b_{n-1} \lambda + b_n = 0
+\]
+
+\begin{itemize}
+\item
+  \textbf{Paso 2}: resolver la ecuación característica para hallar los autovalores \(\lambda_1, \lambda_2, \cdots, \lambda_n\). Dependiendo de \(n\), podemos hacerlo a mano, con la calculadora o con los métodos de la Unidad 2.
+\item
+  \textbf{Paso 3}: tomar cada autovalor \(\lambda_i\) y resolver el sistema de ecuaciones lineales \((\textbf{A} - \lambda_i \textbf{I}) \textbf{x} = \textbf{0}\). No nos sirven los métodos de la Unidad 3 porque este sistema es compatible indeterminado, realizarlo ``a mano'' y dar un expresión para los infinitos autovectores o informar el autovector de norma 1.
+\end{itemize}
+
+\hypertarget{muxe9todo-de-krylov}{%
+\section{Método de Krylov}\label{muxe9todo-de-krylov}}
+
+\begin{itemize}
+\item
+  Como ya mencionamos, el desarrollo de \(\det(\textbf{A} - \lambda \textbf{I})\) para obtener la ecuación característica tal como lo vimos en el ejemplo inicial se vuelve engorroso rápidamente.
+\item
+  El método de Krylov permite obtenerla de manera sencilla, basándose en el siguiente teorema:
+\item
+  \textbf{Teorema de Caylay-Hamilton}: toda matriz cuadrada \(\textbf{A}\) verifica su propia ecuación característica. Es decir, siendo la ecuación característica:
+\end{itemize}
+
+\[
+f(\lambda) = \det(\textbf{A} - \lambda \textbf{I}) = \lambda^n + b_1 \lambda^{n-1} + \cdots + b_{n-1} \lambda + b_n = 0,
+\]
+
+se verifica que:
+
+\[
+f(\textbf{A}) = \textbf{A}^n + b_1 \textbf{A}^{n-1} + \cdots + b_{n-1} \textbf{A} + b_n \textbf{I} = \textbf{0}_{n\times n}
+\]
+
+\textbf{Ejemplo}
+
+\begin{gather*}
+\small
+\mathbf{A} = 
+\begin{bmatrix} 
+    5 & -2 & 0 \\ 
+    -2 & 3 & -1 \\
+    0 & -1 & 1    
+\end{bmatrix}
+\\ \\
+\mathbf{A}^2 = 
+\begin{bmatrix} 
+    29 & -16 & 2 \\ 
+    -16 & 14 & -4 \\
+    2 & -1 & 1    
+\end{bmatrix}
+\\ \\
+\mathbf{A}^3 = 
+\begin{bmatrix} 
+    177 & -108 & 18 \\ 
+    -108 & 78 & -18 \\
+    18 & -18 & 6    
+\end{bmatrix} \\ \\
+f(\textbf{A}) = f(\textbf{A}) = 
+   = \textbf{A}^3 + b_1 \textbf{A}^{2} +  b_{2} \textbf{A} + b_3 \textbf{I} 
+   = \textbf{0} \implies \\ \\
+\begin{bmatrix} 
+    177 & -108 & 18 \\ 
+    -108 & 78 & -18 \\
+    18 & -18 & 6    
+\end{bmatrix}
++ b_1
+\begin{bmatrix} 
+    29 & -16 & 2 \\ 
+    -16 & 14 & -4 \\
+    2 & -1 & 1    
+\end{bmatrix}
++ b_2
+\begin{bmatrix} 
+    5 & -2 & 0 \\ 
+    -2 & 3 & -1 \\
+    0 & -1 & 1    
+\end{bmatrix}  \\ \\
++ b_3
+\begin{bmatrix} 
+    1 & 0 & 0 \\ 
+    0 & 1 & 0 \\
+    0 & 0 & 1    
+\end{bmatrix} =
+\begin{bmatrix} 
+    0 & 0 & 0 \\ 
+    0 & 0 & 0 \\
+    0 & 0 & 0    
+\end{bmatrix}
+\implies \\ \\
+\begin{bmatrix}        
+    177 + 29 b_1 + 5 b_2 + b_3 &   -108-16  b_1 -2  b_2       &  18 +2  b_1              \\ 
+    -108 -16  b_1 -2  b_2      &  78  + 14 b_1 + 3 b_2 + b_3  &   -18 -4  b_1 -  b_2     \\
+    18+2  b_1                  &   -18 -4  b_1 -1  b_2        &   6 + 2 b_1   b_2 + b_3
+\end{bmatrix} =
+\begin{bmatrix} 
+    0 & 0 & 0 \\ 
+    0 & 0 & 0 \\
+    0 & 0 & 0    
+\end{bmatrix}
+\end{gather*}
+
+\begin{itemize}
+\item
+  Cualquiera de las columnas constituyen un sistema de tres ecuaciones lineales en las incógnitas \(b_1, b_2\) y \(b_3\), los coeficientes de la ecuación característica.
+\item
+  Podemos usar el siguiente artificio para generar un único sistema de ecuaciones:
+\end{itemize}
+
+\[
+f(\textbf{A}_{n\times n}) = \textbf{0}_{n\times n} \implies f(\textbf{A})  \, \textbf{y}= \textbf{0}\, \textbf{y}  = \textbf{0}_{n\times 1}  \quad \forall \, \textbf{y}_{n\times 1} \in \mathbb{R}^n
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  Por ejemplo, tomando \(\textbf{y} = [1 \quad 0 \quad 0]^t\), nos queda:
+\end{itemize}
+
+\begin{gather*}
+f(\textbf{A})  \, \textbf{y} = \textbf{0} \, \textbf{y}  \\ \\
+\implies (\textbf{A}^3 + b_1 \textbf{A}^2 + b_{2} \textbf{A} + b_3 \textbf{I})  \textbf{y} = \textbf{0} \\ \\
+\implies \textbf{A}^3 \textbf{y} + b_1 \textbf{A}^{2} \textbf{y} + b_{2} \textbf{A} \textbf{y} + b_3 \textbf{y} = \textbf{0} \\ \\
+\implies
+\begin{bmatrix} 
+    177 & -108 & 18 \\ 
+    -108 & 78 & -18 \\
+    18 & -18 & 6    
+\end{bmatrix}
+\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}
++ b_1
+\begin{bmatrix} 
+    29 & -16 & 2 \\ 
+    -16 & 14 & -4 \\
+    2 & -1 & 1    
+\end{bmatrix}
+\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} + \\ \\
++ b_2
+\begin{bmatrix} 
+    5 & -2 & 0 \\ 
+    -2 & 3 & -1 \\
+    0 & -1 & 1    
+\end{bmatrix} 
+\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} + 
+b_3
+\begin{bmatrix} 
+    1 & 0 & 0 \\ 
+    0 & 1 & 0 \\
+    0 & 0 & 1    
+\end{bmatrix}
+\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} =
+\begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix} \\ \\
+\implies
+\begin{bmatrix} 177 \\ -108 \\ 18 \end{bmatrix}
++ b_1
+\begin{bmatrix} 29 \\ -16 \\ 2 \end{bmatrix}
++ b_2
+\begin{bmatrix} 5 \\ -2 \\ 0 \end{bmatrix} 
++ b_3
+\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} =
+\begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix} \\ \\
+\implies
+\begin{bmatrix} 
+    29 & 5 & 1 \\ 
+    -16 & -2 & 0 \\
+    2 & 0 & 0    
+\end{bmatrix}
+\begin{bmatrix} b_1 \\ b_2 \\ b_3 \end{bmatrix} =
+\begin{bmatrix} -177 \\ 108 \\ -18 \end{bmatrix}
+\end{gather*}
+
+\begin{itemize}
+\item
+  Lo anterior no es más que un sistema de tres ecuaciones lineales, \(\mathbf{Cb=d}\), donde:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    el vector incógnitas es \(\mathbf{b} = \begin{bmatrix} b_1 \\ b_2 \\ b_3 \end{bmatrix}\), los coeficientes de la ecuación característica.
+  \item
+    el vector de términos independientes es \(\mathbf{d} = - \mathbf{A}^3 \, \mathbf{y} = \begin{bmatrix} -177 \\ 108 \\ -18 \end{bmatrix}\).
+  \item
+    la matriz de coeficientes es \(\mathbf{C} = [\mathbf{A}^{2} \, \mathbf{y} \quad \mathbf{A} \, \mathbf{y} \quad \mathbf{y}] = \begin{bmatrix} 29 & 5 & 1 \\ -16 & -2 & 0 \\2 & 0 & 0 \end{bmatrix}\)
+  \end{itemize}
+\item
+  Dependiendo de \(n\), podemos resolver este sistema ``a mano'', con la calcu o con algunos de los métodos de la Unidad 3.
+\item
+  En el ejemplo, el resultado es: \(b_1 = -9, b_2 = 18\) y \(b_3 = -6\).
+\item
+  La ecuación característica entonces es:
+\end{itemize}
+
+\[
+\lambda^3 - 9 \lambda^2 + 18 \lambda - 6 = 0
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  Esta ecuación coincide con la que obtuvimos en la sección anterior.
+\item
+  A partir de aquí, se debe continuar desde el Paso 2 del Resumen 1 para hallar los autovalores y sus respectivos autovectores.
+\end{itemize}
+
+\hypertarget{resumen-2-muxe9todo-de-krylov}{%
+\subsection{Resumen 2: Método de Krylov}\label{resumen-2-muxe9todo-de-krylov}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Qué necesita}: la matriz \(\mathbf{A}\) y un vector \(\mathbf{y}\).
+\item
+  \textbf{Qué nos da}: un sistema de ecuaciones para obtener los coeficientes de la ecuación característica.
+\item
+  \textbf{Paso 1}: elegir un vector \(\mathbf{y}\) de dimensión \(n \times 1\).
+\item
+  \textbf{Paso 2}: crear la matriz de coeficientes \(\mathbf{C} = [\mathbf{A}^{n-1} \, \mathbf{y} \quad \cdots \quad \mathbf{A}^2 \, \mathbf{y} \quad \mathbf{A} \, \mathbf{y} \quad \mathbf{y}]\).
+\item
+  \textbf{Paso 3}: crear el vector de términos independientes \(\mathbf{d} = - \mathbf{A}^n \, \mathbf{y}\), de dimensión \(n \times 1\).
+\item
+  \textbf{Paso 4}: resolver el sistema \(\mathbf{Cb=d}\), donde el vector de incógnitas \(\mathbf{b}\) son los coeficientes de la ecuación característica.
+\item
+  \textbf{Paso 5}: formar la ecuación característica y continuar desde el Paso 2 del Resumen 1 para hallar los autovalores y sus respectivos autovectores.
+\end{itemize}
+
+\hypertarget{muxe9todo-de-faddeev-leverrier}{%
+\section{Método de Faddeev-LeVerrier}\label{muxe9todo-de-faddeev-leverrier}}
+
+\begin{itemize}
+\tightlist
+\item
+  Este método propone hallar los coeficientes \(b_k\) de la ecuación característica:
+\end{itemize}
+
+\[
+f(\lambda) = \det(\textbf{A} - \lambda \textbf{I}) = \lambda^n + b_1 \lambda^{n-1} + \cdots + b_{n-1} \lambda + b_n = 0
+\]
+
+mediante el siguiente cálculo iterativo:
+
+\begin{gather*}
+\textbf{M}_1 = \textbf{A} \qquad b_1 = - tr(\textbf{M}_1) \\
+\textbf{M}_k = \textbf{A} (\textbf{M}_{k-1} + b_{k-1} \textbf{I}) \qquad b_k = - \frac{tr(\textbf{M}_k)}{k} \qquad k = 2, 3, \cdots, n\\
+\end{gather*}
+
+\begin{itemize}
+\item
+  Este método se deriva a partir de propiedades de matrices conjugadas.
+\item
+  En nuestro ejemplo, tenemos:
+\end{itemize}
+
+\begin{gather*}
+\textbf{M}_1 = \textbf{A} = 
+\begin{bmatrix} 
+    5 & -2 & 0 \\ 
+    -2 & 3 & -1 \\
+    0 & -1 & 1  
+\end{bmatrix} 
+\qquad b_1 = - tr(\textbf{M}_1) = -9 \\
+\textbf{M}_2 = \textbf{A} (\textbf{M}_{1} + b_{1} \textbf{I}) = 
+\begin{bmatrix} 
+    -16 & 2 & 2 \\ 
+    2 & -13 & 5 \\
+    2 & 5 & -7  
+\end{bmatrix} 
+\qquad b_2 = - \frac{tr(\textbf{M}_2)}{2} = 18\\
+\textbf{M}_3 = \textbf{A} (\textbf{M}_{2} + b_{2} \textbf{I}) = 
+\begin{bmatrix} 
+    6 & 0 & 0 \\ 
+    0 & 6 & 0 \\
+    0 & 0 & 6  
+\end{bmatrix} 
+\qquad b_3 = - \frac{tr(\textbf{M}_3)}{3} = -6\\
+\end{gather*}
+
+\begin{itemize}
+\tightlist
+\item
+  La ecuación característica entonces es:
+\end{itemize}
+
+\[
+\lambda^3 - 9 \lambda^2 + 18 \lambda - 6 = 0
+\]
+
+\begin{itemize}
+\item
+  A partir de aquí, otra vez se debe continuar desde el Paso 2 del Resumen 1 para hallar los autovalores y sus respectivos autovectores.
+\item
+  Este método también sirve para calcular \(\textbf{A}^{-1}\).
+\item
+  Por Cayley-Hamilton, ya sabemos que:
+\end{itemize}
+
+\[
+f(\textbf{A}) = \textbf{A}^n + b_1 \textbf{A}^{n-1}  + \cdots + b_{n-2} \textbf{A}^2  + b_{n-1} \textbf{A} + b_n \textbf{I} = \textbf{0}
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  Premultiplicando por \(\textbf{A}^{-1}\) nos queda:
+\end{itemize}
+
+\begin{gather*}
+\textbf{A}^{-1} (\textbf{A}^n + b_1 \textbf{A}^{n-1} + \cdots + b_{n-2} \textbf{A}^2 + b_{n-1} \textbf{A} + b_n \textbf{I}) = \textbf{A}^{-1} \, \textbf{0} \\
+\textbf{A}^{n-1} + b_1 \textbf{A}^{n-2} + \cdots + b_{n-2} \textbf{A} +b_{n-1} \textbf{I} + b_n \textbf{A}^{-1} = \textbf{0} \\
+\textbf{A}^{-1} = - \frac{1}{b_n} \Big( \textbf{A}^{n-1} + b_1 \textbf{A}^{n-2} + \cdots + b_{n-2} \textbf{A} + b_{n-1} \textbf{I} \Big) \\
+\textbf{A}^{-1} = - \frac{1}{b_n} \Big( \textbf{M}_{n-1} + b_{n-1} \textbf{I}  \Big) \\
+\end{gather*}
+
+\ldots{} donde el último reemplazo se deduce a partir de la fórmula iterativa vista antes:
+
+\[
+\begin{aligned}
+\textbf{M}_1 &= \textbf{A}\\
+\textbf{M}_2 &= \textbf{A} (\textbf{M}_{1} + b_{1} \textbf{I})  = \textbf{A} (\textbf{A} + b_{1} \textbf{I})= \textbf{A}^2 + b_{1} \textbf{A}\\
+\textbf{M}_3 &= \textbf{A} (\textbf{M}_{2} + b_{2} \textbf{I})  = \textbf{A} (\textbf{A}^2 + b_{1} \textbf{A} + b_{1} \textbf{I})= \textbf{A}^3 + b_1 \textbf{A}^2 + b_{2} \textbf{A}\\
+\textbf{M}_4 &= \textbf{A} (\textbf{M}_{3} + b_{3} \textbf{I}) = \textbf{A}^4 + b_1 \textbf{A}^3 + b_2 \textbf{A}^2 + b_{3} \textbf{A}\\
+&\vdots \\
+\textbf{M}_{n-1} &= \textbf{A} (\textbf{M}_{n-2} + b_{n-2} \textbf{I}) = \textbf{A}^{n-1} + b_1 \textbf{A}^{n-2} + b_2 \textbf{A}^{n-3} + \cdots + b_{n-2} \textbf{A}\\
+\end{aligned}
+\]
+
+\hypertarget{resumen-3-muxe9todo-de-faddeev-leverrier}{%
+\subsection{Resumen 3: Método de Faddeev-LeVerrier}\label{resumen-3-muxe9todo-de-faddeev-leverrier}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Qué necesita}: la matriz \(\mathbf{A}\)
+\item
+  \textbf{Qué nos da}: los coeficientes de la ecuación característica.
+\item
+  \textbf{Paso 1}: calcular los coeficientes \(b_k\) de la ecuación característica con la fórmula recursiva:
+\end{itemize}
+
+\begin{gather*}
+\textbf{M}_1 = \textbf{A} \qquad b_1 = - tr(\textbf{M}_1) \\
+\textbf{M}_k = \textbf{A} (\textbf{M}_{k-1} + b_{k-1} \textbf{I}) \qquad b_k = - \frac{tr(\textbf{M}_k)}{k} \qquad k = 2, 3, \cdots, n\\
+\end{gather*}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Paso 2}: formar la ecuación característica y continuar desde el Paso 2 del Resumen 1 para hallar los autovalores y sus respectivos autovectores.
+\end{itemize}
+
+\hypertarget{muxe9todo-de-aproximaciones-sucesivas-o-de-las-potencias}{%
+\section{Método de Aproximaciones Sucesivas o de las Potencias}\label{muxe9todo-de-aproximaciones-sucesivas-o-de-las-potencias}}
+
+\begin{itemize}
+\item
+  \textbf{Definición}: si \(\lambda\) es un autovalor de \(\textbf{A}\) tal que en valor absoluto es mayor que cualquier otro autovalor, se dice que es un \textbf{autovalor dominante} y sus autovectores se llaman \textbf{autovectores dominantes}.
+\item
+  El \textbf{método de las potencias} dice que si \(\textbf{A}\) tiene un autovalor dominante y \(\textbf{v}\) es su autovector normalizado, la sucesión \(\textbf{x}_k\) a partir de cualquier \(\textbf{x}_0\) no nulo converge a \(\textbf{v}\):
+\end{itemize}
+
+\[
+\textbf{x}_k = \textbf{Ax}_{k-1}
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  El autovalor correspondiente está dado por el \textbf{cociente de Rayleigh}: si \(\textbf{x}\) es un autovector de \(\textbf{A}\), entonces su correspondiente autovalor es:
+\end{itemize}
+
+\[
+\lambda = \frac{(\textbf{Ax})^t\textbf{x}}{\textbf{x}^t\textbf{x}}
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  Se llama método de las potencias porque:
+\end{itemize}
+
+\[
+\begin{aligned}
+\textbf{x}_1 &= \textbf{Ax}_{0} \\
+\textbf{x}_2 &= \textbf{Ax}_{1} = \textbf{A}^2 \textbf{x}_{0}\\
+\textbf{x}_3 &= \textbf{Ax}_{2} = \textbf{A}^3 \textbf{x}_{0}\\
+&\vdots \\
+\textbf{x}_k &= \textbf{Ax}_{k-1} = \textbf{A}^k \textbf{x}_{0}\\
+\end{aligned}
+\]
+
+\begin{itemize}
+\item
+  El método de la potencia tiende a producir aproximaciones en donde los elementos de \(\textbf{x}\) tienen gran magnitud, lo cual produce problemas (errores de desbordamiento, \emph{overflow error}).
+\item
+  Por eso, en la práctica se añade un escalamiento en cada paso iterativo, dividiendo por el elemento de mayor magnitud del paso anterior.
+\item
+  \textbf{Método de las potencias}: si \(\textbf{A}\) tiene un autovalor dominante, la siguiente sucesión \(c_k\) converge al mismo mientras que la sucesión \(\textbf{x}_k\) converge a uno de sus autovectores dominantes:
+\end{itemize}
+
+\[
+\textbf{x}_k = \frac{1}{c_k} \textbf{Ax}_{k-1}
+\]
+
+donde \(c_{k}\) es la coordenada de mayor tamaño de \(\textbf{Ax}_{k-1}\) y \(\textbf{x}_0\) es cualquier vector no nulo.
+
+\begin{itemize}
+\tightlist
+\item
+  Retomando nuestro ejemplo:
+\end{itemize}
+
+\begin{longtable}[]{@{}llllll@{}}
+\toprule
+\begin{minipage}[b]{0.03\columnwidth}\raggedright
+k\strut
+\end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\raggedright
+\(\mathbf{x}_k\)\strut
+\end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\raggedright
+\(\mathbf{Ax}_k\)\strut
+\end{minipage} & \begin{minipage}[b]{0.05\columnwidth}\raggedright
+\(c_k\)\strut
+\end{minipage} & \begin{minipage}[b]{0.27\columnwidth}\raggedright
+\(\mathbf{x}_{k+1}\) = \(\mathbf{Ax}_k / c_{k}\)\strut
+\end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\raggedright
+Error (L\(_2\))\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.03\columnwidth}\raggedright
+0\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright
+{[}1 1 1{]}\(^t\)\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright
+{[}3 0 0{]}\(^t\)\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
+3\strut
+\end{minipage} & \begin{minipage}[t]{0.27\columnwidth}\raggedright
+{[}1 0 0{]}\(^t\)\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+1.4142\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.03\columnwidth}\raggedright
+1\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright
+{[}1 0 0{]}\(^t\)\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright
+{[}5 -2 0{]}\(^t\)\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
+5\strut
+\end{minipage} & \begin{minipage}[t]{0.27\columnwidth}\raggedright
+{[}1 -0.4 0{]}\(^t\)\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+0.4\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.03\columnwidth}\raggedright
+2\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright
+{[}1 -0.4 0{]}\(^t\)\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright
+{[}5.8 -3.2 0.4{]}\(^t\)\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
+5.8\strut
+\end{minipage} & \begin{minipage}[t]{0.27\columnwidth}\raggedright
+{[}1 -0.5517 0.0690{]}\(^t\)\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+0.1667\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.03\columnwidth}\raggedright
+3\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright
+{[}1 -0.5517 0.0690{]}\(^t\)\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright
+{[}6.1034 -3.7241 0.6207{]}\(^t\)\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
+6.1034\strut
+\end{minipage} & \begin{minipage}[t]{0.27\columnwidth}\raggedright
+{[}1 -0.6102 0.1017{]}\(^t\)\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+0.0690\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.03\columnwidth}\raggedright
+4\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright
+{[}1 -0.6102 0.1017{]}\(^t\)\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright
+{[}6.2203 -3.9322 0.7119{]}\(^t\)\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
+6.2203\strut
+\end{minipage} & \begin{minipage}[t]{0.27\columnwidth}\raggedright
+{[}1 -0.6322 0.1144{]}\(^t\)\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+0.0254\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.03\columnwidth}\raggedright
+\ldots{}\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright
+\ldots{}\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright
+\ldots{}\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
+\ldots{}\strut
+\end{minipage} & \begin{minipage}[t]{0.27\columnwidth}\raggedright
+\ldots{}\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+\ldots{}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.03\columnwidth}\raggedright
+16\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright
+{[}1 -0.644972 0.1219239{]}\(^t\)\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright
+{[}6.2899 -4.0568 0.7669{]}\(^t\)\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
+6.2899\strut
+\end{minipage} & \begin{minipage}[t]{0.27\columnwidth}\raggedright
+{[}1 -0.644972 0.1219241{]}\(^t\)\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+3.956E-7\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{muxe9todo-de-las-potencias-inversas}{%
+\section{Método de las potencias inversas}\label{muxe9todo-de-las-potencias-inversas}}
+
+\begin{itemize}
+\tightlist
+\item
+  Es una variante del método de las aproximaciones sucesivas o de las potencias.
+\item
+  Permite hallar el menor autovalor de \(\textbf{A}\).
+\item
+  Se aplica el método a \(\textbf{A}^{-1}\) para hallar su mayor autovalor.
+\item
+  Pero como los autovalores de \(\textbf{A}^{-1}\) son los recíprocos de los de \(\textbf{A}\), el autovalor así hallado es el recíproco del menor autovalor de \(\textbf{A}\).
+\end{itemize}
+
+\hypertarget{muxe9todo-de-las-potencias-con-deflaciuxf3n-o-de-hotelling}{%
+\section{Método de las potencias con deflación (o de Hotelling)}\label{muxe9todo-de-las-potencias-con-deflaciuxf3n-o-de-hotelling}}
+
+\begin{itemize}
+\item
+  Es una variante del método de las aproximaciones sucesivas o de las potencias.
+\item
+  Una vez hallado el mayor autovalor \(\lambda_1\) es posible encontrar el segundo mayor autovalor aplicando el mismo método sobre la matriz \(\textbf{A}_2 = \textbf{A} - \lambda_1 \textbf{u} \textbf{u}^t\), donde \(\textbf{u} = \textbf{x} / ||\textbf{x}||\), con \(\textbf{x}\) el autovector hallado para \(\lambda_1\).
+\item
+  Si \(\{\lambda_1, \lambda_2, \cdots, \lambda_n\}\) son los autovalores de \(\textbf{A}\), entonces \(\{0, \lambda_2, \cdots, \lambda_n\}\) son los de \(\textbf{A}_2\).
+\item
+  Repitiendo este proceso se encuentran los restantes autovalores.
+\end{itemize}
+
+\hypertarget{resumen-4-muxe9todo-de-las-aproximaciones-sucesivas-o-de-las-potencias}{%
+\section{Resumen 4: Método de las Aproximaciones Sucesivas o de las Potencias}\label{resumen-4-muxe9todo-de-las-aproximaciones-sucesivas-o-de-las-potencias}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Qué necesita}: la matriz \(\mathbf{A}\) y un vector inicial \(\mathbf{x}_0\).
+\item
+  \textbf{Qué nos da}: el autovalor dominante de \(\mathbf{A}\) y su autovector.
+\item
+  \textbf{Paso 1}: elegir un vector inicial \(\mathbf{x}_0\) de dimensión \(n \times 1\).
+\item
+  \textbf{Paso 2}: repetir el siguiente proceso iterativo estableciendo un criterio para la convergencia:
+\end{itemize}
+
+\[
+\textbf{x}_k = \frac{1}{c_k} \textbf{Ax}_{k-1}
+\]
+
+\begin{itemize}
+\item
+  \textbf{Paso 3}: al finalizar, \(c_k\) aproxima al autovalor dominante y \(\mathbf{x}_k\) a uno de sus autovectores.
+\item
+  \textbf{Modificación 1}: hacer los mismo con \(\mathbf{A}^{-1}\) nos da el recíproco del menor autovalor de \(\mathbf{A}\) y uno de sus autovectores.
+\item
+  \textbf{Modificación 2}: aplicar sucesivamente este método modificando \(\mathbf{A}\) como establece Hotelling para hallar todos los autovalores.
+\end{itemize}
+
+\hypertarget{anexo-teoremas-uxfatiles}{%
+\chapter*{Anexo: Teoremas útiles}\label{anexo-teoremas-uxfatiles}}
+\addcontentsline{toc}{chapter}{Anexo: Teoremas útiles}
+
+\hypertarget{teorema-del-valor-intermedio-o-de-bolzano}{%
+\section*{Teorema del Valor Intermedio o de Bolzano}\label{teorema-del-valor-intermedio-o-de-bolzano}}
+\addcontentsline{toc}{section}{Teorema del Valor Intermedio o de Bolzano}
+
+Sea \(f\) una función real continua en un intervalo cerrado \([a,b]\) con \(f(a)\) y \(f(b)\) de signos contrarios, es decir, \(f(a)\cdot f(b) < 0\). Entonces existe al menos un punto \(c\) del intervalo abierto \((a, b)\) con \(f(c) = 0\).
+
+\hypertarget{teorema-del-valor-medio}{%
+\section*{Teorema del Valor Medio}\label{teorema-del-valor-medio}}
+\addcontentsline{toc}{section}{Teorema del Valor Medio}
+
+Dada cualquier función \(f\) continua en el intervalo \([a, b]\) y derivable en el intervalo abierto \((a, b)\), entonces existe al menos algún punto \(c\) en el intervalo \((a, b)\) tal que la tangente a la curva en \(c\) es paralela a la recta secante que une los puntos \((b, f(b))\) y \((a, f(a))\). Es decir:
+
+\[
+{\displaystyle {\frac {f(b)-f(a)}{b-a}}=f'(c)} 
+\]
+
+\hypertarget{teorema-de-taylor}{%
+\section*{Teorema de Taylor}\label{teorema-de-taylor}}
+\addcontentsline{toc}{section}{Teorema de Taylor}
+
+Sea \(k \geq 1\) un entero y la función \(f:\mathbb{R} \rightarrow \mathbb{R}\) diferenciable \(k\) veces en el punto \(x_0 \in \mathbb{R}\). Entonces existe una función \(h_n: \mathbb{R} \rightarrow \mathbb{R}\) tal que:
+
+\begin{gather*}
+f(x) =
+\underbrace{f(x_0) + f'(x_0)(x-x_0) + {\frac{f''(x_0)}{2!}} (x-x_0)^{2} + \cdots + {\frac{f^{(n)}(x_0)}{n!}}(x-x_0)^{n}}_{\text{Polinomio de Taylor de orden $n$}} + 
+\underbrace{h_{n}(x)(x-x_0)^{n+1}}_{\text{resto}}
+\end{gather*}
+
+y \(\lim_{x \to x_0} h_n(x)=0\). Esta es la llamada \textbf{forma de Peano del resto}.
+
+El polinomio que aparece en el teorema de Taylor se denomina \textbf{polinomio de Taylor de orden \(n\)}.
+
+Existen diversas fórmulas explícitas para el resto. Una de ellas es la \textbf{forma de Lagrange}:
+
+\[ R_{n}(x) = {\frac {f^{(n+1)}(\xi)}{(n+1)!}}(x-x_0)^{n+1} \]
+para algún número real \(\xi\) entre \(x_0\) y \(x\), siendo \(f\) diferenciable \(n+1\) veces.
+
+\hypertarget{teorema-del-punto-fijo-1}{%
+\section*{Teorema del Punto Fijo}\label{teorema-del-punto-fijo-1}}
+\addcontentsline{toc}{section}{Teorema del Punto Fijo}
+
+Dadas las siguientes condiciones:
+
+\begin{enumerate}[(a)]
+\item $f$ es una función continua en el intervalo $[a, b]$
+\item $f(x) \in [a, b] \quad \forall x \in [a, b]$
+\item $f'$ existe en $(a, b)$ con $|f'(x)| \le m < 1 \quad \forall x \in (a, b)$
+\end{enumerate}
+
+Si \(x_0\) es cualquier número en \([a, b]\), entonces la sucesión definida por
+\[ x_n = f(x_{n-1}), \quad n \ge 1,\]
+
+converge al único punto fijo que \(f\) posee en \([a, b]\).
+
+\hypertarget{demostraciuxf3n}{%
+\subsection*{Demostración}\label{demostraciuxf3n}}
+\addcontentsline{toc}{subsection}{Demostración}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Existencia de un punto fijo}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Si \(f(a) = a\) o \(f(b) = b\), la existencia del punto fijo es obvia.
+  \item
+    Entonces suponemos que \(f(a) \neq a\) y \(f(b) \neq b \implies f(a) > a\) y \(f(b) < b\) por (b).
+    Definimos \(h(x) = f(x) - x\), continua en \([a; b]\) tal que:
+    \[h(a) = f(a) - a > 0 \text{ y } h(b) = f(b) - b < 0\]
+    Por el Teorema del Valor Intermedio:
+    \[ \exists \quad p \in (a; b) \text{ tal que } h(p) = 0 \implies f(p) - p = 0 \implies p = f(p) \implies p \text{ es un punto fijo de } f\]
+  \item
+    Por lo tanto, \(f\) tiene al menos un punto fijo.
+  \end{itemize}
+\item
+  \textbf{Unicidad del punto fijo}
+
+  Sean \(p\) y \(q\) dos puntos fijos de \(f\), \(p \neq q\), \(p, q \in [a; b]\):
+
+  \[ |p-q| \equaltext{puntos fijos} | f(p) - f(q) | \equaltext{T Valor Medio, $\xi$ entre $p$ y $q$} |f'(\xi) (p - q)| \equaltext{Val abs de un prod} \]
+  \[ |f'(\xi)| |p-q| \leqtext{(c)} m |p-q| \leqtext{(c)} |p-q| \implies |p-q| < |p-q| \]
+
+  Lo cual es una contradicción que proviene de la única suposición: \(p \neq q\). Por lo tanto \(p = q\) y el punto fijo es único.
+\item
+  \textbf{Convergencia del proceso iterativo}
+
+  Por (b), dado que \(f:[a; b] \rightarrow [a; b]\) , la sucesión \(\{x_n\}_{n=0}^{\infty}\) está definida \(\forall n \geq 0\) y \(x_n \in [a; b] \quad \forall n\).
+  \[ |x_n - p| \equaltext{p es punto fijo} |x_n - f(p)| \quad \stackrel{x_n=f(x_{n-1})}{=} \quad |f(x_{n-1}) - f(p)| \equaltext{T Valor Medio, $\xi$ entre $p$ y $x_{n-1}$}\]
+  \[ |f'(\xi)| |x_{n-1} - p| \leqtext{(c)} m |x_{n-1} - p| \implies |x_n - p| \leq m |x_{n-1} - p|\]
+  Del mismo modo podríamos ver que \(|x_{n-1} - p| \leq m |x_{n-2} - p|\).
+  Aplicando dicha desigualdad inductivamente resulta:
+  \[ |x_n - p| \leq m |x_{n-1} - p| \leq m^2 |x_{n-2} - p| \leq \dots \leq m^n |x_0 - p| \implies |x_n - p| \leq m^n |x_0 - p|\]
+  Como \(0<m<1\), el segundo miembro decrece a medida que \(n\) aumenta, sin importar cuál es \(x_0\):
+  \[\lim_{n \to \infty} |x_n - p| \leq \lim_{n \to \infty} m^n |x_0 - p| = 0\]
+  Entonces \(|x_n - p| \xrightarrow[n \to \infty]{} 0\), es decir el método converge hacia el punto fijo \(p\).
+\end{enumerate}
+
+\hypertarget{teorema-de-newton-raphson-1}{%
+\section*{Teorema de Newton-Raphson}\label{teorema-de-newton-raphson-1}}
+\addcontentsline{toc}{section}{Teorema de Newton-Raphson}
+
+Supongamos que la función \(F\) es continua, con derivada segunda continua en el intervalo \([a; b]\), y que existe un número \(p \in [a; b]\) tal que \(F(p) = 0\). Si \(F'(p) \neq 0\), entonces \(\exists \quad \delta > 0\) tal que la sucesión \(\{x_n\}_{n=0}^{\infty}\) definida por el proceso iterativo:
+
+\begin{equation}
+\label{reglagral}
+x_n = x_{n-1} - \frac{F(x_{n-1})}{F'(x_{n-1})} \quad n=1,2,\dots
+\end{equation}
+
+converge a \(p\) cualquiera sea la aproximación inicial \(x_0 \in [p-\delta; p+\delta]\).
+
+\hypertarget{demostraciuxf3n-1}{%
+\subsection*{Demostración}\label{demostraciuxf3n-1}}
+\addcontentsline{toc}{subsection}{Demostración}
+
+Aplicamos el \textbf{Teorema de Taylor} para la función \(F\) en el punto \(x_0\) empleando un polinomio de grado \(n=1\) y el resto en la forma de Lagrange:
+\[F(x) = F(x_0) + F'(x_0)(x-x_0) + \frac{F''(\xi)}{2!}(x-x_0)^2\]
+donde \(\xi\) es un número real entre \(x\) y \(x_0\).
+
+Si tomamos \(x = p\), sabiendo que \(F(p) = 0\), nos queda:
+\[0 = F(x_0) + F'(x_0)(p-x_0) + \frac{F''(\xi)}{2!}(p-x_0)^2\]
+Si \(x_0\) está suficientemente cerca de \(p\), entonces el último término del segundo miembro en la igualdad anterior será pequeño comparado con los restantes y podemos despreciarlo:
+
+\begin{equation}
+\label{relacion}
+0 \approx F(x_0) + F'(x_0)(p-x_0) \implies p-x_0 \approx - \frac{F(x_0)}{F'(x_0)} \implies p \approx x_0 - \frac{F(x_0)}{F'(x_0)}.
+\end{equation}
+
+De esta manera podemos llamar \[x_1 = x_0 - \frac{F(x_0)}{F'(x_0)}\] y hemos obtenido un nuevo valor \(x_1\) más cercano a \(p\) que \(x_0\). Pensando del mismo modo, podemos escribir \[p \approx x_1 - \frac{F(x_1)}{F'(x_1)}\] de manera que \[x_2 = x_1 - \frac{F(x_1)}{F'(x_1)}\] es aún una mejor aproximación a \(p\). Continuando de esta manera, queda establecida la regla general (\ref{reglagral}): \[x_n = x_{n-1} - \frac{F(x_{n-1})}{F'(x_{n-1})} \quad n=1,2,\dots\].
+
+Para garantizar la convergencia, debemos darnos cuenta que la iteración de Newton-Raphson es una iteración de punto fijo, por lo cual vale el \textbf{Teorema del Punto Fijo}:
+
+\begin{gather*}
+x_n = 
+\underbrace{x_{n-1} - \frac{F(x_{n-1})}{F'(x_{n-1})}}_{f(x_{n-1})} 
+\end{gather*}
+Por lo tanto, el método será convergente siempre que \(|f'(x)| \leq m < 1\):
+\[f(x) = x - \frac{F(x)}{F'(x)}\]
+\[f'(x) = 1 - \frac{[F'(x)]^2 - F(x)F''(x)}{[F'(x)]^2} = 1 - 1 + \frac{F(x)F''(x)}{[F'(x)]^2} = \frac{F(x)F''(x)}{[F'(x)]^2}.\]
+Es decir, el metodo convergerá si:
+\[|f'(x)| = \frac{|F(x)F''(x)|}{[F'(x)]^2} \leq m < 1\]
+Por hipótesis, sabemos que \(F(p) = 0\); luego \(f'(p) = 0\). Como \(f(x)\) es continua y \(f'(p) = 0\), podemos encontrar \(\delta > 0\) tal que \(|f'(x)| < 1\) se cumple en el intervalo \([p - \delta, p + \delta]\). Por consiguiente, que \(x_0 \in [p - \delta, p + \delta]\) es una condición suficiente para que \(x_0\) sea el punto de partida de una sucesión \(\{x_n\}_{n=0}^{\infty}\) que converge a la única raíz de \(F(x) = 0\) en dicho intervalo, siempre que \(\delta\) sea elegido tal que:
+\[\frac{|F(x)F''(x)|}{[F'(x)]^2} < 1  \quad \forall x \in [p - \delta, p + \delta]\]
+
+\hypertarget{deducciuxf3n-de-la-fuxf3rmula-de-recurrencia-para-el-muxe9todo-de-newton-raphson-de-2uxba-orden}{%
+\section*{Deducción de la fórmula de recurrencia para el Método de Newton-Raphson de 2º Orden}\label{deducciuxf3n-de-la-fuxf3rmula-de-recurrencia-para-el-muxe9todo-de-newton-raphson-de-2uxba-orden}}
+\addcontentsline{toc}{section}{Deducción de la fórmula de recurrencia para el Método de Newton-Raphson de 2º Orden}
+
+Una modificación al método de N-R se deriva a partir de la utilización de un término más en el desarrollo por serie de Taylor de la función \(F(x)\). Aplicamos el \textbf{Teorema de Taylor} para la función \(F\) en el punto \(x_0\) empleando un polinomio de grado \(n=2\) y el resto en la forma de Lagrange:
+
+\[F(x) = F(x_0) + F'(x_0)(x-x_0) + \frac{F''(x_0)}{2!}(x-x_0)^2 + \frac{F''(\xi)}{3!}(x-x_0)^3\]
+donde \(\xi\) es un número real entre \(x\) y \(x_0\).
+
+Si tomamos \(x = p\), sabiendo que \(F(p) = 0\), nos queda:
+\[0 = F(x_0) + F'(x_0)(p-x_0) + \frac{F''(x_0)}{2!}(p-x_0)^2 + \frac{F''(\xi)}{3!}(p-x_0)^3\]
+Si \(x_0\) está suficientemente cerca de \(p\), entonces el último término del segundo miembro en la igualdad anterior será pequeño comparado con los restantes y podemos despreciarlo:
+
+\begin{equation*} 
+\begin{split}
+0 & \approx F(x_0) + F'(x_0)(p-x_0) + \frac{F''(x_0)}{2!}(p-x_0)^2 \\
+\implies 0 & \approx F(x_0) + (p-x_0) \left[ F'(x_0) + \frac{F''(x_0)}{2!}(p-x_0) \right]
+\end{split}
+\end{equation*}
+
+Si dentro de los corchetes se reemplaza \((p - x_0)\) por \(- \frac{F(x_0)}{F'(x_0)}\) según la relación vista en (\ref{relacion}) y se despeja \(p\), se obtiene una expresión para la primera aproximación \(x_1\), dando lugar a la fórmula iterativa:
+
+\[
+x_n = x_{n-1} - \frac{F(x_{n-1})F'(x_{n-1})}{[F'(x_{n-1})]^2 - 0,5 F(x_{n-1}) F''(x_{n-1})} \quad n = 1, 2, \dots
+\]
 
 \end{document}
