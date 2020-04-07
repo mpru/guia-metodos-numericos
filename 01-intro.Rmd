@@ -65,7 +65,7 @@ https://en.wikipedia.org/wiki/Significant_figures#Concise_rules -->
 
 ### Ejemplo 2:
 
-- El número $-2,3 x 10^3$ es $-2300$. También puede escribirse $-2,3E3$ (aquí $E$ no tiene nada que ver con la constante matemática $e$).
+- El número $-2,3 \times 10^3$ es $-2300$. También puede escribirse $-2,3E3$ (aquí $E$ no tiene nada que ver con la constante matemática $e$).
 - El número $0,01E-7$ es $0,000000001$.
 - El número $34E5$ es $3400000$.
 - Sólo el primer caso está en notación científica estándar.
@@ -82,7 +82,14 @@ https://en.wikipedia.org/wiki/Significant_figures#Concise_rules -->
 - Es un sistema posicional, es decir, la posición ocupada por cada dígito tiene un significado exacto y determina la contribución de la cifra al valor numérico. Por ejemplo, 35 y 53 tienen las mismas cifras pero significados distintos.
 - Cada cifra es multiplicada por una potencia de 10, con el exponente determinado por la posición de la cifra con respecto al punto decimal.
 - Por ejemplo, el número decimal $1563$ se puede escribir en forma desarrollada utilizando potencias con base $10$ así:
-$$1563 = 1000 + 500 + 60 + 3 = (1 \times 10^3) + (5 \times 10^2) + (6 \times 10^1) + (3 \times 10^0)$$
+
+$$
+\begin{aligned}
+1563 &= 1000 + 500 + 60 + 3 
+     &= (1 \times 10^3) + (5 \times 10^2) + (6 \times 10^1) + (3 \times 10^0)
+\end{aligned}
+$$
+
 - Son los coeficientes $1$, $5$, $6$ y $3$ los que definen la representación de este número como $1563$ en el sistema decimal.
 - Pero si en vez de usar potencias con base 10, usamos potencias con base 2, el número $1563$ se escribe como:
 
@@ -175,20 +182,20 @@ knitr::include_graphics("Plots/U1/floatej.png")
 <!-- - Luego la mantisa (recordar el 1 implícito): $1,0010101 \times 2^6 = 1001010,1_{(2)} = 2^{6}+2^{3}+2^{1}+2^{-1} = 74,5_{(10)}$ -->
 <!-- - El signo es $1$, por lo tanto el número es negativo $-74,5$. -->
 
-- En [\textcolor{blue}{este link}](http://weitz.de/ieee/) se puede encontrar una calculadora que convierte números entre sus representaciones en decimal y en coma flotante.
+- En [este link](http://weitz.de/ieee/) se puede encontrar una calculadora que convierte números entre sus representaciones en decimal y en coma flotante.
 
 ## Propiedades importantes del formato IEEE-754
 
 - Además de representar números, este sistema permite almacenar ciertos valores especiales. Uno de ellos es *NaN* (*Not a Number*), para resultados no definidos matemáticamente. Por ejemplo:
 
-```{r, warning=F, echo=T}
-0/0
-sqrt(-1)
-```
+	```{r, warning=F, echo=T}
+	0/0
+	sqrt(-1)
+	```
     
-    Operaciones como $x + NaN, NaN \times x, NaN / x, x / NaN$ resultan en $NaN$ (excepto $NaN^0 = 1$).
+	Operaciones como $x + NaN, NaN \times x, NaN / x, x / NaN$ resultan en $NaN$ (excepto $NaN^0 = 1$).
     
-    **Observación**: en R `NaN` no es lo mismo que `NA` (*Not Available*). `NA` es una construcción de R, que no forma parte del IEEE-754, para representar valores desconocidos o faltantes.
+	**Observación**: en R `NaN` no es lo mismo que `NA` (*Not Available*). `NA` es una construcción de R, que no forma parte del IEEE-754, para representar valores desconocidos o faltantes.
 
 - El infinito tiene su propia representación en este estándar y puede ser positivo o negativo. Un valor infinito puede darse como resultado de ciertas operaciones o por exceder los límites de almacenamiento. En R se representan con `Inf` y `-Inf`.
 
@@ -259,14 +266,14 @@ print(1000 + 300 * .Machine$double.eps, digits = 20)
 
 - **Underflow (desbordamiento)**. Es el fenómeno que ocurre cuando cuando el resultado de una operación en coma flotante es menor en magnitud (más cercano a cero) que el menor número representable (en R, `.Machine$double.xmin`). Es difícil mostrar un ejemplo de esto porque, dependiendo de la máquina, la representación en coma flotante puede recurrir a números no normalizados para lograr números incluso por fuera de los límites de desbordamiento:
     
-```{r, echo=T}
-# Mínimo representable en coma flotante normalizada
-.Machine$double.xmin
-# Igual es posible conseguir números menores con representación no normalizada
-.Machine$double.xmin / 2
-```
+	```{r, echo=T}
+	# Mínimo representable en coma flotante normalizada
+	.Machine$double.xmin
+	# Igual es posible conseguir números menores con representación no normalizada
+	.Machine$double.xmin / 2
+	```
     
-    Observación: el mínimo representable `.Machine$double.xmin` es menor que el $\epsilon$ de máquina ya que los números en coma flotante son más densos alrededor del 0 que del 1.
+	Observación: el mínimo representable `.Machine$double.xmin` es menor que el $\epsilon$ de máquina ya que los números en coma flotante son más densos alrededor del 0 que del 1.
 
 ## Análisis de los errores
 
@@ -288,9 +295,9 @@ $$ e^{x^2} = 1 + x^2 + \frac{x^4}{2!} + \frac{x^6}{3!} + ... + \frac{x^{2n}}{n!}
 ### Error de redondeo
 
 - Resulta de reemplazar un número por su forma en coma flotante, es decir, por su representación en la computadora mediante un número finito de bits. 
-- Recibe este nombre ya sea que la aproximación se realice con redondeo o poda (también conocidoa como *truncamiento*, pero no debe confundirse con el error de truncamiento).
+- Recibe este nombre ya sea que la aproximación se realice con redondeo o poda (también conocida como *truncamiento*, pero no debe confundirse con el error de truncamiento).
 - El error de redondeo está ligado fundamentalmente al tipo de precisión que se emplee (algo determinado por el procesador y el software usados). 
-- Sin embargo, el efecto final de los errores de redondeo depende también del algoritmo propuesto por el método numérico y por la forma de programlarlo. 
+- Sin embargo, el efecto final de los errores de redondeo depende también del algoritmo propuesto por el método numérico y por la forma de programarlo. 
 - Existen operaciones que son especialmente sensibles a los errores de redondeo o un algoritmo puede hacer que los mismos se amplifiquen.
 
 ### Ejemplos de operaciones "delicadas"
@@ -329,9 +336,8 @@ Existen dos formas fundamentales de medir los errores que se cometen en la aprox
 
 - Se define como **error propagado** al error que se tiene al final de una cadena de operaciones sucesivas por la existencia de diferentes errores en los pasos intermedios. 
 - Por ejemplo, si tenemos dos valores exactos $p$ y $q$ con valores aproximados $\hat{p}$ y $\hat{q}$ cuyos errores son $\epsilon_p$ y $\epsilon_q$ de modo que $\hat{p} = p + \epsilon_p$ y $\hat{q} = q + \epsilon_q$, al realizar la suma entre los valores aproximados:
-$$\hat{p} + \hat{q} = (p + \epsilon_p) + (q + \epsilon_q) = (p + q) + (\epsilon_p + \epsilon_q)$$
 
-### Error propagado
+$$\hat{p} + \hat{q} = (p + \epsilon_p) + (q + \epsilon_q) = (p + q) + (\epsilon_p + \epsilon_q)$$
 
 - Si bien es normal que en una cadena los errores iniciales se propaguen, es deseable que un error pequeño en el comienzo produzca errores pequeños en el resultado final.
 - Un algoritmo con esta cualidad se llama **estable** (el error se puede acotar), en caso contrario se dice **inestable**.
