@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019) (preloaded format=xelatex 2020.3.6)  7 APR 2020 00:07
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019) (preloaded format=xelatex 2020.3.6)  7 APR 2020 15:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1528,140 +1528,146 @@ LaTeX Info: Redefining \. on input line 1048.
 LaTeX Info: Redefining \% on input line 1048.
 [12]
 Unidad 2.
-LaTeX Info: Redefining \. on input line 1112.
-LaTeX Info: Redefining \% on input line 1112.
+LaTeX Info: Redefining \. on input line 1109.
+LaTeX Info: Redefining \% on input line 1109.
 [13
 
 ]
 Underfull \vbox (badness 1789) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 1201.
-LaTeX Info: Redefining \% on input line 1201.
+LaTeX Info: Redefining \. on input line 1198.
+LaTeX Info: Redefining \% on input line 1198.
 [14]
 File: Plots/U2/f1.png Graphic file (type bmp)
 <Plots/U2/f1.png>
 File: Plots/U2/rtdo1.jpg Graphic file (type bmp)
 <Plots/U2/rtdo1.jpg>
-LaTeX Info: Redefining \. on input line 1262.
-LaTeX Info: Redefining \% on input line 1262.
+LaTeX Info: Redefining \. on input line 1263.
+LaTeX Info: Redefining \% on input line 1263.
 [15]
 File: Plots/U2/rtdo.jpg Graphic file (type bmp)
 <Plots/U2/rtdo.jpg>
-LaTeX Info: Redefining \. on input line 1357.
-LaTeX Info: Redefining \% on input line 1357.
+LaTeX Info: Redefining \. on input line 1358.
+LaTeX Info: Redefining \% on input line 1358.
 [16]
 File: Plots/U2/rtdo.jpg Graphic file (type bmp)
 <Plots/U2/rtdo.jpg>
-File: Plots/U2/f3.pdf Graphic file (type pdf)
-<use Plots/U2/f3.pdf>
+File: Plots/U2/f3.png Graphic file (type bmp)
+<Plots/U2/f3.png>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+LaTeX Info: Redefining \. on input line 1391.
+LaTeX Info: Redefining \% on input line 1391.
+[17]
 File: Plots/U2/convergencia.jpg Graphic file (type bmp)
 <Plots/U2/convergencia.jpg>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 1383.
-LaTeX Info: Redefining \% on input line 1383.
-[17]
 File: Plots/U2/divergencia.jpg Graphic file (type bmp)
 <Plots/U2/divergencia.jpg>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+LaTeX Info: Redefining \. on input line 1402.
+LaTeX Info: Redefining \% on input line 1402.
+[18]
 File: Plots/U2/nr1.png Graphic file (type bmp)
 <Plots/U2/nr1.png>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 1406.
-LaTeX Info: Redefining \% on input line 1406.
-[18]
 File: Plots/U2/nr2.png Graphic file (type bmp)
 <Plots/U2/nr2.png>
-File: Plots/U2/nr3.png Graphic file (type bmp)
-<Plots/U2/nr3.png>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 1410.
-LaTeX Info: Redefining \% on input line 1410.
+LaTeX Info: Redefining \. on input line 1434.
+LaTeX Info: Redefining \% on input line 1434.
 [19]
+File: Plots/U2/nr3.png Graphic file (type bmp)
+<Plots/U2/nr3.png>
 File: Plots/U2/nr4.png Graphic file (type bmp)
 <Plots/U2/nr4.png>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+LaTeX Info: Redefining \. on input line 1452.
+LaTeX Info: Redefining \% on input line 1452.
+[20]
 File: Plots/U2/nr.png Graphic file (type bmp)
 <Plots/U2/nr.png>
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 4341) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 1414.
-LaTeX Info: Redefining \% on input line 1414.
-[20]
-LaTeX Info: Redefining \. on input line 1488.
-LaTeX Info: Redefining \% on input line 1488.
+LaTeX Info: Redefining \. on input line 1476.
+LaTeX Info: Redefining \% on input line 1476.
 [21]
-LaTeX Info: Redefining \. on input line 1578.
-LaTeX Info: Redefining \% on input line 1578.
+LaTeX Info: Redefining \. on input line 1570.
+LaTeX Info: Redefining \% on input line 1570.
 [22]
 File: Plots/U2/vonMises.png Graphic file (type bmp)
 <Plots/U2/vonMises.png>
-LaTeX Info: Redefining \. on input line 1611.
-LaTeX Info: Redefining \% on input line 1611.
+LaTeX Info: Redefining \. on input line 1613.
+LaTeX Info: Redefining \% on input line 1613.
 [23]
+LaTeX Info: Redefining \. on input line 1622.
+LaTeX Info: Redefining \% on input line 1622.
+[24]
 Unidad 3.
-LaTeX Info: Redefining \. on input line 1713.
-LaTeX Info: Redefining \% on input line 1713.
-[24
+LaTeX Info: Redefining \. on input line 1724.
+LaTeX Info: Redefining \% on input line 1724.
+[25
 
 ]
-LaTeX Info: Redefining \. on input line 1827.
-LaTeX Info: Redefining \% on input line 1827.
-[25]
-LaTeX Info: Redefining \. on input line 1977.
-LaTeX Info: Redefining \% on input line 1977.
+LaTeX Info: Redefining \. on input line 1838.
+LaTeX Info: Redefining \% on input line 1838.
 [26]
-LaTeX Info: Redefining \. on input line 2124.
-LaTeX Info: Redefining \% on input line 2124.
+LaTeX Info: Redefining \. on input line 1988.
+LaTeX Info: Redefining \% on input line 1988.
 [27]
-LaTeX Info: Redefining \. on input line 2220.
-LaTeX Info: Redefining \% on input line 2220.
+LaTeX Info: Redefining \. on input line 2135.
+LaTeX Info: Redefining \% on input line 2135.
 [28]
-LaTeX Info: Redefining \. on input line 2353.
-LaTeX Info: Redefining \% on input line 2353.
+LaTeX Info: Redefining \. on input line 2231.
+LaTeX Info: Redefining \% on input line 2231.
 [29]
-LaTeX Info: Redefining \. on input line 2483.
-LaTeX Info: Redefining \% on input line 2483.
+LaTeX Info: Redefining \. on input line 2364.
+LaTeX Info: Redefining \% on input line 2364.
 [30]
+LaTeX Info: Redefining \. on input line 2494.
+LaTeX Info: Redefining \% on input line 2494.
+[31]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 2595.
-LaTeX Info: Redefining \% on input line 2595.
-[31]
+LaTeX Info: Redefining \. on input line 2606.
+LaTeX Info: Redefining \% on input line 2606.
+[32]
 Underfull \vbox (badness 4181) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 2687.
-LaTeX Info: Redefining \% on input line 2687.
-[32]
-LaTeX Info: Redefining \. on input line 2769.
-LaTeX Info: Redefining \% on input line 2769.
+LaTeX Info: Redefining \. on input line 2698.
+LaTeX Info: Redefining \% on input line 2698.
 [33]
-LaTeX Info: Redefining \. on input line 2874.
-LaTeX Info: Redefining \% on input line 2874.
+LaTeX Info: Redefining \. on input line 2780.
+LaTeX Info: Redefining \% on input line 2780.
 [34]
-LaTeX Info: Redefining \. on input line 2880.
-LaTeX Info: Redefining \% on input line 2880.
+LaTeX Info: Redefining \. on input line 2885.
+LaTeX Info: Redefining \% on input line 2885.
 [35]
+LaTeX Info: Redefining \. on input line 2891.
+LaTeX Info: Redefining \% on input line 2891.
+[36]
 Unidad 4.
-LaTeX Info: Redefining \. on input line 3007.
-LaTeX Info: Redefining \% on input line 3007.
-[36
+LaTeX Info: Redefining \. on input line 3018.
+LaTeX Info: Redefining \% on input line 3018.
+[37
 
 ]
 File: Plots/U4/Unidad4_g1.png Graphic file (type bmp)
 <Plots/U4/Unidad4_g1.png>
-LaTeX Info: Redefining \. on input line 3112.
-LaTeX Info: Redefining \% on input line 3112.
-[37]
+LaTeX Info: Redefining \. on input line 3123.
+LaTeX Info: Redefining \% on input line 3123.
+[38]
 Overfull \vbox (2.75726pt too high) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 3189.
-LaTeX Info: Redefining \% on input line 3189.
-[38]
+LaTeX Info: Redefining \. on input line 3200.
+LaTeX Info: Redefining \% on input line 3200.
+[39]
 File: Plots/U4/Unidad4_g1.png Graphic file (type bmp)
 <Plots/U4/Unidad4_g1.png>
 File: Plots/U4/Unidad4_g2.png Graphic file (type bmp)
@@ -1669,41 +1675,41 @@ File: Plots/U4/Unidad4_g2.png Graphic file (type bmp)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 3247.
-LaTeX Info: Redefining \% on input line 3247.
-[39]
+LaTeX Info: Redefining \. on input line 3258.
+LaTeX Info: Redefining \% on input line 3258.
+[40]
 File: Plots/U4/Unidad4_g3.png Graphic file (type bmp)
 <Plots/U4/Unidad4_g3.png>
-LaTeX Info: Redefining \. on input line 3309.
-LaTeX Info: Redefining \% on input line 3309.
-[40]
+LaTeX Info: Redefining \. on input line 3320.
+LaTeX Info: Redefining \% on input line 3320.
+[41]
 File: Plots/U4/Unidad4_g4.png Graphic file (type bmp)
 <Plots/U4/Unidad4_g4.png>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 3364.
-LaTeX Info: Redefining \% on input line 3364.
-[41]
-LaTeX Info: Redefining \. on input line 3456.
-LaTeX Info: Redefining \% on input line 3456.
+LaTeX Info: Redefining \. on input line 3375.
+LaTeX Info: Redefining \% on input line 3375.
 [42]
-LaTeX Info: Redefining \. on input line 3555.
-LaTeX Info: Redefining \% on input line 3555.
+LaTeX Info: Redefining \. on input line 3467.
+LaTeX Info: Redefining \% on input line 3467.
 [43]
+LaTeX Info: Redefining \. on input line 3566.
+LaTeX Info: Redefining \% on input line 3566.
+[44]
 Overfull \vbox (14.28389pt too high) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 3643.
-LaTeX Info: Redefining \% on input line 3643.
-[44]
+LaTeX Info: Redefining \. on input line 3654.
+LaTeX Info: Redefining \% on input line 3654.
+[45]
 File: Plots/U4/lagrej1.png Graphic file (type bmp)
 <Plots/U4/lagrej1.png>
 
 Underfull \vbox (badness 5696) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 3665.
-LaTeX Info: Redefining \% on input line 3665.
-[45]
+LaTeX Info: Redefining \. on input line 3676.
+LaTeX Info: Redefining \% on input line 3676.
+[46]
 File: Plots/U4/lagrej2.png Graphic file (type bmp)
 <Plots/U4/lagrej2.png>
 File: Plots/U4/lagrange2.png Graphic file (type bmp)
@@ -1713,54 +1719,54 @@ File: Plots/U4/lagrange.png Graphic file (type bmp)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 3677.
-LaTeX Info: Redefining \% on input line 3677.
-[46]
+LaTeX Info: Redefining \. on input line 3688.
+LaTeX Info: Redefining \% on input line 3688.
+[47]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 3733.
-LaTeX Info: Redefining \% on input line 3733.
-[47]
+LaTeX Info: Redefining \. on input line 3744.
+LaTeX Info: Redefining \% on input line 3744.
+[48]
 File: Plots/U4/lagr_ecuacion1.png Graphic file (type bmp)
 <Plots/U4/lagr_ecuacion1.png>
-LaTeX Info: Redefining \. on input line 3765.
-LaTeX Info: Redefining \% on input line 3765.
-[48]
-LaTeX Info: Redefining \. on input line 3816.
-LaTeX Info: Redefining \% on input line 3816.
+LaTeX Info: Redefining \. on input line 3776.
+LaTeX Info: Redefining \% on input line 3776.
 [49]
+LaTeX Info: Redefining \. on input line 3827.
+LaTeX Info: Redefining \% on input line 3827.
+[50]
 Unidad 5.
-LaTeX Info: Redefining \. on input line 3904.
-LaTeX Info: Redefining \% on input line 3904.
-[50
+LaTeX Info: Redefining \. on input line 3915.
+LaTeX Info: Redefining \% on input line 3915.
+[51
 
 ]
 File: Plots/U4/Unidad4_2_g.png Graphic file (type bmp)
 <Plots/U4/Unidad4_2_g.png>
 File: Plots/U4/Unidad4_2_g2.png Graphic file (type bmp)
 <Plots/U4/Unidad4_2_g2.png>
-LaTeX Info: Redefining \. on input line 3942.
-LaTeX Info: Redefining \% on input line 3942.
-[51]
+LaTeX Info: Redefining \. on input line 3953.
+LaTeX Info: Redefining \% on input line 3953.
+[52]
 File: Plots/U4/Unidad4_2_g3.png Graphic file (type bmp)
 <Plots/U4/Unidad4_2_g3.png>
 File: Plots/U4/Unidad4_2_g4.png Graphic file (type bmp)
 <Plots/U4/Unidad4_2_g4.png>
-LaTeX Info: Redefining \. on input line 3996.
-LaTeX Info: Redefining \% on input line 3996.
-[52]
+LaTeX Info: Redefining \. on input line 4007.
+LaTeX Info: Redefining \% on input line 4007.
+[53]
 File: Plots/U4/Unidad4_2_g5.png Graphic file (type bmp)
 <Plots/U4/Unidad4_2_g5.png>
-LaTeX Info: Redefining \. on input line 4048.
-LaTeX Info: Redefining \% on input line 4048.
-[53]
+LaTeX Info: Redefining \. on input line 4059.
+LaTeX Info: Redefining \% on input line 4059.
+[54]
 File: Plots/U4/Unidad4_2_g6.png Graphic file (type bmp)
 <Plots/U4/Unidad4_2_g6.png>
 File: Plots/U4/Unidad4_2_g7.png Graphic file (type bmp)
 <Plots/U4/Unidad4_2_g7.png>
-LaTeX Info: Redefining \. on input line 4102.
-LaTeX Info: Redefining \% on input line 4102.
-[54]
+LaTeX Info: Redefining \. on input line 4113.
+LaTeX Info: Redefining \% on input line 4113.
+[55]
 File: Plots/U4/Unidad4_2_g8.png Graphic file (type bmp)
 <Plots/U4/Unidad4_2_g8.png>
 File: Plots/U4/Unidad4_2_g9.png Graphic file (type bmp)
@@ -1768,9 +1774,9 @@ File: Plots/U4/Unidad4_2_g9.png Graphic file (type bmp)
 
 Underfull \vbox (badness 1917) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 4158.
-LaTeX Info: Redefining \% on input line 4158.
-[55]
+LaTeX Info: Redefining \. on input line 4169.
+LaTeX Info: Redefining \% on input line 4169.
+[56]
 Missing character: There is no ó in font lmmi7!
 Missing character: There is no ú in font lmmi7!
 Missing character: There is no ú in font lmmi7!
@@ -1779,21 +1785,21 @@ Missing character: There is no ú in font lmmi7!
 Missing character: There is no ú in font lmmi7!
 File: Plots/U4/Unidad4_2_g10.png Graphic file (type bmp)
 <Plots/U4/Unidad4_2_g10.png>
-LaTeX Info: Redefining \. on input line 4217.
-LaTeX Info: Redefining \% on input line 4217.
-[56]
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 9.0pt on input line 4268.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 9.00096pt on input line 4268.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 8.99904pt on input line 4268.
-LaTeX Info: Redefining \. on input line 4283.
-LaTeX Info: Redefining \% on input line 4283.
+LaTeX Info: Redefining \. on input line 4228.
+LaTeX Info: Redefining \% on input line 4228.
 [57]
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 9.0pt on input line 4279.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 9.00096pt on input line 4279.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 8.99904pt on input line 4279.
+LaTeX Info: Redefining \. on input line 4294.
+LaTeX Info: Redefining \% on input line 4294.
+[58]
 Unidad 6.
 
-Underfull \hbox (badness 1033) in paragraph at lines 4293--4294
+Underfull \hbox (badness 1033) in paragraph at lines 4304--4305
 []\TU/lmr/m/n/10 El objetivo de esta unidad es ver métodos para su cálculo, per
 o antes vamos a repasar qué son
  []
@@ -1803,9 +1809,9 @@ File: Plots/U5/auto1.png Graphic file (type bmp)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 4331.
-LaTeX Info: Redefining \% on input line 4331.
-[58
+LaTeX Info: Redefining \. on input line 4342.
+LaTeX Info: Redefining \% on input line 4342.
+[59
 
 ]
 File: Plots/U5/auto2.png Graphic file (type bmp)
@@ -1813,91 +1819,91 @@ File: Plots/U5/auto2.png Graphic file (type bmp)
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 4339.
-LaTeX Info: Redefining \% on input line 4339.
-[59]
-LaTeX Info: Redefining \. on input line 4398.
-LaTeX Info: Redefining \% on input line 4398.
+LaTeX Info: Redefining \. on input line 4350.
+LaTeX Info: Redefining \% on input line 4350.
 [60]
-LaTeX Info: Redefining \. on input line 4521.
-LaTeX Info: Redefining \% on input line 4521.
+LaTeX Info: Redefining \. on input line 4409.
+LaTeX Info: Redefining \% on input line 4409.
 [61]
-
-LaTeX Font Warning: Command \small invalid in math mode on input line 4622.
-
-
-LaTeX Font Warning: Command \small invalid in math mode on input line 4622.
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 4622.
-LaTeX Info: Redefining \% on input line 4622.
+LaTeX Info: Redefining \. on input line 4532.
+LaTeX Info: Redefining \% on input line 4532.
 [62]
+
+LaTeX Font Warning: Command \small invalid in math mode on input line 4633.
+
+
+LaTeX Font Warning: Command \small invalid in math mode on input line 4633.
+
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 4691.
-LaTeX Info: Redefining \% on input line 4691.
+LaTeX Info: Redefining \. on input line 4633.
+LaTeX Info: Redefining \% on input line 4633.
 [63]
-LaTeX Info: Redefining \. on input line 4745.
-LaTeX Info: Redefining \% on input line 4745.
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+LaTeX Info: Redefining \. on input line 4702.
+LaTeX Info: Redefining \% on input line 4702.
 [64]
-LaTeX Info: Redefining \. on input line 4845.
-LaTeX Info: Redefining \% on input line 4845.
+LaTeX Info: Redefining \. on input line 4756.
+LaTeX Info: Redefining \% on input line 4756.
 [65]
-LaTeX Info: Redefining \. on input line 4922.
-LaTeX Info: Redefining \% on input line 4922.
+LaTeX Info: Redefining \. on input line 4856.
+LaTeX Info: Redefining \% on input line 4856.
 [66]
-Overfull \hbox (2.75427pt too wide) in paragraph at lines 4995--4996
+LaTeX Info: Redefining \. on input line 4933.
+LaTeX Info: Redefining \% on input line 4933.
+[67]
+Overfull \hbox (2.75427pt too wide) in paragraph at lines 5006--5007
 []\TU/lmr/m/n/10 6.1034|  
  []
 
 
-Overfull \hbox (2.75427pt too wide) in paragraph at lines 5008--5009
+Overfull \hbox (2.75427pt too wide) in paragraph at lines 5019--5020
 []\TU/lmr/m/n/10 6.2203|  
  []
 
 
-Overfull \hbox (2.75427pt too wide) in paragraph at lines 5034--5035
+Overfull \hbox (2.75427pt too wide) in paragraph at lines 5045--5046
 []\TU/lmr/m/n/10 6.2899|  
  []
 
-LaTeX Info: Redefining \. on input line 5101.
-LaTeX Info: Redefining \% on input line 5101.
-[67]
-LaTeX Info: Redefining \. on input line 5170.
-LaTeX Info: Redefining \% on input line 5170.
-[68
+LaTeX Info: Redefining \. on input line 5112.
+LaTeX Info: Redefining \% on input line 5112.
+[68]
+LaTeX Info: Redefining \. on input line 5185.
+LaTeX Info: Redefining \% on input line 5185.
+[69
 
 ]
-LaTeX Info: Redefining \. on input line 5227.
-LaTeX Info: Redefining \% on input line 5227.
-[69]
-LaTeX Info: Redefining \. on input line 5255.
-LaTeX Info: Redefining \% on input line 5255.
+LaTeX Info: Redefining \. on input line 5247.
+LaTeX Info: Redefining \% on input line 5247.
 [70]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 5275.
-LaTeX Info: Redefining \. on input line 5275.
-LaTeX Info: Redefining \% on input line 5275.
+LaTeX Info: Redefining \. on input line 5283.
+LaTeX Info: Redefining \% on input line 5283.
 [71]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 5275.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 5311.
+LaTeX Info: Redefining \. on input line 5311.
+LaTeX Info: Redefining \% on input line 5311.
+[72]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 5311.
 (./guia-met-num.aux
 LaTeX Info: Redefining \. on input line 24.
 LaTeX Info: Redefining \% on input line 24.
 )
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 5275.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 5275.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 5311.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 5311.
 
 Package rerunfilecheck Info: File `guia-met-num.out' has not changed.
-(rerunfilecheck)             Checksum: F03EE16CCA3DD72A04C37A45F2514184.
+(rerunfilecheck)             Checksum: 2D2169EFB2A6CA13043D62E406AD875F.
  ) 
 Here is how much of TeX's memory you used:
  29365 strings out of 494880
- 526364 string characters out of 6176317
- 782929 words of memory out of 5000000
+ 526369 string characters out of 6176317
+ 782941 words of memory out of 5000000
  32951 multiletter control sequences out of 15000+600000
  539765 words of font info for 92 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  50i,21n,115p,820b,645s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on guia-met-num.pdf (71 pages).
+Output written on guia-met-num.pdf (72 pages).

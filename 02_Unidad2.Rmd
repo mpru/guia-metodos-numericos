@@ -2,20 +2,18 @@
 
 ## Generalidades
 
-- En esta unidad estudiaremos uno de los problemas básicos y antiguos de la aproximación numérica: la **solución de ecuaciones**.
+- En esta unidad estudiaremos uno de los problemas más básicos y antiguos de la aproximación numérica: la **solución de ecuaciones**.
 - Consiste en obtener una solución de una ecuación $F(x) = O$.
 - Se presenta en una gran variedad de problemas.
 - Las soluciones de una ecuación se llaman **raíces** o **ceros**. 
-
 - Una **ecuación lineal** es una igualdad que involucra una o más variables elevadas a la primera potencia y no contiene productos entre las variables (involucra solamente sumas y restas de las variables). Por ejemplo: $3x+2 = 8$.
 - Para este tipo de ecuaciones es posible hallar analíticamente una expresión para su solución.
-- En una **ecuación no lineal** las incógnitas están elevadas a potencias distintas de $1$, o aparecen en denominadores o exponentes, o están afectadas por funciones no lineales (como el logaritmo o las trigonométricas). 
-
+- En una **ecuación no lineal** las incógnitas están elevadas a potencias distintas de $1$, aparecen en denominadores o exponentes o están afectadas por funciones no lineales (como el logaritmo o las trigonométricas). 
 - Un tipo de ecuación no lineal es la **ecuación algebraica**, que se trata de un polinomio igualado a cero:
 
-$$
-P_n(x) = a_0 x^n + a_1 x^{n-1} + ... + a_{n-1} x + a_n = 0
-$$
+	$$
+	P_n(x) = a_0 x^n + a_1 x^{n-1} + ... + a_{n-1} x + a_n = 0
+	$$
     donde $a_0 \ne 0, n \in \mathbb{N}$ y $a_0, \dots, a_n$ son constantes.
     
 - Ejemplo: $x^3 - x^2 + 5x - 8 = 2x^5$.
@@ -39,7 +37,6 @@ xe^{x}=1 \\
 
 - En general, tampoco es posible hallar de manera análitica una solución exacta para estas ecuaciones.
 - Excepto para algunos problemas, las ecuaciones no lineales carecen de solución exacta, por lo que requieren ser resueltas con métodos numéricos.
-
 - Una técnica fundamental de los métodos numéricos es la **ITERACIÓN** (métodos iterativos).
 - Se trata de **repetir un proceso** hasta que se obtiene un resultado para el problema.
 - En la unidad se verán distintos métodos iterativos para encontrar las raíces, cada con sus propias ventajas y limitaciones.
@@ -75,13 +72,13 @@ p_n = f(p_{n-1}) \\
 
 Si $lim_{n\to\infty} p_n = P$, entonces $P$ es un punto fijo de $f(x)$.
 
-### Empleo para la resolución de ecuaciones
+### Empleo del punto fijo para la resolución de ecuaciones
 
 Siendo:
 
 \begin{equation}
-\label{eq:a}
 F(x) = 0
+(\#eq:a)
 \end{equation}
 
 la ecuación a resolver, el **Método de las Aproximaciones Sucesivas** propone reescribirla a través de la ecuación equivalente:
@@ -90,7 +87,7 @@ $$
 f(x) = x
 $$
 
-de manera que la tarea de hallar un valor de $x$ que satisface \eqref{eq:a} es lo mismo que hallar un punto fijo de la función $f(x)$.
+de manera que la tarea de hallar un valor de $x$ que satisface \@ref(eq:a) es lo mismo que hallar un punto fijo de la función $f(x)$.
 
 Entonces, el método para resolver $F(x) = 0$ consiste en:
 
@@ -109,7 +106,7 @@ x_n = f(x_{n-1}) \\
 - Si a medida que $n$ crece los $x_n$ se aproximan a un valor fijo, se dice que el método converge y la iteración se detiene cuando la diferencia entre dos valores consecutivos $x_{n-1}$ y $x_n$ sea tan pequeña como se desee. 
 - El valor $x_n$ será una raíz aproximada de $F(x)$.
 
-### Ejemplo
+##### Ejemplo {-}
 
 - Hallar las raíces de la ecuación no lineal: $F(x) = x^2-3x+e^x-2=0$
 - Graficamos y vemos que las raíces están cercanas a -0.4 y 1.4.
@@ -117,6 +114,8 @@ x_n = f(x_{n-1}) \\
 ```{r, out.width="70%", echo=F}
 knitr::include_graphics("Plots/U2/f1.png")
 ```
+
+- Nota: para hacer representaciones gráficas de funciones con rapidez y sencillez pueden utilizar herramientas disponibles online. Por ejemplo, nos gusta mucho usar [Geogebra](https://www.geogebra.org/graphing?lang=en).
 
 - Reescribimos $F(x) = 0$ como $f(x) = x$
 - Por ejemplo:
@@ -127,9 +126,11 @@ $$\implies f(x)= \frac{x^2+e^x-2}{3}$$
 
 - Para $x_0 = -1.5$, el proceso converge al valor -0.390271 que consideraremos como la aproximación para la raíz buscada.
 
-```{r, out.width="40%"}
+```{r, out.width="40%", echo=FALSE}
 knitr::include_graphics("Plots/U2/rtdo1.JPG")
 ```
+
+- Verificar estos resultados, pueden hacerlo rápidamente en una planilla de Excel.
 
 ### Criterios para detener el proceso iterativo
 
@@ -155,34 +156,34 @@ knitr::include_graphics("Plots/U2/rtdo1.JPG")
 
 5. $\left|\frac{x_{j}}{x_1}\right| > k$
 
-### Ejemplo
+#### Ejemplo {-}
 
 - En cada paso calculamos el error relativo y nos detuvimos cuando el mismo fue menor a 1E-6.
 
-```{r, out.width="50%"}
+```{r, out.width="50%", echo=FALSE}
 knitr::include_graphics("Plots/U2/rtdo.JPG")
 ```
 
 ### Teorema del Punto Fijo
 
 - Pero esto no funciona siempre, para cualquier $f$ o cualquier $x_0$...
-- ¿Cuándo sí? Cuando se cumplen las condiciones del **Teorema del Punto Fijo**.
+- ¿Cuándo funciona? Cuando se cumplen las condiciones del **Teorema del Punto Fijo**.
 - A saber:
 
 Dadas las siguientes condiciones:
 
-\begin{enumerate}[(a)]
-\item $f$ es una función continua en el intervalo $[a, b]$
-\item $f(x) \in [a, b] \quad \forall x \in [a, b]$
-\item $f'$ existe en $(a, b)$ con $|f'(x)| \le m < 1 \quad \forall x \in (a, b)$
-\end{enumerate}
+a. $f$ es una función continua en el intervalo $[a, b]$
+b. $f(x) \in [a, b] \quad \forall x \in [a, b]$
+c. $f'$ existe en $(a, b)$ con $|f'(x)| \le m < 1 \quad \forall x \in (a, b)$
 
 Si $x_0$ es cualquier número en $[a, b]$, entonces la sucesión definida por
 $$ x_n = f(x_{n-1}), \quad n \ge 1,$$
 
 converge al único punto fijo que $f$ posee en $[a, b]$.
 
-### Ejemplo
+Ver demostración en el anexo.
+
+#### Ejemplo {-}
 
 - En el ejemplo anterior, dada la ecuación $F(x) = x^2-3x+e^x-2=0$, la reexpresamos como:
 
@@ -190,7 +191,7 @@ $$x = \frac{x^2+e^x-2}{3} \implies f(x)= \frac{x^2+e^x-2}{3}$$
 
 $$\implies f'(x) = \frac{1}{3}(2x+e^x)$$
 
-- Verificar condiciones del Teorema.
+- Verificar condiciones del Teorema: para cada región donde se encuentra la raíz, tomar un intervalo $[a, b]$ que la cubra y graficar $f$ y su derivada para poder observar el cumplimiento o no de las condiciones).
 - Si no se cumplen las condiciones, podemos probar con otra expresión para $f(x)$.
 
 ### Interpretación gráfica
@@ -206,11 +207,11 @@ $$\implies f'(x) = \frac{1}{3}(2x+e^x)$$
 
 - Es decir, que geométricamente el valor buscado es el punto de intersección de la curva $y=f(x)$ con la recta $y=x$.
 
-### Ejemplo
+#### Ejemplo {-}
 
 - Para $x_0 = -1.5$, el proceso converge en 7 iteraciones a la raíz -0.390271 con un error relativo menor a -1E+6.
 
-```{r, out.width="100%"}
+```{r, out.width="60%"}
 knitr::include_graphics("Plots/U2/rtdo.JPG")
 ```
 
@@ -240,18 +241,29 @@ knitr::include_graphics("Plots/U2/divergencia.JPG")
 - Vamos a introducir este método a partir de su interpretación geométrica y su representación gráfica.
 - **Recordar**: La *tangente* a una curva en un punto es una recta que toca a la curva sólo en dicho punto.
 - Veamos el siguiente ejemplo donde el objetivo es hallar la raiz de la función $F$, es decir, el valor $p$ tal que $F(p) = 0$.
+- (Sí, tenemos que hacer más lindos estos esquemas, ya los vamos a reemplazar por alguna animación...)
+
+- Supongamos que contamos con una aproximación inicial $x_0$ cercana a la raiz $p$.
 
 ```{r, out.width="90%"}
 knitr::include_graphics("Plots/U2/nr1.png")
 ```
 
+- Definimos a $x_1$ como el punto de intersección del eje de las abscisas con la recta tangente a la curva $F$ en $x_0$.
+- En el caso que muestra la figura, se puede observar que $x_1$ está más cerca de $p$ que $x_0$.
+
 ```{r, out.width="90%"}
 knitr::include_graphics("Plots/U2/nr2.png")
 ```
 
+- Ahora definimos a $x_2$ como el punto de intersección del eje de las abscisas con la recta tangente a la curva $F$ en $x_1$.
+
 ```{r, out.width="90%"}
 knitr::include_graphics("Plots/U2/nr3.png")
 ```
+
+- Nuevamente, para el caso del ejemplo, podemos ver cómo $x_2$ está aún más cerca de $p$.
+- Si continuamos repitiendo este proceso, esperamos encontrar un $x_n$ que sea una buena aproximación para $p$.
 
 ```{r, out.width="90%"}
 knitr::include_graphics("Plots/U2/nr4.png")
@@ -261,55 +273,47 @@ knitr::include_graphics("Plots/U2/nr4.png")
 knitr::include_graphics("Plots/U2/nr.png")
 ```
 
-- Supongamos que contamos con una aproximación inicial $x_0$ cercana a la raiz $p$.
-- Definimos a $x_1$ como el punto de intersección del eje de las abscisas con la recta tangente a la curva $F$ en $x_0$.
-- En el caso de la figura, se puede observar que $x_1$ está más cerca de $p$ que $x_0$.
-- Ahora definimos a $x_2$ como el punto de intersección del eje de las abscisas con la recta tangente a la curva $F$ en $x_1$.
-- Nuevamente, para el caso del ejemplo, podemos ver cómo $x_2$ está aún más cerca de $p$.
-- Si continuamos repitiendo este proceso, esperamos encontrar un $x_n$ que sea una buena aproximación para $p$.
-
 - ¿Podemos expresar esto que observamos gráficamente a través de una fórmula?
 - Es decir, a partir de $x_0$, ¿podemos encontrar una fórmula para $x_1$?
 - Sí, para eso hay prestarle atención a la pendiente $m$ de la recta tangente en $x_0$.
 - Por un lado, sabemos que la pendiente de la recta tangente a la curva en un punto es igual a la derivada de la función en dicho punto: 
 
-\begin{equation}
-\label{eq:deriv1}
-m = F'(x_0)
-\end{equation}
+	\begin{equation}
+	m = F'(x_0)
+	(\#eq:deriv1)
+	\end{equation}
 
 - Pero además sabemos que para cualquier recta, la pendiente es igual a:
 
-\begin{equation}
-\label{eq:deriv2}
-m = \frac{y_1 - y_0}{x_1 - x_0}
-\end{equation}
-
-siendo $(x_0, y_0)$ y $(x_1, y_1)$ dos puntos distintos que pertenecen a la misma.
+	\begin{equation}
+	m = \frac{y_1 - y_0}{x_1 - x_0}
+	(\#eq:deriv2)
+	\end{equation}
+	
+	siendo $(x_0, y_0)$ y $(x_1, y_1)$ dos puntos distintos que pertenecen a la misma.
     
 - Para expresar la pendiente de la recta tangente en $x_0$, podemos tomar los puntos $(x_0, F(x_0))$ y $(x_1, 0)$ (el punto donde la tangente intersecta al eje x), de manera que a partir de la fórmula anterior:
 
-\begin{equation}
-\label{eq:deriv3}
-m = \frac{0 - F(x_0)}{x_1 - x_0} = - \frac{F(x_0)}{x_1 - x_0}
-\end{equation}
+	\begin{equation}
+	m = \frac{0 - F(x_0)}{x_1 - x_0} = - \frac{F(x_0)}{x_1 - x_0}
+	(\#eq:deriv3)
+	\end{equation}
 
-- Igualando (\ref{eq:deriv1}) y (\ref{eq:deriv3}) y despejando $x_1$ nos queda:
+- Igualando \@ref(eq:deriv1) y \@ref(eq:deriv3) y despejando $x_1$ nos queda:
 
-\begin{equation}
-\label{eq:deriv4}
-x_1 = x_0 - \frac{F(x_0)}{F'(x_0)}
-\end{equation}
+	\begin{equation}
+	x_1 = x_0 - \frac{F(x_0)}{F'(x_0)}
+	(\#eq:deriv4)
+	\end{equation}
 
 - Si repetimos este pensamiento empezando desde $x_1$ con la recta tangente a $F$ en el punto $x_1$, vamos a encontrar que:
 
-\begin{equation}
-\label{eq:deriv5}
-x_2 = x_1 - \frac{F(x_1)}{F'(x_1)}
-\end{equation}
+	\begin{equation}
+	x_2 = x_1 - \frac{F(x_1)}{F'(x_1)}
+	(\#eq:deriv5)
+	\end{equation}
 
 - De esta manera hemos deducido una fórmula recursiva que nos permitirá hallar una aproximación para el verdadero valor de la raiz de $F$.
-
 - Las ideas anteriores se formalizan analíticamente a través del siguiente teorema.
 - En el mismo se deduce la fórmula recursiva a partir del desarrollo en serie de Taylor de la función $F$.
 
@@ -323,7 +327,7 @@ $$
 
 converge a $p$ cualquiera sea la aproximación inicial $x_0 \in [p - \delta; p + \delta]$
 
-### Convergencia
+#### Convergencia {-}
 
 **Observación**: para garantizar la convergencia, $\delta$ debe ser elegido tal que:
 $$\frac{|F(x)F''(x)|}{[F'(x)]^2} < 1  \quad \forall x \in [p - \delta, p + \delta]$$
@@ -334,7 +338,7 @@ Esto significa que:
 - $F''(x)$ no debe ser excesivamente grande.
 - $F'(x)$ no debe estar muy próxima a cero.
 
-### Ejemplo: 
+#### Ejemplo {-}
 
 - Evaluar si Newton-Raphson permite hallar la raíz positiva de $F(x) = x^2-3x+e^x-2$, que no pudo ser hallada con Aproximaciones Sucesivas.
 
@@ -342,7 +346,7 @@ Esto significa que:
 
 **Ventajas**
 
-- Aparece $F$ en lugar de $f$.
+- Aparece la expresión original $F$ en lugar de tener que buscar una $f$.
 - Converge más rápido que el método de las aproximaciones sucesivas.
 - En algunos casos en que aproximaciones sucesivas diverge, N-R converge.
 - Se puede adaptar para hallar raíces complejas.

@@ -257,7 +257,7 @@
 \chapter*{Acerca del Taller}\label{acerca-del-taller}}
 \addcontentsline{toc}{chapter}{Acerca del Taller}
 
-La presente guía resume algunos conceptos desarrollados en el Taller de Métodos Numéricos de la Licenciatura en Estadística en la Facultad de Ciencias Económicas y Estadística, Universidad Nacional de Rosario. La misma irá siendo revisada a lo largo del cuatrimestre y no está exenta de presentar errores o expresar ideas que puedan ser mejoradas. ¡Esperamos que juntos podamos enriquecerla al dar nuestros primeros pasos en la programación!
+La presente guía resume algunos conceptos desarrollados en el Taller de Métodos Numéricos de la Licenciatura en Estadística en la Facultad de Ciencias Económicas y Estadística, Universidad Nacional de Rosario. La misma irá siendo revisada a lo largo del cuatrimestre y no está exenta de presentar errores o expresar ideas que puedan ser mejoradas. Contamos con la ayuda de ustedes para mejorarla entre todos.
 
 \hypertarget{horario-y-lugar-de-cursado}{%
 \section*{Horario y lugar de cursado}\label{horario-y-lugar-de-cursado}}
@@ -1052,7 +1052,7 @@ Existen dos formas fundamentales de medir los errores que se cometen en la aprox
 
 \begin{itemize}
 \item
-  En esta unidad estudiaremos uno de los problemas básicos y antiguos de la aproximación numérica: la \textbf{solución de ecuaciones}.
+  En esta unidad estudiaremos uno de los problemas más básicos y antiguos de la aproximación numérica: la \textbf{solución de ecuaciones}.
 \item
   Consiste en obtener una solución de una ecuación \(F(x) = O\).
 \item
@@ -1064,17 +1064,14 @@ Existen dos formas fundamentales de medir los errores que se cometen en la aprox
 \item
   Para este tipo de ecuaciones es posible hallar analíticamente una expresión para su solución.
 \item
-  En una \textbf{ecuación no lineal} las incógnitas están elevadas a potencias distintas de \(1\), o aparecen en denominadores o exponentes, o están afectadas por funciones no lineales (como el logaritmo o las trigonométricas).
+  En una \textbf{ecuación no lineal} las incógnitas están elevadas a potencias distintas de \(1\), aparecen en denominadores o exponentes o están afectadas por funciones no lineales (como el logaritmo o las trigonométricas).
 \item
   Un tipo de ecuación no lineal es la \textbf{ecuación algebraica}, que se trata de un polinomio igualado a cero:
-\end{itemize}
 
-\[
-P_n(x) = a_0 x^n + a_1 x^{n-1} + ... + a_{n-1} x + a_n = 0
-\]
-donde \(a_0 \ne 0, n \in \mathbb{N}\) y \(a_0, \dots, a_n\) son constantes.
-
-\begin{itemize}
+  \[
+    P_n(x) = a_0 x^n + a_1 x^{n-1} + ... + a_{n-1} x + a_n = 0
+    \]
+  donde \(a_0 \ne 0, n \in \mathbb{N}\) y \(a_0, \dots, a_n\) son constantes.
 \item
   Ejemplo: \(x^3 - x^2 + 5x - 8 = 2x^5\).
 \item
@@ -1161,14 +1158,14 @@ p_n = f(p_{n-1}) \\
 
 Si \(lim_{n\to\infty} p_n = P\), entonces \(P\) es un punto fijo de \(f(x)\).
 
-\hypertarget{empleo-para-la-resoluciuxf3n-de-ecuaciones}{%
-\subsection{Empleo para la resolución de ecuaciones}\label{empleo-para-la-resoluciuxf3n-de-ecuaciones}}
+\hypertarget{empleo-del-punto-fijo-para-la-resoluciuxf3n-de-ecuaciones}{%
+\subsection{Empleo del punto fijo para la resolución de ecuaciones}\label{empleo-del-punto-fijo-para-la-resoluciuxf3n-de-ecuaciones}}
 
 Siendo:
 
 \begin{equation}
-\label{eq:a}
 F(x) = 0
+\label{eq:a}
 \end{equation}
 
 la ecuación a resolver, el \textbf{Método de las Aproximaciones Sucesivas} propone reescribirla a través de la ecuación equivalente:
@@ -1209,7 +1206,8 @@ x_n = f(x_{n-1}) \\
 \end{itemize}
 
 \hypertarget{ejemplo}{%
-\subsection{Ejemplo}\label{ejemplo}}
+\paragraph{Ejemplo}\label{ejemplo}}
+\addcontentsline{toc}{paragraph}{Ejemplo}
 
 \begin{itemize}
 \tightlist
@@ -1222,7 +1220,8 @@ x_n = f(x_{n-1}) \\
 \begin{center}\includegraphics[width=0.7\linewidth]{Plots/U2/f1} \end{center}
 
 \begin{itemize}
-\tightlist
+\item
+  Nota: para hacer representaciones gráficas de funciones con rapidez y sencillez pueden utilizar herramientas disponibles online. Por ejemplo, nos gusta mucho usar \href{https://www.geogebra.org/graphing?lang=en}{Geogebra}.
 \item
   Reescribimos \(F(x) = 0\) como \(f(x) = x\)
 \item
@@ -1240,6 +1239,12 @@ x_n = f(x_{n-1}) \\
 \end{itemize}
 
 \begin{center}\includegraphics[width=0.4\linewidth]{Plots/U2/rtdo1} \end{center}
+
+\begin{itemize}
+\tightlist
+\item
+  Verificar estos resultados, pueden hacerlo rápidamente en una planilla de Excel.
+\end{itemize}
 
 \hypertarget{criterios-para-detener-el-proceso-iterativo}{%
 \subsection{Criterios para detener el proceso iterativo}\label{criterios-para-detener-el-proceso-iterativo}}
@@ -1283,7 +1288,8 @@ x_n = f(x_{n-1}) \\
 \end{enumerate}
 
 \hypertarget{ejemplo-1}{%
-\subsection{Ejemplo}\label{ejemplo-1}}
+\subsubsection*{Ejemplo}\label{ejemplo-1}}
+\addcontentsline{toc}{subsubsection}{Ejemplo}
 
 \begin{itemize}
 \tightlist
@@ -1301,17 +1307,22 @@ x_n = f(x_{n-1}) \\
 \item
   Pero esto no funciona siempre, para cualquier \(f\) o cualquier \(x_0\)\ldots{}
 \item
-  ¿Cuándo sí? Cuando se cumplen las condiciones del \textbf{Teorema del Punto Fijo}.
+  ¿Cuándo funciona? Cuando se cumplen las condiciones del \textbf{Teorema del Punto Fijo}.
 \item
   A saber:
 \end{itemize}
 
 Dadas las siguientes condiciones:
 
-\begin{enumerate}[(a)]
-\item $f$ es una función continua en el intervalo $[a, b]$
-\item $f(x) \in [a, b] \quad \forall x \in [a, b]$
-\item $f'$ existe en $(a, b)$ con $|f'(x)| \le m < 1 \quad \forall x \in (a, b)$
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  \(f\) es una función continua en el intervalo \([a, b]\)
+\item
+  \(f(x) \in [a, b] \quad \forall x \in [a, b]\)
+\item
+  \(f'\) existe en \((a, b)\) con \(|f'(x)| \le m < 1 \quad \forall x \in (a, b)\)
 \end{enumerate}
 
 Si \(x_0\) es cualquier número en \([a, b]\), entonces la sucesión definida por
@@ -1319,8 +1330,11 @@ Si \(x_0\) es cualquier número en \([a, b]\), entonces la sucesión definida po
 
 converge al único punto fijo que \(f\) posee en \([a, b]\).
 
+Ver demostración en el anexo.
+
 \hypertarget{ejemplo-4}{%
-\subsection{Ejemplo}\label{ejemplo-4}}
+\subsubsection*{Ejemplo}\label{ejemplo-4}}
+\addcontentsline{toc}{subsubsection}{Ejemplo}
 
 \begin{itemize}
 \tightlist
@@ -1335,7 +1349,7 @@ converge al único punto fijo que \(f\) posee en \([a, b]\).
 \begin{itemize}
 \tightlist
 \item
-  Verificar condiciones del Teorema.
+  Verificar condiciones del Teorema: para cada región donde se encuentra la raíz, tomar un intervalo \([a, b]\) que la cubra y graficar \(f\) y su derivada para poder observar el cumplimiento o no de las condiciones).
 \item
   Si no se cumplen las condiciones, podemos probar con otra expresión para \(f(x)\).
 \end{itemize}
@@ -1363,7 +1377,8 @@ converge al único punto fijo que \(f\) posee en \([a, b]\).
 \end{itemize}
 
 \hypertarget{ejemplo-5}{%
-\subsection{Ejemplo}\label{ejemplo-5}}
+\subsubsection*{Ejemplo}\label{ejemplo-5}}
+\addcontentsline{toc}{subsubsection}{Ejemplo}
 
 \begin{itemize}
 \tightlist
@@ -1371,7 +1386,7 @@ converge al único punto fijo que \(f\) posee en \([a, b]\).
   Para \(x_0 = -1.5\), el proceso converge en 7 iteraciones a la raíz -0.390271 con un error relativo menor a -1E+6.
 \end{itemize}
 
-\begin{center}\includegraphics[width=1\linewidth]{Plots/U2/rtdo} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{Plots/U2/rtdo} \end{center}
 
 \begin{center}\includegraphics[width=1\linewidth]{Plots/U2/f3} \end{center}
 
@@ -1390,7 +1405,6 @@ converge al único punto fijo que \(f\) posee en \([a, b]\).
 \section{Método de Newton-Raphson}\label{muxe9todo-de-newton-raphson}}
 
 \begin{itemize}
-\tightlist
 \item
   Si la función \(F\) y sus derivadas \(F'\) y \(F''\) son continuas cerca de una raíz \(p\), se pueden usar estas características de \(F\) para desarrollar algoritmos que produzcan sucesiones \(\{x_k\}\) que converjan a \(p\) más rápidamente.
 \item
@@ -1401,31 +1415,45 @@ converge al único punto fijo que \(f\) posee en \([a, b]\).
   \textbf{Recordar}: La \emph{tangente} a una curva en un punto es una recta que toca a la curva sólo en dicho punto.
 \item
   Veamos el siguiente ejemplo donde el objetivo es hallar la raiz de la función \(F\), es decir, el valor \(p\) tal que \(F(p) = 0\).
+\item
+  (Sí, tenemos que hacer más lindos estos esquemas, ya los vamos a reemplazar por alguna animación\ldots{})
+\item
+  Supongamos que contamos con una aproximación inicial \(x_0\) cercana a la raiz \(p\).
 \end{itemize}
 
 \begin{center}\includegraphics[width=0.9\linewidth]{Plots/U2/nr1} \end{center}
 
+\begin{itemize}
+\tightlist
+\item
+  Definimos a \(x_1\) como el punto de intersección del eje de las abscisas con la recta tangente a la curva \(F\) en \(x_0\).
+\item
+  En el caso que muestra la figura, se puede observar que \(x_1\) está más cerca de \(p\) que \(x_0\).
+\end{itemize}
+
 \begin{center}\includegraphics[width=0.9\linewidth]{Plots/U2/nr2} \end{center}
 
+\begin{itemize}
+\tightlist
+\item
+  Ahora definimos a \(x_2\) como el punto de intersección del eje de las abscisas con la recta tangente a la curva \(F\) en \(x_1\).
+\end{itemize}
+
 \begin{center}\includegraphics[width=0.9\linewidth]{Plots/U2/nr3} \end{center}
+
+\begin{itemize}
+\tightlist
+\item
+  Nuevamente, para el caso del ejemplo, podemos ver cómo \(x_2\) está aún más cerca de \(p\).
+\item
+  Si continuamos repitiendo este proceso, esperamos encontrar un \(x_n\) que sea una buena aproximación para \(p\).
+\end{itemize}
 
 \begin{center}\includegraphics[width=0.9\linewidth]{Plots/U2/nr4} \end{center}
 
 \begin{center}\includegraphics[width=0.9\linewidth]{Plots/U2/nr} \end{center}
 
 \begin{itemize}
-\item
-  Supongamos que contamos con una aproximación inicial \(x_0\) cercana a la raiz \(p\).
-\item
-  Definimos a \(x_1\) como el punto de intersección del eje de las abscisas con la recta tangente a la curva \(F\) en \(x_0\).
-\item
-  En el caso de la figura, se puede observar que \(x_1\) está más cerca de \(p\) que \(x_0\).
-\item
-  Ahora definimos a \(x_2\) como el punto de intersección del eje de las abscisas con la recta tangente a la curva \(F\) en \(x_1\).
-\item
-  Nuevamente, para el caso del ejemplo, podemos ver cómo \(x_2\) está aún más cerca de \(p\).
-\item
-  Si continuamos repitiendo este proceso, esperamos encontrar un \(x_n\) que sea una buena aproximación para \(p\).
 \item
   ¿Podemos expresar esto que observamos gráficamente a través de una fórmula?
 \item
@@ -1434,60 +1462,41 @@ converge al único punto fijo que \(f\) posee en \([a, b]\).
   Sí, para eso hay prestarle atención a la pendiente \(m\) de la recta tangente en \(x_0\).
 \item
   Por un lado, sabemos que la pendiente de la recta tangente a la curva en un punto es igual a la derivada de la función en dicho punto:
-\end{itemize}
 
-\begin{equation}
-\label{eq:deriv1}
-m = F'(x_0)
-\end{equation}
-
-\begin{itemize}
-\tightlist
+  \begin{equation}
+    m = F'(x_0)
+    \label{eq:deriv1}
+    \end{equation}
 \item
   Pero además sabemos que para cualquier recta, la pendiente es igual a:
-\end{itemize}
 
-\begin{equation}
-\label{eq:deriv2}
-m = \frac{y_1 - y_0}{x_1 - x_0}
-\end{equation}
+  \begin{equation}
+    m = \frac{y_1 - y_0}{x_1 - x_0}
+    \label{eq:deriv2}
+    \end{equation}
 
-siendo \((x_0, y_0)\) y \((x_1, y_1)\) dos puntos distintos que pertenecen a la misma.
-
-\begin{itemize}
-\tightlist
+  siendo \((x_0, y_0)\) y \((x_1, y_1)\) dos puntos distintos que pertenecen a la misma.
 \item
   Para expresar la pendiente de la recta tangente en \(x_0\), podemos tomar los puntos \((x_0, F(x_0))\) y \((x_1, 0)\) (el punto donde la tangente intersecta al eje x), de manera que a partir de la fórmula anterior:
-\end{itemize}
 
-\begin{equation}
-\label{eq:deriv3}
-m = \frac{0 - F(x_0)}{x_1 - x_0} = - \frac{F(x_0)}{x_1 - x_0}
-\end{equation}
-
-\begin{itemize}
-\tightlist
+  \begin{equation}
+    m = \frac{0 - F(x_0)}{x_1 - x_0} = - \frac{F(x_0)}{x_1 - x_0}
+    \label{eq:deriv3}
+    \end{equation}
 \item
-  Igualando (\ref{eq:deriv1}) y (\ref{eq:deriv3}) y despejando \(x_1\) nos queda:
-\end{itemize}
+  Igualando \eqref{eq:deriv1} y \eqref{eq:deriv3} y despejando \(x_1\) nos queda:
 
-\begin{equation}
-\label{eq:deriv4}
-x_1 = x_0 - \frac{F(x_0)}{F'(x_0)}
-\end{equation}
-
-\begin{itemize}
-\tightlist
+  \begin{equation}
+    x_1 = x_0 - \frac{F(x_0)}{F'(x_0)}
+    \label{eq:deriv4}
+    \end{equation}
 \item
   Si repetimos este pensamiento empezando desde \(x_1\) con la recta tangente a \(F\) en el punto \(x_1\), vamos a encontrar que:
-\end{itemize}
 
-\begin{equation}
-\label{eq:deriv5}
-x_2 = x_1 - \frac{F(x_1)}{F'(x_1)}
-\end{equation}
-
-\begin{itemize}
+  \begin{equation}
+    x_2 = x_1 - \frac{F(x_1)}{F'(x_1)}
+    \label{eq:deriv5}
+    \end{equation}
 \item
   De esta manera hemos deducido una fórmula recursiva que nos permitirá hallar una aproximación para el verdadero valor de la raiz de \(F\).
 \item
@@ -1508,7 +1517,8 @@ x_k = x_{k-1} - \frac{F(x_{k-1})}{F'(x_{k-1})} \quad k = 1, 2, \dots
 converge a \(p\) cualquiera sea la aproximación inicial \(x_0 \in [p - \delta; p + \delta]\)
 
 \hypertarget{convergencia}{%
-\subsection{Convergencia}\label{convergencia}}
+\subsubsection*{Convergencia}\label{convergencia}}
+\addcontentsline{toc}{subsubsection}{Convergencia}
 
 \textbf{Observación}: para garantizar la convergencia, \(\delta\) debe ser elegido tal que:
 \[\frac{|F(x)F''(x)|}{[F'(x)]^2} < 1  \quad \forall x \in [p - \delta, p + \delta]\]
@@ -1526,7 +1536,8 @@ Esto significa que:
 \end{itemize}
 
 \hypertarget{ejemplo-6}{%
-\subsection{Ejemplo:}\label{ejemplo-6}}
+\subsubsection*{Ejemplo}\label{ejemplo-6}}
+\addcontentsline{toc}{subsubsection}{Ejemplo}
 
 \begin{itemize}
 \tightlist
@@ -1542,7 +1553,7 @@ Esto significa que:
 \begin{itemize}
 \tightlist
 \item
-  Aparece \(F\) en lugar de \(f\).
+  Aparece la expresión original \(F\) en lugar de tener que buscar una \(f\).
 \item
   Converge más rápido que el método de las aproximaciones sucesivas.
 \item
@@ -5144,10 +5155,15 @@ para algún número real \(\xi\) entre \(x_0\) y \(x\), siendo \(f\) diferenciab
 
 Dadas las siguientes condiciones:
 
-\begin{enumerate}[(a)]
-\item $f$ es una función continua en el intervalo $[a, b]$
-\item $f(x) \in [a, b] \quad \forall x \in [a, b]$
-\item $f'$ existe en $(a, b)$ con $|f'(x)| \le m < 1 \quad \forall x \in (a, b)$
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  \(f\) es una función continua en el intervalo \([a, b]\)
+\item
+  \(f(x) \in [a, b] \quad \forall x \in [a, b]\)
+\item
+  \(f'\) existe en \((a, b)\) con \(|f'(x)| \le m < 1 \quad \forall x \in (a, b)\)
 \end{enumerate}
 
 Si \(x_0\) es cualquier número en \([a, b]\), entonces la sucesión definida por
@@ -5165,15 +5181,20 @@ converge al único punto fijo que \(f\) posee en \([a, b]\).
   \textbf{Existencia de un punto fijo}
 
   \begin{itemize}
-  \tightlist
   \item
     Si \(f(a) = a\) o \(f(b) = b\), la existencia del punto fijo es obvia.
   \item
     Entonces suponemos que \(f(a) \neq a\) y \(f(b) \neq b \implies f(a) > a\) y \(f(b) < b\) por (b).
+  \item
     Definimos \(h(x) = f(x) - x\), continua en \([a; b]\) tal que:
+
     \[h(a) = f(a) - a > 0 \text{ y } h(b) = f(b) - b < 0\]
+  \item
     Por el Teorema del Valor Intermedio:
-    \[ \exists \quad p \in (a; b) \text{ tal que } h(p) = 0 \implies f(p) - p = 0 \implies p = f(p) \implies p \text{ es un punto fijo de } f\]
+
+    \[\exists \quad p \in (a; b) \text{ tal que } h(p) = 0 \implies f(p) - p = 0\]
+
+    \[\implies p = f(p) \implies p \text{ es un punto fijo de } f\]
   \item
     Por lo tanto, \(f\) tiene al menos un punto fijo.
   \end{itemize}
@@ -5182,19 +5203,33 @@ converge al único punto fijo que \(f\) posee en \([a, b]\).
 
   Sean \(p\) y \(q\) dos puntos fijos de \(f\), \(p \neq q\), \(p, q \in [a; b]\):
 
-  \[ |p-q| \equaltext{puntos fijos} | f(p) - f(q) | \equaltext{T Valor Medio, $\xi$ entre $p$ y $q$} |f'(\xi) (p - q)| \equaltext{Val abs de un prod} \]
-  \[ |f'(\xi)| |p-q| \leqtext{(c)} m |p-q| \leqtext{(c)} |p-q| \implies |p-q| < |p-q| \]
+  \[ |p-q| = \qquad \qquad \text{ por ser puntos fijos}\]
+  \[= | f(p) - f(q) | \qquad \qquad \text{ Teorema Valor Medio } \xi \text{ entre } p \text{ y } q\]
+  \[= |f'(\xi) (p - q)| \qquad \qquad \text{ Valor absoluto de un producto} \]
+  \[= |f'(\xi)| |p-q| \qquad \qquad \text{ por (c)}\]
+  \[\leq m |p-q| \qquad \qquad \text{ por (c)}\]
+  \[\leq |p-q|\]
+  \[\implies |p-q| < |p-q| \]
 
   Lo cual es una contradicción que proviene de la única suposición: \(p \neq q\). Por lo tanto \(p = q\) y el punto fijo es único.
 \item
   \textbf{Convergencia del proceso iterativo}
 
   Por (b), dado que \(f:[a; b] \rightarrow [a; b]\) , la sucesión \(\{x_n\}_{n=0}^{\infty}\) está definida \(\forall n \geq 0\) y \(x_n \in [a; b] \quad \forall n\).
-  \[ |x_n - p| \equaltext{p es punto fijo} |x_n - f(p)| \quad \stackrel{x_n=f(x_{n-1})}{=} \quad |f(x_{n-1}) - f(p)| \equaltext{T Valor Medio, $\xi$ entre $p$ y $x_{n-1}$}\]
-  \[ |f'(\xi)| |x_{n-1} - p| \leqtext{(c)} m |x_{n-1} - p| \implies |x_n - p| \leq m |x_{n-1} - p|\]
+
+  \[|x_n - p| \qquad \qquad \text{p es punto fijo}\]
+  \[=|x_n - f(p)| \qquad \qquad \text{ Recordando que: } x_n=f(x_{n-1})\]
+  \[=|f(x_{n-1}) - f(p)| \qquad \qquad \text{ Teorema Valor Medio } \xi \text{ entre } p \text{ y } x_{n-1}\]
+  \[=|f'(\xi)| |x_{n-1} - p| \qquad \qquad \text{ por (c)}\]
+  \[\leq m |x_{n-1} - p| \implies |x_n - p| \leq m |x_{n-1} - p|\]
+
   Del mismo modo podríamos ver que \(|x_{n-1} - p| \leq m |x_{n-2} - p|\).
+
   Aplicando dicha desigualdad inductivamente resulta:
-  \[ |x_n - p| \leq m |x_{n-1} - p| \leq m^2 |x_{n-2} - p| \leq \dots \leq m^n |x_0 - p| \implies |x_n - p| \leq m^n |x_0 - p|\]
+
+  \[ |x_n - p| \leq m |x_{n-1} - p| \leq m^2 |x_{n-2} - p| \leq \dots \leq m^n |x_0 - p|\]
+  \[\implies |x_n - p| \leq m^n |x_0 - p|\]
+
   Como \(0<m<1\), el segundo miembro decrece a medida que \(n\) aumenta, sin importar cuál es \(x_0\):
   \[\lim_{n \to \infty} |x_n - p| \leq \lim_{n \to \infty} m^n |x_0 - p| = 0\]
   Entonces \(|x_n - p| \xrightarrow[n \to \infty]{} 0\), es decir el método converge hacia el punto fijo \(p\).
@@ -5226,8 +5261,9 @@ Si tomamos \(x = p\), sabiendo que \(F(p) = 0\), nos queda:
 Si \(x_0\) está suficientemente cerca de \(p\), entonces el último término del segundo miembro en la igualdad anterior será pequeño comparado con los restantes y podemos despreciarlo:
 
 \begin{equation}
-\label{relacion}
-0 \approx F(x_0) + F'(x_0)(p-x_0) \implies p-x_0 \approx - \frac{F(x_0)}{F'(x_0)} \implies p \approx x_0 - \frac{F(x_0)}{F'(x_0)}.
+0 \approx F(x_0) + F'(x_0)(p-x_0) \implies p-x_0 \approx - \frac{F(x_0)}{F'(x_0)}\\
+\implies p \approx x_0 - \frac{F(x_0)}{F'(x_0)}.
+\label{eq:relacion}
 \end{equation}
 
 De esta manera podemos llamar \[x_1 = x_0 - \frac{F(x_0)}{F'(x_0)}\] y hemos obtenido un nuevo valor \(x_1\) más cercano a \(p\) que \(x_0\). Pensando del mismo modo, podemos escribir \[p \approx x_1 - \frac{F(x_1)}{F'(x_1)}\] de manera que \[x_2 = x_1 - \frac{F(x_1)}{F'(x_1)}\] es aún una mejor aproximación a \(p\). Continuando de esta manera, queda establecida la regla general (\ref{reglagral}): \[x_n = x_{n-1} - \frac{F(x_{n-1})}{F'(x_{n-1})} \quad n=1,2,\dots\].
@@ -5266,7 +5302,7 @@ Si \(x_0\) está suficientemente cerca de \(p\), entonces el último término de
 \end{split}
 \end{equation*}
 
-Si dentro de los corchetes se reemplaza \((p - x_0)\) por \(- \frac{F(x_0)}{F'(x_0)}\) según la relación vista en (\ref{relacion}) y se despeja \(p\), se obtiene una expresión para la primera aproximación \(x_1\), dando lugar a la fórmula iterativa:
+Si dentro de los corchetes se reemplaza \((p - x_0)\) por \(- \frac{F(x_0)}{F'(x_0)}\) según la relación vista en \eqref{eq:relacion} y se despeja \(p\), se obtiene una expresión para la primera aproximación \(x_1\), dando lugar a la fórmula iterativa:
 
 \[
 x_n = x_{n-1} - \frac{F(x_{n-1})F'(x_{n-1})}{[F'(x_{n-1})]^2 - 0,5 F(x_{n-1}) F''(x_{n-1})} \quad n = 1, 2, \dots
