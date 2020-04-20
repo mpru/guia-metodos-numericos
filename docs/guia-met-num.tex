@@ -244,7 +244,7 @@
 \providecommand{\subtitle}[1]{}
 \subtitle{Guía de estudio}
 \author{Marcos Prunello \and Cecilia Rapelli}
-\date{2020-04-07}
+\date{2020-04-20}
 
 \begin{document}
 \maketitle
@@ -1349,7 +1349,7 @@ Ver demostración en el anexo.
 \begin{itemize}
 \tightlist
 \item
-  Verificar condiciones del Teorema: para cada región donde se encuentra la raíz, tomar un intervalo \([a, b]\) que la cubra y graficar \(f\) y su derivada para poder observar el cumplimiento o no de las condiciones).
+  Verificar condiciones del Teorema: para cada región donde se encuentra la raíz, tomar un intervalo \([a, b]\) que la cubra y graficar \(f\) y su derivada para poder observar el cumplimiento o no de las condiciones.
 \item
   Si no se cumplen las condiciones, podemos probar con otra expresión para \(f(x)\).
 \end{itemize}
@@ -1500,9 +1500,7 @@ Ver demostración en el anexo.
 \item
   De esta manera hemos deducido una fórmula recursiva que nos permitirá hallar una aproximación para el verdadero valor de la raiz de \(F\).
 \item
-  Las ideas anteriores se formalizan analíticamente a través del siguiente teorema.
-\item
-  En el mismo se deduce la fórmula recursiva a partir del desarrollo en serie de Taylor de la función \(F\).
+  Las ideas anteriores se formalizan analíticamente a través del siguiente teorema, en el cual se deduce la fórmula recursiva a partir del desarrollo en serie de Taylor de la función \(F\).
 \end{itemize}
 
 \hypertarget{teorema-de-newton-raphson}{%
@@ -1707,17 +1705,21 @@ a_{n1} & a_{n2} & \cdots & a_{nn} & b_n
   \end{itemize}
 \end{itemize}
 
-\textbf{Teorema}. Las siguientes condiciones son equivalentes:
-
 \begin{itemize}
 \item
-  El sistema \(\mathbf{Ax=b}\) tiene solución única (es compatible determinado).
-\item
-  La matriz \(\mathbf{A}\) es invertible (existe \(\mathbf{A^{-1}}\)).
-\item
-  La matriz \(\mathbf{A}\) es no singular (\(\det \mathbf{A} \neq 0\)).
-\item
-  El sistema \(\mathbf{Ax=0}\) tiene como única solución \(\mathbf{x=0}\).
+  \textbf{Teorema}. Las siguientes condiciones son equivalentes:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    El sistema \(\mathbf{Ax=b}\) tiene solución única (es compatible determinado).
+  \item
+    La matriz \(\mathbf{A}\) es invertible (existe \(\mathbf{A^{-1}}\)).
+  \item
+    La matriz \(\mathbf{A}\) es no singular (\(\det \mathbf{A} \neq 0\)).
+  \item
+    El sistema \(\mathbf{Ax=0}\) tiene como única solución \(\mathbf{x=0}\).
+  \end{itemize}
 \item
   Dos sistemas de orden \(n \times n\) son \textbf{equivalentes} si tienen el mismo conjunto de soluciones.
 \item
@@ -1741,7 +1743,7 @@ a_{n1} & a_{n2} & \cdots & a_{nn} & b_n
 
 \begin{itemize}
 \item
-  Notación que ayuda a expresar algoritmos con operaciones matriciales y facilita la escritura de los programas en IML o R.
+  En esta sección presentamos la notación utilizaremos para expresar algoritmos con operaciones matriciales, facilitando su traducción a IML o R.
 \item
   Dada una matriz \(\mathbf{Z}\) de dimensión \(n \times m\), anotamos:
 
@@ -1801,7 +1803,7 @@ a_{n1} & a_{n2} & \cdots & a_{nn} & b_n
 \hypertarget{sistemas-fuxe1ciles-de-resolver}{%
 \section{Sistemas fáciles de resolver}\label{sistemas-fuxe1ciles-de-resolver}}
 
-\textbf{Caso 1: La matriz} \(\mathbf{A}\) es \textbf{diagonal}
+\textbf{Caso 1: La matriz} \(\mathbf{A}\) \textbf{es diagonal}
 
 \[
 \begin{bmatrix}
@@ -1856,7 +1858,7 @@ b_1 \\ b_2 \\ \vdots \\ b_n
 \begin{itemize}
 \tightlist
 \item
-  La solución de \(x_n\) es inmediata y a partir de ella se encuentran las restantes siguiendo el orden inverso \(x_{n-1}, \cdots, x_1\), aplicando el algoritmo de \textbf{sustitución regresiva}:
+  La solución de \(x_n\) es inmediata y a partir de ella se encuentran las restantes en orden inverso \(x_{n-1}, \cdots, x_1\), aplicando el algoritmo de \textbf{sustitución regresiva}:
 \end{itemize}
 
 \[
@@ -1879,7 +1881,7 @@ x_n = \frac{b_n}{a_{nn}} \text{ y } x_k = \frac{b_k - \sum_{j = k+1}^{n}a_{kj}x_
 \begin{itemize}
 \tightlist
 \item
-  Iniciando el vector solución con ceros (\(\mathbf{x} = [0 ~ 0 \cdots 0]\)), la expresión anterior se simplifica en:
+  Iniciando el vector solución con ceros, \(\mathbf{x} = [0 ~ 0 \cdots 0]\), la expresión anterior se simplifica como:
 \end{itemize}
 
 \[
@@ -1887,11 +1889,7 @@ x_n = \frac{b_n}{a_{nn}} \text{ y } x_k = \frac{b_k - \sum_{j = k+1}^{n}a_{kj}x_
 \qquad k = n-1, n-2, \cdots, 1
 \]
 
-\begin{itemize}
-\tightlist
-\item
-  Ver el algoritmo y programarlo.
-\end{itemize}
+\textbf{Tarea:} ver el algoritmo en documento adjunto y programarlo.
 
 \textbf{Caso 3: La matrix} \(\mathbf{A}\) \textbf{es triangular inferior}:
 
@@ -1901,12 +1899,12 @@ x_n = \frac{b_n}{a_{nn}} \text{ y } x_k = \frac{b_k - \sum_{j = k+1}^{n}a_{kj}x_
   Obtención de la solución análoga al caso anterior.
 \end{itemize}
 
-\textbf{Observación}
+\textbf{Observaciones}
 
 \begin{itemize}
 \tightlist
 \item
-  En los casos anteriores asumimos \(a_{kk} \neq 0 \forall k\). De lo contrario el sistema no tiene solución o tiene infinitas.
+  En los casos anteriores asumimos \(a_{kk} \neq 0 \quad \forall \quad k\). De lo contrario el sistema no tiene solución o tiene infinitas.
 \item
   Recordar que un sistema lineal \(\mathbf{Ax=b}\) tiene solución única si y sólo si \(\det \mathbf{A} \neq 0\) y que si un elemento de la diagonal principal de una matriz triangular es cero, entonces \(\det \mathbf{A} = 0\).
 \end{itemize}
@@ -1990,16 +1988,21 @@ x \\ y \\ z \\ t
 \begin{itemize}
 \tightlist
 \item
-  A la Fila 1 se le dice \textbf{fila pivote} y al elemento \(a_{11}=1\), \textbf{pivote}.
+  A la Fila 1 se le dice \textbf{fila pivote} y al elemento \(a_{11}=1\), \textbf{pivote}. A los valores \(2\), \(-1\) y \(3\) que multiplican a la fila pivote en los reemplazos se les dice \textbf{multiplicadores}.
 \item
-  A los valores \(2\), \(-1\) y \(3\) que multiplican a la fila pivote en los reemplazos se les dice \textbf{multiplicadores}.
-\item
-  Los multiplicadores se simbolizan y obtienen con: \(m_{r1} = a_{r1} / a_{11}, \quad r = 2, 3, 4\).
-\item
-  De esta forma, los reemplazos realizados se generalizan como: Fila \(r\) = Fila \(r\) - \(m_{r1}\times\) Fila 1.
-\item
-  El resultado de los reemplazos anteriores es:
+  De manera general, los multiplicadores se simbolizan y obtienen con:
 \end{itemize}
+
+\[m_{r1} = a_{r1} / a_{11}, \quad r = 2, 3, ..., n\]
+
+\begin{itemize}
+\tightlist
+\item
+  De esta forma, los reemplazos realizados se generalizan como:
+\end{itemize}
+
+\[\text{Fila } r = \text{Fila } r - m_{r1} \times \text{Fila 1}\]
+- El resultado de los reemplazos anteriores es:
 
 \[
 \begin{matrix}
@@ -2023,11 +2026,7 @@ x \\ y \\ z \\ t
 \begin{itemize}
 \tightlist
 \item
-  En el segundo paso, eliminamos la incógnita \(y\) en las ecuaciones 3 y 4.
-\item
-  La fila pivote pasa a ser la segunda y el pivote es \(a_{22}=-4\).
-\item
-  Los multiplicadores son \(m_{r2}=a_{r2}/a_{22}\), \(r=3,4\), dando lugar a los reemplazos:
+  En el segundo paso, eliminamos la incógnita \(y\) en las ecuaciones 3 y 4. La fila pivote pasa a ser la segunda y el pivote es \(a_{22}=-4\). Los multiplicadores son \(m_{r2}=a_{r2}/a_{22}\), \(r=3,4\), dando lugar a los reemplazos:
 \end{itemize}
 
 \[
@@ -2068,13 +2067,15 @@ x \\ y \\ z \\ t
 \begin{itemize}
 \tightlist
 \item
-  Finalmente, eliminamos la incógnita \(z\) en la última ecuación.
+  Finalmente, eliminamos la incógnita \(z\) en la última ecuación. La fila pivote es la 3º y el pivote es \(a_{33}=-12\). El multiplicador es \(m_{43}=a_{43}/a_{33}=-4/12\).
 \item
-  La fila pivote es la 3º y el pivote es \(a_{33}=-12\).
-\item
-  El multiplicador es \(m_{43}=a_{43}/a_{33}=-4/12\).
-\item
-  El reemplazo a realizar es Fila 4 = Fila 4 - \((-4/12)\times\) Fila 3.
+  El reemplazo a realizar es:
+\end{itemize}
+
+\[\text{Fila } 4 = \text{Fila } 4 - (-4/12) \times \text{Fila } 3\]
+
+\begin{itemize}
+\tightlist
 \item
   El resultado es:
 \end{itemize}
@@ -2124,19 +2125,21 @@ x &= 1\\ y &= 2\\ z &= 4\\ t &= -3
 \right.
 \]
 
+\textbf{Tarea:} revisar el algoritmo y la función ya programada.
+
 \hypertarget{eliminaciuxf3n-gaussiana-con-pivoteo-trivial}{%
 \subsection{Eliminación gaussiana con pivoteo trivial}\label{eliminaciuxf3n-gaussiana-con-pivoteo-trivial}}
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Observación}: en el algoritmo visto es necesario que los pivotes \(a_{qq} \neq 0 ~\forall q\).
+  En el algoritmo anterior es necesario que los pivotes \(a_{qq} \neq 0 ~\forall q\).
 \item
   Si en uno de los pasos encontramos un \(a_{qq} = 0\), debemos intercambiar la \(q\)-ésima fila por una cualquiera de las siguientes, por ejemplo la fila \(k\), en la que \(a_{kq} \neq 0, k>q\).
 \item
   Esta estrategia para hallar un pivote no nulo se llama \textbf{pivoteo trivial}.
 \item
-  Ejemplo propuesto:
+  \textbf{Tarea:} verificar ``a mano'' que con el siguiente sistema, si seguimos el algoritmo anterior, incurrimos en este problema. En cambio, si seguimos el algoritmo con pivoteo trivial (ver en documento adjunto y su programa) no tenemos dicho problema.
 \end{itemize}
 
 \[
@@ -2173,6 +2176,8 @@ x-3y-4z=-1
   Es decir, se busca si existe \(r\) tal que \(|a_{rq}| > |a_{qq}|,\quad r>q\) para luego intercambiar las filas \(q\) y \(r\).
 \item
   Este proceso suele conservar las magnitudes relativas de los elementos de la matriz triangular superior en el mismo orden que las de los coeficientes de la matriz original.
+\item
+  \textbf{Tarea}: leer el algoritmo del pivoteo parcial en el documento adjunto y programarlo.
 \end{itemize}
 
 \hypertarget{pivoteo-parcial-escalado}{%
@@ -2198,6 +2203,8 @@ s_r = max\{|a_{rq}|, |a_{r,q+1}|, \cdots, |a_{rn}| \} \quad r = q, q+1, \cdots, 
   \textbf{Paso 2}: elegir como fila pivote a la que tenga el mayor valor de \(\frac{|a_{rq}|}{s_r}\), \(r = q, q+1, \cdots, n\).
 \item
   \textbf{Paso 3}: intercambiar la fila \(q\) con la fila hallada en el paso 2.
+\item
+  \textbf{Tarea}: leer el algoritmo del pivoteo parcial en el documento adjunto y programarlo.
 \end{itemize}
 
 \hypertarget{muxe9todo-de-eliminaciuxf3n-de-gauss-jordan}{%
@@ -2210,7 +2217,7 @@ s_r = max\{|a_{rq}|, |a_{r,q+1}|, \cdots, |a_{rn}| \} \quad r = q, q+1, \cdots, 
 \item
   El método de Gauss-Jordan continúa el proceso de transformación hasta obtener la matriz identidad.
 \item
-  \textbf{Retomar Ejemplo Diapo 15}: cuando aplicamos eliminación de Gauss llegamos a la siguiente matriz triangular.
+  En el ejemplo de la sección 3.6, cuando aplicamos eliminación de Gauss habíamos llegado a la siguiente matriz triangular:
 \end{itemize}
 
 \[
@@ -2225,7 +2232,7 @@ s_r = max\{|a_{rq}|, |a_{r,q+1}|, \cdots, |a_{rn}| \} \quad r = q, q+1, \cdots, 
 \begin{itemize}
 \tightlist
 \item
-  Con el método de sustitución regresiva, llegamos a encontrar \(x=1\), \(y=2\), \(z=4\) y \(t=-3\).
+  Luego, con el método de sustitución regresiva, llegamos a encontrar \(x=1\), \(y=2\), \(z=4\) y \(t=-3\).
 \item
   En lugar de aplicar sustitución regresiva, seguimos operando por fila hasta lograr una matriz diagonal:
 \end{itemize}
@@ -2303,7 +2310,7 @@ x &= 1\\ y &= 2\\ z &= 4\\ t &= -3
 \item
   Para esto hay que concatenar a la derecha de la matriz aumentada una matriz identidad de orden \(n\). Cuando en la submatriz izquierda se llega a la matriz identidad, en el centro habrá quedado el vector solución y a su derecha la matriz inversa.
 \item
-  Ejemplo. Resolver el siguiente sistema y hallar la inversa de la matriz de coeficientes:
+  \textbf{Ejemplo}. Resolver el siguiente sistema y hallar la inversa de la matriz de coeficientes:
 \end{itemize}
 
 \[
@@ -2347,7 +2354,7 @@ x-y+z=-4 \\
 \item
   Recordar que la inversa de \(\mathbf{A}\) es aquella matriz \(\mathbf{A}^{-1}\) que verifica \(\mathbf{AA}^{-1} =\mathbf{A}^{-1}\mathbf{A}=\mathbf{I}\)
 \item
-  Entonces queremos hallar la matriz \(\mathbf{A}^{-1}\):
+  Entonces si queremos hallar la matriz \(\mathbf{A}^{-1}\):
 \end{itemize}
 
 \[
@@ -2359,7 +2366,9 @@ x_{31} & x_{32} & x_{33}
 \end{bmatrix}
 \]
 
-tal que:
+\begin{verbatim}
+podemos plantear el siguiente producto matricial:
+\end{verbatim}
 
 \[
 \begin{bmatrix}
@@ -2381,11 +2390,9 @@ x_{31} & x_{32} & x_{33}
 \end{bmatrix}
 \]
 
-\begin{itemize}
-\tightlist
-\item
-  Esto da lugar a tres sistemas de ecuaciones con la misma matriz de coeficientes:
-\end{itemize}
+\begin{verbatim}
+que da lugar a tres sistemas de ecuaciones con la misma matriz de coeficientes:
+\end{verbatim}
 
 \[
 \implies
@@ -2433,7 +2440,9 @@ x_{13}-x_{23}+x_{33}=0 \\
 \begin{itemize}
 \tightlist
 \item
-  Los resolvemos simultáneamente al agregar la matriz identidad de orden \(n\) a la derecha de la matriz aumentada del sistema original.
+  Los resolvemos simultáneamente al agregarle a la matriz aumentada del sistema original, estos tres ``nuevos vectores de términos independientes'' que forman una matriz identidad de orden \(n\). En cierto modo, estamos resolviendo cuatro sistemas de ecuaciones a la vez, el sistema original y los tres que permiten hallar cada columna de \(\mathbf{A}^{-1}\).
+\item
+  \textbf{Tarea}. Revisar el algoritmo y programarlo.
 \end{itemize}
 
 \hypertarget{muxe9todos-aproximados-o-iterativos}{%
@@ -2441,7 +2450,7 @@ x_{13}-x_{23}+x_{33}=0 \\
 
 \begin{itemize}
 \item
-  \textbf{Objetivo}: extender a espacios de dimensión mayor que uno las ideas de los métodos iterativos vistos en la unidad 2 para resolver sistemas de ecuaciones lineales.
+  \textbf{Objetivo}: extender a espacios de dimensión mayor que 1 las ideas de los métodos iterativos vistos en la Unidad 2 para resolver sistemas de ecuaciones lineales.
 \item
   Veremos:
 
@@ -2657,22 +2666,11 @@ z_{k+1}=(15+2x_{k+1}-y_{k+1})/5
 \subsection{Generalización}\label{generalizaciuxf3n}}
 
 \begin{itemize}
+\tightlist
 \item
-  Ahora que sabemos qué hace cada método y en qué se diferencian vamos a:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Generalizar las fórmulas recursivas
-  \item
-    Escribirlas matricialmente
-  \item
-    Evaluar la convergencia
-  \item
-    Ver los programas
-  \end{itemize}
+  Ahora que sabemos qué hace cada método y en qué se diferencian, vamos a generalizar las fórmulas recursivas.
 \item
-  Tenemos un sistema de \(n\) ecuaciones lineales con \(n\) incógnitas y despejamos una variable en cada ecuación:
+  Pensems en un sistema de \(n\) ecuaciones lineales con \(n\) incógnitas y despejamos una variable en cada ecuación:
 \end{itemize}
 
 \[
@@ -2698,13 +2696,10 @@ x_n = \frac{b_n - a_{n1}x_1 - \cdots - a_{n(n-1)}x_{n-1}}{a_{nn}}\\
 \]
 
 \hypertarget{generalizaciuxf3n-del-muxe9todo-de-jacobi}{%
-\subsubsection{Generalización del Método de Jacobi}\label{generalizaciuxf3n-del-muxe9todo-de-jacobi}}
+\subsubsection*{Generalización del Método de Jacobi}\label{generalizaciuxf3n-del-muxe9todo-de-jacobi}}
+\addcontentsline{toc}{subsubsection}{Generalización del Método de Jacobi}
 
-\begin{itemize}
-\tightlist
-\item
-  Con los supra índices indicando el número de iteración, la fórmula de recurrencia es:
-\end{itemize}
+Con los supra índices indicando el número de iteración, la fórmula de recurrencia es:
 
 \[
 \begin{cases} 
@@ -2726,13 +2721,10 @@ k=1, 2, \cdots n
 \]
 
 \hypertarget{generalizaciuxf3n-del-muxe9todo-de-gauss-seidel}{%
-\subsubsection{Generalización del Método de Gauss-Seidel}\label{generalizaciuxf3n-del-muxe9todo-de-gauss-seidel}}
+\subsubsection*{Generalización del Método de Gauss-Seidel}\label{generalizaciuxf3n-del-muxe9todo-de-gauss-seidel}}
+\addcontentsline{toc}{subsubsection}{Generalización del Método de Gauss-Seidel}
 
-\begin{itemize}
-\tightlist
-\item
-  Con los supra índices indicando el número de iteración, la fórmula de recurrencia es:
-\end{itemize}
+Con los supra índices indicando el número de iteración, la fórmula de recurrencia es:
 
 \[
 \begin{cases} 
@@ -2753,8 +2745,20 @@ x_j^{(k+1)} = \frac{b_j - a_{j1}x_1^{(k+1)} \cdots - a_{j(j-1)}x_{j-1}^{(k+1)} -
 k=1, 2, \cdots n
 \]
 
+\hypertarget{expresiuxf3n-matricial}{%
+\subsection{Expresión matricial}\label{expresiuxf3n-matricial}}
+
+\begin{itemize}
+\tightlist
+\item
+  Ahora vamos a ver que es posible escribir las fórmulas recursivas anteriores de manera matricial, de modo que sea más fácil programar estos métodos.
+\item
+  \textbf{Tarea}: corroborar con un sistema pequeño la coincidencia entre los procesos iterativos mencionados en la sección anterior y la iteración con matrices como se muestra a continuación. Ver ambos algoritmos y programar el de Gauss-Seidel.
+\end{itemize}
+
 \hypertarget{expresiuxf3n-matricial-para-el-muxe9todo-de-jacobi}{%
-\subsubsection{Expresión matricial para el Método de Jacobi}\label{expresiuxf3n-matricial-para-el-muxe9todo-de-jacobi}}
+\subsubsection*{Expresión matricial para el Método de Jacobi}\label{expresiuxf3n-matricial-para-el-muxe9todo-de-jacobi}}
+\addcontentsline{toc}{subsubsection}{Expresión matricial para el Método de Jacobi}
 
 \begin{itemize}
 \tightlist
@@ -2772,7 +2776,7 @@ k=1, 2, \cdots n
 \begin{itemize}
 \tightlist
 \item
-  Esto da lugar a la siguiente fórmula de recurrencia, que es equivalente a las vistas anteriormente, y facilita la programación del método:
+  Esto da lugar a la siguiente fórmula de recurrencia, que es equivalente a las vistas anteriormente y facilita la programación del método:
 \end{itemize}
 
 \[
@@ -2786,7 +2790,8 @@ k=1, 2, \cdots n
 \end{itemize}
 
 \hypertarget{expresiuxf3n-matricial-para-el-muxe9todo-de-gauss-seidel}{%
-\subsubsection{Expresión matricial para el Método de Gauss-Seidel}\label{expresiuxf3n-matricial-para-el-muxe9todo-de-gauss-seidel}}
+\subsubsection*{Expresión matricial para el Método de Gauss-Seidel}\label{expresiuxf3n-matricial-para-el-muxe9todo-de-gauss-seidel}}
+\addcontentsline{toc}{subsubsection}{Expresión matricial para el Método de Gauss-Seidel}
 
 \begin{itemize}
 \tightlist
@@ -2820,9 +2825,9 @@ k=1, 2, \cdots n
 \hypertarget{convergencia-1}{%
 \subsection{Convergencia}\label{convergencia-1}}
 
-\textbf{Definición}:
+\textbf{Definición}
 
-Se dice que una matriz \(\mathbf{A}\) de orden \(n \times n\) es \textbf{diagonal estrictamente dominante} cuando el elemento diagonal es mayor a la suma del resto de los elementos de su fila en valor absoluto:
+Se dice que una matriz \(\mathbf{A}\) de orden \(n \times n\) es \textbf{diagonal estrictamente dominante} cuando cada elemento diagonal es mayor a la suma del resto de los elementos de su fila en valor absoluto:
 
 \[
 |a_{kk}| > \sum\limits_{\substack{j=0 \\ j\neq k}}^n |a_{kj}| \quad k=1, 2, \cdots, n
@@ -2830,15 +2835,19 @@ Se dice que una matriz \(\mathbf{A}\) de orden \(n \times n\) es \textbf{diagona
 
 \textbf{Teorema}
 
-Si la matriz \(\mathbf{A}\) es diagonal estrictamente dominante, entonces el sistema lineal \(\mathbf{Ax=b}\) tiene solución única y los procesos iterativos de Jacobi y de Gauss-Seidel convergen hacia la misma cualquiera sea el vector de partida \(\mathbf{x_0}\).
+Si la matriz \(\mathbf{A}\) es diagonal estrictamente dominante, entonces el sistema lineal \(\mathbf{Ax=b}\) tiene solución única y los procesos iterativos de Jacobi y de Gauss-Seidel convergen hacia la misma solución cualquiera sea el vector de partida \(\mathbf{x_0}\).
 
 \begin{itemize}
 \tightlist
 \item
   Es una condición suficiente pero no necesaria.
+\item
+  En la práctica, ante un sistema buscamos reordenar las columnas y filas para intentar obtener una matriz con estas características. Si no es posible, igualmente buscamos colocar en la diagonal los elementos de mayor valor absoluto, puesto que esto puede favorecer a la convergencia.
 \end{itemize}
 
-\textbf{Criterios para la convergencia}
+\hypertarget{criterios-para-la-convergencia}{%
+\subsubsection*{Criterios para la convergencia}\label{criterios-para-la-convergencia}}
+\addcontentsline{toc}{subsubsection}{Criterios para la convergencia}
 
 \begin{itemize}
 \tightlist
@@ -2875,7 +2884,8 @@ Si la matriz \(\mathbf{A}\) es diagonal estrictamente dominante, entonces el sis
 \end{itemize}
 
 \hypertarget{ventajas-de-gauss-seidel}{%
-\subsubsection{Ventajas de Gauss-Seidel}\label{ventajas-de-gauss-seidel}}
+\subsubsection*{Ventajas de Gauss-Seidel}\label{ventajas-de-gauss-seidel}}
+\addcontentsline{toc}{subsubsection}{Ventajas de Gauss-Seidel}
 
 \begin{itemize}
 \tightlist

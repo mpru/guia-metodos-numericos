@@ -57,7 +57,7 @@ $$
     - **Compatible determinado**: tiene una única solución
     - **Compatible indeterminado**: tiene infinitas soluciones
     - **Incompatible**: no existe solución
- 
+
 <!--  
 # Repaso
 
@@ -71,13 +71,12 @@ $$
         - $r(\mathbf{A}) < n \implies$ indeterminado
 -->
 
-**Teorema**. Las siguientes condiciones son equivalentes:
+- **Teorema**. Las siguientes condiciones son equivalentes:
 
-- El sistema $\mathbf{Ax=b}$ tiene solución única (es compatible determinado).
-- La matriz $\mathbf{A}$ es invertible (existe $\mathbf{A^{-1}}$).
-- La matriz $\mathbf{A}$ es no singular ($\det \mathbf{A} \neq 0$).
-- El sistema $\mathbf{Ax=0}$ tiene como única solución $\mathbf{x=0}$.
-
+	- El sistema $\mathbf{Ax=b}$ tiene solución única (es compatible determinado).
+	- La matriz $\mathbf{A}$ es invertible (existe $\mathbf{A^{-1}}$).
+	- La matriz $\mathbf{A}$ es no singular ($\det \mathbf{A} \neq 0$).
+	- El sistema $\mathbf{Ax=0}$ tiene como única solución $\mathbf{x=0}$.
 
 - Dos sistemas de orden $n \times n$ son **equivalentes** si tienen el mismo conjunto de soluciones.
 - Existen ciertas transformaciones sobre las ecuaciones de un sistema que no cambian el conjunto de soluciones (producen un sistema equivalente):
@@ -90,7 +89,7 @@ $$
 
 ## Notación
 
-- Notación que ayuda a expresar algoritmos con operaciones matriciales y facilita la escritura de los programas en IML o R.
+- En esta sección presentamos la notación utilizaremos para expresar algoritmos con operaciones matriciales, facilitando su traducción a IML o R.
 
 - Dada una matriz $\mathbf{Z}$ de dimensión $n \times m$, anotamos:
 
@@ -111,17 +110,17 @@ $$
 
 	- Método de Eliminación de Gauss
 	- Método de Gauss-Jordan
-	
+
 - **Métodos aproximados**: utilizan algoritmos iterativos que calculan las solución del sistema por aproximaciones sucesivas.
 
 	- Método de Jacobi
 	- Método de Gauss-Seidel
-	
+
 - En muchas ocasiones los métodos aproximados permiten obtener un grado de exactitud superior al que se puede obtener empleando los denominados métodos exactos, debido fundamentalmente a los errores de truncamiento que se producen en el proceso.
 
 ## Sistemas fáciles de resolver
 
-**Caso 1: La matriz** $\mathbf{A}$ es **diagonal**
+**Caso 1: La matriz** $\mathbf{A}$ **es diagonal**
 
 $$
 \begin{bmatrix}
@@ -169,7 +168,7 @@ b_1 \\ b_2 \\ \vdots \\ b_n
 \end{bmatrix}
 $$
 
-- La solución de $x_n$ es inmediata y a partir de ella se encuentran las restantes siguiendo el orden inverso $x_{n-1}, \cdots, x_1$, aplicando el algoritmo de **sustitución regresiva**:
+- La solución de $x_n$ es inmediata y a partir de ella se encuentran las restantes en orden inverso $x_{n-1}, \cdots, x_1$, aplicando el algoritmo de **sustitución regresiva**:
 
 $$
 x_n = \frac{b_n}{a_{nn}} \text{ y } x_k = \frac{b_k - \sum_{j = k+1}^{n}a_{kj}x_j}{a_{kk}} \quad k = n-1, n-2, \cdots, 1
@@ -184,7 +183,7 @@ $$
 \quad k = n-1, n-2, \cdots, 1
 $$
 
-- Iniciando el vector solución con ceros ($\mathbf{x} = [0 ~ 0 \cdots 0]$), la expresión anterior se simplifica en:
+- Iniciando el vector solución con ceros, $\mathbf{x} = [0 ~ 0 \cdots 0]$, la expresión anterior se simplifica como:
 
 $$
 \mathbf{x}[n] = \frac{\mathbf{b}[n]}{\mathbf{A}[n,n]} \qquad \mathbf{x}[k] = \frac{\mathbf{b}[k] - \mathbf{A}[k, ] \times \mathbf{x}}{\mathbf{A}[k,k]}
@@ -192,15 +191,15 @@ $$
 $$
 
 
-- Ver el algoritmo y programarlo.
+**Tarea:** ver el algoritmo en documento adjunto y programarlo.
 
 **Caso 3: La matrix** $\mathbf{A}$ **es triangular inferior**:
 
 - Obtención de la solución análoga al caso anterior.
 
-**Observación**
+**Observaciones**
 
-- En los casos anteriores asumimos $a_{kk} \neq 0 \forall k$. De lo contrario el sistema no tiene solución o tiene infinitas.
+- En los casos anteriores asumimos $a_{kk} \neq 0 \quad \forall \quad k$. De lo contrario el sistema no tiene solución o tiene infinitas.
 - Recordar que un sistema lineal $\mathbf{Ax=b}$ tiene solución única si y sólo si $\det \mathbf{A} \neq 0$ y que si un elemento de la diagonal principal de una matriz triangular es cero, entonces $\det \mathbf{A} = 0$.
 
 ## Eliminación gaussiana
@@ -261,10 +260,14 @@ $$
 \end{array}
 $$
 
-- A la Fila 1 se le dice **fila pivote** y al elemento $a_{11}=1$, **pivote**.
-- A los valores $2$, $-1$ y $3$ que multiplican a la fila pivote en los reemplazos se les dice **multiplicadores**.
-- Los multiplicadores se simbolizan y obtienen con: $m_{r1} = a_{r1} / a_{11}, \quad r = 2, 3, 4$.
-- De esta forma, los reemplazos realizados se generalizan como: Fila $r$ = Fila $r$ - $m_{r1}\times$ Fila 1.
+- A la Fila 1 se le dice **fila pivote** y al elemento $a_{11}=1$, **pivote**. A los valores $2$, $-1$ y $3$ que multiplican a la fila pivote en los reemplazos se les dice **multiplicadores**.
+- De manera general, los multiplicadores se simbolizan y obtienen con: 
+
+$$m_{r1} = a_{r1} / a_{11}, \quad r = 2, 3, ..., n$$
+
+- De esta forma, los reemplazos realizados se generalizan como: 
+
+$$\text{Fila } r = \text{Fila } r - m_{r1} \times \text{Fila 1}$$
 - El resultado de los reemplazos anteriores es:
 
 $$
@@ -286,9 +289,7 @@ $$
 \end{bmatrix}
 $$
 
-- En el segundo paso, eliminamos la incógnita $y$ en las ecuaciones 3 y 4.
-- La fila pivote pasa a ser la segunda y el pivote es $a_{22}=-4$.
-- Los multiplicadores son $m_{r2}=a_{r2}/a_{22}$, $r=3,4$, dando lugar a los reemplazos:
+- En el segundo paso, eliminamos la incógnita $y$ en las ecuaciones 3 y 4. La fila pivote pasa a ser la segunda y el pivote es $a_{22}=-4$. Los multiplicadores son $m_{r2}=a_{r2}/a_{22}$, $r=3,4$, dando lugar a los reemplazos:
 
 $$
 \begin{array}{cl}
@@ -321,10 +322,12 @@ $$
 \end{bmatrix}
 $$
 
-- Finalmente, eliminamos la incógnita $z$ en la última ecuación.
-- La fila pivote es la 3º y el pivote es $a_{33}=-12$.
-- El multiplicador es $m_{43}=a_{43}/a_{33}=-4/12$.
-- El reemplazo a realizar es Fila 4 = Fila 4 - $(-4/12)\times$ Fila 3.
+- Finalmente, eliminamos la incógnita $z$ en la última ecuación. La fila pivote es la 3º y el pivote es $a_{33}=-12$. El multiplicador es $m_{43}=a_{43}/a_{33}=-4/12$.
+- El reemplazo a realizar es:
+
+$$\text{Fila } 4 = \text{Fila } 4 - (-4/12) \times \text{Fila } 3$$
+
+
 - El resultado es:
 
 $$
@@ -368,12 +371,14 @@ x &= 1\\ y &= 2\\ z &= 4\\ t &= -3
 \right.
 $$
 
+**Tarea:** revisar el algoritmo y la función ya programada.
+
 ### Eliminación gaussiana con pivoteo trivial
 
-- **Observación**: en el algoritmo visto es necesario que los pivotes $a_{qq} \neq 0 ~\forall q$.
+- En el algoritmo anterior es necesario que los pivotes $a_{qq} \neq 0 ~\forall q$.
 - Si en uno de los pasos encontramos un $a_{qq} = 0$, debemos intercambiar la $q$-ésima fila por una cualquiera de las siguientes, por ejemplo la fila $k$, en la que $a_{kq} \neq 0, k>q$.
 - Esta estrategia para hallar un pivote no nulo se llama **pivoteo trivial**.
-- Ejemplo propuesto:
+- **Tarea:** verificar "a mano" que con el siguiente sistema, si seguimos el algoritmo anterior, incurrimos en este problema. En cambio, si seguimos el algoritmo con pivoteo trivial (ver en documento adjunto y su programa) no tenemos dicho problema.
 
 $$
 \begin{cases} 
@@ -395,6 +400,7 @@ $$
 - Para reducir la propagación de los errores de redondeo, antes de comenzar una nueva ronda de reemplazos con el pivote $a_{qq}$ se evalúa si debajo en la misma columna hay algún elemento con mayor valor absoluto y en ese caso se intercambian las respectivas filas.
 - Es decir, se busca si existe $r$ tal que $|a_{rq}| > |a_{qq}|,\quad r>q$ para luego intercambiar las filas $q$ y $r$.
 - Este proceso suele conservar las magnitudes relativas de los elementos de la matriz triangular superior en el mismo orden que las de los coeficientes de la matriz original.
+- **Tarea**: leer el algoritmo del pivoteo parcial en el documento adjunto y programarlo.
 
 ### Pivoteo parcial escalado
 
@@ -408,12 +414,13 @@ $$
 
 - **Paso 2**: elegir como fila pivote a la que tenga el mayor valor de $\frac{|a_{rq}|}{s_r}$, $r = q, q+1, \cdots, n$.
 - **Paso 3**: intercambiar la fila $q$ con la fila hallada en el paso 2.
+- **Tarea**: leer el algoritmo del pivoteo parcial en el documento adjunto y programarlo.
 
 ## Método de eliminación de Gauss-Jordan
 
 - Ya vimos que el método de Gauss transforma la matriz de coeficientes en una matriz triangular superior. 
 - El método de Gauss-Jordan continúa el proceso de transformación hasta obtener la matriz identidad.
-- **Retomar Ejemplo Diapo 15**: cuando aplicamos eliminación de Gauss llegamos a la siguiente matriz triangular.
+- En el ejemplo de la sección 3.6, cuando aplicamos eliminación de Gauss habíamos llegado a la siguiente matriz triangular:
 
 $$
 \begin{bmatrix}
@@ -424,7 +431,7 @@ $$
 \end{bmatrix}
 $$
 
-- Con el método de sustitución regresiva, llegamos a encontrar $x=1$, $y=2$, $z=4$ y $t=-3$.
+- Luego, con el método de sustitución regresiva, llegamos a encontrar $x=1$, $y=2$, $z=4$ y $t=-3$.
 - En lugar de aplicar sustitución regresiva, seguimos operando por fila hasta lograr una matriz diagonal:
 
 $$
@@ -495,7 +502,7 @@ $$
 
 - La ventaja de este método es que permite también hallar fácilmente la matriz inversa de $\mathbf{A}$.
 - Para esto hay que concatenar a la derecha de la matriz aumentada una matriz identidad de orden $n$. Cuando en la submatriz izquierda se llega a la matriz identidad, en el centro habrá quedado el vector solución y a su derecha la matriz inversa.
-- Ejemplo. Resolver el siguiente sistema y hallar la inversa de la matriz de coeficientes:
+- **Ejemplo**. Resolver el siguiente sistema y hallar la inversa de la matriz de coeficientes:
 
 $$
 \begin{cases} 
@@ -512,6 +519,7 @@ $$
 	2 & 1 & 1 &|& 11 &|& 0 & 0 & 1
 \end{bmatrix}
 $$
+
 $$
 \begin{array}{cl}
 	F2 &= F2 - 5 F1 \\
@@ -523,6 +531,7 @@ $$
 	F3 &= F3 / 5
 \end{array}
 $$
+
 $$
 \begin{bmatrix}
 	1 & 0 & 0 &|& 3 &|& -7/5 & 2/5 & 1/5\\
@@ -533,89 +542,90 @@ $$
 
 - ¿Por qué este procedimiento nos devuelva la inversa de la matriz de coeficientes?
 - Recordar que la inversa de $\mathbf{A}$ es aquella matriz $\mathbf{A}^{-1}$ que verifica $\mathbf{AA}^{-1} =\mathbf{A}^{-1}\mathbf{A}=\mathbf{I}$
-- Entonces queremos hallar la matriz $\mathbf{A}^{-1}$:
+- Entonces si queremos hallar la matriz $\mathbf{A}^{-1}$:
 
-$$
-\mathbf{A}^{-1} =
-\begin{bmatrix}
-x_{11} & x_{12} & x_{13} \\
-x_{21} & x_{22} & x_{23} \\
-x_{31} & x_{32} & x_{33} 
-\end{bmatrix}
-$$
+	$$
+	\mathbf{A}^{-1} =
+	\begin{bmatrix}
+	x_{11} & x_{12} & x_{13} \\
+	x_{21} & x_{22} & x_{23} \\
+	x_{31} & x_{32} & x_{33} 
+	\end{bmatrix}
+	$$
+	
+	podemos plantear el siguiente producto matricial:
+	
+	$$
+	\begin{bmatrix}
+	1 & -1 & 1 \\
+	5 & -4 & 3 \\
+	2 & 1 & 1 
+	\end{bmatrix}
+	\times
+	\begin{bmatrix}
+	x_{11} & x_{12} & x_{13} \\
+	x_{21} & x_{22} & x_{23} \\
+	x_{31} & x_{32} & x_{33} 
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+	1 & 0 & 0 \\
+	0 & 1 & 0 \\
+	0 & 0 & 1 
+	\end{bmatrix}
+	$$
+	
+	que da lugar a tres sistemas de ecuaciones con la misma matriz de coeficientes:
+	
+	$$
+	\implies
+	\begin{bmatrix}
+	x_{11}-x_{21}+x_{31} & x_{12}-x_{22}+x_{32} & x_{13}-x_{23}+x_{33} \\
+	5x_{11}-4x_{21}+3x_{31} & 5x_{12}-4x_{22}+3x_{32} & 5x_{13}-4x_{23}+3x_{33} \\
+	2x_{11}+x_{21}+x_{31} & 2x_{12}-x_{22}+x_{32} & 2x_{13}-x_{23}+x_{33} 
+	\end{bmatrix}
+	=
+	$$
+	
+	$$
+	=
+	\begin{bmatrix}
+	1 & 0 & 0 \\
+	0 & 1 & 0 \\
+	0 & 0 & 1 
+	\end{bmatrix}
+	$$
+	
+	$$
+	\begin{cases} 
+	x_{11}-x_{21}+x_{31}=1 \\
+	5x_{11}-4x_{21}+3x_{31}=0 \\
+	2x_{11}+x_{21}+x_{31}=0
+	\end{cases}
+	$$
+	
+	$$
+	\begin{cases} 
+	x_{12}-x_{22}+x_{32}=0 \\
+	5x_{12}-4x_{22}+3x_{32}=1 \\
+	2x_{12}+x_{22}+x_{32}=0
+	\end{cases}
+	$$
+	
+	$$
+	\begin{cases} 
+	x_{13}-x_{23}+x_{33}=0 \\
+	5x_{13}-4x_{23}+3x_{33}=0 \\
+	2x_{13}+x_{23}+x_{33}=1
+	\end{cases}
+	$$
 
-tal que:
-
-$$
-\begin{bmatrix}
-1 & -1 & 1 \\
-5 & -4 & 3 \\
-2 & 1 & 1 
-\end{bmatrix}
-\times
-\begin{bmatrix}
-x_{11} & x_{12} & x_{13} \\
-x_{21} & x_{22} & x_{23} \\
-x_{31} & x_{32} & x_{33} 
-\end{bmatrix}
-=
-\begin{bmatrix}
-1 & 0 & 0 \\
-0 & 1 & 0 \\
-0 & 0 & 1 
-\end{bmatrix}
-$$
-
-- Esto da lugar a tres sistemas de ecuaciones con la misma matriz de coeficientes:
-
-$$
-\implies
-\begin{bmatrix}
-x_{11}-x_{21}+x_{31} & x_{12}-x_{22}+x_{32} & x_{13}-x_{23}+x_{33} \\
-5x_{11}-4x_{21}+3x_{31} & 5x_{12}-4x_{22}+3x_{32} & 5x_{13}-4x_{23}+3x_{33} \\
-2x_{11}+x_{21}+x_{31} & 2x_{12}-x_{22}+x_{32} & 2x_{13}-x_{23}+x_{33} 
-\end{bmatrix}
-=
-$$
-
-$$
-=
-\begin{bmatrix}
-1 & 0 & 0 \\
-0 & 1 & 0 \\
-0 & 0 & 1 
-\end{bmatrix}
-$$
-
-$$
-\begin{cases} 
-x_{11}-x_{21}+x_{31}=1 \\
-5x_{11}-4x_{21}+3x_{31}=0 \\
-2x_{11}+x_{21}+x_{31}=0
-\end{cases}
-$$
-
-$$
-\begin{cases} 
-x_{12}-x_{22}+x_{32}=0 \\
-5x_{12}-4x_{22}+3x_{32}=1 \\
-2x_{12}+x_{22}+x_{32}=0
-\end{cases}
-$$
-
-$$
-\begin{cases} 
-x_{13}-x_{23}+x_{33}=0 \\
-5x_{13}-4x_{23}+3x_{33}=0 \\
-2x_{13}+x_{23}+x_{33}=1
-\end{cases}
-$$
-
-- Los resolvemos simultáneamente al agregar la matriz identidad de orden $n$ a la derecha de la matriz aumentada del sistema original.
+- Los resolvemos simultáneamente al agregarle a la matriz aumentada del sistema original, estos tres "nuevos vectores de términos independientes" que forman una matriz identidad de orden $n$. En cierto modo, estamos resolviendo cuatro sistemas de ecuaciones a la vez, el sistema original y los tres que permiten hallar cada columna de $\mathbf{A}^{-1}$.
+- **Tarea**. Revisar el algoritmo y programarlo.
 
 ## Métodos Aproximados o Iterativos
 
-- **Objetivo**: extender a espacios de dimensión mayor que uno las ideas de los métodos iterativos vistos en la unidad 2 para resolver sistemas de ecuaciones lineales.
+- **Objetivo**: extender a espacios de dimensión mayor que 1 las ideas de los métodos iterativos vistos en la Unidad 2 para resolver sistemas de ecuaciones lineales.
 - Veremos:
     
     - Método de Jacobi
@@ -778,14 +788,8 @@ $$
 
 ### Generalización
 
-- Ahora que sabemos qué hace cada método y en qué se diferencian vamos a:
-    
-    - Generalizar las fórmulas recursivas
-    - Escribirlas matricialmente
-    - Evaluar la convergencia
-    - Ver los programas
-
-- Tenemos un sistema de $n$ ecuaciones lineales con $n$ incógnitas y despejamos una variable en cada ecuación:
+- Ahora que sabemos qué hace cada método y en qué se diferencian, vamos a generalizar las fórmulas recursivas.
+- Pensemos en un sistema de $n$ ecuaciones lineales con $n$ incógnitas y despejamos una variable en cada ecuación:
 
 $$
 \begin{cases} 
@@ -809,9 +813,9 @@ x_n = \frac{b_n - a_{n1}x_1 - \cdots - a_{n(n-1)}x_{n-1}}{a_{nn}}\\
 \end{cases}
 $$
 
-#### Generalización del Método de Jacobi
+#### Generalización del Método de Jacobi {-}
 
-- Con los supra índices indicando el número de iteración, la fórmula de recurrencia es:
+Con los supra índices indicando el número de iteración, la fórmula de recurrencia es:
 
 $$
 \begin{cases} 
@@ -832,9 +836,9 @@ $$
 k=1, 2, \cdots n
 $$
 
-#### Generalización del Método de Gauss-Seidel
+#### Generalización del Método de Gauss-Seidel {-}
 
-- Con los supra índices indicando el número de iteración, la fórmula de recurrencia es:
+Con los supra índices indicando el número de iteración, la fórmula de recurrencia es:
 
 $$
 \begin{cases} 
@@ -855,7 +859,12 @@ $$
 k=1, 2, \cdots n
 $$
 
-#### Expresión matricial para el Método de Jacobi
+### Expresión matricial
+
+- Ahora vamos a ver que es posible escribir las fórmulas recursivas anteriores de manera matricial, de modo que sea más fácil programar estos métodos.
+- **Tarea**: corroborar con un sistema pequeño la coincidencia entre los procesos iterativos mencionados en la sección anterior y la iteración con matrices como se muestra a continuación. Ver ambos algoritmos y programar el de Gauss-Seidel.
+
+#### Expresión matricial para el Método de Jacobi {-}
 
 - Si descomponemos a la matriz $\mathbf{A}$ como $\mathbf{A=D+R}$, donde $\mathbf{D}$ es la matriz diagonal formada con la diagonal de $\mathbf{A}$ y $\mathbf{R}$ es igual a $\mathbf{A}$ excepto en la diagonal donde posee todos ceros, tenemos:
 
@@ -866,8 +875,7 @@ $$
 \mathbf{x} &= \mathbf{D}^{-1} (\mathbf{b} - \mathbf{Rx})  \\
 \end{align*}
 
-
-- Esto da lugar a la siguiente fórmula de recurrencia, que es equivalente a las vistas anteriormente, y facilita la programación del método:
+- Esto da lugar a la siguiente fórmula de recurrencia, que es equivalente a las vistas anteriormente y facilita la programación del método:
 
 $$
 \mathbf{x}^{(k+1)} = \mathbf{D}^{-1} (\mathbf{b} - \mathbf{Rx}^{(k)}) 
@@ -875,7 +883,7 @@ $$
 
 - Requisito: ningún elemento en la diagonal de $\mathbf{A}$ es cero.
 
-#### Expresión matricial para el Método de Gauss-Seidel
+#### Expresión matricial para el Método de Gauss-Seidel {-}
 
 - Si descomponemos a la matriz $\mathbf{A}$ como $\mathbf{A=L+U}$, donde $\mathbf{L}$ es una matriz triangular inferior (incluyendo la diagonal de $\mathbf{A}$) y $\mathbf{U}$ es una matriz triangular superior (con ceros en la diagonal), tenemos:
 
@@ -896,9 +904,9 @@ $$
 
 ### Convergencia
 
-**Definición**:
+**Definición**
 
-Se dice que una matriz $\mathbf{A}$ de orden $n \times n$ es **diagonal estrictamente dominante** cuando el elemento diagonal es mayor a la suma del resto de los elementos de su fila en valor absoluto:
+Se dice que una matriz $\mathbf{A}$ de orden $n \times n$ es **diagonal estrictamente dominante** cuando cada elemento diagonal es mayor a la suma del resto de los elementos de su fila en valor absoluto:
 
 $$
 |a_{kk}| > \sum\limits_{\substack{j=0 \\ j\neq k}}^n |a_{kj}| \quad k=1, 2, \cdots, n
@@ -906,12 +914,12 @@ $$
 
 **Teorema**
 
-Si la matriz $\mathbf{A}$ es diagonal estrictamente dominante, entonces el sistema lineal $\mathbf{Ax=b}$ tiene solución única y los procesos iterativos de Jacobi y de Gauss-Seidel convergen hacia la misma cualquiera sea el vector de partida $\mathbf{x_0}$.
+Si la matriz $\mathbf{A}$ es diagonal estrictamente dominante, entonces el sistema lineal $\mathbf{Ax=b}$ tiene solución única y los procesos iterativos de Jacobi y de Gauss-Seidel convergen hacia la misma solución cualquiera sea el vector de partida $\mathbf{x_0}$.
 
 - Es una condición suficiente pero no necesaria.
+- En la práctica, ante un sistema buscamos reordenar las columnas y filas para intentar obtener una matriz con estas características. Si no es posible, igualmente buscamos colocar en la diagonal los elementos de mayor valor absoluto, puesto que esto puede favorecer a la convergencia.
 
-
-**Criterios para la convergencia**
+#### Criterios para la convergencia {-}
 
 - **Norma L1 (distancia Manhattan)**:
 
@@ -932,8 +940,7 @@ $$
 
 - **Establecer un número máximo de iteraciones**
 
-#### Ventajas de Gauss-Seidel
-
+#### Ventajas de Gauss-Seidel {-}
 
 - Converge más rápidamente.
 - Puede converger cuando Jacobi no lo hace (aunque $\mathbf{A}$ no sea diagonal estrictamente dominante, por ejemplo si $\mathbf{A}$ es semidefinida positiva).

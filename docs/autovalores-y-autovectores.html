@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6 Autovalores y Autovectores | Taller de Métodos Numéricos</title>
   <meta name="description" content="Esta guía resume algunos conceptos desarrollados en el Taller de Métodos Numéricos de la Licenciatura en Estadística (Facultad de Ciencias Económicas y Estadstica, Universidad Nacional de Rosario)." />
-  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6 Autovalores y Autovectores | Taller de Métodos Numéricos" />
   <meta property="og:type" content="book" />
@@ -25,15 +25,15 @@
 <meta name="author" content="Cecilia Rapelli" />
 
 
-<meta name="date" content="2020-04-07" />
+<meta name="date" content="2020-04-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="aproximación-polinomial-integración-y-derivación-numérica.html">
-<link rel="next" href="anexo-teoremas-útiles.html">
+<link rel="prev" href="aproximación-polinomial-integración-y-derivación-numérica.html"/>
+<link rel="next" href="anexo-teoremas-útiles.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -41,6 +41,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -190,7 +193,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.9.1" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#método-de-jacobi"><i class="fa fa-check"></i><b>3.9.1</b> Método de Jacobi</a></li>
 <li class="chapter" data-level="3.9.2" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#método-de-gauss-seidel"><i class="fa fa-check"></i><b>3.9.2</b> Método de Gauss-Seidel</a></li>
 <li class="chapter" data-level="3.9.3" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#generalización"><i class="fa fa-check"></i><b>3.9.3</b> Generalización</a></li>
-<li class="chapter" data-level="3.9.4" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#convergencia-1"><i class="fa fa-check"></i><b>3.9.4</b> Convergencia</a></li>
+<li class="chapter" data-level="3.9.4" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#expresión-matricial"><i class="fa fa-check"></i><b>3.9.4</b> Expresión matricial</a></li>
+<li class="chapter" data-level="3.9.5" data-path="solución-de-sistemas-de-ecuaciones-lineales.html"><a href="solución-de-sistemas-de-ecuaciones-lineales.html#convergencia-1"><i class="fa fa-check"></i><b>3.9.5</b> Convergencia</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="aproximación-polinomial-interpolación-y-extrapolación.html"><a href="aproximación-polinomial-interpolación-y-extrapolación.html"><i class="fa fa-check"></i><b>4</b> Aproximación Polinomial: interpolación y extrapolación</a><ul>
@@ -860,11 +864,13 @@ f(\textbf{A}) = \textbf{A}^n + b_1 \textbf{A}^{n-1}  + \cdots + b_{n-2} \textbf{
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -879,6 +885,10 @@ gitbook.start({
 "text": "Edit"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -897,8 +907,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

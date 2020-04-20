@@ -191,7 +191,7 @@ $$x = \frac{x^2+e^x-2}{3} \implies f(x)= \frac{x^2+e^x-2}{3}$$
 
 $$\implies f'(x) = \frac{1}{3}(2x+e^x)$$
 
-- Verificar condiciones del Teorema: para cada región donde se encuentra la raíz, tomar un intervalo $[a, b]$ que la cubra y graficar $f$ y su derivada para poder observar el cumplimiento o no de las condiciones).
+- Verificar condiciones del Teorema: para cada región donde se encuentra la raíz, tomar un intervalo $[a, b]$ que la cubra y graficar $f$ y su derivada para poder observar el cumplimiento o no de las condiciones.
 - Si no se cumplen las condiciones, podemos probar con otra expresión para $f(x)$.
 
 ### Interpretación gráfica
@@ -314,8 +314,7 @@ knitr::include_graphics("Plots/U2/nr.png")
 	\end{equation}
 
 - De esta manera hemos deducido una fórmula recursiva que nos permitirá hallar una aproximación para el verdadero valor de la raiz de $F$.
-- Las ideas anteriores se formalizan analíticamente a través del siguiente teorema.
-- En el mismo se deduce la fórmula recursiva a partir del desarrollo en serie de Taylor de la función $F$.
+- Las ideas anteriores se formalizan analíticamente a través del siguiente teorema, en el cual se deduce la fórmula recursiva a partir del desarrollo en serie de Taylor de la función $F$.
 
 ### Teorema de Newton-Raphson
 
