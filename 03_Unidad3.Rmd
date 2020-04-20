@@ -118,7 +118,11 @@ $$
 
 - En muchas ocasiones los métodos aproximados permiten obtener un grado de exactitud superior al que se puede obtener empleando los denominados métodos exactos, debido fundamentalmente a los errores de truncamiento que se producen en el proceso.
 
-## Sistemas fáciles de resolver
+## Métodos exactos
+
+En esta sección repasaremos los métodos que ya conocen y que han aplicado "a mano" muchas veces para resolver sistemas de ecuaciones, con la particularidad de que pensaremos cómo expresar sus algoritmos para poder programarlos en la computadora. Entre los aspectos que tendremos que considerar, se encuentra la necesidad de aplicar estrategias de pivoteo (para evitar un *pivote* igual a cero cuando se resuelve el sistema) y la posibilidad de realizar reordenamientos de la matriz de coeficientes para disminuir los errores producidos en los cálculos computacionales.
+
+### Sistemas fáciles de resolver
 
 **Caso 1: La matriz** $\mathbf{A}$ **es diagonal**
 
@@ -202,7 +206,7 @@ $$
 - En los casos anteriores asumimos $a_{kk} \neq 0 \quad \forall \quad k$. De lo contrario el sistema no tiene solución o tiene infinitas.
 - Recordar que un sistema lineal $\mathbf{Ax=b}$ tiene solución única si y sólo si $\det \mathbf{A} \neq 0$ y que si un elemento de la diagonal principal de una matriz triangular es cero, entonces $\det \mathbf{A} = 0$.
 
-## Eliminación gaussiana
+### Eliminación gaussiana
 
 - Es un método para resolver un sistema lineal general $\mathbf{Ax=b}$ de $n$ ecuaciones con $n$ incógnitas.
 - El objetivo es construir un sistema equivalente donde la matriz de coeficientes sea triangular superior para obtener las soluciones con el algoritmo de sustitución regresiva.
@@ -373,7 +377,7 @@ $$
 
 **Tarea:** revisar el algoritmo y la función ya programada.
 
-### Eliminación gaussiana con pivoteo trivial
+#### Eliminación gaussiana con pivoteo trivial {-}
 
 - En el algoritmo anterior es necesario que los pivotes $a_{qq} \neq 0 ~\forall q$.
 - Si en uno de los pasos encontramos un $a_{qq} = 0$, debemos intercambiar la $q$-ésima fila por una cualquiera de las siguientes, por ejemplo la fila $k$, en la que $a_{kq} \neq 0, k>q$.
@@ -388,21 +392,21 @@ x-3y-4z=-1
 \end{cases}
 $$
 
-## Estrategias de pivoteo para reducir los errores
+### Estrategias de pivoteo para reducir los errores
 
 - Como ya sabemos, dado que las computadoras usan una aritmética cuya precisión está fijada de antemano, es posible que cada vez que se realice una operación aritmética se introduzca un pequeño error.
 - En la resolución de ecuaciones por eliminación gaussiana, un adecuado reordenamiento de las filas en el momento indicado puede reducir notablemente los errores cometidos. 
 - Por ejemplo, se puede mostrar cómo buscar un multiplicador de menor magnitud (es decir, un pivote de mayor magnitud) mejora la precisión de los resultados. 
 - Por eso, existen estrategias de pivoteo que no solamente hacen intercambio de filas cuando se tiene un pivote nulo, si no también cuando alguna de las filas posteriores tiene un pivote de mayor valor absoluto.
 
-### Pivoteo parcial
+#### Pivoteo parcial {-}
 
 - Para reducir la propagación de los errores de redondeo, antes de comenzar una nueva ronda de reemplazos con el pivote $a_{qq}$ se evalúa si debajo en la misma columna hay algún elemento con mayor valor absoluto y en ese caso se intercambian las respectivas filas.
 - Es decir, se busca si existe $r$ tal que $|a_{rq}| > |a_{qq}|,\quad r>q$ para luego intercambiar las filas $q$ y $r$.
 - Este proceso suele conservar las magnitudes relativas de los elementos de la matriz triangular superior en el mismo orden que las de los coeficientes de la matriz original.
 - **Tarea**: leer el algoritmo del pivoteo parcial en el documento adjunto y programarlo.
 
-### Pivoteo parcial escalado
+#### Pivoteo parcial escalado {-}
 
 - Reduce aún más los efectos de la propagación de los errores.
 - Se elige el elemento de la columna $q$-ésima, en o por debajo de la diagonal principal, que tiene mayor tamaño relativo con respecto al resto de los elementos de su fila.
@@ -416,7 +420,7 @@ $$
 - **Paso 3**: intercambiar la fila $q$ con la fila hallada en el paso 2.
 - **Tarea**: leer el algoritmo del pivoteo parcial en el documento adjunto y programarlo.
 
-## Método de eliminación de Gauss-Jordan
+### Método de eliminación de Gauss-Jordan
 
 - Ya vimos que el método de Gauss transforma la matriz de coeficientes en una matriz triangular superior. 
 - El método de Gauss-Jordan continúa el proceso de transformación hasta obtener la matriz identidad.
