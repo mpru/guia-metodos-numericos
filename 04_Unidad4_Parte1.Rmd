@@ -5,7 +5,7 @@
 - En matemática estudiamos funciones de la forma $y = f(x)$, donde se conoce la expresión matemática que define a $f(x)$, para determinar sus derivadas y calcular integrales definidas.
 - Sin embargo, muchas veces en aplicaciones prácticas se requiere trabajar con funciones cuya derivación e integración presenta dificultades porque: 
 
-    - no son funciones elementales (polinomios, expresiones racionales, funciones trigonométricas, exponenciales o comibnaciones sencillas de estas);
+    - no son funciones elementales (polinomios, expresiones racionales, funciones trigonométricas, exponenciales o combinaciones sencillas de estas);
     - directamente se desconoce su expresión analítica (ejemplo: datos obtenidos experimentalmente).
 
 - En estos casos, se suele contar con una tabla de valores compuestas por puntos $(x_i, y_i)$ a partir de la cual se desea:
@@ -14,15 +14,15 @@
     - integrar $f(x)$ en un intervalo determinado
     - derivar $f(x)$
 
-- En esta unidad estudiaremos métodos numéricos que cumplen con estos objetivos que consisten en sustituir la función complicada o que está determinada tabularmente, por una función polinomial que se aproxime a los puntos disponibles.
+- En esta unidad estudiaremos métodos numéricos que cumplen con estos objetivos al sustituir la función complicada o que está determinada tabularmente, por una función polinomial que se aproxime a los puntos disponibles.
 
 ## Diferencias finitas
 
-- Antes de ver el primer método veremos cómo crear una tabla de diferencia que utilizaremos más adelante.
-- Se tiene una función $y = f(x)$ definida en forma tabular con saltos equiespaciados en $x$:
+- Antes de ver el primer método veremos cómo crear una tabla de diferencias finitas que utilizaremos más adelante.
+- Dada una función $y = f(x)$ definida en forma tabular con saltos equiespaciados en $x$:
 
 | $x_k$                     | $y_k = f(x_k)$ |
-|---------------------------|----------------|
+|:-------------------------:|:--------------:|
 | $x_0$                     | $y_0$          |
 | $x_1 = x_0 + h$           | $y_1$          |
 | $x_2 = x_0 + 2 h$         | $y_2$          |
@@ -30,6 +30,23 @@
 | $x_{n-1} = x_0 + (n-1) h$ | $y_{n-1}$      |
 | $x_{n} = x_0 + n h$       | $y_n$          |
 
+- Las diferencias finitas se expresan como:
+
+$$
+\Delta^{j} y_k = \Delta^{j-1} y_{k+1} - \Delta^{j-1} y_k 
+$$
+
+$$
+j = 1, ..., n \qquad k = 0, ..., j-1 \qquad \Delta^{0} y_k = y_k
+$$
+
+- Suelen ser presentadas en una *tabla de diferencias finitas:*
+
+```{r, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("Plots/U4/tabladif.png")
+```
+
+<!-- 
 
 | $\Delta y_k = y_{k+1} - y_k$       | $\Delta^2 y_k = \Delta y_{k+1} - \Delta y_k$ | $\Delta^3 y_k = \Delta^2 y_{k+1} - \Delta^2 y_k$ | $\cdots$ |
 |------------------------------------|----------------------------------------------|--------------------------------------------------|----------|
@@ -49,12 +66,12 @@
 | $\ddots$ | $\vdots$                                                     | $\vdots$                                                   |
 | $\cdots$ | -                                                            | -                                                          |
 | $\cdots$ | -                                                            | -                                                          |
+-->
 
-
-**Ejemplo 1**. Siendo $y=f(x)$ una función desconocida de la cual se tienen los valores tabulados $(x_k, y_k)$ que se presentan a continuación, junto con una representación gráfica de los mismos:
+**Ejemplo 1**. Sea $y=f(x)$ una función desconocida de la cual se tienen los valores tabulados $(x_k, y_k)$ que se presentan a continuación, junto con una representación gráfica de los mismos:
 
 | $k$ | $x_k$ | $y_k$  |
-|-----|-------|--------|
+|:---:|:-----:|:------:|
 | 0   | 2     | 0,3010 |
 | 1   | 3     | 0,4771 |
 | 2   | 4     | 0,6021 |
@@ -66,10 +83,10 @@
 knitr::include_graphics("Plots/U4/Unidad4_g1.png")
 ```
 
-- La correspondiente tabla de diferencias finitas es:
+La correspondiente tabla de diferencias finitas es:
 
 | $k$ | $x_k$ | $y_k$  | $\Delta y_k$ | $\Delta^2 y_k$ | $\Delta^3 y_k$ | $\Delta^4 y_k$ | $\Delta^5 y_k$ |
-|-----|-------|--------|--------------|----------------|----------------|----------------|----------------|
+|:---:|:-----:|:------:|:------------:|:--------------:|:--------------:|:--------------:|:--------------:|
 | 0   | 2     | 0,3010 | 0,1761       | -0,0511        | 0,0230         | -0,0127        | 0,0081         |
 | 1   | 3     | 0,4771 | 0,1250       | -0,0281        | 0,0103         | -0,0046        | -              |
 | 2   | 4     | 0,6021 | 0,0969       | -0,0178        | 0,0057         | -              | -              |
@@ -87,33 +104,33 @@ knitr::include_graphics("Plots/U4/Unidad4_g1.png")
 ## Interpolación de Newton para incrementos constantes
 
 - Ahora intentaremos resolver el problema de aproximar la función $f(x)$ para valores de $x$ que no forman parte de la tabla.
-- Operando con los valores de la tabla de diferencia, se comprueba que los valores tabulados $y_k$ se pueden escribir como:
+- Operando con los valores de la tabla de diferencias, se comprueba que los valores tabulados $y_k$ se pueden escribir como:
 
-$$
-\begin{aligned}
-y_k & = \sum_{j=0}^k \binom{k}{j} \Delta^{j} y_0 \\
-    & = y_0 + k \Delta y_0 + \frac{k(k-1)}{2!}\Delta^2 y_0 + \frac{k(k-1)(k-2)}{3!}\Delta^3 y_0 + \cdots 
-\end{aligned}
-$$
+	$$
+	\begin{aligned}
+	y_k & = \sum_{j=0}^k \binom{k}{j} \Delta^{j} y_0 \\
+	    & = y_0 + k \Delta y_0 + \frac{k(k-1)}{2!}\Delta^2 y_0 + \frac{k(k-1)(k-2)}{3!}\Delta^3 y_0 + \cdots + \Delta^k y_0 
+	\end{aligned}
+	$$
 
-donde $\Delta^{0} y_0 = y_0$. 
+	donde $\Delta^{0} y_0 = y_0$. 
 
 - Por ejemplo:
 
-$$
-y_2 = 0.3010 + 2 \cdot 0.1761 + \frac{2\cdot 1}{2!} (-0.0511) = 0.6021
-$$
+	$$
+	y_2 = 0.3010 + 2 \cdot 0.1761 + \frac{2\cdot 1}{2!} (-0.0511) = 0.6021
+	$$
 
-- Esta fórmula se generaliza para proporcionar valores aproximados de $y = f(x)$ para cualquier $x$:
+- Esta fórmula se emplea para proporcionar valores aproximados de $y = f(x)$ para cualquier $x$:
 
-$$
-y = f(x) \cong \sum_{j = 0}^{g} \binom{k}{j} \Delta^{j} y_0 = 
-$$
-$$
-y_0 + k \Delta y_0 + \frac{k(k-1)}{2!}\Delta^2 y_0 + \frac{k(k-1)(k-2)}{3!}\Delta^3 y_0 + \cdots
-$$
-
-donde $g$ es el orden de la aproximación, $\Delta^{0} y_0 = y_0$ y $k = \frac{x-x_0}{h}$.
+	$$
+	y = f(x) \cong \sum_{j = 0}^{g} \binom{k}{j} \Delta^{j} y_0 = 
+	$$
+	$$
+	y_0 + k \Delta y_0 + \frac{k(k-1)}{2!}\Delta^2 y_0 + \frac{k(k-1)(k-2)}{3!}\Delta^3 y_0 + \cdots
+	$$
+	
+	donde $g$ es el orden de la aproximación, $\Delta^{0} y_0 = y_0$ y $k = \frac{x-x_0}{h}$.
 
 - Si $x_0 < x < x_n$, este proceso se llama **interpolación** y la fórmula anterior, **Fórmula de interpolación de Newton para incrementos constantes**.
 
@@ -139,9 +156,6 @@ donde $g$ es el orden de la aproximación, $\Delta^{0} y_0 = y_0$ y $k = \frac{x
 ```{r, echo=FALSE, , out.width = '100%'}
 knitr::include_graphics("Plots/U4/Unidad4_g1.png")
 ```
-
-- ¿Hasta qué orden de diferencias deberíamos incluir? Es decir, ¿qué grado elegimos para el polinomio interpolador? 
-- Viendo el gráfico podemos pensar que una función cuadrática puede proveer un buen ajuste.
 
 ```{r, echo=FALSE, warning=F, message=F, eval=F}
 x <- 2:7
@@ -207,6 +221,8 @@ g4 <- ggplot(data.frame(x, y), aes(x = x, y = y)) +
 ggsave("Plots/U4/Unidad4_g4.png", g4, width = 5, height = 3.25)
 ```
 
+- ¿Hasta qué orden de diferencias deberíamos incluir? Es decir, ¿qué grado elegimos para el polinomio interpolador? 
+- Viendo el gráfico podemos pensar que una función cuadrática puede proveer un buen ajuste.
 - Por eso, proponemos un polinomio interpolador de grado 2, usando hasta la diferencia de segundo orden:
 
     - $x = 2,3$
@@ -289,7 +305,7 @@ knitr::include_graphics("Plots/U4/Unidad4_g3.png")
 - En el ejemplo con $x = 2.3$; $x_0=2$; $h = 1$; $k = 0.3$:
     
 | Grado | $f(2.3) \approx$                                                 |
-|-------|------------------------------------------------------------------|
+|:-----:|:----------------------------------------------------------------:|
 | 1     | $y_0 + k \Delta y_0 = 0.3538$                                    |
 | 2     | $0.3538 + \frac{k(k-1)}{2!}\Delta^2 y_0 = 0.3592$                |
 | 3     | $0.3592 + \frac{k(k-1)(k-2)}{3!}\Delta^3 y_0 = 0.3606$           |
@@ -301,7 +317,7 @@ knitr::include_graphics("Plots/U4/Unidad4_g3.png")
 - Con esta información, podemos calcular el Error Relativo que resulta de hacer las aproximaciones anteriores:
 
 | Grado | $f(2.3) \approx$ | ER     |
-|-------|------------------|--------|
+|:-----:|:----------------:|:------:|
 | 1     | $0.3538$         | 0.0218 |
 | 2     | $0.3592$         | 0.0070 |
 | 3     | $0.3606$         | 0.0032 |
@@ -315,7 +331,7 @@ Polinomios interpoladores con $x_0=2$:
 knitr::include_graphics("Plots/U4/Unidad4_g4.png")
 ```
 
-- Realizar una interpolación cúbica para $x=6.4$. 
+- Ahora vamos a realizar una interpolación cúbica para $x=6.4$. 
 - Si tomamos $x_0 = 6$, nos faltan las diferencias de 2° y 3° orden y no podemos obtener el polinomio deseado.
 - **Modificación**: tomar como $x_0$ al inmediato superior y emplear las diferencias que se encuentran en la diagonal ascendente que comienza en dicho punto.
 - Se debe redefinir $k$ y alternar signos positivos y negativos en la fórmula:
@@ -358,9 +374,7 @@ $x_0 = 7$
 
 $k = \frac{x_0-x}{h} = \frac{7-6.4}{1} = 0.6$
 
-$y_0 = 0,8451$; $\Delta y_0 = 0,0670$; 
-
-$\Delta^2 y_0 = -0.0121$; $\Delta^3 y_0 = 0.0057$
+$y_0 = 0,8451$; $\Delta y_0 = 0,0670$; $\Delta^2 y_0 = -0.0121$; $\Delta^3 y_0 = 0.0057$
 
 $$
 \begin{aligned}
@@ -374,7 +388,7 @@ $$
 **Ejemplo 2**. Dada la siguiente función tabulada, interpolar para $x = 3.2$.
 
 | $x$ | $y=f(x)$ |
-|-----|----------|
+|:---:|:--------:|
 | 0   | 2        |
 | 2   | 8        |
 | 4   | 62       |
@@ -382,12 +396,10 @@ $$
 | 8   | 506      |
 | 10  | 992      |
 
-
-
-**Ejemplo 2**. La tabla de diferencias es:
+La tabla de diferencias es:
 
 | $x_k$ | $y_k=f(x_k)$ | $\Delta y_k$ | $\Delta^2 y_k$ | $\Delta^3 y_k$ | $\Delta^4 y_k$ |
-|-------|--------------|--------------|----------------|----------------|----------------|
+|:-----:|:------------:|:------------:|:--------------:|:--------------:|:--------------:|
 | 0     | 2            | 6            | 48             | 48             | 0              |
 | 2     | 8            | 54           | 96             | 48             | 0              |
 | 4     | 62           | 150          | 144            | 48             | -              |
@@ -399,7 +411,7 @@ $$
 - Las diferencias de orden 3 son constantes. Esto significa que la función $f(x)$ es exactamente un polinomio de grado 3.
 - Es decir, si usamos hasta la diferencia de orden 3, con la fórmula de Newton podemos hallar exactamente el valor de $f(x)$ para cualquier $x$ (y no importa cuál valor tomamos como $x_0$).
 
-**Ejemplo 2**. Continuando con el objetivo de hallar $f(3.2)$:
+Continuando con el objetivo de hallar $f(3.2)$:
 
 - $x = 3.2$
 - $x_0 = 2$
@@ -415,24 +427,10 @@ y = f(3.2) &= y_0 + k \Delta y_0 + \frac{k(k-1)}{2!}\Delta^2 y_0 + \frac{k(k-1)(
 \end{aligned}
 $$
 
-**Ejemplo 2**. Ahora interpolar para $x = 9$. Recordemos la tabla:
-
-| $x_k$ | $y_k=f(x_k)$ | $\Delta y_k$ | $\Delta^2 y_k$ | $\Delta^3 y_k$ | $\Delta^4 y_k$ |
-|-------|--------------|--------------|----------------|----------------|----------------|
-| 0     | 2            | 6            | 48             | 48             | 0              |
-| 2     | 8            | 54           | 96             | 48             | 0              |
-| 4     | 62           | 150          | 144            | 48             | -              |
-| 6     | 212          | 294          | 192            | -              | -              |
-| 8     | 506          | 486          | -              | -              | -              |
-| 10    | 992          | -            | -              | -              | -              |
-
-
+- Ahora vamos a interpolar para $x = 9$.
 - Si tomamos como $x_0$ al inmediato inferior, es decir, $x_0 = 8$, nos faltan dos diferencias para completar el cálculo.
 - Pero como tenemos diferencias constantes y la verdadera función es un polinomio, cualquier punto de partida nos dará el valor exacto de $f(9)$.
-- Así que podemos tomar, por ejemplo, el primer renglón de la tabla: $x_0=0$.
-
-**Ejemplo 2**. Continuando con el objetivo de hallar $f(9)$:
-
+- Así que podemos tomar, por ejemplo, el primer renglón de la tabla: $x_0=0$:
 - $x = 9$
 - $x_0 = 0$
 - $h = 2$
@@ -457,7 +455,7 @@ $$
 - $x_0 = 0$
 - $h = 2$
 - $k = \frac{x-x_0}{h} = \frac{-1-0}{2} = -0.5$
-- $y_0 = 2$; $\Delta y_0 = 6$; $\Delta^2 y_0 = 48$; $\Delta^2 y_0 = 48$
+- $y_0 = 2$; $\Delta y_0 = 6$; $\Delta^2 y_0 = 48$; $\Delta^3 y_0 = 48$
 
 $$
 \begin{aligned}
@@ -496,7 +494,7 @@ $$
 f(x) = \frac{x - x_1}{x_0 - x_1} y_0 + \frac{x - x_0}{x_1 - x_0} y_1
 $$
 
-- Esta es expresión que se puede extender para obtener polinomios de grados superiores que pasen por más puntos.
+- Esta expresión se puede extender para obtener polinomios de grados superiores que pasen por más puntos.
 - Por ejemplo, para hallar el polinomio que pasa por los puntos $(x_0, y_0)$, $(x_1, y_1)$ y $(x_2, y_2)$:
 
 $$
@@ -538,7 +536,7 @@ $$
 **Ejemplo 5**. Emplear el método de Lagrange para interpolar el valor de la función $f$ en $x=2.25$, con el polinomio interpolador de grado 3 que pasa por los cuatro puntos tabulados:
 
 | $x_k$ | $y_k$   |
-|-------|---------|
+|:-----:|:-------:|
 | -1    | 0,5403  |
 | 0     | 1,0000  |
 | 2     | -0,4162 |
@@ -549,21 +547,23 @@ $$
 knitr::include_graphics("Plots/U4/lagrej1.png")
 ```
 
-**Ejemplo 5**
-
 $$
 \begin{split}
-f(x) &= \sum_{i = 0}^3 \frac{\prod\limits_{\substack{j = 0\\ j \neq i}}^3 (x - x_j)}{\prod\limits_{\substack{j = 0\\ j \neq i}}^3 (x_i - x_j)} y_i \\ \\
-&= \frac{(x - x_1)(x - x_2)(x - x_3)}{(x_0 - x_1)(x_0 - x_2)(x_0 - x_3)} y_0 + \frac{(x - x_0)(x - x_2)(x - x_3)}{(x_1 - x_0)(x_1 - x_2)(x_1 - x_3)} y_1 \\
-&~ + \frac{(x - x_0)(x - x_1)(x - x_3)}{(x_2 - x_0)(x_2 - x_1)(x_2 - x_3)} y_2 + \frac{(x - x_0)(x - x_1)(x - x_2)}{(x_3 - x_0)(x_3 - x_1)(x_3 - x_2)} y_3 \\ \\
-\implies y = f(2.25) &\approx \frac{(2.25 - 0)(2.25 - 2)(2.25 - 2.5)}{(-1-0)(-1-2)(-1-2.5)} 0.5403 + \frac{(2.25 +1)(2.25 - 2)(2.25 - 2.5)}{(0+1)(0-2)(0-2.5)} 1.0000 \\
-&~ + \frac{(2.25 +1)(2.25 - 0)(2.25 - 2.5)}{(2+1)(2-0)(2-2.5)} (-0.4162) + \frac{(2.25 +1)(2.25 - 0)(2.25 - 2)}{(2.5+1)(2.5-0)(2.5-2)} (-0.8011) \\
-&= -0.6218 \\ \\
+f(x) =& \sum_{i = 0}^3 \frac{\prod\limits_{\substack{j = 0\\ j \neq i}}^3 (x - x_j)}{\prod\limits_{\substack{j = 0\\ j \neq i}}^3 (x_i - x_j)} y_i = \\ \\
+& \frac{(x - x_1)(x - x_2)(x - x_3)}{(x_0 - x_1)(x_0 - x_2)(x_0 - x_3)} y_0 + \\ \\
+&\frac{(x - x_0)(x - x_2)(x - x_3)}{(x_1 - x_0)(x_1 - x_2)(x_1 - x_3)} y_1 + \\ \\
+&\frac{(x - x_0)(x - x_1)(x - x_3)}{(x_2 - x_0)(x_2 - x_1)(x_2 - x_3)} y_2 + \\ \\
+&\frac{(x - x_0)(x - x_1)(x - x_2)}{(x_3 - x_0)(x_3 - x_1)(x_3 - x_2)} y_3 \\ \\
+\implies y = f(2.25) \approx & \frac{(2.25 - 0)(2.25 - 2)(2.25 - 2.5)}{(-1-0)(-1-2)(-1-2.5)} 0.5403 + \\ \\
+&\frac{(2.25 +1)(2.25 - 2)(2.25 - 2.5)}{(0+1)(0-2)(0-2.5)} 1.0000 + \\ \\
+&\frac{(2.25 +1)(2.25 - 0)(2.25 - 2.5)}{(2+1)(2-0)(2-2.5)} (-0.4162) + \\ \\
+&\frac{(2.25 +1)(2.25 - 0)(2.25 - 2)}{(2.5+1)(2.5-0)(2.5-2)} (-0.8011) = \\ \\
+& -0.6218 \\ \\
 &\therefore f(2.25) \approx -0.6218
 \end{split}
 $$
 
-**Ejemplo 5**. Si en la fórmula anterior en lugar de reemplazar $x$ por un valor particular (en este caso, $2.5$) operamos y reacomodamos los términos, podemos hallar la expresión del polinomio interpolador:
+Si en la fórmula anterior en lugar de reemplazar $x$ por un valor particular (en este caso, $2.5$) operamos y reacomodamos los términos, podemos hallar la expresión del polinomio interpolador:
 
 $$
 f(x) = 0.1042 x^3 -0.4934 x^2 -0.1379 x+1
@@ -573,7 +573,7 @@ $$
 knitr::include_graphics("Plots/U4/lagrej2.png")
 ```
 
-**Ejemplo 5**. La función que generó los valores tabulados es $cos(x)$:
+La función que generó los valores tabulados es $cos(x)$:
 
 En el rango tabulado:
 
@@ -587,7 +587,7 @@ Un poco más lejos:
 knitr::include_graphics("Plots/U4/lagrange.png")
 ```
 
-- Siendo $cos(2.25) = -0.6282$, el error relativo de la aproximación fue $|-0.6282-0.6218| / |-0.6285| = 1.02\%$
+Siendo $cos(2.25) = -0.6282$, el error relativo de la aproximación fue $|-0.6282-0.6218| / |-0.6285| = 1.02\%$
 
 **Interpolación inversa**
 
@@ -606,26 +606,32 @@ Emplear Lagrange allí no aproxima la misma curva, puesto q no es una fc, hay ma
 **Ejemplo 6**. Con los datos del Ejemplo 1, ¿cuál es el valor de $x$ tal que $f(x)=-0.75$?
 
 | $x_k$ | $y_k$   |
-|-------|---------|
+|:-----:|:-------:|
 | -1    | 0,5403  |
 | 0     | 1,0000  |
 | 2     | -0,4162 |
 | 2.5   | -0,8011 |
 
 
-$\downarrow$
+$$\downarrow$$
 
 | $x_k$   | $y_k$ |
-|---------|-------|
+|:-------:|:-----:|
 | 1,0000  | 0     |
 | -0,4162 | 2     |
 | -0,8011 | 2.5   |
 
 
 $$
+f(x) = \sum_{i = 0}^2 \frac{\prod\limits_{\substack{j = 0\\ j \neq i}}^2 (x - x_j)}{\prod\limits_{\substack{j = 0\\ j \neq i}}^2 (x_i - x_j)} y_i
+$$
+
+$$
+= \frac{(x - x_1)(x - x_2)}{(x_0 - x_1)(x_0 - x_2)} y_0 + \frac{(x - x_0)(x - x_2)}{(x_1 - x_0)(x_1 - x_2)} y_1 + \frac{(x - x_0)(x - x_1)}{(x_2 - x_0)(x_2 - x_1)} y_2
+$$
+
+$$
 \begin{split}
-f(x) &= \sum_{i = 0}^2 \frac{\prod\limits_{\substack{j = 0\\ j \neq i}}^2 (x - x_j)}{\prod\limits_{\substack{j = 0\\ j \neq i}}^2 (x_i - x_j)} y_i \\ \\
-&= \frac{(x - x_1)(x - x_2)}{(x_0 - x_1)(x_0 - x_2)} y_0 + \frac{(x - x_0)(x - x_2)}{(x_1 - x_0)(x_1 - x_2)} y_1 + \frac{(x - x_0)(x - x_1)}{(x_2 - x_0)(x_2 - x_1)} y_2 \\ \\
 \implies f(-0.75) &\approx \frac{(-0.75+0.4162)(-0.75+0.8011)}{(1+0.4162)(1+0.8011)} 0 \\
 &~ + \frac{(-0.75-1)(-0.75+0.8011)}{(-0.4162-1)(-0.4162+0.8011)} 2 \\
 &~ + \frac{(-0.75-1)(-0.75+0.4162)}{(-0.8011-1)(-0.8011+0.4162)} 2.5  \\
@@ -637,13 +643,10 @@ $\therefore$ el valor de $x$ tal que $f(x)=-0.75$ es $x \approx 2.4347$.
 
 **Interpolación inversa**. Podemos usar la interpolación inversa para resolver ecuaciones.
 
-**Ejemplo 7**: hallar una raiz positiva para la ecuación $f(x)=x-4\sin(x+2) = 0$. 
-
-- Tabulamos algunos valores y graficamos:
-
+**Ejemplo 7**: hallar una raiz positiva para la ecuación $f(x)=x-4\sin(x+2) = 0$. Tabulamos algunos valores y graficamos:
 
 | $x_k$ | $y_k$   |
-|-------|---------|
+|:-----:|:-------:|
 | 0     | -3.6372 |
 | 0.5   | -1.8939 |
 | 1     | 0.4355  |
@@ -653,24 +656,13 @@ $\therefore$ el valor de $x$ tal que $f(x)=-0.75$ es $x \approx 2.4347$.
 knitr::include_graphics("Plots/U4/lagr_ecuacion1.png")
 ```
 
-**Ejemplo 7**
-
-- Podemos usar los dos últimos puntos donde vemos que la función cortó a las abscisas y hacer una interpolación lineal, los tres puntos y tener una interpolación cuadrática, o incluso agregar más puntos.
-
-| $x_k$ | $y_k$   |
-|-------|---------|
-| 0     | -3.6372 |
-| 0.5   | -1.8939 |
-| 1     | 0.4355  |
-
-
-$\downarrow$
+Podemos usar los dos últimos puntos donde vemos que la función cortó a las abscisas y hacer una interpolación lineal, o usar los tres puntos y tener una interpolación cuadrática, o incluso agregar más puntos. Al intercambiar roles:
 
 | $x_k$                    | $y_k$                |
-|--------------------------|----------------------|
+|:------------------------:|:--------------------:|
 | -3.6372                  | 0                    |
-| \textcolor{red}{-1.8939} | \textcolor{red}{0.5} |
-| \textcolor{red}{0.4355}  | \textcolor{red}{1}   |
+| -1.8939 | 0.5 |
+| 0.4355  | 1   |
 
 $$
 \begin{split}
@@ -679,6 +671,7 @@ y = f(x) &= \frac{x - x_1}{x_0 - x_1} y_0 + \frac{x - x_0}{x_1 - x_0} y_1 \\ \\
 &= 0.9065 \\
 \end{split}
 $$
+
 $\therefore$ La solución positiva de la ecuación es $x \approx 0.9065$ ya que $f(0.9065) \approx 0$.
 
 ### Observaciones finales

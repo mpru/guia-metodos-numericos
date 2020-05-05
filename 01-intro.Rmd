@@ -40,7 +40,10 @@ $$ (a + b) - b = a $$
 ## Cifras significativas
 
 <!-- https://www.nde-ed.org/GeneralResources/SigFigs/SigFigs.htm 
-https://en.wikipedia.org/wiki/Significant_figures#Concise_rules -->
+https://en.wikipedia.org/wiki/Significant_figures#Concise_rules 
+Ejemplos:
+http://www.learningaboutelectronics.com/Articulos/Calculadora-de-redondeo-de-cifras-significativas.php#answer
+-->
 
 - Las cifras significativas de un número son las que aportan alguna información.
 - Reglas:

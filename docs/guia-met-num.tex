@@ -244,7 +244,7 @@
 \providecommand{\subtitle}[1]{}
 \subtitle{Guía de estudio}
 \author{Marcos Prunello \and Cecilia Rapelli}
-\date{2020-04-20}
+\date{2020-05-05}
 
 \begin{document}
 \maketitle
@@ -1800,8 +1800,13 @@ a_{n1} & a_{n2} & \cdots & a_{nn} & b_n
   En muchas ocasiones los métodos aproximados permiten obtener un grado de exactitud superior al que se puede obtener empleando los denominados métodos exactos, debido fundamentalmente a los errores de truncamiento que se producen en el proceso.
 \end{itemize}
 
+\hypertarget{muxe9todos-exactos}{%
+\section{Métodos exactos}\label{muxe9todos-exactos}}
+
+En esta sección repasaremos los métodos que ya conocen y que han aplicado ``a mano'' muchas veces para resolver sistemas de ecuaciones, con la particularidad de que pensaremos cómo expresar sus algoritmos para poder programarlos en la computadora. Entre los aspectos que tendremos que considerar, se encuentra la necesidad de aplicar estrategias de pivoteo (para evitar un \emph{pivote} igual a cero cuando se resuelve el sistema) y la posibilidad de realizar reordenamientos de la matriz de coeficientes para disminuir los errores producidos en los cálculos computacionales.
+
 \hypertarget{sistemas-fuxe1ciles-de-resolver}{%
-\section{Sistemas fáciles de resolver}\label{sistemas-fuxe1ciles-de-resolver}}
+\subsection{Sistemas fáciles de resolver}\label{sistemas-fuxe1ciles-de-resolver}}
 
 \textbf{Caso 1: La matriz} \(\mathbf{A}\) \textbf{es diagonal}
 
@@ -1910,7 +1915,7 @@ x_n = \frac{b_n}{a_{nn}} \text{ y } x_k = \frac{b_k - \sum_{j = k+1}^{n}a_{kj}x_
 \end{itemize}
 
 \hypertarget{eliminaciuxf3n-gaussiana}{%
-\section{Eliminación gaussiana}\label{eliminaciuxf3n-gaussiana}}
+\subsection{Eliminación gaussiana}\label{eliminaciuxf3n-gaussiana}}
 
 \begin{itemize}
 \tightlist
@@ -2128,7 +2133,8 @@ x &= 1\\ y &= 2\\ z &= 4\\ t &= -3
 \textbf{Tarea:} revisar el algoritmo y la función ya programada.
 
 \hypertarget{eliminaciuxf3n-gaussiana-con-pivoteo-trivial}{%
-\subsection{Eliminación gaussiana con pivoteo trivial}\label{eliminaciuxf3n-gaussiana-con-pivoteo-trivial}}
+\subsubsection*{Eliminación gaussiana con pivoteo trivial}\label{eliminaciuxf3n-gaussiana-con-pivoteo-trivial}}
+\addcontentsline{toc}{subsubsection}{Eliminación gaussiana con pivoteo trivial}
 
 \begin{itemize}
 \tightlist
@@ -2151,7 +2157,7 @@ x-3y-4z=-1
 \]
 
 \hypertarget{estrategias-de-pivoteo-para-reducir-los-errores}{%
-\section{Estrategias de pivoteo para reducir los errores}\label{estrategias-de-pivoteo-para-reducir-los-errores}}
+\subsection{Estrategias de pivoteo para reducir los errores}\label{estrategias-de-pivoteo-para-reducir-los-errores}}
 
 \begin{itemize}
 \tightlist
@@ -2166,7 +2172,8 @@ x-3y-4z=-1
 \end{itemize}
 
 \hypertarget{pivoteo-parcial}{%
-\subsection{Pivoteo parcial}\label{pivoteo-parcial}}
+\subsubsection*{Pivoteo parcial}\label{pivoteo-parcial}}
+\addcontentsline{toc}{subsubsection}{Pivoteo parcial}
 
 \begin{itemize}
 \tightlist
@@ -2181,7 +2188,8 @@ x-3y-4z=-1
 \end{itemize}
 
 \hypertarget{pivoteo-parcial-escalado}{%
-\subsection{Pivoteo parcial escalado}\label{pivoteo-parcial-escalado}}
+\subsubsection*{Pivoteo parcial escalado}\label{pivoteo-parcial-escalado}}
+\addcontentsline{toc}{subsubsection}{Pivoteo parcial escalado}
 
 \begin{itemize}
 \tightlist
@@ -2208,7 +2216,7 @@ s_r = max\{|a_{rq}|, |a_{r,q+1}|, \cdots, |a_{rn}| \} \quad r = q, q+1, \cdots, 
 \end{itemize}
 
 \hypertarget{muxe9todo-de-eliminaciuxf3n-de-gauss-jordan}{%
-\section{Método de eliminación de Gauss-Jordan}\label{muxe9todo-de-eliminaciuxf3n-de-gauss-jordan}}
+\subsection{Método de eliminación de Gauss-Jordan}\label{muxe9todo-de-eliminaciuxf3n-de-gauss-jordan}}
 
 \begin{itemize}
 \tightlist
@@ -2328,6 +2336,7 @@ x-y+z=-4 \\
     2 & 1 & 1 &|& 11 &|& 0 & 0 & 1
 \end{bmatrix}
 \]
+
 \[
 \begin{array}{cl}
     F2 &= F2 - 5 F1 \\
@@ -2339,6 +2348,7 @@ x-y+z=-4 \\
     F3 &= F3 / 5
 \end{array}
 \]
+
 \[
 \begin{bmatrix}
     1 & 0 & 0 &|& 3 &|& -7/5 & 2/5 & 1/5\\
@@ -2348,97 +2358,88 @@ x-y+z=-4 \\
 \]
 
 \begin{itemize}
-\tightlist
 \item
   ¿Por qué este procedimiento nos devuelva la inversa de la matriz de coeficientes?
 \item
   Recordar que la inversa de \(\mathbf{A}\) es aquella matriz \(\mathbf{A}^{-1}\) que verifica \(\mathbf{AA}^{-1} =\mathbf{A}^{-1}\mathbf{A}=\mathbf{I}\)
 \item
   Entonces si queremos hallar la matriz \(\mathbf{A}^{-1}\):
-\end{itemize}
 
-\[
-\mathbf{A}^{-1} =
-\begin{bmatrix}
-x_{11} & x_{12} & x_{13} \\
-x_{21} & x_{22} & x_{23} \\
-x_{31} & x_{32} & x_{33} 
-\end{bmatrix}
-\]
+  \[
+    \mathbf{A}^{-1} =
+    \begin{bmatrix}
+    x_{11} & x_{12} & x_{13} \\
+    x_{21} & x_{22} & x_{23} \\
+    x_{31} & x_{32} & x_{33} 
+    \end{bmatrix}
+    \]
 
-\begin{verbatim}
-podemos plantear el siguiente producto matricial:
-\end{verbatim}
+  podemos plantear el siguiente producto matricial:
 
-\[
-\begin{bmatrix}
-1 & -1 & 1 \\
-5 & -4 & 3 \\
-2 & 1 & 1 
-\end{bmatrix}
-\times
-\begin{bmatrix}
-x_{11} & x_{12} & x_{13} \\
-x_{21} & x_{22} & x_{23} \\
-x_{31} & x_{32} & x_{33} 
-\end{bmatrix}
-=
-\begin{bmatrix}
-1 & 0 & 0 \\
-0 & 1 & 0 \\
-0 & 0 & 1 
-\end{bmatrix}
-\]
+  \[
+    \begin{bmatrix}
+    1 & -1 & 1 \\
+    5 & -4 & 3 \\
+    2 & 1 & 1 
+    \end{bmatrix}
+    \times
+    \begin{bmatrix}
+    x_{11} & x_{12} & x_{13} \\
+    x_{21} & x_{22} & x_{23} \\
+    x_{31} & x_{32} & x_{33} 
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1 
+    \end{bmatrix}
+    \]
 
-\begin{verbatim}
-que da lugar a tres sistemas de ecuaciones con la misma matriz de coeficientes:
-\end{verbatim}
+  que da lugar a tres sistemas de ecuaciones con la misma matriz de coeficientes:
 
-\[
-\implies
-\begin{bmatrix}
-x_{11}-x_{21}+x_{31} & x_{12}-x_{22}+x_{32} & x_{13}-x_{23}+x_{33} \\
-5x_{11}-4x_{21}+3x_{31} & 5x_{12}-4x_{22}+3x_{32} & 5x_{13}-4x_{23}+3x_{33} \\
-2x_{11}+x_{21}+x_{31} & 2x_{12}-x_{22}+x_{32} & 2x_{13}-x_{23}+x_{33} 
-\end{bmatrix}
-=
-\]
+  \[
+    \implies
+    \begin{bmatrix}
+    x_{11}-x_{21}+x_{31} & x_{12}-x_{22}+x_{32} & x_{13}-x_{23}+x_{33} \\
+    5x_{11}-4x_{21}+3x_{31} & 5x_{12}-4x_{22}+3x_{32} & 5x_{13}-4x_{23}+3x_{33} \\
+    2x_{11}+x_{21}+x_{31} & 2x_{12}-x_{22}+x_{32} & 2x_{13}-x_{23}+x_{33} 
+    \end{bmatrix}
+    =
+    \]
 
-\[
-=
-\begin{bmatrix}
-1 & 0 & 0 \\
-0 & 1 & 0 \\
-0 & 0 & 1 
-\end{bmatrix}
-\]
+  \[
+    =
+    \begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1 
+    \end{bmatrix}
+    \]
 
-\[
-\begin{cases} 
-x_{11}-x_{21}+x_{31}=1 \\
-5x_{11}-4x_{21}+3x_{31}=0 \\
-2x_{11}+x_{21}+x_{31}=0
-\end{cases}
-\]
+  \[
+    \begin{cases} 
+    x_{11}-x_{21}+x_{31}=1 \\
+    5x_{11}-4x_{21}+3x_{31}=0 \\
+    2x_{11}+x_{21}+x_{31}=0
+    \end{cases}
+    \]
 
-\[
-\begin{cases} 
-x_{12}-x_{22}+x_{32}=0 \\
-5x_{12}-4x_{22}+3x_{32}=1 \\
-2x_{12}+x_{22}+x_{32}=0
-\end{cases}
-\]
+  \[
+    \begin{cases} 
+    x_{12}-x_{22}+x_{32}=0 \\
+    5x_{12}-4x_{22}+3x_{32}=1 \\
+    2x_{12}+x_{22}+x_{32}=0
+    \end{cases}
+    \]
 
-\[
-\begin{cases} 
-x_{13}-x_{23}+x_{33}=0 \\
-5x_{13}-4x_{23}+3x_{33}=0 \\
-2x_{13}+x_{23}+x_{33}=1
-\end{cases}
-\]
-
-\begin{itemize}
-\tightlist
+  \[
+    \begin{cases} 
+    x_{13}-x_{23}+x_{33}=0 \\
+    5x_{13}-4x_{23}+3x_{33}=0 \\
+    2x_{13}+x_{23}+x_{33}=1
+    \end{cases}
+    \]
 \item
   Los resolvemos simultáneamente al agregarle a la matriz aumentada del sistema original, estos tres ``nuevos vectores de términos independientes'' que forman una matriz identidad de orden \(n\). En cierto modo, estamos resolviendo cuatro sistemas de ecuaciones a la vez, el sistema original y los tres que permiten hallar cada columna de \(\mathbf{A}^{-1}\).
 \item
@@ -2670,7 +2671,7 @@ z_{k+1}=(15+2x_{k+1}-y_{k+1})/5
 \item
   Ahora que sabemos qué hace cada método y en qué se diferencian, vamos a generalizar las fórmulas recursivas.
 \item
-  Pensems en un sistema de \(n\) ecuaciones lineales con \(n\) incógnitas y despejamos una variable en cada ecuación:
+  Pensemos en un sistema de \(n\) ecuaciones lineales con \(n\) incógnitas y despejamos una variable en cada ecuación:
 \end{itemize}
 
 \[
@@ -2912,7 +2913,7 @@ Si la matriz \(\mathbf{A}\) es diagonal estrictamente dominante, entonces el sis
   \begin{itemize}
   \tightlist
   \item
-    no son funciones elementales (polinomios, expresiones racionales, funciones trigonométricas, exponenciales o comibnaciones sencillas de estas);
+    no son funciones elementales (polinomios, expresiones racionales, funciones trigonométricas, exponenciales o combinaciones sencillas de estas);
   \item
     directamente se desconoce su expresión analítica (ejemplo: datos obtenidos experimentalmente).
   \end{itemize}
@@ -2929,7 +2930,7 @@ Si la matriz \(\mathbf{A}\) es diagonal estrictamente dominante, entonces el sis
     derivar \(f(x)\)
   \end{itemize}
 \item
-  En esta unidad estudiaremos métodos numéricos que cumplen con estos objetivos que consisten en sustituir la función complicada o que está determinada tabularmente, por una función polinomial que se aproxime a los puntos disponibles.
+  En esta unidad estudiaremos métodos numéricos que cumplen con estos objetivos al sustituir la función complicada o que está determinada tabularmente, por una función polinomial que se aproxime a los puntos disponibles.
 \end{itemize}
 
 \hypertarget{diferencias-finitas}{%
@@ -2938,12 +2939,12 @@ Si la matriz \(\mathbf{A}\) es diagonal estrictamente dominante, entonces el sis
 \begin{itemize}
 \tightlist
 \item
-  Antes de ver el primer método veremos cómo crear una tabla de diferencia que utilizaremos más adelante.
+  Antes de ver el primer método veremos cómo crear una tabla de diferencias finitas que utilizaremos más adelante.
 \item
-  Se tiene una función \(y = f(x)\) definida en forma tabular con saltos equiespaciados en \(x\):
+  Dada una función \(y = f(x)\) definida en forma tabular con saltos equiespaciados en \(x\):
 \end{itemize}
 
-\begin{longtable}[]{@{}ll@{}}
+\begin{longtable}[]{@{}cc@{}}
 \toprule
 \(x_k\) & \(y_k = f(x_k)\)\tabularnewline
 \midrule
@@ -2957,135 +2958,31 @@ Si la matriz \(\mathbf{A}\) es diagonal estrictamente dominante, entonces el sis
 \bottomrule
 \end{longtable}
 
-\begin{longtable}[]{@{}llll@{}}
-\toprule
-\begin{minipage}[b]{0.22\columnwidth}\raggedright
-\(\Delta y_k = y_{k+1} - y_k\)\strut
-\end{minipage} & \begin{minipage}[b]{0.29\columnwidth}\raggedright
-\(\Delta^2 y_k = \Delta y_{k+1} - \Delta y_k\)\strut
-\end{minipage} & \begin{minipage}[b]{0.31\columnwidth}\raggedright
-\(\Delta^3 y_k = \Delta^2 y_{k+1} - \Delta^2 y_k\)\strut
-\end{minipage} & \begin{minipage}[b]{0.06\columnwidth}\raggedright
-\(\cdots\)\strut
-\end{minipage}\tabularnewline
-\midrule
-\endhead
-\begin{minipage}[t]{0.22\columnwidth}\raggedright
-\(\Delta y_0 = y_1 - y_0\)\strut
-\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\raggedright
-\(\Delta^2 y_0 = \Delta y_{1} - \Delta y_0\)\strut
-\end{minipage} & \begin{minipage}[t]{0.31\columnwidth}\raggedright
-\(\Delta^3 y_0 = \Delta^2 y_{1} - \Delta^2 y_0\)\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright
-\(\cdots\)\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.22\columnwidth}\raggedright
-\(\Delta y_1 = y_2 - y_1\)\strut
-\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\raggedright
-\(\Delta^2 y_1 = \Delta y_{2} - \Delta y_1\)\strut
-\end{minipage} & \begin{minipage}[t]{0.31\columnwidth}\raggedright
-\(\Delta^3 y_1 = \Delta^2 y_{2} - \Delta^2 y_1\)\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright
-\(\cdots\)\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.22\columnwidth}\raggedright
-\(\Delta y_2 = y_3 - y_2\)\strut
-\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\raggedright
-\(\Delta^2 y_2 = \Delta y_{3} - \Delta y_2\)\strut
-\end{minipage} & \begin{minipage}[t]{0.31\columnwidth}\raggedright
-\(\Delta^3 y_2 = \Delta^2 y_{3} - \Delta^2 y_2\)\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright
-\(\cdots\)\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.22\columnwidth}\raggedright
-\(\vdots\)\strut
-\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\raggedright
-\(\vdots\)\strut
-\end{minipage} & \begin{minipage}[t]{0.31\columnwidth}\raggedright
-\(\vdots\)\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright
-\(\ddots\)\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.22\columnwidth}\raggedright
-\(\Delta y_{n-1} = y_{n} - y_{n-1}\)\strut
-\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\raggedright
--\strut
-\end{minipage} & \begin{minipage}[t]{0.31\columnwidth}\raggedright
--\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright
-\(\cdots\)\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.22\columnwidth}\raggedright
--\strut
-\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\raggedright
--\strut
-\end{minipage} & \begin{minipage}[t]{0.31\columnwidth}\raggedright
--\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright
-\(\cdots\)\strut
-\end{minipage}\tabularnewline
-\bottomrule
-\end{longtable}
+\begin{itemize}
+\tightlist
+\item
+  Las diferencias finitas se expresan como:
+\end{itemize}
 
-\begin{longtable}[]{@{}lll@{}}
-\toprule
-\begin{minipage}[b]{0.07\columnwidth}\raggedright
-\(\cdots\)\strut
-\end{minipage} & \begin{minipage}[b]{0.43\columnwidth}\raggedright
-\(\Delta^{n-1} y_k = \Delta^{n-2} y_{k+1} - \Delta^{n-2} y_k\)\strut
-\end{minipage} & \begin{minipage}[b]{0.41\columnwidth}\raggedright
-\(\Delta^{n} y_k = \Delta^{n-1} y_{k+1} - \Delta^{n-1} y_k\)\strut
-\end{minipage}\tabularnewline
-\midrule
-\endhead
-\begin{minipage}[t]{0.07\columnwidth}\raggedright
-\(\cdots\)\strut
-\end{minipage} & \begin{minipage}[t]{0.43\columnwidth}\raggedright
-\(\Delta^{n-1} y_0 = \Delta^{n-2} y_{1} - \Delta^{n-2} y_0\)\strut
-\end{minipage} & \begin{minipage}[t]{0.41\columnwidth}\raggedright
-\(\Delta^{n} y_0 = \Delta^{n-1} y_{1} - \Delta^{n-1} y_0\)\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.07\columnwidth}\raggedright
-\(\cdots\)\strut
-\end{minipage} & \begin{minipage}[t]{0.43\columnwidth}\raggedright
-\(\Delta^{n-1} y_1 = \Delta^{n-2} y_{0} - \Delta^{n-2} y_1\)\strut
-\end{minipage} & \begin{minipage}[t]{0.41\columnwidth}\raggedright
--\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.07\columnwidth}\raggedright
-\(\cdots\)\strut
-\end{minipage} & \begin{minipage}[t]{0.43\columnwidth}\raggedright
--\strut
-\end{minipage} & \begin{minipage}[t]{0.41\columnwidth}\raggedright
--\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.07\columnwidth}\raggedright
-\(\ddots\)\strut
-\end{minipage} & \begin{minipage}[t]{0.43\columnwidth}\raggedright
-\(\vdots\)\strut
-\end{minipage} & \begin{minipage}[t]{0.41\columnwidth}\raggedright
-\(\vdots\)\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.07\columnwidth}\raggedright
-\(\cdots\)\strut
-\end{minipage} & \begin{minipage}[t]{0.43\columnwidth}\raggedright
--\strut
-\end{minipage} & \begin{minipage}[t]{0.41\columnwidth}\raggedright
--\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.07\columnwidth}\raggedright
-\(\cdots\)\strut
-\end{minipage} & \begin{minipage}[t]{0.43\columnwidth}\raggedright
--\strut
-\end{minipage} & \begin{minipage}[t]{0.41\columnwidth}\raggedright
--\strut
-\end{minipage}\tabularnewline
-\bottomrule
-\end{longtable}
+\[
+\Delta^{j} y_k = \Delta^{j-1} y_{k+1} - \Delta^{j-1} y_k 
+\]
 
-\textbf{Ejemplo 1}. Siendo \(y=f(x)\) una función desconocida de la cual se tienen los valores tabulados \((x_k, y_k)\) que se presentan a continuación, junto con una representación gráfica de los mismos:
+\[
+j = 1, ..., n \qquad k = 0, ..., j-1 \qquad \Delta^{0} y_k = y_k
+\]
 
-\begin{longtable}[]{@{}lll@{}}
+\begin{itemize}
+\tightlist
+\item
+  Suelen ser presentadas en una \emph{tabla de diferencias finitas:}
+\end{itemize}
+
+\begin{center}\includegraphics[width=1\linewidth]{Plots/U4/tabladif} \end{center}
+
+\textbf{Ejemplo 1}. Sea \(y=f(x)\) una función desconocida de la cual se tienen los valores tabulados \((x_k, y_k)\) que se presentan a continuación, junto con una representación gráfica de los mismos:
+
+\begin{longtable}[]{@{}ccc@{}}
 \toprule
 \(k\) & \(x_k\) & \(y_k\)\tabularnewline
 \midrule
@@ -3101,13 +2998,9 @@ Si la matriz \(\mathbf{A}\) es diagonal estrictamente dominante, entonces el sis
 
 \begin{center}\includegraphics[width=1\linewidth]{Plots/U4/Unidad4_g1} \end{center}
 
-\begin{itemize}
-\tightlist
-\item
-  La correspondiente tabla de diferencias finitas es:
-\end{itemize}
+La correspondiente tabla de diferencias finitas es:
 
-\begin{longtable}[]{@{}llllllll@{}}
+\begin{longtable}[]{@{}cccccccc@{}}
 \toprule
 \(k\) & \(x_k\) & \(y_k\) & \(\Delta y_k\) & \(\Delta^2 y_k\) & \(\Delta^3 y_k\) & \(\Delta^4 y_k\) & \(\Delta^5 y_k\)\tabularnewline
 \midrule
@@ -3139,48 +3032,36 @@ Si la matriz \(\mathbf{A}\) es diagonal estrictamente dominante, entonces el sis
 \section{Interpolación de Newton para incrementos constantes}\label{interpolaciuxf3n-de-newton-para-incrementos-constantes}}
 
 \begin{itemize}
-\tightlist
 \item
   Ahora intentaremos resolver el problema de aproximar la función \(f(x)\) para valores de \(x\) que no forman parte de la tabla.
 \item
-  Operando con los valores de la tabla de diferencia, se comprueba que los valores tabulados \(y_k\) se pueden escribir como:
-\end{itemize}
+  Operando con los valores de la tabla de diferencias, se comprueba que los valores tabulados \(y_k\) se pueden escribir como:
 
-\[
-\begin{aligned}
-y_k & = \sum_{j=0}^k \binom{k}{j} \Delta^{j} y_0 \\
-    & = y_0 + k \Delta y_0 + \frac{k(k-1)}{2!}\Delta^2 y_0 + \frac{k(k-1)(k-2)}{3!}\Delta^3 y_0 + \cdots 
-\end{aligned}
-\]
+  \[
+    \begin{aligned}
+    y_k & = \sum_{j=0}^k \binom{k}{j} \Delta^{j} y_0 \\
+        & = y_0 + k \Delta y_0 + \frac{k(k-1)}{2!}\Delta^2 y_0 + \frac{k(k-1)(k-2)}{3!}\Delta^3 y_0 + \cdots + \Delta^k y_0 
+    \end{aligned}
+    \]
 
-donde \(\Delta^{0} y_0 = y_0\).
-
-\begin{itemize}
-\tightlist
+  donde \(\Delta^{0} y_0 = y_0\).
 \item
   Por ejemplo:
-\end{itemize}
 
-\[
-y_2 = 0.3010 + 2 \cdot 0.1761 + \frac{2\cdot 1}{2!} (-0.0511) = 0.6021
-\]
-
-\begin{itemize}
-\tightlist
+  \[
+    y_2 = 0.3010 + 2 \cdot 0.1761 + \frac{2\cdot 1}{2!} (-0.0511) = 0.6021
+    \]
 \item
-  Esta fórmula se generaliza para proporcionar valores aproximados de \(y = f(x)\) para cualquier \(x\):
-\end{itemize}
+  Esta fórmula se emplea para proporcionar valores aproximados de \(y = f(x)\) para cualquier \(x\):
 
-\[
-y = f(x) \cong \sum_{j = 0}^{g} \binom{k}{j} \Delta^{j} y_0 = 
-\]
-\[
-y_0 + k \Delta y_0 + \frac{k(k-1)}{2!}\Delta^2 y_0 + \frac{k(k-1)(k-2)}{3!}\Delta^3 y_0 + \cdots
-\]
+  \[
+    y = f(x) \cong \sum_{j = 0}^{g} \binom{k}{j} \Delta^{j} y_0 = 
+    \]
+  \[
+    y_0 + k \Delta y_0 + \frac{k(k-1)}{2!}\Delta^2 y_0 + \frac{k(k-1)(k-2)}{3!}\Delta^3 y_0 + \cdots
+    \]
 
-donde \(g\) es el orden de la aproximación, \(\Delta^{0} y_0 = y_0\) y \(k = \frac{x-x_0}{h}\).
-
-\begin{itemize}
+  donde \(g\) es el orden de la aproximación, \(\Delta^{0} y_0 = y_0\) y \(k = \frac{x-x_0}{h}\).
 \item
   Si \(x_0 < x < x_n\), este proceso se llama \textbf{interpolación} y la fórmula anterior, \textbf{Fórmula de interpolación de Newton para incrementos constantes}.
 \item
@@ -3316,7 +3197,7 @@ y = f(5,2) &\approx y_0 + k \Delta y_0 + \frac{k(k-1)}{2!}\Delta^2 y_0 \\
   En el ejemplo con \(x = 2.3\); \(x_0=2\); \(h = 1\); \(k = 0.3\):
 \end{itemize}
 
-\begin{longtable}[]{@{}ll@{}}
+\begin{longtable}[]{@{}cc@{}}
 \toprule
 Grado & \(f(2.3) \approx\)\tabularnewline
 \midrule
@@ -3337,7 +3218,7 @@ Grado & \(f(2.3) \approx\)\tabularnewline
   Con esta información, podemos calcular el Error Relativo que resulta de hacer las aproximaciones anteriores:
 \end{itemize}
 
-\begin{longtable}[]{@{}lll@{}}
+\begin{longtable}[]{@{}ccc@{}}
 \toprule
 Grado & \(f(2.3) \approx\) & ER\tabularnewline
 \midrule
@@ -3357,7 +3238,7 @@ Polinomios interpoladores con \(x_0=2\):
 \begin{itemize}
 \tightlist
 \item
-  Realizar una interpolación cúbica para \(x=6.4\).
+  Ahora vamos a realizar una interpolación cúbica para \(x=6.4\).
 \item
   Si tomamos \(x_0 = 6\), nos faltan las diferencias de 2° y 3° orden y no podemos obtener el polinomio deseado.
 \item
@@ -3384,9 +3265,7 @@ Polinomios interpoladores con \(x_0=2\):
 
 \(k = \frac{x_0-x}{h} = \frac{7-6.4}{1} = 0.6\)
 
-\(y_0 = 0,8451\); \(\Delta y_0 = 0,0670\);
-
-\(\Delta^2 y_0 = -0.0121\); \(\Delta^3 y_0 = 0.0057\)
+\(y_0 = 0,8451\); \(\Delta y_0 = 0,0670\); \(\Delta^2 y_0 = -0.0121\); \(\Delta^3 y_0 = 0.0057\)
 
 \[
 \begin{aligned}
@@ -3398,7 +3277,7 @@ y = f(6.4) &\approx y_0 - k \Delta y_0 + \frac{k(k-1)}{2!}\Delta^2 y_0 - \frac{k
 
 \textbf{Ejemplo 2}. Dada la siguiente función tabulada, interpolar para \(x = 3.2\).
 
-\begin{longtable}[]{@{}ll@{}}
+\begin{longtable}[]{@{}cc@{}}
 \toprule
 \(x\) & \(y=f(x)\)\tabularnewline
 \midrule
@@ -3412,9 +3291,9 @@ y = f(6.4) &\approx y_0 - k \Delta y_0 + \frac{k(k-1)}{2!}\Delta^2 y_0 - \frac{k
 \bottomrule
 \end{longtable}
 
-\textbf{Ejemplo 2}. La tabla de diferencias es:
+La tabla de diferencias es:
 
-\begin{longtable}[]{@{}llllll@{}}
+\begin{longtable}[]{@{}cccccc@{}}
 \toprule
 \(x_k\) & \(y_k=f(x_k)\) & \(\Delta y_k\) & \(\Delta^2 y_k\) & \(\Delta^3 y_k\) & \(\Delta^4 y_k\)\tabularnewline
 \midrule
@@ -3436,7 +3315,7 @@ y = f(6.4) &\approx y_0 - k \Delta y_0 + \frac{k(k-1)}{2!}\Delta^2 y_0 - \frac{k
   Es decir, si usamos hasta la diferencia de orden 3, con la fórmula de Newton podemos hallar exactamente el valor de \(f(x)\) para cualquier \(x\) (y no importa cuál valor tomamos como \(x_0\)).
 \end{itemize}
 
-\textbf{Ejemplo 2}. Continuando con el objetivo de hallar \(f(3.2)\):
+Continuando con el objetivo de hallar \(f(3.2)\):
 
 \begin{itemize}
 \tightlist
@@ -3460,36 +3339,16 @@ y = f(3.2) &= y_0 + k \Delta y_0 + \frac{k(k-1)}{2!}\Delta^2 y_0 + \frac{k(k-1)(
 \end{aligned}
 \]
 
-\textbf{Ejemplo 2}. Ahora interpolar para \(x = 9\). Recordemos la tabla:
-
-\begin{longtable}[]{@{}llllll@{}}
-\toprule
-\(x_k\) & \(y_k=f(x_k)\) & \(\Delta y_k\) & \(\Delta^2 y_k\) & \(\Delta^3 y_k\) & \(\Delta^4 y_k\)\tabularnewline
-\midrule
-\endhead
-0 & 2 & 6 & 48 & 48 & 0\tabularnewline
-2 & 8 & 54 & 96 & 48 & 0\tabularnewline
-4 & 62 & 150 & 144 & 48 & -\tabularnewline
-6 & 212 & 294 & 192 & - & -\tabularnewline
-8 & 506 & 486 & - & - & -\tabularnewline
-10 & 992 & - & - & - & -\tabularnewline
-\bottomrule
-\end{longtable}
-
 \begin{itemize}
 \tightlist
+\item
+  Ahora vamos a interpolar para \(x = 9\).
 \item
   Si tomamos como \(x_0\) al inmediato inferior, es decir, \(x_0 = 8\), nos faltan dos diferencias para completar el cálculo.
 \item
   Pero como tenemos diferencias constantes y la verdadera función es un polinomio, cualquier punto de partida nos dará el valor exacto de \(f(9)\).
 \item
-  Así que podemos tomar, por ejemplo, el primer renglón de la tabla: \(x_0=0\).
-\end{itemize}
-
-\textbf{Ejemplo 2}. Continuando con el objetivo de hallar \(f(9)\):
-
-\begin{itemize}
-\tightlist
+  Así que podemos tomar, por ejemplo, el primer renglón de la tabla: \(x_0=0\):
 \item
   \(x = 9\)
 \item
@@ -3533,7 +3392,7 @@ y = f(9) &= y_0 + k \Delta y_0 + \frac{k(k-1)}{2!}\Delta^2 y_0 + \frac{k(k-1)(k-
 \item
   \(k = \frac{x-x_0}{h} = \frac{-1-0}{2} = -0.5\)
 \item
-  \(y_0 = 2\); \(\Delta y_0 = 6\); \(\Delta^2 y_0 = 48\); \(\Delta^2 y_0 = 48\)
+  \(y_0 = 2\); \(\Delta y_0 = 6\); \(\Delta^2 y_0 = 48\); \(\Delta^3 y_0 = 48\)
 \end{itemize}
 
 \[
@@ -3593,7 +3452,7 @@ f(x) = \frac{x - x_1}{x_0 - x_1} y_0 + \frac{x - x_0}{x_1 - x_0} y_1
 \begin{itemize}
 \tightlist
 \item
-  Esta es expresión que se puede extender para obtener polinomios de grados superiores que pasen por más puntos.
+  Esta expresión se puede extender para obtener polinomios de grados superiores que pasen por más puntos.
 \item
   Por ejemplo, para hallar el polinomio que pasa por los puntos \((x_0, y_0)\), \((x_1, y_1)\) y \((x_2, y_2)\):
 \end{itemize}
@@ -3651,7 +3510,7 @@ y = f(x) = \sum_{i = 0}^n \frac{\prod\limits_{\substack{j = 0\\ j \neq i}}^n (x 
 
 \textbf{Ejemplo 5}. Emplear el método de Lagrange para interpolar el valor de la función \(f\) en \(x=2.25\), con el polinomio interpolador de grado 3 que pasa por los cuatro puntos tabulados:
 
-\begin{longtable}[]{@{}ll@{}}
+\begin{longtable}[]{@{}cc@{}}
 \toprule
 \(x_k\) & \(y_k\)\tabularnewline
 \midrule
@@ -3665,21 +3524,23 @@ y = f(x) = \sum_{i = 0}^n \frac{\prod\limits_{\substack{j = 0\\ j \neq i}}^n (x 
 
 \begin{center}\includegraphics[width=1\linewidth]{Plots/U4/lagrej1} \end{center}
 
-\textbf{Ejemplo 5}
-
 \[
 \begin{split}
-f(x) &= \sum_{i = 0}^3 \frac{\prod\limits_{\substack{j = 0\\ j \neq i}}^3 (x - x_j)}{\prod\limits_{\substack{j = 0\\ j \neq i}}^3 (x_i - x_j)} y_i \\ \\
-&= \frac{(x - x_1)(x - x_2)(x - x_3)}{(x_0 - x_1)(x_0 - x_2)(x_0 - x_3)} y_0 + \frac{(x - x_0)(x - x_2)(x - x_3)}{(x_1 - x_0)(x_1 - x_2)(x_1 - x_3)} y_1 \\
-&~ + \frac{(x - x_0)(x - x_1)(x - x_3)}{(x_2 - x_0)(x_2 - x_1)(x_2 - x_3)} y_2 + \frac{(x - x_0)(x - x_1)(x - x_2)}{(x_3 - x_0)(x_3 - x_1)(x_3 - x_2)} y_3 \\ \\
-\implies y = f(2.25) &\approx \frac{(2.25 - 0)(2.25 - 2)(2.25 - 2.5)}{(-1-0)(-1-2)(-1-2.5)} 0.5403 + \frac{(2.25 +1)(2.25 - 2)(2.25 - 2.5)}{(0+1)(0-2)(0-2.5)} 1.0000 \\
-&~ + \frac{(2.25 +1)(2.25 - 0)(2.25 - 2.5)}{(2+1)(2-0)(2-2.5)} (-0.4162) + \frac{(2.25 +1)(2.25 - 0)(2.25 - 2)}{(2.5+1)(2.5-0)(2.5-2)} (-0.8011) \\
-&= -0.6218 \\ \\
+f(x) =& \sum_{i = 0}^3 \frac{\prod\limits_{\substack{j = 0\\ j \neq i}}^3 (x - x_j)}{\prod\limits_{\substack{j = 0\\ j \neq i}}^3 (x_i - x_j)} y_i = \\ \\
+& \frac{(x - x_1)(x - x_2)(x - x_3)}{(x_0 - x_1)(x_0 - x_2)(x_0 - x_3)} y_0 + \\ \\
+&\frac{(x - x_0)(x - x_2)(x - x_3)}{(x_1 - x_0)(x_1 - x_2)(x_1 - x_3)} y_1 + \\ \\
+&\frac{(x - x_0)(x - x_1)(x - x_3)}{(x_2 - x_0)(x_2 - x_1)(x_2 - x_3)} y_2 + \\ \\
+&\frac{(x - x_0)(x - x_1)(x - x_2)}{(x_3 - x_0)(x_3 - x_1)(x_3 - x_2)} y_3 \\ \\
+\implies y = f(2.25) \approx & \frac{(2.25 - 0)(2.25 - 2)(2.25 - 2.5)}{(-1-0)(-1-2)(-1-2.5)} 0.5403 + \\ \\
+&\frac{(2.25 +1)(2.25 - 2)(2.25 - 2.5)}{(0+1)(0-2)(0-2.5)} 1.0000 + \\ \\
+&\frac{(2.25 +1)(2.25 - 0)(2.25 - 2.5)}{(2+1)(2-0)(2-2.5)} (-0.4162) + \\ \\
+&\frac{(2.25 +1)(2.25 - 0)(2.25 - 2)}{(2.5+1)(2.5-0)(2.5-2)} (-0.8011) = \\ \\
+& -0.6218 \\ \\
 &\therefore f(2.25) \approx -0.6218
 \end{split}
 \]
 
-\textbf{Ejemplo 5}. Si en la fórmula anterior en lugar de reemplazar \(x\) por un valor particular (en este caso, \(2.5\)) operamos y reacomodamos los términos, podemos hallar la expresión del polinomio interpolador:
+Si en la fórmula anterior en lugar de reemplazar \(x\) por un valor particular (en este caso, \(2.5\)) operamos y reacomodamos los términos, podemos hallar la expresión del polinomio interpolador:
 
 \[
 f(x) = 0.1042 x^3 -0.4934 x^2 -0.1379 x+1
@@ -3687,7 +3548,7 @@ f(x) = 0.1042 x^3 -0.4934 x^2 -0.1379 x+1
 
 \begin{center}\includegraphics[width=0.6\linewidth]{Plots/U4/lagrej2} \end{center}
 
-\textbf{Ejemplo 5}. La función que generó los valores tabulados es \(cos(x)\):
+La función que generó los valores tabulados es \(cos(x)\):
 
 En el rango tabulado:
 
@@ -3697,11 +3558,7 @@ Un poco más lejos:
 
 \begin{center}\includegraphics[width=1\linewidth]{Plots/U4/lagrange} \end{center}
 
-\begin{itemize}
-\tightlist
-\item
-  Siendo \(cos(2.25) = -0.6282\), el error relativo de la aproximación fue \(|-0.6282-0.6218| / |-0.6285| = 1.02\%\)
-\end{itemize}
+Siendo \(cos(2.25) = -0.6282\), el error relativo de la aproximación fue \(|-0.6282-0.6218| / |-0.6285| = 1.02\%\)
 
 \textbf{Interpolación inversa}
 
@@ -3717,7 +3574,7 @@ Un poco más lejos:
 
 \textbf{Ejemplo 6}. Con los datos del Ejemplo 1, ¿cuál es el valor de \(x\) tal que \(f(x)=-0.75\)?
 
-\begin{longtable}[]{@{}ll@{}}
+\begin{longtable}[]{@{}cc@{}}
 \toprule
 \(x_k\) & \(y_k\)\tabularnewline
 \midrule
@@ -3729,9 +3586,9 @@ Un poco más lejos:
 \bottomrule
 \end{longtable}
 
-\(\downarrow\)
+\[\downarrow\]
 
-\begin{longtable}[]{@{}ll@{}}
+\begin{longtable}[]{@{}cc@{}}
 \toprule
 \(x_k\) & \(y_k\)\tabularnewline
 \midrule
@@ -3743,9 +3600,15 @@ Un poco más lejos:
 \end{longtable}
 
 \[
+f(x) = \sum_{i = 0}^2 \frac{\prod\limits_{\substack{j = 0\\ j \neq i}}^2 (x - x_j)}{\prod\limits_{\substack{j = 0\\ j \neq i}}^2 (x_i - x_j)} y_i
+\]
+
+\[
+= \frac{(x - x_1)(x - x_2)}{(x_0 - x_1)(x_0 - x_2)} y_0 + \frac{(x - x_0)(x - x_2)}{(x_1 - x_0)(x_1 - x_2)} y_1 + \frac{(x - x_0)(x - x_1)}{(x_2 - x_0)(x_2 - x_1)} y_2
+\]
+
+\[
 \begin{split}
-f(x) &= \sum_{i = 0}^2 \frac{\prod\limits_{\substack{j = 0\\ j \neq i}}^2 (x - x_j)}{\prod\limits_{\substack{j = 0\\ j \neq i}}^2 (x_i - x_j)} y_i \\ \\
-&= \frac{(x - x_1)(x - x_2)}{(x_0 - x_1)(x_0 - x_2)} y_0 + \frac{(x - x_0)(x - x_2)}{(x_1 - x_0)(x_1 - x_2)} y_1 + \frac{(x - x_0)(x - x_1)}{(x_2 - x_0)(x_2 - x_1)} y_2 \\ \\
 \implies f(-0.75) &\approx \frac{(-0.75+0.4162)(-0.75+0.8011)}{(1+0.4162)(1+0.8011)} 0 \\
 &~ + \frac{(-0.75-1)(-0.75+0.8011)}{(-0.4162-1)(-0.4162+0.8011)} 2 \\
 &~ + \frac{(-0.75-1)(-0.75+0.4162)}{(-0.8011-1)(-0.8011+0.4162)} 2.5  \\
@@ -3756,15 +3619,9 @@ f(x) &= \sum_{i = 0}^2 \frac{\prod\limits_{\substack{j = 0\\ j \neq i}}^2 (x - x
 
 \textbf{Interpolación inversa}. Podemos usar la interpolación inversa para resolver ecuaciones.
 
-\textbf{Ejemplo 7}: hallar una raiz positiva para la ecuación \(f(x)=x-4\sin(x+2) = 0\).
+\textbf{Ejemplo 7}: hallar una raiz positiva para la ecuación \(f(x)=x-4\sin(x+2) = 0\). Tabulamos algunos valores y graficamos:
 
-\begin{itemize}
-\tightlist
-\item
-  Tabulamos algunos valores y graficamos:
-\end{itemize}
-
-\begin{longtable}[]{@{}ll@{}}
+\begin{longtable}[]{@{}cc@{}}
 \toprule
 \(x_k\) & \(y_k\)\tabularnewline
 \midrule
@@ -3777,35 +3634,16 @@ f(x) &= \sum_{i = 0}^2 \frac{\prod\limits_{\substack{j = 0\\ j \neq i}}^2 (x - x
 
 \begin{center}\includegraphics[width=0.75\linewidth]{Plots/U4/lagr_ecuacion1} \end{center}
 
-\textbf{Ejemplo 7}
+Podemos usar los dos últimos puntos donde vemos que la función cortó a las abscisas y hacer una interpolación lineal, o usar los tres puntos y tener una interpolación cuadrática, o incluso agregar más puntos. Al intercambiar roles:
 
-\begin{itemize}
-\tightlist
-\item
-  Podemos usar los dos últimos puntos donde vemos que la función cortó a las abscisas y hacer una interpolación lineal, los tres puntos y tener una interpolación cuadrática, o incluso agregar más puntos.
-\end{itemize}
-
-\begin{longtable}[]{@{}ll@{}}
-\toprule
-\(x_k\) & \(y_k\)\tabularnewline
-\midrule
-\endhead
-0 & -3.6372\tabularnewline
-0.5 & -1.8939\tabularnewline
-1 & 0.4355\tabularnewline
-\bottomrule
-\end{longtable}
-
-\(\downarrow\)
-
-\begin{longtable}[]{@{}ll@{}}
+\begin{longtable}[]{@{}cc@{}}
 \toprule
 \(x_k\) & \(y_k\)\tabularnewline
 \midrule
 \endhead
 -3.6372 & 0\tabularnewline
-\textcolor{red}{-1.8939} & \textcolor{red}{0.5}\tabularnewline
-\textcolor{red}{0.4355} & \textcolor{red}{1}\tabularnewline
+-1.8939 & 0.5\tabularnewline
+0.4355 & 1\tabularnewline
 \bottomrule
 \end{longtable}
 
@@ -3816,6 +3654,7 @@ y = f(x) &= \frac{x - x_1}{x_0 - x_1} y_0 + \frac{x - x_0}{x_1 - x_0} y_1 \\ \\
 &= 0.9065 \\
 \end{split}
 \]
+
 \(\therefore\) La solución positiva de la ecuación es \(x \approx 0.9065\) ya que \(f(0.9065) \approx 0\).
 
 \hypertarget{observaciones-finales}{%
