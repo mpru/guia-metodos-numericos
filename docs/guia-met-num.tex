@@ -244,7 +244,7 @@
 \providecommand{\subtitle}[1]{}
 \subtitle{Guía de estudio}
 \author{Marcos Prunello \and Cecilia Rapelli}
-\date{2020-05-19}
+\date{2020-05-26}
 
 \begin{document}
 \maketitle
@@ -4218,7 +4218,7 @@ Nota: esta fórmula se conoce como \emph{aproximación por diferencias hacia ade
   \item
     Transformarlo mediante \(\textbf{A}\) significa realizar el producto \(\textbf{Ax}\) dando como resultado un nuevo vector de orden \(n\).
   \item
-    Que la dirección de \(\textbf{x}\) no se modifique significa que el nuevo vector debe ser múltiplo de \(\textbf{x}\), es decir, igual a \(\lambda \textbf{x}\), con \(\lambda \in \mathbb{C}\), que recibe el nombre de \textbf{autovalor} o \textbf{valor propio} de A.
+    Que la dirección de \(\textbf{x}\) no se modifique significa que el nuevo vector debe ser múltiplo escalar de \(\textbf{x}\), es decir, igual a \(\lambda \textbf{x}\), con \(\lambda \in \mathbb{C}\), que recibe el nombre de \textbf{autovalor} o \textbf{valor propio} de A.
   \end{itemize}
 \item
   Lo anterior se resume en la siguiente expresión: \(\textbf{x}\) es un autovector y \(\lambda\) es un autovalor de \(\textbf{A}\) si:
@@ -4231,7 +4231,7 @@ Nota: esta fórmula se conoce como \emph{aproximación por diferencias hacia ade
 \begin{itemize}
 \tightlist
 \item
-  Se debe observar que si \(\textbf{x}\) es un autovector con el autovalor \(\lambda\) entonces cualquier múltiplo diferente de cero de \(\textbf{x}\) es también un autovector con el autovalor \(\lambda\).
+  Se debe observar que si \(\textbf{x}\) es un autovector con el autovalor \(\lambda\) entonces cualquier múltiplo escalar de \(\textbf{x}\) diferente del vector nulo es también un autovector con el autovalor \(\lambda\).
 \end{itemize}
 
 \hypertarget{propiedades}{%
@@ -4260,7 +4260,7 @@ Nota: esta fórmula se conoce como \emph{aproximación por diferencias hacia ade
   \item
     Si \(\textbf{A}\) tiene inversa, los autovalores de \(\textbf{A}^{-1}\) son \(1/\lambda_1, 1/\lambda_2, \cdots, 1/\lambda_n\).
   \item
-    Los valores de \(\alpha \textbf{A}\) son \(\alpha \lambda_1, \alpha \lambda_2, \cdots, \alpha \lambda_n, \, \alpha \in \mathbb{R}\).
+    Los autovalores de \(\alpha \textbf{A}\) son \(\alpha \lambda_1, \alpha \lambda_2, \cdots, \alpha \lambda_n, \, \alpha \in \mathbb{R}\).
   \item
     Las matrices \(\textbf{A}\) y \(\textbf{Q}^{-1}\textbf{AQ}\) (forma cuadrática) tienen los mismos valores propios.
   \end{itemize}
@@ -4280,15 +4280,20 @@ Nota: esta fórmula se conoce como \emph{aproximación por diferencias hacia ade
 \]
 
 \begin{itemize}
-\tightlist
 \item
-  Esto es un sistema de ecuaciones lineales con matriz de coeficientes \(\textbf{A} - \lambda \textbf{I}\) y vector de términos independientes \(\textbf{0}\), es decir, es un \textbf{sistema homogéneo} y como tal tiene solución no nula si: \(\det (\textbf{A} - \lambda \textbf{I}) = 0\) (repasar por qué).
-\end{itemize}
+  Esto es un sistema de ecuaciones lineales con matriz de coeficientes \(\textbf{A} - \lambda \textbf{I}\) y vector de términos independientes \(\textbf{0}\), es decir, es un \textbf{sistema homogéneo} y como tal tiene solución no nula si: \(\det (\textbf{A} - \lambda \textbf{I}) = 0\). La razón es:
 
-\begin{itemize}
-\tightlist
+  \begin{itemize}
+  \tightlist
+  \item
+    Como ya sabemos, un sistema \(\textbf{Cx} = \textbf{b}\) tiene solución única si \(\det \textbf{C} \neq 0\).
+  \item
+    En nuestro caso, siendo \(\textbf{b} = \textbf{0}\), si el determinante de \((\textbf{A} - \lambda \textbf{I})\) es distinto de cero, la solución única tiene que ser la trivial, \(\textbf{x} = \textbf{0}\).
+  \item
+    Por lo tanto, para que el sistema tenga soluciones no nulas (los autovectores) requerimos que el determinante sea igual a 0, lo cual significa que el sistema va a tener infinitas soluciones (infinitos autovectores).
+  \end{itemize}
 \item
-  El desarrollo de esta expresión conduce a un polinomio de grado \(n\) en la incógnita \(\lambda\) que igualado a cero es llamado \textbf{ecuación característica} y su resolución permite hallar los autovalores.
+  El desarrollo de la expresión anterior conduce a un polinomio de grado \(n\) en la incógnita \(\lambda\) que igualado a cero es llamado \textbf{ecuación característica} y su resolución permite hallar los autovalores.
 \end{itemize}
 
 \textbf{Ejemplo}
@@ -4318,7 +4323,7 @@ Nota: esta fórmula se conoce como \emph{aproximación por diferencias hacia ade
 \item
   Pero nos faltan los autovectores!
 \item
-  Para eso hacemos uso de la definición: \(\textbf{A}\) es un autovector de \(\textbf{A}\) asociado al autovalor \(\lambda\) si \((\textbf{A} - \lambda \textbf{I}) \textbf{x} = \textbf{0}\).
+  Para eso hacemos uso de la definición: \(\textbf{x}\) es un autovector de \(\textbf{A}\) asociado al autovalor \(\lambda\) si \((\textbf{A} - \lambda \textbf{I}) \textbf{x} = \textbf{0}\).
 \item
   Tomamos uno de los autovalores, por ejemplo, \(\lambda_1 = 6.2899\) y resolvemos el sistema de ecuaciones que la expresión anterior plantea:
 \end{itemize}
@@ -4373,7 +4378,8 @@ Nota: esta fórmula se conoce como \emph{aproximación por diferencias hacia ade
 \end{itemize}
 
 \hypertarget{resumen-1-obtener-autovalores-y-autovectores}{%
-\subsection{Resumen 1: Obtener autovalores y autovectores}\label{resumen-1-obtener-autovalores-y-autovectores}}
+\subsection*{Resumen 1: Obtener autovalores y autovectores}\label{resumen-1-obtener-autovalores-y-autovectores}}
+\addcontentsline{toc}{subsection}{Resumen 1: Obtener autovalores y autovectores}
 
 \begin{itemize}
 \tightlist
@@ -4474,7 +4480,7 @@ f(\textbf{A}) = f(\textbf{A}) =
     177 + 29 b_1 + 5 b_2 + b_3 &   -108-16  b_1 -2  b_2       &  18 +2  b_1              \\ 
     -108 -16  b_1 -2  b_2      &  78  + 14 b_1 + 3 b_2 + b_3  &   -18 -4  b_1 -  b_2     \\
     18+2  b_1                  &   -18 -4  b_1 -1  b_2        &   6 + 2 b_1   b_2 + b_3
-\end{bmatrix} =
+\end{bmatrix} = \\ \\
 \begin{bmatrix} 
     0 & 0 & 0 \\ 
     0 & 0 & 0 \\
@@ -4585,7 +4591,8 @@ b_3
 \end{itemize}
 
 \hypertarget{resumen-2-muxe9todo-de-krylov}{%
-\subsection{Resumen 2: Método de Krylov}\label{resumen-2-muxe9todo-de-krylov}}
+\subsection*{Resumen 2: Método de Krylov}\label{resumen-2-muxe9todo-de-krylov}}
+\addcontentsline{toc}{subsection}{Resumen 2: Método de Krylov}
 
 \begin{itemize}
 \tightlist
@@ -4618,7 +4625,9 @@ b_3
 f(\lambda) = \det(\textbf{A} - \lambda \textbf{I}) = \lambda^n + b_1 \lambda^{n-1} + \cdots + b_{n-1} \lambda + b_n = 0
 \]
 
+\begin{verbatim}
 mediante el siguiente cálculo iterativo:
+\end{verbatim}
 
 \begin{gather*}
 \textbf{M}_1 = \textbf{A} \qquad b_1 = - tr(\textbf{M}_1) \\
@@ -4706,7 +4715,8 @@ f(\textbf{A}) = \textbf{A}^n + b_1 \textbf{A}^{n-1}  + \cdots + b_{n-2} \textbf{
 \]
 
 \hypertarget{resumen-3-muxe9todo-de-faddeev-leverrier}{%
-\subsection{Resumen 3: Método de Faddeev-LeVerrier}\label{resumen-3-muxe9todo-de-faddeev-leverrier}}
+\subsection*{Resumen 3: Método de Faddeev-LeVerrier}\label{resumen-3-muxe9todo-de-faddeev-leverrier}}
+\addcontentsline{toc}{subsection}{Resumen 3: Método de Faddeev-LeVerrier}
 
 \begin{itemize}
 \tightlist
@@ -4771,21 +4781,17 @@ f(\textbf{A}) = \textbf{A}^n + b_1 \textbf{A}^{n-1}  + \cdots + b_{n-2} \textbf{
 
 \begin{itemize}
 \item
-  El método de la potencia tiende a producir aproximaciones en donde los elementos de \(\textbf{x}\) tienen gran magnitud, lo cual produce problemas (errores de desbordamiento, \emph{overflow error}).
+  Este método tiende a producir aproximaciones en donde los elementos de \(\textbf{x}\) tienen gran magnitud, lo cual produce problemas (errores de desbordamiento, \emph{overflow error}).
 \item
   Por eso, en la práctica se añade un escalamiento en cada paso iterativo, dividiendo por el elemento de mayor magnitud del paso anterior.
 \item
   \textbf{Método de las potencias}: si \(\textbf{A}\) tiene un autovalor dominante, la siguiente sucesión \(c_k\) converge al mismo mientras que la sucesión \(\textbf{x}_k\) converge a uno de sus autovectores dominantes:
-\end{itemize}
 
-\[
-\textbf{x}_k = \frac{1}{c_k} \textbf{Ax}_{k-1}
-\]
+  \[
+    \textbf{x}_k = \frac{1}{c_k} \textbf{Ax}_{k-1}
+    \]
 
-donde \(c_{k}\) es la coordenada de mayor tamaño de \(\textbf{Ax}_{k-1}\) y \(\textbf{x}_0\) es cualquier vector no nulo.
-
-\begin{itemize}
-\tightlist
+  donde \(c_{k}\) es la coordenada de mayor tamaño de \(\textbf{Ax}_{k-1}\) y \(\textbf{x}_0\) es cualquier vector no nulo.
 \item
   Retomando nuestro ejemplo:
 \end{itemize}
@@ -4901,8 +4907,12 @@ Error (L\(_2\))\strut
 \bottomrule
 \end{longtable}
 
+\hypertarget{variantes-del-muxe9todo-de-las-potencias}{%
+\subsection{Variantes del método de las potencias}\label{variantes-del-muxe9todo-de-las-potencias}}
+
 \hypertarget{muxe9todo-de-las-potencias-inversas}{%
-\section{Método de las potencias inversas}\label{muxe9todo-de-las-potencias-inversas}}
+\subsubsection*{Método de las potencias inversas}\label{muxe9todo-de-las-potencias-inversas}}
+\addcontentsline{toc}{subsubsection}{Método de las potencias inversas}
 
 \begin{itemize}
 \tightlist
@@ -4917,7 +4927,8 @@ Error (L\(_2\))\strut
 \end{itemize}
 
 \hypertarget{muxe9todo-de-las-potencias-con-deflaciuxf3n-o-de-hotelling}{%
-\section{Método de las potencias con deflación (o de Hotelling)}\label{muxe9todo-de-las-potencias-con-deflaciuxf3n-o-de-hotelling}}
+\subsubsection*{Método de las potencias con deflación (o de Hotelling)}\label{muxe9todo-de-las-potencias-con-deflaciuxf3n-o-de-hotelling}}
+\addcontentsline{toc}{subsubsection}{Método de las potencias con deflación (o de Hotelling)}
 
 \begin{itemize}
 \item
@@ -4931,7 +4942,8 @@ Error (L\(_2\))\strut
 \end{itemize}
 
 \hypertarget{resumen-4-muxe9todo-de-las-aproximaciones-sucesivas-o-de-las-potencias}{%
-\section{Resumen 4: Método de las Aproximaciones Sucesivas o de las Potencias}\label{resumen-4-muxe9todo-de-las-aproximaciones-sucesivas-o-de-las-potencias}}
+\subsubsection*{Resumen 4: Método de las Aproximaciones Sucesivas o de las Potencias}\label{resumen-4-muxe9todo-de-las-aproximaciones-sucesivas-o-de-las-potencias}}
+\addcontentsline{toc}{subsubsection}{Resumen 4: Método de las Aproximaciones Sucesivas o de las Potencias}
 
 \begin{itemize}
 \tightlist
@@ -4953,7 +4965,7 @@ Error (L\(_2\))\strut
 \item
   \textbf{Paso 3}: al finalizar, \(c_k\) aproxima al autovalor dominante y \(\mathbf{x}_k\) a uno de sus autovectores.
 \item
-  \textbf{Modificación 1}: hacer los mismo con \(\mathbf{A}^{-1}\) nos da el recíproco del menor autovalor de \(\mathbf{A}\) y uno de sus autovectores.
+  \textbf{Modificación 1}: hacer lo mismo con \(\mathbf{A}^{-1}\) nos da el recíproco del menor autovalor de \(\mathbf{A}\) y uno de sus autovectores.
 \item
   \textbf{Modificación 2}: aplicar sucesivamente este método modificando \(\mathbf{A}\) como establece Hotelling para hallar todos los autovalores.
 \end{itemize}
